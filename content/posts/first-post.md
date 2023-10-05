@@ -1,7 +1,7 @@
 ---
 title: 'First Post'
 date: '2023-10-05T14:37:23+11:00'
-draft: true
+draft: false
 ---
 # First Post using Hugo
 
