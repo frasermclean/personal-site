@@ -2,6 +2,7 @@
 title: 'First Post'
 date: '2023-10-05T14:37:23+11:00'
 draft: false
+tags: ['hugo', 'github', 'github-pages']
 ---
 # First Post using Hugo
 
