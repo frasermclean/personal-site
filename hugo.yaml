@@ -8,7 +8,7 @@ params:
   brand: Fraser McLean
   brand_image: /images/profile_bnw.png
   description: Exploring the cloud
-  favicon: favicon.ico
+  favicon: /favicon.ico
   github_url: https://github.com/frasermclean
   linkedin_url: https://www.linkedin.com/in/frasermclean/
   instagram_url: https://www.instagram.com/frasermclean81
