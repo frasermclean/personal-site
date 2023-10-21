@@ -16,3 +16,6 @@ sidebar:
 
 footer:
   since: 2023
+  customText: >-
+    The complete source code for this site can be found on
+    <a href="https://github.com/frasermclean/personal-site" target="_blank">GitHub</a>
