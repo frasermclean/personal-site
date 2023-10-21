@@ -1,4 +1,4 @@
-# Root config file
+# Hugo root config file
 baseURL: https://www.frasermclean.com/
 title: Fraser McLean
 languageCode": en-AU

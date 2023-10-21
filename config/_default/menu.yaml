@@ -1,0 +1,18 @@
+main:
+  - identifier: home
+    name: Home
+    url: /
+    params:
+      icon: home
+
+social:
+  - identifier: github
+    name: GitHub
+    url: https://github.com/frasermclean
+    params:
+      icon: brand-github
+  - identifier: linkedin
+    name: LinkedIn
+    url: https://www.linkedin.com/in/frasermclean/
+    params:
+      icon: brand-linkedin
