@@ -1,4 +1,7 @@
 favicon: /favicon.ico
+dateFormat:
+  published: 2 January 2006
+  lastUpdated: 2 January 2006
 
 # Pages placed under these sections will be shown on homepage and archive page.
 mainSections:
@@ -10,3 +13,6 @@ sidebar:
     enabled: true
     local: true
     src: /images/avatar.png
+
+footer:
+  since: 2023
