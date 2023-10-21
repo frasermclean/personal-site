@@ -1,0 +1,12 @@
+favicon: /favicon.ico
+
+# Pages placed under these sections will be shown on homepage and archive page.
+mainSections:
+  - posts
+
+sidebar:
+  subtitle: Adventures in the world of software development
+  avatar:
+    enabled: true
+    local: true
+    src: /images/avatar.png

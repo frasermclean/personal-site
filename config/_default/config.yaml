@@ -1,0 +1,6 @@
+# Root config file
+baseURL: https://www.frasermclean.com/
+title: Fraser McLean
+languageCode": en-AU
+defaultContentLanguage: en
+theme: stack
