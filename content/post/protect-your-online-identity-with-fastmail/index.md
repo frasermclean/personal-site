@@ -1,7 +1,7 @@
 ---
 title: 'Protect your online identity with Fastmail'
 date: '2023-11-08T19:42:58+08:00'
-draft: true
+draft: false
 image: cover.jpg
 aliases:
   - /2023/01/14/protect-your-online-identity-with-fastmail/
