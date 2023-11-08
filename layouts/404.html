@@ -1,0 +1,10 @@
+{{ define "main" }}
+    <div class="not-found-card">
+        <h1 class="article-title">{{ T "notFound.title" }}</h1>
+        <p class="article-subtitle" style="margin-top: 32px;">This server tried hard, but couldn't find the content you were looking for 😭</p>
+    </div>
+    {{ partialCached "footer/footer" . }}
+
+    <!-- Track custom 404 event in Plausible -->
+    <script>console.log("Wassup") ;document.addEventListener('DOMContentLoaded', function () { plausible('404', { props: { path: document.location.pathname } }); });</script>
+{{ end }}
