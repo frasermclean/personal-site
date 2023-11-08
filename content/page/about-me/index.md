@@ -9,7 +9,7 @@ menu:
     name: About Me
     weight: 2
     params:
-      icon: home
+      icon: user
 ---
 I am a software engineer with a passion for building things. I have a strong interest in the
 intersection of technology, creativity and business, and I am always looking for
