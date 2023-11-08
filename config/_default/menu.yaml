@@ -17,3 +17,9 @@ social:
     weight: 3
     params:
       icon: brand-instagram
+  - identifier: twitter
+    name: Twitter
+    url: https://twitter.com/frasermclean81
+    weight: 4
+    params:
+      icon: brand-twitter
