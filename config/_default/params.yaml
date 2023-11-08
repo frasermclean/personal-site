@@ -5,7 +5,7 @@ dateFormat:
 
 # Pages placed under these sections will be shown on homepage and archive page.
 mainSections:
-  - posts
+  - post
 
 sidebar:
   subtitle: Adventures in the world of software development
@@ -13,6 +13,18 @@ sidebar:
     enabled: true
     local: true
     src: /images/avatar.png
+
+widgets:
+  homepage:
+    - type: search
+    - type: archives
+      params:
+        limit: 5
+    - type: tag-cloud
+      params:
+        limit: 10
+  page:
+    - type: toc
 
 footer:
   since: 2023

@@ -50,9 +50,13 @@ Singapore 248649
 ```
 
 ## Postal codes
+According to this [WikiPedia article](https://en.wikipedia.org/wiki/Postal_codes_in_Singapore),
+postal codes in Singapore are 6 digits long and actually contain quite a bit of information.
+The sector is represented by the first two numbers of the postal code. The remaining four numbers
+define the delivery point within the sector
 
-Postal codes in Singapore are 6 digits long and actually contain quite a bit of information.
-The sector is represented by the first two numbers of the postal code.
-The remaining four numbers define the delivery point within the sector
+Given the postal code **569993**:
+* **56** is the sector code
+* **9933** is the delivery point (house or building).
 
-Given the postal code 569993, **56** is the sector code and **9933** is the delivery point (house or building).
+> Photo by [Swapnil Bapat](https://unsplash.com/@deadlyvyper) on [Unsplash](https://unsplash.com/)
