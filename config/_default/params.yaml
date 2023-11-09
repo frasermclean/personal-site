@@ -26,6 +26,14 @@ widgets:
   page:
     - type: toc
 
+comments:
+  enabled: true
+  provider: remark42
+  remark42:
+    host: https://comments.frasermclean.com
+    site: frasermclean
+    locale: en
+
 footer:
   since: 2023
   customText: >-
