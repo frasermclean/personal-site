@@ -6,5 +6,5 @@
     {{ partialCached "footer/footer" . }}
 
     <!-- Track custom 404 event in Plausible -->
-    <script>console.log("Wassup") ;document.addEventListener('DOMContentLoaded', function () { plausible('404', { props: { path: document.location.pathname } }); });</script>
+    <script>document.addEventListener('DOMContentLoaded', function () { plausible('404', { props: { path: document.location.pathname } }); });</script>
 {{ end }}
