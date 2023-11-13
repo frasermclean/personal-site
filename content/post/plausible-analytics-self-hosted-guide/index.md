@@ -20,7 +20,7 @@ links:
 
 ## PostgreSQL database
 
-Plausible Analytics uses [PostgreSQL](https://www.postgresql.org/) as its main database. We will create a new `compose.yml` file and add 
+Plausible Analytics uses [PostgreSQL](https://www.postgresql.org/) as its main database. We will create a new `compose.yml` file and add the following contents:
 
 ```yaml
 services:
@@ -38,7 +38,10 @@ volumes:
   postgres-data:
 ```
 
+The above defines a new service called `postgres` which uses the official PostgreSQL image. We are using the `14-alpine` tag which is the latest version supported by Plausible at the time of writing. We are also using a named volume called `postgres-data` to store the database files. This is so that we can easily upgrade the database in the future without losing any data.
+
 ### Environment variables
+
 Under the environment section, we are using variables for the username and password. These need to be referenced from other services, so ideally we should set these in environment varibles. We will create a `.env` file in the same directory as the `compose.yml` file with the following contents:
 
 ```env
@@ -54,5 +57,4 @@ We can test the database by running the following commands:
 docker compose up -d postgres
 docker compose logs postgres
 ```
-
 If the last line says: `database system is ready to accept connections`, then we are good to go!
