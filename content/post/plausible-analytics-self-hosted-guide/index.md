@@ -1,5 +1,5 @@
 ---
-title: 'Plausible Analytics Self Hosted Guide'
+title: 'Plausible Analytics self-hosted guide'
 date: '2023-11-13T10:37:23+08:00'
 draft: true
 image: cover.jpg
@@ -13,6 +13,10 @@ links:
     description: The World's Most Advanced Open Source Relational Database
     website: https://www.postgresql.org/
     image: https://asset.brandfetch.io/idjSeCeMle/idZol6htuN.svg
+  - title: ClickHouse
+    description: ClickHouse is the fastest and most resource efficient open-source database for real-time apps and analytics.
+    website: https://clickhouse.tech/
+    image: https://asset.brandfetch.io/idp4VufaPQ/idxv4ToAqd.jpeg
 ---
 
 [Plausible Analytics](https://plausible.io/) is a lightweight and open-source web analytics tool. It doesn't use cookies and is fully compliant with GDPR, CCPA and PECR. It's a great alternative to Google Analytics.
