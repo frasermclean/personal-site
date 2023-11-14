@@ -22,21 +22,12 @@ param staticWebAppLocation string
 @description('Static web app custom domain verification code')
 param customDomainVerification string
 
-@description('Name of the public IP address for the comments host')
-param commentsPublicIpName string
-
-@description('Resource group of the public IP address for the comments host')
-param commentsPublicIpResourceGroup string
-
 var tags = {
   workload: workload
   category: category
 }
 
-resource kerriganPublicIp 'Microsoft.Network/publicIPAddresses@2023-05-01' existing = {
-  name: commentsPublicIpName
-  scope: resourceGroup(commentsPublicIpResourceGroup)
-}
+var commentsAppName = '${workload}-${category}-comments-ca'
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
   name: domainName
@@ -74,13 +65,23 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
     }
   }
 
-  resource commentsARecord 'A' = {
+  resource commentsCnameRecord 'CNAME' = {
     name: 'comments'
     properties: {
       TTL: 3600
-      targetResource: {
-        id: kerriganPublicIp.id
+      CNAMERecord: {
+        cname: '${commentsAppName}.${appsEnvironment.properties.defaultDomain}'
       }
+    }
+  }
+
+  resource commentsTxtRecord 'TXT' = {
+    name: 'asuid.comments'
+    properties: {
+      TTL: 3600
+      TXTRecords: [
+        { value: [ appsEnvironment.properties.customDomainConfiguration.customDomainVerificationId ] }
+      ]
     }
   }
 }
@@ -139,6 +140,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
 
   resource remark42Secret 'secrets' existing = {
     name: 'remark42-secret'
+  }
+
+  resource remark42AdminIdsSecret 'secrets' existing = {
+    name: 'remark42-admin-ids'
   }
 }
 
@@ -202,11 +207,15 @@ resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
       }
     }
   }
+
+  resource commentsCertificate 'managedCertificates' existing = {
+    name: 'comments-cert'
+  }
 }
 
 // remark42 comments container app
 resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
-  name: '${workload}-${category}-comments-ca'
+  name: commentsAppName
   location: location
   tags: tags
   identity: {
@@ -228,12 +237,24 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
             weight: 100
           }
         ]
+        customDomains: [
+          {
+            name: appsEnvironment::commentsCertificate.properties.subjectName
+            bindingType: 'SniEnabled'
+            certificateId: appsEnvironment::commentsCertificate.id
+          }
+        ]
       }
       secrets: [
         {
           name: 'remark42-secret'
           identity: managedIdentity.id
           keyVaultUrl: keyVault::remark42Secret.properties.secretUri
+        }
+        {
+          name: 'remark42-admin-ids'
+          identity: managedIdentity.id
+          keyVaultUrl: keyVault::remark42AdminIdsSecret.properties.secretUri
         }
       ]
     }
@@ -249,7 +270,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
           env: [
             {
               name: 'REMARK_URL'
-              value: 'https://comments.frasermclean.com'
+              value: 'https://comments.${domainName}'
             }
             {
               name: 'SITE'
@@ -262,6 +283,10 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
             {
               name: 'TIME_ZONE'
               value: 'Asia/Singapore'
+            }
+            {
+              name: 'ADMIN_SHARED_EMAIL'
+              value: 'admin@${domainName}'
             }
           ]
           volumeMounts: [
