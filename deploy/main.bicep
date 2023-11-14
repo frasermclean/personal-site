@@ -29,6 +29,16 @@ var tags = {
 
 var commentsAppName = '${workload}-${category}-comments-ca'
 
+var commentsAppSecretNames = [
+  'remark42-jwt-secret'
+  'remark42-admin-ids'
+  'remark42-auth-google-client-secret'
+  'remark42-auth-github-client-secret'
+  'remark42-auth-microsoft-client-secret'
+  'remark42-smtp-username'
+  'remark42-smtp-password'
+]
+
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
   name: domainName
   location: 'global'
@@ -137,14 +147,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
       name: 'standard'
     }
   }
-
-  resource remark42Secret 'secrets' existing = {
-    name: 'remark42-secret'
-  }
-
-  resource remark42AdminIdsSecret 'secrets' existing = {
-    name: 'remark42-admin-ids'
-  }
 }
 
 // storage account
@@ -245,18 +247,11 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
           }
         ]
       }
-      secrets: [
-        {
-          name: 'remark42-secret'
-          identity: managedIdentity.id
-          keyVaultUrl: keyVault::remark42Secret.properties.secretUri
-        }
-        {
-          name: 'remark42-admin-ids'
-          identity: managedIdentity.id
-          keyVaultUrl: keyVault::remark42AdminIdsSecret.properties.secretUri
-        }
-      ]
+      secrets: [for name in commentsAppSecretNames: {
+        name: replace(name, 'remark42-', '') // remove remark42- prefix
+        identity: managedIdentity.id
+        keyVaultUrl: 'https://${keyVault.name}${environment().suffixes.keyvaultDns}/secrets/${name}'
+      }]
     }
     template: {
       containers: [
@@ -278,15 +273,75 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
             }
             {
               name: 'SECRET'
-              secretRef: 'remark42-secret'
+              secretRef: 'jwt-secret'
             }
             {
               name: 'TIME_ZONE'
               value: 'Asia/Singapore'
             }
             {
+              name: 'ADMIN_SHARED_ID'
+              secretRef: 'admin-ids'
+            }
+            {
               name: 'ADMIN_SHARED_EMAIL'
               value: 'admin@${domainName}'
+            }
+            {
+              name: 'AUTH_GOOGLE_CID'
+              value: '551474988358-8vsq4t4frq5bv2f7lqgkp4eei4dkuk7t.apps.googleusercontent.com'
+            }
+            {
+              name: 'AUTH_GOOGLE_CSEC'
+              secretRef: 'auth-google-client-secret'
+            }
+            {
+              name: 'AUTH_GITHUB_CID'
+              value: 'f93d1abe0a16cca1040d'
+            }
+            {
+              name: 'AUTH_GITHUB_CSEC'
+              secretRef: 'auth-github-client-secret'
+            }
+            {
+              name: 'AUTH_MICROSOFT_CID'
+              value: '7530eab9-ce40-4c23-975d-58ff1d590920'
+            }
+            {
+              name: 'AUTH_MICROSOFT_CSEC'
+              secretRef: 'auth-github-client-secret'
+            }
+            {
+              name: 'SMTP_HOST'
+              value: 'smtp.fastmail.com'
+            }
+            {
+              name: 'SMTP_PORT'
+              value: '465'
+            }
+            {
+              name: 'SMTP_TLS'
+              value: 'true'
+            }
+            {
+              name: 'SMTP_USERNAME'
+              secretRef: 'smtp-username'
+            }
+            {
+              name: 'SMTP_PASSWORD'
+              secretRef: 'smtp-password'
+            }
+            {
+              name: 'NOTIFY_ADMINS'
+              value: 'email'
+            }
+            {
+              name: 'NOTIFY_USERS'
+              value: 'email'
+            }
+            {
+              name: 'NOTIFY_EMAIL_FROM'
+              value: 'no-reply@frasermclean.com'
             }
           ]
           volumeMounts: [
