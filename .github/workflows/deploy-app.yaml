@@ -65,17 +65,26 @@ jobs:
     environment:
       name: main
     steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-        # Login to Azure
+      # Login to Azure
       - name: Login to Azure
         uses: azure/login@v1
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      # Deploy template
+      - uses: azure/arm-deploy@v1
+        name: Deploy template
+        with:
+          scope: resourcegroup
+          resourceGroupName: frasermclean-site-rg
+          template: ${{ github.workspace }}/deploy/main.bicep
+          parameters: ${{ github.workspace }}/deploy/main.bicepparam
 
   # Deployment job
   deploy-app:
