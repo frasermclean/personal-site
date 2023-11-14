@@ -22,6 +22,12 @@ param staticWebAppLocation string
 @description('Static web app custom domain verification code')
 param customDomainVerification string
 
+@description('Name of the container registry')
+param containerRegistryName string
+
+@description('Container registry resource group')
+param containerRegistryResourceGroup string
+
 var tags = {
   workload: workload
   category: category
@@ -183,6 +189,11 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
   }
 }
 
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
+  name: containerRegistryName
+  scope: resourceGroup(containerRegistryResourceGroup)
+}
+
 // container apps environment
 resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: '${workload}-${category}-cae'
@@ -247,6 +258,12 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
           }
         ]
       }
+      registries: [
+        {
+          server: containerRegistry.properties.loginServer
+          identity: managedIdentity.id
+        }
+      ]
       secrets: [for name in commentsAppSecretNames: {
         name: replace(name, 'remark42-', '') // remove remark42- prefix
         identity: managedIdentity.id
@@ -257,7 +274,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'remark42'
-          image: 'docker.io/umputun/remark42:latest'
+          image: '${containerRegistry.properties.loginServer}/umputun/remark42:latest'
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
