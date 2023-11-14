@@ -28,11 +28,6 @@ param commentsPublicIpName string
 @description('Resource group of the public IP address for the comments host')
 param commentsPublicIpResourceGroup string
 
-@secure()
-@minLength(32)
-@description('Remark42 shared secret key used to sign JWT')
-param remark42Secret string
-
 var tags = {
   workload: workload
   category: category
@@ -120,12 +115,174 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
   }
 }
 
-module containerApps 'containerApps.bicep' = {
-  name: 'containerApps'
-  params: {
-    workload: workload
-    category: category
-    location: location
-    remark42Secret: remark42Secret
+// user assigned managed identity
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: '${workload}-${category}-id'
+  location: location
+  tags: tags
+}
+
+// key vault
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
+  name: '${workload}-${category}-kv'
+  location: location
+  tags: tags
+  properties: {
+    tenantId: subscription().tenantId
+    enableRbacAuthorization: true
+    enabledForTemplateDeployment: true
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+  }
+
+  resource remark42Secret 'secrets' existing = {
+    name: 'remark42-secret'
+  }
+}
+
+// storage account
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+  name: '${workload}${category}'
+  location: location
+  tags: tags
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+
+  resource fileServices 'fileServices' = {
+    name: 'default'
+
+    resource commentsDataShare 'shares' = {
+      name: 'comments-data'
+      properties: {
+        shareQuota: 8
+      }
+    }
+  }
+}
+
+// log analytics workspace
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: '${workload}-${category}-law'
+  location: location
+  tags: tags
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+  }
+}
+
+// container apps environment
+resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
+  name: '${workload}-${category}-cae'
+  location: location
+  tags: tags
+  properties: {
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: logAnalyticsWorkspace.properties.customerId
+        sharedKey: logAnalyticsWorkspace.listKeys().primarySharedKey
+      }
+    }
+  }
+
+  resource commentsDataStorage 'storages' = {
+    name: 'comments-data-storage'
+    properties: {
+      azureFile: {
+        shareName: storageAccount::fileServices::commentsDataShare.name
+        accessMode: 'ReadWrite'
+        accountKey: storageAccount.listKeys().keys[0].value
+        accountName: storageAccount.name
+      }
+    }
+  }
+}
+
+// remark42 comments container app
+resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
+  name: '${workload}-${category}-comments-ca'
+  location: location
+  tags: tags
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${managedIdentity.id}': {}
+    }
+  }
+  properties: {
+    environmentId: appsEnvironment.id
+    configuration: {
+      ingress: {
+        external: true
+        targetPort: 8080
+        allowInsecure: false
+        traffic: [
+          {
+            latestRevision: true
+            weight: 100
+          }
+        ]
+      }
+      secrets: [
+        {
+          name: 'remark42-secret'
+          identity: managedIdentity.id
+          keyVaultUrl: keyVault::remark42Secret.properties.secretUri
+        }
+      ]
+    }
+    template: {
+      containers: [
+        {
+          name: 'remark42'
+          image: 'docker.io/umputun/remark42:latest'
+          resources: {
+            cpu: json('0.5')
+            memory: '1Gi'
+          }
+          env: [
+            {
+              name: 'REMARK_URL'
+              value: 'https://comments.frasermclean.com'
+            }
+            {
+              name: 'SITE'
+              value: 'frasermclean'
+            }
+            {
+              name: 'SECRET'
+              secretRef: 'remark42-secret'
+            }
+            {
+              name: 'TIME_ZONE'
+              value: 'Asia/Singapore'
+            }
+          ]
+          volumeMounts: [
+            {
+              volumeName: 'comments-data'
+              mountPath: '/srv/var'
+            }
+          ]
+        }
+      ]
+      scale: {
+        minReplicas: 0
+        maxReplicas: 1
+      }
+      volumes: [
+        {
+          name: 'comments-data'
+          storageName: appsEnvironment::commentsDataStorage.name
+          storageType: 'AzureFile'
+        }
+      ]
+    }
   }
 }

@@ -12,4 +12,3 @@ param googleSiteVerification = 'google-site-verification=b_Qsl0HYr9Y5rPew78cllGS
 param commentsPublicIpName = 'kerrigan-pip'
 param commentsPublicIpResourceGroup = 'vm-kerrigan-rg'
 
-param remark42Secret = 'This should be replaced with a proper secret'
