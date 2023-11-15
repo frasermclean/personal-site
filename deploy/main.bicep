@@ -240,6 +240,8 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
   properties: {
     environmentId: appsEnvironment.id
     configuration: {
+      activeRevisionsMode: 'Single'
+      maxInactiveRevisions: 3
       ingress: {
         external: true
         targetPort: 8080
@@ -276,8 +278,8 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
           name: 'remark42'
           image: '${containerRegistry.properties.loginServer}/umputun/remark42:latest'
           resources: {
-            cpu: json('0.5')
-            memory: '1Gi'
+            cpu: json('0.25')
+            memory: '0.5Gi'
           }
           env: [
             {
@@ -370,7 +372,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
         }
       ]
       scale: {
-        minReplicas: 0
+        minReplicas: 1
         maxReplicas: 1
       }
       volumes: [
