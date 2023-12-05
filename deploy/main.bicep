@@ -22,11 +22,16 @@ param staticWebAppLocation string
 @description('Static web app custom domain verification code')
 param customDomainVerification string
 
+@description('Container registry subscription id')
+param containerRegistrySubscriptionId string
+
 @description('Name of the container registry')
 param containerRegistryName string
 
 @description('Container registry resource group')
 param containerRegistryResourceGroup string
+
+param shouldDeployComments bool = false
 
 var tags = {
   workload: workload
@@ -133,14 +138,14 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
 }
 
 // user assigned managed identity
-resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = if (shouldDeployComments) {
   name: '${workload}-${category}-id'
   location: location
   tags: tags
 }
 
 // key vault
-resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = if (shouldDeployComments) {
   name: '${workload}-${category}-kv'
   location: location
   tags: tags
@@ -178,7 +183,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 
 // log analytics workspace
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = if (shouldDeployComments) {
   name: '${workload}-${category}-law'
   location: location
   tags: tags
@@ -191,11 +196,11 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
   name: containerRegistryName
-  scope: resourceGroup(containerRegistryResourceGroup)
+  scope: resourceGroup(containerRegistrySubscriptionId, containerRegistryResourceGroup)
 }
 
 // container apps environment
-resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
+resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = if (shouldDeployComments) {
   name: '${workload}-${category}-cae'
   location: location
   tags: tags
@@ -227,7 +232,7 @@ resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
 }
 
 // remark42 comments container app
-resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
+resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = if (shouldDeployComments) {
   name: commentsAppName
   location: location
   tags: tags
@@ -254,9 +259,10 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
         ]
         customDomains: [
           {
-            name: appsEnvironment::commentsCertificate.properties.subjectName
-            bindingType: 'SniEnabled'
-            certificateId: appsEnvironment::commentsCertificate.id
+            name: 'comments.${domainName}'
+            bindingType: 'Disabled'
+            // bindingType: 'SniEnabled'
+            // certificateId: appsEnvironment::commentsCertificate.id
           }
         ]
       }
