@@ -6,6 +6,9 @@ param workload string
 @description('Category of the workload')
 param category string
 
+@description('Location for resources within the resource group')
+param location string = resourceGroup().location
+
 @description('DNS zone name')
 param domainName string
 
@@ -19,20 +22,9 @@ param staticWebAppLocation string
 @description('Static web app custom domain verification code')
 param customDomainVerification string
 
-@description('Name of the public IP address for the comments host')
-param commentsPublicIpName string
-
-@description('Resource group of the public IP address for the comments host')
-param commentsPublicIpResourceGroup string
-
 var tags = {
   workload: workload
   category: category
-}
-
-resource kerriganPublicIp 'Microsoft.Network/publicIPAddresses@2023-05-01' existing = {
-  name: commentsPublicIpName
-  scope: resourceGroup(commentsPublicIpResourceGroup)
 }
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
@@ -70,16 +62,6 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
       }
     }
   }
-
-  resource commentsARecord 'A' = {
-    name: 'comments'
-    properties: {
-      TTL: 3600
-      targetResource: {
-        id: kerriganPublicIp.id
-      }
-    }
-  }
 }
 
 module fastmailDnsRecords 'fastmailDnsRecords.bicep' = {
@@ -109,5 +91,27 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
 
   resource wwwCustomDomain 'customDomains' = {
     name: 'www.${domainName}'
+  }
+}
+
+// storage account
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+  name: '${workload}${category}'
+  location: location
+  tags: tags
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+
+  resource fileServices 'fileServices' = {
+    name: 'default'
+
+    resource commentsDataShare 'shares' = {
+      name: 'comments-data'
+      properties: {
+        shareQuota: 8
+      }
+    }
   }
 }
