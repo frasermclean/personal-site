@@ -19,9 +19,11 @@ links:
     image: https://asset.brandfetch.io/idp4VufaPQ/idxv4ToAqd.jpeg
 ---
 
+Wouldn't it be great to gain powerful insights into your website traffic without compromising your users' privacy?
+
 [Plausible Analytics](https://plausible.io/) is a lightweight and open-source web analytics tool. It doesn't use cookies and is fully compliant with GDPR, CCPA and PECR. It's a great alternative to Google Analytics.
 
-Plausible Analytics is available as a paid service, but you can also self-host it. This guide will show you how to self-host Plausible Analytics on a server using Docker Compose.
+Plausible Analytics is available as a paid service, but you can also self-host it. I have written this guide to show you how to self-host Plausible Analytics on your own server using Docker Compose.
 
 ## Prerequisites
 
@@ -54,7 +56,7 @@ The above defines a new service called `postgres` which uses the official Postgr
 
 Under the environment section, we are using variables for the username and password. These need to be referenced from other services, so ideally we should set these in environment varibles. We will create a `.env` file in the same directory as the `compose.yml` file with the following contents:
 
-```env
+```
 POSTGRES_USER=admin
 POSTGRES_PASSWORD=supersecretpassword # Change this to something more secure!
 ```
@@ -67,6 +69,8 @@ We can test the database by running the following commands:
 docker compose up -d postgres
 docker compose logs postgres
 ```
+
+![Postgres ready to accept connections](images/postgres-ready.png)
 If the last line says: `database system is ready to accept connections`, then we are good to go!
 
 ## ClickHouse database
@@ -94,3 +98,87 @@ volumes:
 ```
 
 I have also added a `ulimits` section to increase the number of open files that ClickHouse can use. Please note that previously created services and volumes have been omitted for brevity.
+
+## Plausible Analytics
+
+We are now ready to add the Plausible Analytics service to our `compose.yml` file:
+
+```yaml
+services:
+  # Previously created services have been omitted
+
+  plausible:
+    image: plausible/analytics:v2.0
+    restart: always
+    command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
+    depends_on:
+      - postgres
+      - clickhouse
+    ports:
+      - 8000:8000
+    environment:
+      - BASE_URL=https://analytics.yourdomain.com # Change this to your domain
+      - SECRET_KEY_BASE=a0cd04ab7e053758bdd54a9437db97416a3021d5c2d7e847b15ee72006d1517f # Use `openssl rand -hex 64` to generate a new key
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/plausible  # References environment variables defined in the postgres step
+      - CLICKHOUSE_DATABASE_URL=http://clickhouse:8123/plausible_events
+```
+
+After adding the above, we can run another `docker compose up -d` in the same directory. This should bring up our Plausible Analytics instance on port 8000. We can test this by visiting `http://localhost:8000` in our browser. 
+
+If everything went well, you should see a page similar to the following: ![Plausible Analaytics registration page](images/plausible-register.png)
+
+This will give us a basic installation running unencrypted on our server on port 8000. We will now look at how to secure this installation using HTTPS.
+
+## Adding a reverse proxy
+
+## Putting it all together
+
+Here is the complete `compose.yml` file:
+
+```yaml
+name: plausible-analytics
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  
+  # ClickHouse server
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.3-alpine
+    restart: always
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+  
+  # Plausible Analytics
+  plausible:
+    image: plausible/analytics:v2.0
+    restart: always
+    command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
+    depends_on:
+      - postgres
+      - clickhouse
+    ports:
+      - 8000:8000
+    environment:
+      - BASE_URL=https://analytics.yourdomain.com # Change this to your domain
+      - SECRET_KEY_BASE=a0cd04ab7e053758bdd54a9437db97416a3021d5c2d7e847b15ee72006d1517f # Use `openssl rand -hex 64` to generate a new key
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/plausible  # References environment variables defined in the postgres step
+      - CLICKHOUSE_DATABASE_URL=http://clickhouse:8123/plausible_events
+
+volumes:
+  postgres-data:
+    driver: local
+  clickhouse-data:
+    driver: local
+```
