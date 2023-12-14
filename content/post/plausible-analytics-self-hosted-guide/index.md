@@ -1,6 +1,6 @@
 ---
 title: 'Plausible Analytics self-hosted guide'
-date: '2023-11-13T10:37:23+08:00'
+date: '2023-12-14T9:11:23+08:00'
 draft: true
 image: cover.jpg
 tags: [ analytics, self-hosted, plausible ]
@@ -127,9 +127,7 @@ After adding the above, we can run another `docker compose up -d` in the same di
 
 If everything went well, you should see a page similar to the following: ![Plausible Analaytics registration page](images/plausible-register.png)
 
-This will give us a basic installation running unencrypted on our server on port 8000. We will now look at how to secure this installation using HTTPS.
-
-## Adding a reverse proxy
+This will give us a basic installation running unencrypted on our server on port 8000.
 
 ## Putting it all together
 
