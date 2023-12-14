@@ -1,7 +1,7 @@
 ---
 title: 'Plausible Analytics self-hosted guide'
 date: '2023-12-14T9:11:23+08:00'
-draft: true
+draft: false
 image: cover.jpg
 tags: [ analytics, self-hosted, plausible ]
 links:
@@ -180,3 +180,13 @@ volumes:
   clickhouse-data:
     driver: local
 ```
+
+If you prefer, I have provided a ZIP file containing the `compose.yml` file and `.env` file [here](plausible-analytics.zip).
+
+## Closing thoughts
+
+I hope you found this guide useful. I would highly recommend securing your server with a HTTPS reverse proxy but this is beyond the scope of this guide.
+
+Plausible Analytics is an amazing open source project that deserves our support. Check our their [pricing page](https://plausible.io/#pricing) and consider supporting them if you can.
+
+If you have any questions or feedback, please feel free to leave a comment below.
