@@ -3,7 +3,8 @@ title: 'Plausible Analytics self-hosted guide'
 date: '2023-12-14T9:11:23+08:00'
 draft: false
 image: cover.jpg
-tags: [ analytics, self-hosted, plausible ]
+categories: [ guide]
+tags: [ analytics, self-hosted, plausible, docker, containers ]
 links:
   - title: Plausible Analytivcs
     description: Easy to use and privacy-friendly Google Analytics alternative
