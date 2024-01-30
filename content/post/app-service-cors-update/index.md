@@ -1,9 +1,16 @@
 ---
 title: 'Azure App Service CORS update script'
 date: '2024-01-30T11:29:55+08:00'
-draft: true
+draft: false
 image: cover.jpg
 tags: ['azure', 'powershell', 'app-service', 'cors']
+links:
+  - title: Static Web Apps
+    description: Azure Static Web Apps is a service that automatically builds and deploys full stack web apps to Azure from a GitHub repository.
+    website: https://azure.microsoft.com/en-us/products/app-service/static
+  - title: Azure App Service
+    description: Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends.
+    website: https://azure.microsoft.com/en-us/products/app-service
 ---
 
 ## Introduction
