@@ -88,6 +88,34 @@ var srvRecords = [
     target: 'api.fastmail.com'
     weight: 1
   }
+  {
+    name: '_caldav._tcp'
+    port: 0
+    priority: 0
+    target: '.'
+    weight: 0
+  }
+  {
+    name: '_caldavs._tcp'
+    port: 443
+    priority: 0
+    target: 'caldav.fastmail.com'
+    weight: 1
+  }
+  {
+    name: '_carddav._tcp'
+    port: 0
+    priority: 0
+    target: '.'
+    weight: 0
+  }
+  {
+    name: '_carddavs._tcp'
+    port: 443
+    priority: 0
+    target: 'carddav.fastmail.com'
+    weight: 1
+  }
 ]
 
 resource zone 'Microsoft.Network/dnsZones@2018-05-01' existing = {
