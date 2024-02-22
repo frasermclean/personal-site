@@ -28,6 +28,9 @@ param containerRegistryName string
 @description('Container registry resource group')
 param containerRegistryResourceGroup string
 
+@description('Reset the comments certificate. Useful on first deployment - should normally be false')
+param resetCommentsCertificate bool = false
+
 var tags = {
   workload: workload
   category: category
@@ -238,12 +241,9 @@ resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
     location: location
     tags: tags
     properties: {
-      subjectName: 'comments.${domainName}'
+      subjectName: '${dnsZone::commentsCnameRecord.name}.${dnsZone.name}'
       domainControlValidation: 'CNAME'
     }
-    dependsOn: [
-      dnsZone::commentsCnameRecord
-    ]
   }
 }
 
@@ -273,8 +273,8 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
         customDomains: [
           {
             name: '${dnsZone::commentsCnameRecord.name}.${dnsZone.name}'
-            bindingType: 'Disabled'
-            //certificateId: appsEnvironment::commentsCertificate.id
+            bindingType: resetCommentsCertificate ? 'Disabled' : 'SniEnabled'
+            certificateId: resetCommentsCertificate ? null : appsEnvironment::commentsCertificate.id
           }
         ]
       }
@@ -422,7 +422,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
         }
       ]
       scale: {
-        minReplicas: 1
+        minReplicas: 0
         maxReplicas: 1
       }
       volumes: [
