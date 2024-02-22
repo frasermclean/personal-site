@@ -12,7 +12,7 @@ on:
     branches:
       - main
     paths:
-      - ./.github/workflows/deploy-app.yaml
+      - .github/workflows/deploy-app.yaml
       - src/**
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
