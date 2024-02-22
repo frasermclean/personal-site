@@ -7,3 +7,7 @@ param domainName = 'frasermclean.com'
 param staticWebAppLocation = 'eastasia'
 param customDomainVerification = 'sd37rt662lqyqg77pfnmh61ddqx44bxq'
 param googleSiteVerification = 'google-site-verification=b_Qsl0HYr9Y5rPew78cllGSW_YKduu7KzvgdrEDbfDo'
+
+// container registry
+param containerRegistryName = 'snakebytecorecr'
+param containerRegistryResourceGroup = 'snakebyte-core-rg'
