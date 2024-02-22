@@ -25,11 +25,14 @@ param customDomainVerification string
 @description('Name of the container registry')
 param containerRegistryName string
 
-@description('Container registry resource group')
-param containerRegistryResourceGroup string
+@description('Name of the container image')
+param containerImageName string
+
+@description('Tag of the container image')
+param containerImageTag string
 
 @description('Reset the comments certificate. Useful on first deployment - should normally be false')
-param resetCommentsCertificate bool = false
+param resetCommentsCertificate bool
 
 var tags = {
   workload: workload
@@ -37,6 +40,7 @@ var tags = {
 }
 
 var commentsAppName = '${workload}-${category}-comments-ca'
+var containerRegistryLoginServer = '${containerRegistryName}.azurecr.io'
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
   name: domainName
@@ -203,12 +207,6 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
   }
 }
 
-// container registry (existing)
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
-  name: containerRegistryName
-  scope: resourceGroup(containerRegistryResourceGroup)
-}
-
 // container apps environment
 resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: '${workload}-${category}-cae'
@@ -280,7 +278,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
       }
       registries: [
         {
-          server: containerRegistry.properties.loginServer
+          server: containerRegistryLoginServer
           identity: 'system'
         }
       ]
@@ -326,7 +324,7 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'remark42'
-          image: '${containerRegistry.properties.loginServer}/umputun/remark42:latest'
+          image: '${containerRegistryLoginServer}/${containerImageName}:${containerImageTag}'
           resources: {
             cpu: json('0.25')
             memory: '0.5Gi'

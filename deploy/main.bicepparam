@@ -10,4 +10,7 @@ param googleSiteVerification = 'google-site-verification=b_Qsl0HYr9Y5rPew78cllGS
 
 // container registry
 param containerRegistryName = 'snakebytecorecr'
-param containerRegistryResourceGroup = 'snakebyte-core-rg'
+param containerImageName = 'umputun/remark42'
+param containerImageTag = 'latest'
+
+param resetCommentsCertificate = false
