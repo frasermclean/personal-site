@@ -34,6 +34,10 @@ comments:
     site: frasermclean
     locale: en
 
+recaptcha:
+  enabled: true
+  siteKey: 6LcLpXspAAAAAB4BYXF5CoKPKC7_YpaqSxALVnmR
+
 footer:
   since: 2023
   customText: >-

@@ -1,26 +1,43 @@
+{{ define "head" }}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha.siteKey }}"></script>
+{{ end }} 
+
 {{ define "main" }}
-<div class="contact-me-card">
-  <h1 class="article-title">{{ .Title }}</h1>
-  <div class="instructions">{{ .Content }}</div>
+  <div class="contact-me-card">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="instructions">{{ .Content }}</div>
 
-  <form id="contact-form">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required>
-    </div>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="your-email-address@example.com" required>
-    </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
 
-    <div class="form-group">
-      <label for="message">Your message</label>
-      <textarea id="message" name="message" rows="5" placeholder="Enter your message here"></textarea>
-    </div>
+      <div class="form-group">
+        <label for="message">Message to send</label>
+        <textarea id="message" name="message" rows="5"></textarea>
+      </div>
 
-    <button type="submit" class="submit-button">Send message</button>
-  </form>
-</div>
+      <button type="submit" class="submit-button">Send message</button>
+      
+    </form>
+  </div>
 
-{{ partialCached "footer/footer" . }} {{ end }}
+  <script>
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      grecaptcha.ready(async () => {
+        const token = await grecaptcha.execute('{{ .Site.Params.recaptcha.siteKey }}', {action: 'submit'});
+        console.log(token);
+      });
+    });
+  </script>
+
+  {{ partialCached "footer/footer" . }}
+{{ end }}
