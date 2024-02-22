@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -14,7 +17,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: pages
+  group: main
   cancel-in-progress: false
 
 # Default to bash
@@ -31,33 +34,41 @@ jobs:
     name: Build site
     runs-on: ubuntu-latest
     steps:
+      # Install build dependencies
       - name: Install Hugo
-        run: sudo snap install hugo
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
+        run: |
+          sudo snap install hugo
+          sudo snap install dart-sass
+
+      # Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
           submodules: recursive
           fetch-depth: 0
-      - name: Setup Pages
-        id: setup-pages
-        uses: actions/configure-pages@v3
+
+      # Install Node.js dependencies
       - name: Install Node.js dependencies
         run: '[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true'
+        working-directory: ${{ github.workspace }}/src
+
+      # Build Hugo site
       - name: Build Hugo site
         env:
           # For maximum backward compatibility with Hugo modules
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
-        run: hugo --gc --minify --baseURL "${{ steps.setup-pages.outputs.base_url }}/"
+        run: hugo --gc --minify
+        working-directory: ${{ github.workspace }}/src
+
+      # Upload artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ./public
-  
+          path: ${{ github.workspace }}/src/public
+
   deploy-infra:
     name: Deploy infrastructure
     runs-on: ubuntu-latest
@@ -74,8 +85,8 @@ jobs:
 
       # Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
-      
+        uses: actions/checkout@v4
+
       # Deploy template
       - uses: azure/arm-deploy@v1
         name: Deploy template
@@ -99,11 +110,11 @@ jobs:
     steps:
       # Download artifact from build job
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.APP_PATH }}
-      
+
       # Deploy to Azure Static Web Apps
       - uses: azure/static-web-apps-deploy@v1
         name: Deploy application
