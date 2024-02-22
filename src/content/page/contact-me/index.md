@@ -2,6 +2,7 @@
 title: 'Contact Me'
 slug: 'contact-me'
 draft: true
+layout: 'contact-me'
 menu:
   main:
     name: Contact Me
