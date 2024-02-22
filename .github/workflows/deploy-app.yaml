@@ -35,12 +35,6 @@ jobs:
     name: Build application
     runs-on: ubuntu-latest
     steps:
-      # Install build dependencies
-      - name: Install build dependencies
-        run: |
-          sudo snap install hugo
-          sudo snap install dart-sass
-
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,6 +42,13 @@ jobs:
           lfs: true
           submodules: recursive
           fetch-depth: 0
+
+      # Setup Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: latest
+          extended: true
 
       # Install Node.js dependencies
       - name: Install Node.js dependencies
