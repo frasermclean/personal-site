@@ -15,17 +15,6 @@ on:
       - .github/workflows/deploy-app.yaml
       - src/**
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: main
-  cancel-in-progress: false
-
-# Default to bash
-defaults:
-  run:
-    shell: bash
-
 env:
   ARTIFACT_NAME: app-build-${{ github.run_number }}
 
@@ -74,12 +63,15 @@ jobs:
   # Deployment job
   deploy:
     name: Deploy application
-    environment:
-      name: main
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: main
+    concurrency:
+      group: main
+      cancel-in-progress: false
     env:
       APP_PATH: ${{ github.workspace }}/artifact
     steps:
