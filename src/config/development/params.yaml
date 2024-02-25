@@ -1,0 +1,6 @@
+recaptcha:
+  enabled: true
+  siteKey: 6LdK830pAAAAAOI6c-ikOMnQGQKwId760Ro7N4We
+
+backend:
+  baseUrl: http://localhost:8080

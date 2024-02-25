@@ -19,15 +19,38 @@
 </form>
 
 <script>
-  const contactForm = document.getElementById('contact-form');
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    grecaptcha.ready(async () => {
-      const token = await grecaptcha.execute(
-        '{{ .Site.Params.recaptcha.siteKey }}',
-        { action: 'submit' }
-      );
-      console.log(token);
+  document
+    .getElementById('contact-form')
+    .addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const siteKey = '{{ .Site.Params.recaptcha.siteKey }}';
+      const action = 'submit';
+
+      grecaptcha.enterprise.ready(async () => {
+        // get the token
+        const token = await grecaptcha.enterprise.execute(siteKey, { action });
+
+        // send the token to the backend for processing
+        const url = '{{ .Site.Params.backend.baseUrl }}/contact';
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            event: {
+              token,
+              action,
+              siteKey,
+            },
+            payload: {
+              name: document.getElementById('name').value,
+              email: document.getElementById('email').value,
+              message: document.getElementById('message').value,
+            },
+          }),
+        });
+      });
     });
-  });
 </script>
