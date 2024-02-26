@@ -13,26 +13,20 @@ public interface IAssessmentService
 }
 
 public class AssessmentService(
-    IOptions<AssessmentServiceOptions> assessmentOptions,
-    IOptions<GoogleProjectOptions> googleProjectOptions,
+    IOptions<AssessmentServiceOptions> options,
     ILogger<AssessmentService> logger,
-    IGoogleCredentialProvider googleCredentialProvider)
+    RecaptchaEnterpriseServiceClientProvider clientProvider)
     : IAssessmentService
 {
-    private readonly string projectId = googleProjectOptions.Value.ProjectId;
-    private readonly float scoreThreshold = assessmentOptions.Value.ScoreThreshold;
-
-    private readonly RecaptchaEnterpriseServiceClient client = new RecaptchaEnterpriseServiceClientBuilder()
-    {
-        GoogleCredential = googleCredentialProvider.GetCredential()
-    }.Build();
+    private readonly float scoreThreshold = options.Value.ScoreThreshold;
+    private readonly RecaptchaEnterpriseServiceClient client = clientProvider.CreateClient();
 
     public async Task<bool> AssessActionAsync(string token, string siteKey, string action)
     {
         // create assessment request
         var request = new CreateAssessmentRequest
         {
-            ParentAsProjectName = ProjectName.FromProject(projectId),
+            ParentAsProjectName = ProjectName.FromProject(clientProvider.ProjectId),
             Assessment = new Assessment
             {
                 Event = new Event

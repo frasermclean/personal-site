@@ -22,7 +22,7 @@ public static class Program
                 services.AddScoped<IAssessmentService, AssessmentService>();
                 services.AddOptions<GoogleProjectOptions>()
                     .Bind(context.Configuration.GetSection(GoogleProjectOptions.SectionName));
-                services.AddSingleton<IGoogleCredentialProvider, GoogleCredentialProvider>();
+                services.AddSingleton<RecaptchaEnterpriseServiceClientProvider>();
             })
             .Build();
 
