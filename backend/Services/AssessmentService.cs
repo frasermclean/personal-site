@@ -14,19 +14,20 @@ public interface IAssessmentService
 
 public class AssessmentService(
     IOptions<AssessmentServiceOptions> options,
+    IOptions<GoogleProjectOptions> googleProjectOptions,
     ILogger<AssessmentService> logger,
-    RecaptchaEnterpriseServiceClientProvider clientProvider)
+    RecaptchaEnterpriseServiceClient client)
     : IAssessmentService
 {
     private readonly float scoreThreshold = options.Value.ScoreThreshold;
-    private readonly RecaptchaEnterpriseServiceClient client = clientProvider.CreateClient();
+    private readonly string googleProjectId = googleProjectOptions.Value.ProjectId;
 
     public async Task<bool> AssessActionAsync(string token, string siteKey, string action)
     {
         // create assessment request
         var request = new CreateAssessmentRequest
         {
-            ParentAsProjectName = ProjectName.FromProject(clientProvider.ProjectId),
+            ParentAsProjectName = ProjectName.FromProject(googleProjectId),
             Assessment = new Assessment
             {
                 Event = new Event
