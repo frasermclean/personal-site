@@ -207,6 +207,18 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
   }
 }
 
+// application insights
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: '${workload}-${category}-appi'
+  location: location
+  tags: tags
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+  }
+}
+
 // container apps environment
 resource appsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: '${workload}-${category}-cae'
@@ -428,6 +440,58 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
           name: 'comments-data'
           storageName: appsEnvironment::commentsDataStorage.name
           storageType: 'AzureFile'
+        }
+      ]
+    }
+  }
+}
+
+// consumption app service plan
+resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
+  name: '${workload}-${category}-asp'
+  location: location
+  tags: tags
+  sku: {
+    name: 'Y1'
+  }
+  properties: {
+    reserved: true
+  }
+}
+
+// function app
+resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
+  name: '${workload}-${category}-func'
+  location: location
+  tags: tags
+  kind: 'functionapp,linux'
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+    siteConfig: {
+      http20Enabled: true
+      ftpsState: 'FtpsOnly'
+      linuxFxVersion: 'DOTNET-ISOLATED|8.0'
+      use32BitWorkerProcess: false
+      appSettings: [
+        {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
+        }
+        {
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~4'
+        }
+        {
+          name: 'FUNCTIONS_WORKER_RUNTIME'
+          value: 'dotnet-isolated'
+        }
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: applicationInsights.properties.ConnectionString
         }
       ]
     }
