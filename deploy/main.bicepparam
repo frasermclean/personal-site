@@ -14,3 +14,13 @@ param containerImageName = 'umputun/remark42'
 param containerImageTag = 'latest'
 
 param resetCommentsCertificate = false
+
+// email
+param emailHost = 'smtp.fastmail.com'
+param emailPort = 465
+param emailRecipientName = 'Fraser McLean'
+param emailRecipientAddress = 'contact@${domainName}'
+
+// recaptcha settings
+param recaptchaGoogleProjectId = 'fm-site-comments'
+param recaptchaScoreThreshold = '0.5'

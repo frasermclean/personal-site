@@ -34,6 +34,24 @@ param containerImageTag string
 @description('Reset the comments certificate. Useful on first deployment - should normally be false')
 param resetCommentsCertificate bool
 
+@description('SMTP server hostname')
+param emailHost string
+
+@description('SMTP server port number')
+param emailPort int
+
+@description('Email recipient name')
+param emailRecipientName string
+
+@description('Email recipient address')
+param emailRecipientAddress string
+
+@description('Google project ID for reCAPTCHA')
+param recaptchaGoogleProjectId string
+
+@description('reCAPTCHA score threshold')
+param recaptchaScoreThreshold string
+
 var tags = {
   workload: workload
   category: category
@@ -41,6 +59,7 @@ var tags = {
 
 var commentsAppName = '${workload}-${category}-comments-ca'
 var containerRegistryLoginServer = '${containerRegistryName}.azurecr.io'
+var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
   name: domainName
@@ -171,6 +190,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   resource smtpPassword 'secrets' existing = {
     name: 'smtp-password'
   }
+
+  resource googleJsonCredentialsSecret 'secrets' existing = {
+    name: 'google-json-credentials'
+  }
 }
 
 // storage account
@@ -188,6 +211,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
     resource commentsDataShare 'shares' = {
       name: 'comments-data'
+      properties: {
+        shareQuota: 8
+      }
+    }
+
+    resource functionAppContentShare 'shares' = {
+      name: 'function-app-content'
       properties: {
         shareQuota: 8
       }
@@ -479,7 +509,23 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       appSettings: [
         {
           name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
+          value: storageAccountConnectionString
+        }
+        {
+          name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
+          value: storageAccountConnectionString
+        }
+        {
+          name: 'WEBSITE_CONTENTSHARE'
+          value: storageAccount::fileServices::functionAppContentShare.name
+        }
+        {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '1'
+        }
+        {
+          name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED'
+          value: '1'
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -492,6 +538,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
           value: applicationInsights.properties.ConnectionString
+        }
+        {
+          name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
+          value: 'true'
+        }
+        {
+          name: 'GOOGLE_JSON_CREDENTIALS'
+          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::googleJsonCredentialsSecret.name})'
+        }
+        {
+          name: 'Recaptcha__GoogleProjectId'
+          value: recaptchaGoogleProjectId
+        }
+        {
+          name: 'Recaptcha__ScoreThreshold'
+          value: recaptchaScoreThreshold
+        }
+        {
+          name: 'Email__Username'
+          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::smtpUsername.name})'
+        }
+        {
+          name: 'Email__Password'
+          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::smtpPassword.name})'
+        }
+        {
+          name: 'Email__Host'
+          value: emailHost
+        }
+        {
+          name: 'Email__Port'
+          value: string(emailPort)
+        }
+        {
+          name: 'Email__RecipientName'
+          value: emailRecipientName
+        }
+        {
+          name: 'Email__RecipientAddress'
+          value: emailRecipientAddress
         }
       ]
     }
