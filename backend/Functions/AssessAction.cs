@@ -1,25 +1,32 @@
 using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Extensions.Logging;
 using PersonalSite.Backend.Models;
 using PersonalSite.Backend.Services;
 
 namespace PersonalSite.Backend.Functions;
 
-public class AssessAction(ILogger<AssessAction> logger, IAssessmentService assessmentService)
+public class AssessAction(IAssessmentService assessmentService, IEmailSender emailSender)
 {
     [Function(nameof(AssessAction))]
     public async Task<HttpResponseData> ExecuteAsync(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "assess-action")]
         HttpRequestData request,
-        [FromBody] ProcessContactFormRequest body)
+        [FromBody] ProcessContactFormRequest body,
+        CancellationToken cancellationToken)
     {
+        // perform action assessment
         var (token, action, siteKey) = body.Event;
-        var isValid = await assessmentService.AssessActionAsync(token, siteKey, action);
+        var assessmentIsValid = await assessmentService.AssessActionAsync(token, siteKey, action);
+        if (!assessmentIsValid)
+        {
+            request.CreateResponse(HttpStatusCode.BadRequest);
+        }
 
-        return isValid
-            ? request.CreateResponse(HttpStatusCode.OK)
-            : request.CreateResponse(HttpStatusCode.BadRequest);
+        // send email
+        var (name, email, message) = body.Payload;
+        await emailSender.SendEmailAsync(name, email, message, cancellationToken);
+
+        return request.CreateResponse(HttpStatusCode.OK);
     }
 }

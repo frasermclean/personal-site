@@ -17,12 +17,17 @@ public static class Program
                 services.AddApplicationInsightsTelemetryWorkerService();
                 services.ConfigureFunctionsApplicationInsights();
 
+                services.AddScoped<IAssessmentService, AssessmentService>();
                 services.AddOptions<AssessmentServiceOptions>()
                     .Bind(context.Configuration.GetSection(AssessmentServiceOptions.SectionName));
-                services.AddScoped<IAssessmentService, AssessmentService>();
+
+                services.AddScoped<IEmailSender, EmailSender>();
+                services.AddOptions<EmailOptions>()
+                    .Bind(context.Configuration.GetSection(EmailOptions.SectionName));
+
+                services.AddSingleton<RecaptchaEnterpriseServiceClientProvider>();
                 services.AddOptions<GoogleProjectOptions>()
                     .Bind(context.Configuration.GetSection(GoogleProjectOptions.SectionName));
-                services.AddSingleton<RecaptchaEnterpriseServiceClientProvider>();
             })
             .Build();
 
