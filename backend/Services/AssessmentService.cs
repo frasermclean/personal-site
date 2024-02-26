@@ -43,16 +43,34 @@ public class AssessmentService(
         }
         catch (RpcException exception)
         {
-            logger.LogError(exception, "Error creating assessment");
+            logger.LogError(exception, "RPC error occurred while creating assessment");
             return false;
         }
 
+        // ensure token is valid
         if (!assessment.TokenProperties.Valid)
         {
-            logger.LogError("Token is invalid");
+            logger.LogError("Token is invalid - {InvalidReason}", assessment.TokenProperties.InvalidReason);
             return false;
         }
 
-        return assessment.RiskAnalysis.Score >= scoreThreshold;
+        // ensure expected action is executed
+        if (assessment.TokenProperties.Action != action)
+        {
+            logger.LogError(
+                "Invalid action was executed. Executed action: {ExecutedAction}, Expected action: {ExpectedAction}",
+                assessment.TokenProperties.Action, action);
+            return false;
+        }
+
+        // ensure score is above threshold
+        var hasPassed = assessment.RiskAnalysis.Score >= scoreThreshold;
+        if (!hasPassed)
+        {
+            logger.LogWarning("Assessment failed. Score: {Score}, Threshold: {Threshold}",
+                assessment.RiskAnalysis.Score, scoreThreshold);
+        }
+
+        return hasPassed;
     }
 }
