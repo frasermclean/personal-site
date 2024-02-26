@@ -32,7 +32,7 @@
         const token = await grecaptcha.enterprise.execute(siteKey, { action });
 
         // send the token to the backend for processing
-        const url = '{{ .Site.Params.backend.baseUrl }}/contact';
+        const url = '{{ .Site.Params.backend.baseUrl }}/contact-form';
         const response = await fetch(url, {
           method: 'POST',
           headers: {
