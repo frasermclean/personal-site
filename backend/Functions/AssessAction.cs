@@ -20,7 +20,7 @@ public class AssessAction(IAssessmentService assessmentService, IEmailSender ema
         var assessmentIsValid = await assessmentService.AssessActionAsync(token, siteKey, action);
         if (!assessmentIsValid)
         {
-            request.CreateResponse(HttpStatusCode.BadRequest);
+            return request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         // send email

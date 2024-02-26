@@ -13,14 +13,13 @@ public interface IAssessmentService
 }
 
 public class AssessmentService(
-    IOptions<AssessmentServiceOptions> options,
-    IOptions<GoogleProjectOptions> googleProjectOptions,
+    IOptions<RecaptchaOptions> options,
     ILogger<AssessmentService> logger,
     RecaptchaEnterpriseServiceClient client)
     : IAssessmentService
 {
     private readonly float scoreThreshold = options.Value.ScoreThreshold;
-    private readonly string googleProjectId = googleProjectOptions.Value.ProjectId;
+    private readonly string googleProjectId = options.Value.GoogleProjectId;
 
     public async Task<bool> AssessActionAsync(string token, string siteKey, string action)
     {
