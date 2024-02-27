@@ -1,5 +1,4 @@
 recaptcha:
-  enabled: true
   siteKey: 6LdP034pAAAAAON04x4XEBxzNpU40gqkUb5CDrRB
 
 backend:
