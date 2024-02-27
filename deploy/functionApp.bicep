@@ -118,6 +118,11 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       ftpsState: 'FtpsOnly'
       linuxFxVersion: 'DOTNET-ISOLATED|8.0'
       use32BitWorkerProcess: false
+      cors: {
+        allowedOrigins: [
+          'https://www.${domainName}'
+        ]
+      }
       appSettings: [
         {
           name: 'AzureWebJobsStorage__accountName' // Use managed identity for storage account access: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob&pivots=programming-language-csharp#connecting-to-host-storage-with-an-identity
