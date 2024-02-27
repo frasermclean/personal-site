@@ -7,6 +7,8 @@ on:
     paths:
       - .github/workflows/deploy-infra.yaml
       - deploy/**
+      
+  workflow_dispatch:
 
 jobs:
   deploy-infra:
