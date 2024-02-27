@@ -34,18 +34,6 @@ param containerImageTag string
 @description('Reset the comments certificate. Useful on first deployment - should normally be false')
 param resetCommentsCertificate bool
 
-@description('SMTP server hostname')
-param emailHost string
-
-@description('SMTP server port number')
-param emailPort int
-
-@description('Email recipient name')
-param emailRecipientName string
-
-@description('Email recipient address')
-param emailRecipientAddress string
-
 @description('Google project ID for reCAPTCHA')
 param recaptchaGoogleProjectId string
 
@@ -468,102 +456,21 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 
-// consumption app service plan
-resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
-  name: '${workload}-${category}-asp'
-  location: location
-  tags: tags
-  sku: {
-    name: 'Y1'
-  }
-  properties: {
-    reserved: true
-  }
-}
-
-// function app
-resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
-  name: '${workload}-${category}-func'
-  location: location
-  tags: tags
-  kind: 'functionapp,linux'
-  identity: {
-    type: 'SystemAssigned'
-  }
-  properties: {
-    serverFarmId: appServicePlan.id
-    httpsOnly: true
-    siteConfig: {
-      http20Enabled: true
-      ftpsState: 'FtpsOnly'
-      linuxFxVersion: 'DOTNET-ISOLATED|8.0'
-      use32BitWorkerProcess: false
-      appSettings: [
-        {
-          name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
-        }
-        {
-          name: 'FUNCTIONS_EXTENSION_VERSION'
-          value: '~4'
-        }
-        {
-          name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet-isolated'
-        }
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: applicationInsights.properties.ConnectionString
-        }
-        {
-          name: 'ENABLE_ORYX_BUILD' // Enable remote build: https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-technologies?tabs=linux#remote-build
-          value: 'true'
-        }
-        {
-          name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
-          value: 'true'
-        }
-        {
-          name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED' // Improves cold start time: https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_use_placeholder_dotnetisolated
-          value: '1'
-        }
-        {
-          name: 'GOOGLE_JSON_CREDENTIALS'
-          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::googleJsonCredentialsSecret.name})'
-        }
-        {
-          name: 'Recaptcha__GoogleProjectId'
-          value: recaptchaGoogleProjectId
-        }
-        {
-          name: 'Recaptcha__ScoreThreshold'
-          value: recaptchaScoreThreshold
-        }
-        {
-          name: 'Email__Username'
-          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::smtpUsername.name})'
-        }
-        {
-          name: 'Email__Password'
-          value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::smtpPassword.name})'
-        }
-        {
-          name: 'Email__Host'
-          value: emailHost
-        }
-        {
-          name: 'Email__Port'
-          value: string(emailPort)
-        }
-        {
-          name: 'Email__RecipientName'
-          value: emailRecipientName
-        }
-        {
-          name: 'Email__RecipientAddress'
-          value: emailRecipientAddress
-        }
-      ]
-    }
+module functionApp 'functionApp.bicep' = {
+  name: 'functionApp'
+  params: {
+    workload: workload
+    category: category
+    location: location
+    tags: tags
+    domainName: domainName
+    storageAccountName: storageAccount.name
+    keyVaultName: keyVault.name
+    applicatioInsightsConnectionString: applicationInsights.properties.ConnectionString
+    emailHost: 'smtp.fastmail.com'
+    emailPort: 465
+    emailRecipientName: 'Fraser McLean'
+    recaptchaGoogleProjectId:  recaptchaGoogleProjectId
+    recaptchaScoreThreshold: recaptchaScoreThreshold
   }
 }
