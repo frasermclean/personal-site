@@ -16,7 +16,7 @@ on:
       - backend/**
 
 env:
-  ARTIFACT_NAME: functions-backend-${{ github.run_number }}-${{ github.run_attempt}}
+  ARTIFACT_NAME: functions-backend-${{ github.run_number }}
 
 jobs:
   build:
