@@ -40,6 +40,9 @@ param recaptchaGoogleProjectId string
 @description('reCAPTCHA score threshold')
 param recaptchaScoreThreshold string
 
+@description('Attempt to assign roles - requires appropriate permissions')
+param attemptRoleAssignments bool
+
 var tags = {
   workload: workload
   category: category
@@ -470,7 +473,17 @@ module functionApp 'functionApp.bicep' = {
     emailHost: 'smtp.fastmail.com'
     emailPort: 465
     emailRecipientName: 'Fraser McLean'
-    recaptchaGoogleProjectId:  recaptchaGoogleProjectId
+    recaptchaGoogleProjectId: recaptchaGoogleProjectId
     recaptchaScoreThreshold: recaptchaScoreThreshold
+  }
+}
+
+module roleAssignments 'roleAssignments.bicep' = if (attemptRoleAssignments) {
+  name: 'roleAssignments'
+  params: {
+    storageAccountName: storageAccount.name
+    keyVaultName: keyVault.name
+    commentsAppPrincipalId: commentsApp.identity.principalId
+    functionAppPrincipalId: functionApp.outputs.principalId
   }
 }

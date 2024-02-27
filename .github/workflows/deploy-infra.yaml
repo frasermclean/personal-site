@@ -35,6 +35,8 @@ jobs:
       # Deploy template
       - uses: azure/arm-deploy@v1
         name: Deploy template
+        env:
+          ATTEMPT_ROLE_ASSIGNMENTS: false
         with:
           scope: resourcegroup
           resourceGroupName: frasermclean-site-rg

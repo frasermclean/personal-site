@@ -18,3 +18,5 @@ param resetCommentsCertificate = false
 // recaptcha settings
 param recaptchaGoogleProjectId = 'fm-site-comments'
 param recaptchaScoreThreshold = '0.5'
+
+param attemptRoleAssignments = bool(readEnvironmentVariable('ATTEMPT_ROLE_ASSIGNMENTS', 'true'))
