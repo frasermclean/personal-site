@@ -59,6 +59,9 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    concurrency:
+      group: main
+      cancel-in-progress: false
     steps:
       # Download artifact
       - name: Download artifact
