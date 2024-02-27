@@ -59,7 +59,6 @@ var tags = {
 
 var commentsAppName = '${workload}-${category}-comments-ca'
 var containerRegistryLoginServer = '${containerRegistryName}.azurecr.io'
-var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
   name: domainName
@@ -211,13 +210,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
     resource commentsDataShare 'shares' = {
       name: 'comments-data'
-      properties: {
-        shareQuota: 8
-      }
-    }
-
-    resource functionAppContentShare 'shares' = {
-      name: 'function-app-content'
       properties: {
         shareQuota: 8
       }
@@ -509,23 +501,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       appSettings: [
         {
           name: 'AzureWebJobsStorage'
-          value: storageAccountConnectionString
-        }
-        {
-          name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
-          value: storageAccountConnectionString
-        }
-        {
-          name: 'WEBSITE_CONTENTSHARE'
-          value: storageAccount::fileServices::functionAppContentShare.name
-        }
-        {
-          name: 'WEBSITE_RUN_FROM_PACKAGE'
-          value: '1'
-        }
-        {
-          name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED'
-          value: '1'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -540,8 +516,16 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
           value: applicationInsights.properties.ConnectionString
         }
         {
+          name: 'ENABLE_ORYX_BUILD' // Enable remote build: https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-technologies?tabs=linux#remote-build
+          value: 'true'
+        }
+        {
           name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
           value: 'true'
+        }
+        {
+          name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED' // Improves cold start time: https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_use_placeholder_dotnetisolated
+          value: '1'
         }
         {
           name: 'GOOGLE_JSON_CREDENTIALS'
