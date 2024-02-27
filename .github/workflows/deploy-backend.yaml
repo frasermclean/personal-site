@@ -54,6 +54,7 @@ jobs:
   deploy:
     name: Deploy application
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     needs: build
     environment: main
     permissions:
