@@ -12,7 +12,11 @@ param location string = resourceGroup().location
 @description('Tags for the resources')
 param tags object
 
+@description('Main domain name')
 param domainName string
+
+@description('Subdomain for the function app')
+param subdomain string = 'func'
 
 @description('Storage account name')
 param storageAccountName string
@@ -40,11 +44,9 @@ param recaptchaGoogleProjectId string
 @description('reCAPTCHA score threshold')
 param recaptchaScoreThreshold string = '0.5'
 
-var functionAppCustomDomain = 'func.${domainName}'
+param resetCertificate bool = false
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: storageAccountName
-}
+var functionAppCustomDomain = '${subdomain}.${domainName}'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
@@ -66,7 +68,7 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' existing = {
   name: domainName
 
   resource functionAppCnameRecord 'CNAME' = {
-    name: 'func'
+    name: subdomain
     properties: {
       TTL: 3600
       CNAMERecord: {
@@ -76,7 +78,7 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' existing = {
   }
 
   resource functionAppTxtRecord 'TXT' = {
-    name: 'asuid.func'
+    name: 'asuid.${subdomain}'
     properties: {
       TTL: 3600
       TXTRecords: [
@@ -118,8 +120,12 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       use32BitWorkerProcess: false
       appSettings: [
         {
-          name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
+          name: 'AzureWebJobsStorage__accountName' // Use managed identity for storage account access: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob&pivots=programming-language-csharp#connecting-to-host-storage-with-an-identity
+          value: storageAccountName
+        }
+        {
+          name: 'AzureWebJobsStorage__credential'
+          value: 'managedidentity'
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -132,14 +138,6 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
           value: applicatioInsightsConnectionString
-        }
-        {
-          name: 'ENABLE_ORYX_BUILD' // Enable remote build: https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-technologies?tabs=linux#remote-build
-          value: 'true'
-        }
-        {
-          name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
-          value: 'true'
         }
         {
           name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED' // Improves cold start time: https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_use_placeholder_dotnetisolated
@@ -192,8 +190,8 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       siteName: functionApp.name
       customHostNameDnsRecordType: 'CName'
       hostNameType: 'Verified'
-      sslState: 'SniEnabled'
-      thumbprint: functionAppCertificate.properties.thumbprint
+      sslState: resetCertificate ? 'Disabled' : 'SniEnabled'
+      thumbprint: resetCertificate ? null : functionAppCertificate.properties.thumbprint
     }
     dependsOn: [
       dnsZone::functionAppCnameRecord
@@ -203,13 +201,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 
 // managed certificate
-resource functionAppCertificate 'Microsoft.Web/certificates@2023-01-01' = {
-  name: 'func-cert'
+resource functionAppCertificate 'Microsoft.Web/certificates@2023-01-01' = if (resetCertificate) {
+  name: '${subdomain}-cert'
   location: location
   tags: tags
   properties: {
-    serverFarmId: appServicePlan.id
     canonicalName: functionAppCustomDomain
-    domainValidationMethod: 'http-token'
+    serverFarmId: appServicePlan.id
   }
 }
+
+@description('Principal ID of the function app identity')
+output principalId string = functionApp.identity.principalId
