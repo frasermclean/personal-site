@@ -2,4 +2,4 @@ recaptcha:
   siteKey: 6Ldp_38pAAAAAGCt9VQ9yygOPWNeifBQft9sTIH8
 
 backend:
-  baseUrl: http://func.frasermclean.com/api
+  baseUrl: https://func.frasermclean.com/api
