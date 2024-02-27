@@ -1,4 +1,4 @@
-name: Deploy and deploy backend
+name: Build and deploy backend
 
 on:
   push:
@@ -16,7 +16,7 @@ on:
       - backend/**
 
 env:
-  ARTIFACT_NAME: functions-backend-${{ github.run_id }}
+  ARTIFACT_NAME: functions-backend-${{ github.run_number }}-${{ github.run_attempt}}
 
 jobs:
   build:
@@ -44,10 +44,30 @@ jobs:
           --configuration Release
           --output publish
         working-directory: ${{ github.workspace }}/backend
-      
-       # Upload API artifact
-      - name: Upload API artifact
+
+        # Upload artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ github.workspace }}/backend/publish
+
+  deploy:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    environment: main
+    steps:
+      # Download artifact
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        id: download-artifact
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+
+      # Deploy to Functions app
+      - name: Deploy to Functions app
+        uses: Azure/functions-action@v1
+        with:
+          app-name: frasermclean-site-func
+          package: ${{ steps.download-artifact.outputs.download-path }}
+          publish-profile: ${{ secrets.FUNCTIONS_PUBLISH_PROFILE }}
