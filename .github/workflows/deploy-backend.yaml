@@ -1,0 +1,53 @@
+name: Deploy and deploy backend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-backend.yaml
+      - backend/**
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-backend.yaml
+      - backend/**
+
+env:
+  ARTIFACT_NAME: functions-backend-${{ github.run_id }}
+
+jobs:
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+        # Restore NuGet packages
+      - name: Restore packages
+        run: dotnet restore
+
+      # Build solution
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      # Publish project
+      - name: Publish project
+        run: >-
+          dotnet publish
+          --no-restore
+          --configuration Release
+          --output publish
+        working-directory: ${{ github.workspace }}/backend
+      
+       # Upload API artifact
+      - name: Upload API artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ github.workspace }}/backend/publish
