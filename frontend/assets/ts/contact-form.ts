@@ -1,28 +1,37 @@
-function updateVisibility(state) {
+import * as params from '@params';
+
+// declare the grecaptcha object
+declare var grecaptcha: any;
+
+function updateVisibility(state: 'initial' | 'busy' | 'complete') {
   const formContainer = document.getElementById('form-container');
   const loaderContainer = document.getElementById('loader-container');
   const resultContainer = document.getElementById('result-container');
 
   switch (state) {
     case 'busy':
-      formContainer.style.display = 'none';
-      loaderContainer.style.display = 'flex';
-      resultContainer.style.display = 'none';
+      setElementDisplay(formContainer, 'none');
+      setElementDisplay(loaderContainer, 'flex');
+      setElementDisplay(resultContainer, 'none');
       break;
     case 'complete':
-      formContainer.style.display = 'none';
-      loaderContainer.style.display = 'none';
-      resultContainer.style.display = 'flex';
+      setElementDisplay(formContainer, 'none');
+      setElementDisplay(loaderContainer, 'none');
+      setElementDisplay(resultContainer, 'flex');
       break;
     default:
-      formContainer.style.display = 'block';
-      loaderContainer.style.display = 'none';
-      resultContainer.style.display = 'none';
+      setElementDisplay(formContainer, 'block');
+      setElementDisplay(loaderContainer, 'none');
+      setElementDisplay(resultContainer, 'none');
       break;
   }
 }
 
-function updateResult(isSuccess) {
+function setElementDisplay(element: HTMLElement, display: 'none' | 'block' | 'flex') {
+  element.style.display = display;
+}
+
+function updateResult(isSuccess: boolean) {
   const resultTitle = document.getElementById('result-title');
   const resultMessage = document.getElementById('result-message');
 
@@ -35,6 +44,14 @@ function updateResult(isSuccess) {
   }
 }
 
+function createPayload(): { name: string; email: string; message: string } {
+  return {
+    name: (document.getElementById('name') as HTMLInputElement).value,
+    email: (document.getElementById('email') as HTMLInputElement).value,
+    message: (document.getElementById('message') as HTMLInputElement).value,
+  };
+}
+
 updateVisibility('initial');
 
 // attach event listener to the form
@@ -42,7 +59,7 @@ document.getElementById('contact-form').addEventListener('submit', (event) => {
   event.preventDefault();
   updateVisibility('busy');
 
-  const siteKey = '{{ .Site.Params.recaptcha.siteKey }}';
+  const siteKey = params.siteKey;
   const action = 'submit_contact_form';
 
   grecaptcha.enterprise.ready(async () => {
@@ -50,7 +67,7 @@ document.getElementById('contact-form').addEventListener('submit', (event) => {
     const token = await grecaptcha.enterprise.execute(siteKey, { action });
 
     // send the token to the backend for processing
-    const url = '{{ .Site.Params.backend.baseUrl }}/assess-action';
+    const url = `${params.apiBaseUrl}/assess-action`;
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -63,11 +80,7 @@ document.getElementById('contact-form').addEventListener('submit', (event) => {
             action,
             siteKey,
           },
-          payload: {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value,
-          },
+          payload: createPayload(),
         }),
       });
       updateVisibility('complete');
