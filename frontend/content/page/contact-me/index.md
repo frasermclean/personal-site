@@ -1,7 +1,7 @@
 ---
 title: 'Contact Me'
 slug: 'contact-me'
-draft: true
+draft: false
 layout: 'contact-me'
 menu:
   main:
