@@ -1,19 +1,19 @@
-name: Build and deploy application
+name: Build and deploy frontend
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/deploy-app.yaml
-      - src/**
+      - .github/workflows/deploy-frontend.yaml
+      - frontend/**
 
   pull_request:
     branches:
       - main
     paths:
-      - .github/workflows/deploy-app.yaml
-      - src/**
+      - .github/workflows/deploy-frontend.yaml
+      - frontend/**
 
 env:
   ARTIFACT_NAME: app-build-${{ github.run_number }}
@@ -42,7 +42,7 @@ jobs:
       # Install Node.js dependencies
       - name: Install Node.js dependencies
         run: '[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true'
-        working-directory: ${{ github.workspace }}/src
+        working-directory: ${{ github.workspace }}/frontend
 
       # Build Hugo application
       - name: Build Hugo application
@@ -51,14 +51,14 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: hugo --gc --minify
-        working-directory: ${{ github.workspace }}/src
+        working-directory: ${{ github.workspace }}/frontend
 
       # Upload artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ github.workspace }}/src/public
+          path: ${{ github.workspace }}/frontend/public
 
   # Deployment job
   deploy:

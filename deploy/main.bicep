@@ -34,6 +34,15 @@ param containerImageTag string
 @description('Reset the comments certificate. Useful on first deployment - should normally be false')
 param resetCommentsCertificate bool
 
+@description('Google project ID for reCAPTCHA')
+param recaptchaGoogleProjectId string
+
+@description('reCAPTCHA score threshold')
+param recaptchaScoreThreshold string
+
+@description('Attempt to assign roles - requires appropriate permissions')
+param attemptRoleAssignments bool
+
 var tags = {
   workload: workload
   category: category
@@ -171,6 +180,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   resource smtpPassword 'secrets' existing = {
     name: 'smtp-password'
   }
+
+  resource googleJsonCredentialsSecret 'secrets' existing = {
+    name: 'google-json-credentials'
+  }
 }
 
 // storage account
@@ -204,6 +217,18 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
     sku: {
       name: 'PerGB2018'
     }
+  }
+}
+
+// application insights
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: '${workload}-${category}-appi'
+  location: location
+  tags: tags
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    WorkspaceResourceId: logAnalyticsWorkspace.id
   }
 }
 
@@ -431,5 +456,34 @@ resource commentsApp 'Microsoft.App/containerApps@2023-05-01' = {
         }
       ]
     }
+  }
+}
+
+module functionApp 'functionApp.bicep' = {
+  name: 'functionApp'
+  params: {
+    workload: workload
+    category: category
+    location: location
+    tags: tags
+    domainName: domainName
+    storageAccountName: storageAccount.name
+    keyVaultName: keyVault.name
+    applicatioInsightsConnectionString: applicationInsights.properties.ConnectionString
+    emailHost: 'smtp.fastmail.com'
+    emailPort: 465
+    emailRecipientName: 'Fraser McLean'
+    recaptchaGoogleProjectId: recaptchaGoogleProjectId
+    recaptchaScoreThreshold: recaptchaScoreThreshold
+  }
+}
+
+module roleAssignments 'roleAssignments.bicep' = if (attemptRoleAssignments) {
+  name: 'roleAssignments'
+  params: {
+    storageAccountName: storageAccount.name
+    keyVaultName: keyVault.name
+    commentsAppPrincipalId: commentsApp.identity.principalId
+    functionAppPrincipalId: functionApp.outputs.principalId
   }
 }

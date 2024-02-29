@@ -1,0 +1,5 @@
+recaptcha:
+  siteKey: 6LdP034pAAAAAON04x4XEBxzNpU40gqkUb5CDrRB
+
+backend:
+  baseUrl: http://localhost:7071/api

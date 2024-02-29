@@ -1,0 +1,87 @@
+name: Build and deploy backend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-backend.yaml
+      - backend/**
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-backend.yaml
+      - backend/**
+
+env:
+  ARTIFACT_NAME: functions-backend-${{ github.run_number }}
+
+jobs:
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+        # Restore NuGet packages
+      - name: Restore packages
+        run: dotnet restore
+
+      # Build solution
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      # Publish project
+      - name: Publish project
+        run: >-
+          dotnet publish
+          --no-restore
+          --configuration Release
+          --output publish
+        working-directory: ${{ github.workspace }}/backend
+
+        # Upload artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ github.workspace }}/backend/publish
+
+  deploy:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    needs: build
+    environment: main
+    permissions:
+      id-token: write
+      contents: read
+    concurrency:
+      group: main
+      cancel-in-progress: false
+    steps:
+      # Download artifact
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        id: download-artifact
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+
+      # Login to Azure
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      # Deploy to Functions app
+      - name: Deploy to Functions app
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ vars.FUNCTIONS_APP_NAME }}
+          package: ${{ steps.download-artifact.outputs.download-path }}

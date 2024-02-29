@@ -1,0 +1,12 @@
+{{ define "head" }}
+  <script src="https://www.google.com/recaptcha/enterprise.js?render={{ .Site.Params.recaptcha.siteKey }}"></script>
+{{ end }} 
+
+{{ define "main" }}
+  <div class="contact-me-card">
+    <h1 class="article-title">{{ .Title }}</h1>
+    {{ partial "contact-form" . }}
+  </div>
+  
+  {{ partialCached "footer/footer" . }}
+{{ end }}
