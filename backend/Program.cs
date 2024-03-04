@@ -1,4 +1,5 @@
 using Azure.Identity;
+using Azure.Storage.Queues;
 using Google.Cloud.RecaptchaEnterprise.V1;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Azure;
@@ -22,6 +23,8 @@ public static class Program
 
                 services.AddAzureClients(builder =>
                 {
+                    builder.AddQueueServiceClient(new Uri(context.Configuration["Storage:QueueServiceEndpoint"]))
+                        .ConfigureOptions(options => options.MessageEncoding = QueueMessageEncoding.Base64);
                     builder.AddTableServiceClient(new Uri(context.Configuration["Storage:TableServiceEndpoint"]));
                     builder.UseCredential(new DefaultAzureCredential());
                 });
@@ -35,6 +38,7 @@ public static class Program
                     .Bind(context.Configuration.GetSection(EmailOptions.SectionName));
 
                 services.AddScoped<IAuditService, AuditService>();
+                services.AddScoped<IQueueDispatcher, QueueDispatcher>();
 
                 services.AddSingleton<RecaptchaEnterpriseServiceClient>(_ => new RecaptchaEnterpriseServiceClientBuilder
                 {

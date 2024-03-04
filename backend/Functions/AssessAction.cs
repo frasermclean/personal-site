@@ -2,7 +2,7 @@ using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using PersonalSite.Backend.Models;
+using PersonalSite.Backend.Contracts.Requests;
 using PersonalSite.Backend.Services;
 
 namespace PersonalSite.Backend.Functions;
@@ -11,30 +11,36 @@ public class AssessAction(
     ILogger<AssessAction> logger,
     IAssessmentService assessmentService,
     IAuditService auditService,
-    IEmailSender emailSender)
+    IQueueDispatcher queueDispatcher)
 {
     [Function(nameof(AssessAction))]
     public async Task<HttpResponseData> ExecuteAsync(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "assess-action")]
-        HttpRequestData request,
-        [FromBody] ProcessContactFormRequest body,
+        HttpRequestData httpRequest,
+        [FromBody] AssessActionRequest request,
         CancellationToken cancellationToken)
     {
         // perform action assessment
-        var (token, action, siteKey) = body.Event;
-        var assessmentResult = await assessmentService.AssessActionAsync(token, siteKey, action);
+        var assessmentResult = await assessmentService.AssessActionAsync(request.Action, request.Token, cancellationToken);
         await auditService.LogAssessmentAsync(assessmentResult, cancellationToken);
         if (!assessmentResult.IsSuccess)
         {
             logger.LogError("Action assessment failed - {ErrorMessage}, Score: {Score}",
                 assessmentResult.ErrorMessage, assessmentResult.Score);
-            return request.CreateResponse(HttpStatusCode.BadRequest);
+            return httpRequest.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        // send email
-        var (name, email, message) = body.Payload;
-        await emailSender.SendEmailAsync(name, email, message, cancellationToken);
+        var sendEmailRequest = new SendEmailRequest
+        {
+            FromName = request.Payload["name"]?.ToString() ?? string.Empty,
+            FromAddress = request.Payload["email"]?.ToString() ?? string.Empty,
+            Subject = "Personal Site Contact Form",
+            Body = request.Payload["message"]?.ToString() ?? string.Empty
+        };
 
-        return request.CreateResponse(HttpStatusCode.OK);
+        // queue email dispatch
+        await queueDispatcher.DispatchRequestAsync(sendEmailRequest, cancellationToken);
+
+        return httpRequest.CreateResponse(HttpStatusCode.OK);
     }
 }

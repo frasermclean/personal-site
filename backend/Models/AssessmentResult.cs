@@ -1,6 +1,4 @@
-﻿using Grpc.Core;
-
-namespace PersonalSite.Backend.Models;
+﻿namespace PersonalSite.Backend.Models;
 
 public class AssessmentResult
 {

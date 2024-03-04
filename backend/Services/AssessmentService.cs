@@ -10,7 +10,8 @@ namespace PersonalSite.Backend.Services;
 
 public interface IAssessmentService
 {
-    Task<AssessmentResult> AssessActionAsync(string token, string siteKey, string expectedAction);
+    Task<AssessmentResult> AssessActionAsync(string expectedAction, string token,
+        CancellationToken cancellationToken = default);
 }
 
 public class AssessmentService(
@@ -21,10 +22,11 @@ public class AssessmentService(
 {
     private readonly float scoreThreshold = options.Value.ScoreThreshold;
     private readonly string googleProjectId = options.Value.GoogleProjectId;
+    private readonly string siteKey = options.Value.SiteKey;
 
-    public async Task<AssessmentResult> AssessActionAsync(string token, string siteKey, string expectedAction)
+    public async Task<AssessmentResult> AssessActionAsync(string expectedAction, string token, CancellationToken cancellationToken)
     {
-        var request = CreateRequest(token, siteKey, expectedAction);
+        var request = CreateRequest(token, expectedAction);
 
         try
         {
@@ -38,7 +40,7 @@ public class AssessmentService(
             return AssessmentResult.CreateFailure(expectedAction, assessmentName, $"RPC error - {exception.Message}");
         }
     }
-    private CreateAssessmentRequest CreateRequest(string token, string siteKey, string expectedAction) => new()
+    private CreateAssessmentRequest CreateRequest(string token, string expectedAction) => new()
     {
         ParentAsProjectName = ProjectName.FromProject(googleProjectId),
         Assessment = new Assessment
