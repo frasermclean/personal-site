@@ -1,12 +1,13 @@
 using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
 using PersonalSite.Backend.Models;
 using PersonalSite.Backend.Services;
 
 namespace PersonalSite.Backend.Functions;
 
-public class AssessAction(IAssessmentService assessmentService, IEmailSender emailSender)
+public class AssessAction(IAssessmentService assessmentService, IEmailSender emailSender, ILogger<AssessAction> logger)
 {
     [Function(nameof(AssessAction))]
     public async Task<HttpResponseData> ExecuteAsync(
@@ -17,9 +18,11 @@ public class AssessAction(IAssessmentService assessmentService, IEmailSender ema
     {
         // perform action assessment
         var (token, action, siteKey) = body.Event;
-        var assessmentIsValid = await assessmentService.AssessActionAsync(token, siteKey, action);
-        if (!assessmentIsValid)
+        var assessmentResult = await assessmentService.AssessActionAsync(token, siteKey, action);
+        if (!assessmentResult.IsSuccess)
         {
+            logger.LogError("Action assessment failed - {ErrorMessage}, Score: {Score}",
+                assessmentResult.ErrorMessage, assessmentResult.Score);
             return request.CreateResponse(HttpStatusCode.BadRequest);
         }
 

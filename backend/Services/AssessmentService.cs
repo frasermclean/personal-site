@@ -3,13 +3,14 @@ using Google.Cloud.RecaptchaEnterprise.V1;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PersonalSite.Backend.Models;
 using PersonalSite.Backend.Options;
 
 namespace PersonalSite.Backend.Services;
 
 public interface IAssessmentService
 {
-    Task<bool> AssessActionAsync(string token, string siteKey, string action);
+    Task<AssessmentResult> AssessActionAsync(string token, string siteKey, string action);
 }
 
 public class AssessmentService(
@@ -21,7 +22,7 @@ public class AssessmentService(
     private readonly float scoreThreshold = options.Value.ScoreThreshold;
     private readonly string googleProjectId = options.Value.GoogleProjectId;
 
-    public async Task<bool> AssessActionAsync(string token, string siteKey, string action)
+    public async Task<AssessmentResult> AssessActionAsync(string token, string siteKey, string action)
     {
         // create assessment request
         var request = new CreateAssessmentRequest
@@ -44,14 +45,14 @@ public class AssessmentService(
         catch (RpcException exception)
         {
             logger.LogError(exception, "RPC error occurred while creating assessment");
-            return false;
+            return AssessmentResult.CreateFailure($"RPC error - {exception.Message}");
         }
 
         // ensure token is valid
         if (!assessment.TokenProperties.Valid)
         {
             logger.LogError("Token is invalid - {InvalidReason}", assessment.TokenProperties.InvalidReason);
-            return false;
+            return AssessmentResult.CreateFailure($"Token is invalid - {assessment.TokenProperties.InvalidReason}");
         }
 
         // ensure expected action is executed
@@ -60,17 +61,12 @@ public class AssessmentService(
             logger.LogError(
                 "Invalid action was executed. Executed action: {ExecutedAction}, Expected action: {ExpectedAction}",
                 assessment.TokenProperties.Action, action);
-            return false;
+            return AssessmentResult.CreateFailure("Expected action mismatch");
         }
 
         // ensure score is above threshold
-        var hasPassed = assessment.RiskAnalysis.Score >= scoreThreshold;
-        if (!hasPassed)
-        {
-            logger.LogWarning("Assessment failed. Score: {Score}, Threshold: {Threshold}",
-                assessment.RiskAnalysis.Score, scoreThreshold);
-        }
-
-        return hasPassed;
+        return assessment.RiskAnalysis.Score >= scoreThreshold
+            ? AssessmentResult.CreateSuccess(assessment.RiskAnalysis.Score)
+            : AssessmentResult.CreateFailure("Score is below threshold", assessment.RiskAnalysis.Score);
     }
 }
