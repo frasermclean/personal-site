@@ -1,5 +1,7 @@
+using Azure.Identity;
 using Google.Cloud.RecaptchaEnterprise.V1;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalSite.Backend.Options;
@@ -18,6 +20,12 @@ public static class Program
                 services.AddApplicationInsightsTelemetryWorkerService();
                 services.ConfigureFunctionsApplicationInsights();
 
+                services.AddAzureClients(builder =>
+                {
+                    builder.AddTableServiceClient(new Uri(context.Configuration["Storage:TableServiceEndpoint"]));
+                    builder.UseCredential(new DefaultAzureCredential());
+                });
+
                 services.AddScoped<IAssessmentService, AssessmentService>();
                 services.AddOptions<RecaptchaOptions>()
                     .Bind(context.Configuration.GetSection(RecaptchaOptions.SectionName));
@@ -25,6 +33,8 @@ public static class Program
                 services.AddScoped<IEmailSender, EmailSender>();
                 services.AddOptions<EmailOptions>()
                     .Bind(context.Configuration.GetSection(EmailOptions.SectionName));
+
+                services.AddScoped<IAuditService, AuditService>();
 
                 services.AddSingleton<RecaptchaEnterpriseServiceClient>(_ => new RecaptchaEnterpriseServiceClientBuilder
                 {

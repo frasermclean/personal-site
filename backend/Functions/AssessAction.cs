@@ -7,7 +7,11 @@ using PersonalSite.Backend.Services;
 
 namespace PersonalSite.Backend.Functions;
 
-public class AssessAction(IAssessmentService assessmentService, IEmailSender emailSender, ILogger<AssessAction> logger)
+public class AssessAction(
+    ILogger<AssessAction> logger,
+    IAssessmentService assessmentService,
+    IAuditService auditService,
+    IEmailSender emailSender)
 {
     [Function(nameof(AssessAction))]
     public async Task<HttpResponseData> ExecuteAsync(
@@ -19,6 +23,7 @@ public class AssessAction(IAssessmentService assessmentService, IEmailSender ema
         // perform action assessment
         var (token, action, siteKey) = body.Event;
         var assessmentResult = await assessmentService.AssessActionAsync(token, siteKey, action);
+        await auditService.LogAssessmentAsync(assessmentResult, cancellationToken);
         if (!assessmentResult.IsSuccess)
         {
             logger.LogError("Action assessment failed - {ErrorMessage}, Score: {Score}",
