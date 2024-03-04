@@ -3,14 +3,15 @@ using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using PersonalSite.Backend.Contracts.Requests;
 using PersonalSite.Backend.Options;
 
 namespace PersonalSite.Backend.Services;
 
 public interface IEmailSender
 {
-    Task SendEmailAsync(string fromName, string fromAddress, string body,
-        CancellationToken cancellationToken = default);
+    Task SendEmailAsync(SendEmailRequest request, CancellationToken cancellationToken = default)
+        => SendEmailAsync(request.FromName, request.FromAddress, request.Subject, request.Body, cancellationToken);
 
     Task SendEmailAsync(string fromName, string fromAddress, string subject, string body,
         CancellationToken cancellationToken = default);
@@ -20,10 +21,6 @@ public sealed class EmailSender(IOptions<EmailOptions> options, ILogger<EmailSen
 {
     private readonly EmailOptions options = options.Value;
     private readonly SmtpClient client = new();
-
-    public Task SendEmailAsync(string fromName, string fromAddress, string body,
-        CancellationToken cancellationToken = default)
-        => SendEmailAsync(fromName, fromAddress, "Personal Site Contact Form", body, cancellationToken);
 
     public async Task SendEmailAsync(string fromName, string fromAddress, string subject, string body,
         CancellationToken cancellationToken = default)
