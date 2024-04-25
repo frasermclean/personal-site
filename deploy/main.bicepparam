@@ -16,7 +16,7 @@ param containerImageTag = 'latest'
 param resetCommentsCertificate = false
 
 // function app
-param functionAppPackageUrl = 'https://frasermcleansite.blob.core.windows.net/github-actions-deploy/Functionapp_202422751952.zip'
+param functionAppPackageUrl = 'https://frasermcleansite.blob.core.windows.net/github-actions-deploy/Functionapp_202442554214.zip'
 
 // recaptcha settings
 param recaptchaGoogleProjectId = 'fm-site-comments'
