@@ -15,7 +15,7 @@ param domainName string
 @description('Google site verification code')
 param googleSiteVerification string
 
-@allowed([ 'eastasia' ])
+@allowed(['eastasia'])
 @description('Location of the static web app')
 param staticWebAppLocation string
 
@@ -37,11 +37,17 @@ param resetCommentsCertificate bool
 @description('Google project ID for reCAPTCHA')
 param recaptchaGoogleProjectId string
 
+@description('reCAPTCHA Enterprise site key')
+param recaptchaSiteKey string
+
 @description('reCAPTCHA score threshold')
 param recaptchaScoreThreshold string
 
 @description('Attempt to assign roles - requires appropriate permissions')
 param attemptRoleAssignments bool
+
+@description('Function app package URL')
+param functionAppPackageUrl string = ''
 
 var tags = {
   workload: workload
@@ -61,8 +67,8 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
     properties: {
       TTL: 3600
       TXTRecords: [
-        { value: [ customDomainVerification ] }
-        { value: [ googleSiteVerification ] }
+        { value: [customDomainVerification] }
+        { value: [googleSiteVerification] }
       ]
     }
   }
@@ -102,7 +108,7 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
     properties: {
       TTL: 3600
       TXTRecords: [
-        { value: [ appsEnvironment.properties.customDomainConfiguration.customDomainVerificationId ] }
+        { value: [appsEnvironment.properties.customDomainConfiguration.customDomainVerificationId] }
       ]
     }
   }
@@ -204,6 +210,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
       properties: {
         shareQuota: 8
       }
+    }
+  }
+
+  resource queueService 'queueServices' = {
+    name: 'default'
+
+    resource emailOutboxQueue 'queues' = {
+      name: 'email-outbox'
+    }
+  }
+
+  resource tableService 'tableServices' = {
+    name: 'default'
+
+    resource assessmentsTable 'tables' = {
+      name: 'assessments'
     }
   }
 }
@@ -470,20 +492,23 @@ module functionApp 'functionApp.bicep' = {
     storageAccountName: storageAccount.name
     keyVaultName: keyVault.name
     applicatioInsightsConnectionString: applicationInsights.properties.ConnectionString
+    appPackageUrl: functionAppPackageUrl
     emailHost: 'smtp.fastmail.com'
     emailPort: 465
     emailRecipientName: 'Fraser McLean'
     recaptchaGoogleProjectId: recaptchaGoogleProjectId
+    recaptchaSiteKey: recaptchaSiteKey
     recaptchaScoreThreshold: recaptchaScoreThreshold
   }
 }
 
-module roleAssignments 'roleAssignments.bicep' = if (attemptRoleAssignments) {
-  name: 'roleAssignments'
-  params: {
-    storageAccountName: storageAccount.name
-    keyVaultName: keyVault.name
-    commentsAppPrincipalId: commentsApp.identity.principalId
-    functionAppPrincipalId: functionApp.outputs.principalId
+module roleAssignments 'roleAssignments.bicep' =
+  if (attemptRoleAssignments) {
+    name: 'roleAssignments'
+    params: {
+      storageAccountName: storageAccount.name
+      keyVaultName: keyVault.name
+      commentsAppPrincipalId: commentsApp.identity.principalId
+      functionAppPrincipalId: functionApp.outputs.principalId
+    }
   }
-}
