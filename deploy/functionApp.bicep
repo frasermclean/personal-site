@@ -26,6 +26,9 @@ param keyVaultName string
 
 param applicatioInsightsConnectionString string
 
+@description('URL of the function app package')
+param appPackageUrl string = ''
+
 @description('SMTP server hostname')
 param emailHost string
 
@@ -41,12 +44,19 @@ param emailRecipientAddress string = 'contact@${domainName}'
 @description('Google project ID for reCAPTCHA')
 param recaptchaGoogleProjectId string
 
+@description('reCAPTCHA Enterprise site key')
+param recaptchaSiteKey string
+
 @description('reCAPTCHA score threshold')
 param recaptchaScoreThreshold string = '0.5'
 
 param resetCertificate bool = false
 
 var functionAppCustomDomain = '${subdomain}.${domainName}'
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: storageAccountName
+}
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
@@ -82,7 +92,7 @@ resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' existing = {
     properties: {
       TTL: 3600
       TXTRecords: [
-        { value: [ functionApp.properties.customDomainVerificationId ] }
+        { value: [functionApp.properties.customDomainVerificationId] }
       ]
     }
   }
@@ -145,6 +155,10 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
           value: applicatioInsightsConnectionString
         }
         {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: !empty(appPackageUrl) ? appPackageUrl : '1'
+        }
+        {
           name: 'WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED' // Improves cold start time: https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_use_placeholder_dotnetisolated
           value: '1'
         }
@@ -153,8 +167,20 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${keyVault::googleJsonCredentialsSecret.name})'
         }
         {
+          name: 'Storage__QueueServiceEndpoint'
+          value: storageAccount.properties.primaryEndpoints.queue
+        }
+        {
+          name: 'Storage__TableServiceEndpoint'
+          value: storageAccount.properties.primaryEndpoints.table
+        }
+        {
           name: 'Recaptcha__GoogleProjectId'
           value: recaptchaGoogleProjectId
+        }
+        {
+          name: 'Recaptcha__SiteKey'
+          value: recaptchaSiteKey
         }
         {
           name: 'Recaptcha__ScoreThreshold'
@@ -206,15 +232,16 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 
 // managed certificate
-resource functionAppCertificate 'Microsoft.Web/certificates@2023-01-01' = if (resetCertificate) {
-  name: '${subdomain}-cert'
-  location: location
-  tags: tags
-  properties: {
-    canonicalName: functionAppCustomDomain
-    serverFarmId: appServicePlan.id
+resource functionAppCertificate 'Microsoft.Web/certificates@2023-01-01' =
+  if (resetCertificate) {
+    name: '${subdomain}-cert'
+    location: location
+    tags: tags
+    properties: {
+      canonicalName: functionAppCustomDomain
+      serverFarmId: appServicePlan.id
+    }
   }
-}
 
 @description('Principal ID of the function app identity')
 output principalId string = functionApp.identity.principalId
