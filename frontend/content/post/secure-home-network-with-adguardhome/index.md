@@ -5,6 +5,13 @@ image: cover.jpg
 draft: true
 categories: [ guide ]
 tags: [ docker, ad-block, privacy, dns, raspberry-pi, self-hosted ]
+links:
+  - title: AdGuard Home
+    description: AdGuard Home is a network-wide software for blocking ads & tracking.
+    website: https://adguard.com/en/adguard-home/overview.html
+  - title: Docker Compose
+    description: Docker Compose is a tool for defining and running multi-container applications. It is the key to unlocking a streamlined and efficient development and deployment experience.
+    website: https://docs.docker.com/compose/
 ---
 
 ## Introduction
@@ -19,7 +26,7 @@ In this guide, I'll show you how to set up AdGuard Home on your Raspberry Pi or 
 
 - A Raspberry Pi or other computing device to host the software
 - Docker with Docker Compose installed on the host
-- Home network with adnministrator access to the router
+- Home network with administrator access to the router
 
 ## Installation
 
