@@ -2,7 +2,7 @@
 title: 'Secure your entire home network with AdGuard Home'
 date: '2024-04-29T08:22:40+08:00'
 image: cover.jpg
-draft: true
+draft: false
 categories: [ guide ]
 tags: [ docker, ad-block, privacy, dns, raspberry-pi, self-hosted ]
 links:
