@@ -2,7 +2,12 @@
 title: 'Database Friendly UUIDs'
 date: '2024-07-08T12:04:14+08:00'
 draft: true
-tags: [ 'database', 'uuid', 'guid', 'dotnet', 'linq' ]
+image: cover.jpg
+tags: [ 'database', 'uuid', 'guid', 'dotnet', 'linq', 'uuidnext' ]
+links:
+  - title: UUIDNext
+    description: A fast and modern .NET library to generate UUID/GUID that are either sequential and database friendly (versions 7), name based (versions 5) or random (version 4).
+    website: https://github.com/mareek/UUIDNext
 ---
 
 ## Introduction
