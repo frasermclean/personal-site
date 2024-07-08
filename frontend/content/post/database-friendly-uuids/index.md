@@ -1,7 +1,7 @@
 ---
 title: 'Database Friendly UUIDs'
 date: '2024-07-08T12:04:14+08:00'
-draft: true
+draft: false
 image: cover.jpg
 tags: [ 'database', 'uuid', 'guid', 'dotnet', 'linq', 'uuidnext' ]
 links:
