@@ -31,11 +31,7 @@ widgets:
 
 comments:
   enabled: true
-  provider: remark42
-  remark42:
-    host: https://comments.frasermclean.com
-    site: frasermclean
-    locale: en
+  provider: disqus 
 
 footer:
   since: 2023
