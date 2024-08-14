@@ -1,3 +1,9 @@
+# NPM modules
+node_modules/
+
+# Wrangler output
+.wrangler/
+
 # Hugo build output
 /public/
 /resources/_gen/
