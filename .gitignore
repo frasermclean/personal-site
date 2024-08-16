@@ -1,8 +1,9 @@
 # NPM modules
 node_modules/
 
-# Wrangler output
+# CloudFlare pages
 .wrangler/
+.dev.vars
 
 # Hugo build output
 /public/
