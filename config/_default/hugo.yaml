@@ -4,7 +4,3 @@ title: Fraser McLean
 languageCode": en-AU
 defaultContentLanguage: en
 theme: stack
-
-services:
-  disqus:
-    shortname: frasermclean
