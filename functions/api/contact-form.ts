@@ -6,21 +6,21 @@ interface Env {
 }
 
 interface MessageData {
-  to: string;
   name: string;
   email: string;
   message: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  // extract message data from the form
-  const formData = await context.request.formData();
-  const messageData = {
-    to: context.env.CONTACT_ADDRESS,
-    name: formData.get('name'),
-    email: formData.get('email'),
-    message: formData.get('message'),
-  };
+  // ensure we have the correct content type
+  const contentType = context.request.headers.get('content-type');
+  if (contentType !== 'application/json') {
+    console.error('Invalid content type: ', contentType);
+    return new Response(null, { status: 415 });
+  }
+
+  // parse JSON body
+  const messageData = await context.request.json<MessageData>();
 
   // validate data
   const errorMessage = validateData(messageData);
@@ -30,7 +30,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   // send email
-  const isSuccess = await sendEmail(context.env.RESEND_API_KEY, messageData);
+  const isSuccess = await sendEmail(
+    context.env.RESEND_API_KEY,
+    context.env.CONTACT_ADDRESS,
+    messageData
+  );
   if (!isSuccess) {
     return new Response('Failed to send email', { status: 500 });
   }
@@ -62,19 +66,24 @@ function validateData(data: MessageData): string {
 /**
  * Send an email using the Resend API
  * @param apiKey The Resend API key
+ * @param to Email address to send the message to
  * @param data Message data
  * @returns True if the email was sent successfully
  */
-async function sendEmail(apiKey: string, data: MessageData): Promise<boolean> {
+async function sendEmail(
+  apiKey: string,
+  to: string,
+  data: MessageData
+): Promise<boolean> {
   const resend = new Resend(apiKey);
 
   const response = await resend.emails.send({
     from: 'Contact Form <no-reply@resend.dev>',
-    to: data.to,
+    to,
     reply_to: data.email,
     subject: `Message from ${data.name}`,
     text: data.message,
-  })
+  });
 
   if (response.error) {
     console.error('Error sending email', response.error);
