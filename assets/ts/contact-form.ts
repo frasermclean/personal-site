@@ -1,8 +1,3 @@
-import * as params from '@params';
-
-// declare the grecaptcha object
-declare var grecaptcha: any;
-
 function updateVisibility(state: 'initial' | 'busy' | 'complete') {
   const formContainer = document.getElementById('form-container');
   const loaderContainer = document.getElementById('loader-container');
@@ -27,7 +22,10 @@ function updateVisibility(state: 'initial' | 'busy' | 'complete') {
   }
 }
 
-function setElementDisplay(element: HTMLElement, display: 'none' | 'block' | 'flex') {
+function setElementDisplay(
+  element: HTMLElement,
+  display: 'none' | 'block' | 'flex'
+) {
   element.style.display = display;
 }
 
@@ -55,30 +53,19 @@ function createPayload(): { name: string; email: string; message: string } {
 updateVisibility('initial');
 
 // attach event listener to the form
-document.getElementById('contact-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  updateVisibility('busy');
+document
+  .getElementById('contact-form')
+  .addEventListener('submit', async (event) => {
+    event.preventDefault();
+    updateVisibility('busy');
 
-  const siteKey = params.siteKey;
-  const action = 'submit_contact_form';
-
-  grecaptcha.enterprise.ready(async () => {
-    // get the token
-    const token = await grecaptcha.enterprise.execute(siteKey, { action });
-
-    // send the token to the backend for processing
-    const url = `${params.apiBaseUrl}/assess-action`;
     try {
-      const response = await fetch(url, {
+      const response = await fetch('/api/contact-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          action,
-          token,
-          payload: createPayload(),
-        }),
+        body: JSON.stringify(createPayload()),
       });
       updateVisibility('complete');
       updateResult(response.ok);
@@ -87,4 +74,3 @@ document.getElementById('contact-form').addEventListener('submit', (event) => {
       updateResult(false);
     }
   });
-});
