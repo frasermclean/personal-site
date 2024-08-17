@@ -29,10 +29,6 @@ widgets:
   page:
     - type: toc
 
-comments:
-  enabled: true
-  provider: disqus 
-
 footer:
   since: 2023
   customText: >-

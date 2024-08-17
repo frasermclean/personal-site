@@ -1,2 +1,6 @@
+comments:
+  enabled: true
+  provider: disqus 
+
 turnstile:
   siteKey: 0x4AAAAAAAhX2PdPqj0Cojk1

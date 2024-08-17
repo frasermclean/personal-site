@@ -1,2 +1,5 @@
+comments:
+  enabled: false
+
 turnstile:
   siteKey: 0x4AAAAAAAhX3M5VG0JFivUl
