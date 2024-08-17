@@ -27,8 +27,6 @@
         }
         input,
         textarea {
-          margin-top: 4px;
-          margin-bottom: 16px;
           width: 100%;
           min-width: 100%;
           max-width: 100%;
@@ -62,6 +60,22 @@
       align-items: center;
     }
   }
+}
+
+.mb-1 {
+  margin-bottom: 4px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mt-1 {
+  margin-top: 4px;
 }
 
 .loader {

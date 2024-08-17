@@ -3,6 +3,12 @@ import { Resend } from 'resend';
 interface Env {
   CONTACT_ADDRESS: string;
   RESEND_API_KEY: string;
+  TURNSTILE_SECRET_KEY: string;
+}
+
+interface RequestBody {
+  token: string;
+  data: MessageData;
 }
 
 interface MessageData {
@@ -20,12 +26,23 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   // parse JSON body
-  const messageData = await context.request.json<MessageData>();
+  const body = await context.request.json<RequestBody>();
+
+  // validate token
+  const isValidToken = await validateToken(
+    body.token,
+    context.env.TURNSTILE_SECRET_KEY,
+    context.request.headers.get('CF-Connecting-IP')
+  );
+  if (!isValidToken) {
+    console.error('Invalid token');
+    return new Response('Invalid token', { status: 400 });
+  }
 
   // validate data
-  const errorMessage = validateData(messageData);
+  const errorMessage = validateData(body.data);
   if (errorMessage) {
-    console.warn(errorMessage, messageData);
+    console.warn(errorMessage, body);
     return new Response(errorMessage, { status: 400 });
   }
 
@@ -33,7 +50,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const isSuccess = await sendEmail(
     context.env.RESEND_API_KEY,
     context.env.CONTACT_ADDRESS,
-    messageData
+    body.data
   );
   if (!isSuccess) {
     return new Response('Failed to send email', { status: 500 });
@@ -41,6 +58,36 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   return new Response('Message sent successfully');
 };
+
+async function validateToken(
+  token: string,
+  secretKey: string,
+  remoteIp: string
+): Promise<boolean> {
+  const formData = new FormData();
+  formData.append('response', token);
+  formData.append('secret', secretKey);
+  formData.append('remoteip', remoteIp);
+
+  // send request to siteverify API endpoint
+  const response = await fetch(
+    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    {
+      method: 'POST',
+      body: formData,
+    }
+  );
+
+  const result = await response.json<{success: boolean, 'error-codes': string[]}>();
+
+  if (!result.success) {
+    console.error('Failed to validate token', result['error-codes']);
+    return false;
+  }
+
+  console.log('Token validated successfully');
+  return true;
+}
 
 function validateData(data: MessageData): string {
   // validate name
@@ -78,7 +125,7 @@ async function sendEmail(
   const resend = new Resend(apiKey);
 
   const response = await resend.emails.send({
-    from: 'Contact Form <no-reply@resend.dev>',
+    from: 'Contact Form <contact-form@updates.frasermclean.com>',
     to,
     reply_to: data.email,
     subject: `Message from ${data.name}`,

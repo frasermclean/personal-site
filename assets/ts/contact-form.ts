@@ -1,3 +1,5 @@
+import * as params from '@params';
+
 function updateVisibility(state: 'initial' | 'busy' | 'complete') {
   const formContainer = document.getElementById('form-container');
   const loaderContainer = document.getElementById('loader-container');
@@ -42,35 +44,55 @@ function updateResult(isSuccess: boolean) {
   }
 }
 
-function createPayload(): { name: string; email: string; message: string } {
+function createPayload(): {
+  token: string;
+  data: { name: string; email: string; message: string };
+} {
   return {
-    name: (document.getElementById('name') as HTMLInputElement).value,
-    email: (document.getElementById('email') as HTMLInputElement).value,
-    message: (document.getElementById('message') as HTMLInputElement).value,
+    token: turnstile.getResponse(turnstileContainer),
+    data: {
+      name: contactForm.querySelector<HTMLInputElement>('#name').value,
+      email: contactForm.querySelector<HTMLInputElement>('#email').value,
+      message: contactForm.querySelector<HTMLTextAreaElement>('#message').value,
+    },
   };
 }
 
 updateVisibility('initial');
 
-// attach event listener to the form
-document
-  .getElementById('contact-form')
-  .addEventListener('submit', async (event) => {
-    event.preventDefault();
-    updateVisibility('busy');
+const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+const turnstileContainer = contactForm.querySelector<HTMLDivElement>(
+  '#turnstile-container'
+);
 
-    try {
-      const response = await fetch('/api/contact-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(createPayload()),
-      });
-      updateVisibility('complete');
-      updateResult(response.ok);
-    } catch (error) {
-      updateVisibility('complete');
-      updateResult(false);
-    }
+(window as any).turnstileCallback = () => {
+  turnstile.render(turnstileContainer, {
+    sitekey: params.siteKey,
+    action: 'contact-form',
+    callback: (token) => {
+      console.log(`Challenge Success ${token}`);
+    },
   });
+};
+
+// attach event listener to the form submit button
+contactForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  updateVisibility('busy');
+
+  try {
+    const response = await fetch('/api/contact-form', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(createPayload()),
+    });
+    updateVisibility('complete');
+    updateResult(response.ok);
+  } catch (error) {
+    console.error('Failed to send message', error);
+    updateVisibility('complete');
+    updateResult(false);
+  }
+});

@@ -1,5 +1,6 @@
-recaptcha:
-  siteKey: 6Ldp_38pAAAAAGCt9VQ9yygOPWNeifBQft9sTIH8
+comments:
+  enabled: true
+  provider: disqus 
 
-backend:
-  baseUrl: https://func.frasermclean.com/api
+turnstile:
+  siteKey: 0x4AAAAAAAhX2PdPqj0Cojk1
