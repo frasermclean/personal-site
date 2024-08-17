@@ -78,7 +78,7 @@ async function sendEmail(
   const resend = new Resend(apiKey);
 
   const response = await resend.emails.send({
-    from: 'Contact Form <no-reply@resend.dev>',
+    from: 'Contact Form <contact-form@updates.frasermclean.com>',
     to,
     reply_to: data.email,
     subject: `Message from ${data.name}`,
