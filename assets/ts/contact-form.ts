@@ -68,6 +68,7 @@ const turnstileContainer = contactForm.querySelector<HTMLDivElement>(
 (window as any).turnstileCallback = () => {
   turnstile.render(turnstileContainer, {
     sitekey: params.siteKey,
+    action: 'contact-form',
     callback: (token) => {
       console.log(`Challenge Success ${token}`);
     },
