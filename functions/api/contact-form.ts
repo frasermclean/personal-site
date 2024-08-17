@@ -5,6 +5,11 @@ interface Env {
   RESEND_API_KEY: string;
 }
 
+interface RequestBody {
+  token: string;
+  data: MessageData;
+}
+
 interface MessageData {
   name: string;
   email: string;
@@ -20,12 +25,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   // parse JSON body
-  const messageData = await context.request.json<MessageData>();
+  const body = await context.request.json<RequestBody>();
 
   // validate data
-  const errorMessage = validateData(messageData);
+  const errorMessage = validateData(body.data);
   if (errorMessage) {
-    console.warn(errorMessage, messageData);
+    console.warn(errorMessage, body);
     return new Response(errorMessage, { status: 400 });
   }
 
@@ -33,7 +38,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const isSuccess = await sendEmail(
     context.env.RESEND_API_KEY,
     context.env.CONTACT_ADDRESS,
-    messageData
+    body.data
   );
   if (!isSuccess) {
     return new Response('Failed to send email', { status: 500 });
