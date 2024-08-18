@@ -6,3 +6,8 @@ defaultContentLanguage: en
 enableGitInfo: true
 titleCaseStyle: none
 theme: stack
+
+pagination:
+  disableAliases: false
+  pagerSize: 5
+  path: page
