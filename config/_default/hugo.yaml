@@ -4,6 +4,7 @@ title: Fraser McLean
 languageCode": en-AU
 defaultContentLanguage: en
 enableGitInfo: true
+enableRobotsTXT: true
 titleCaseStyle: none
 theme: stack
 
