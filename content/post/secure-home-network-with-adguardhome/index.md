@@ -1,5 +1,6 @@
 ---
 title: 'Secure your entire home network with AdGuard Home'
+description: 'Block ads on your home network via AdGuard Home and Docker Compose'
 date: '2024-04-29T08:22:40+08:00'
 image: cover.jpg
 draft: false

@@ -1,5 +1,6 @@
 ---
 title: 'Fastmail DNS Bicep Template'
+description: 'Handy Bicep template for adding required Fastmail DNS records to Azure DNS'
 date: '2023-10-21T12:30:02+11:00'
 draft: false
 tags: ['azure', 'bicep', 'fastmail', 'dns']
