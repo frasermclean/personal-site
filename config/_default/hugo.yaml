@@ -3,4 +3,5 @@ baseURL: https://www.frasermclean.com/
 title: Fraser McLean
 languageCode": en-AU
 defaultContentLanguage: en
+titleCaseStyle: none
 theme: stack
