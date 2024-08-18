@@ -1,12 +1,14 @@
 ---
 title: 'Singapore Address Format'
+description: 'A short guide on how to understand the physical address format in Singapore'
 date: '2023-11-05T07:41:38Z'
+lastmod: '2024-08-18'
 draft: false
 image: cover.jpg
 tags: [ 'travel', 'singapore' ]
 ---
 Having recently moved to Singapore, I am having to apply for numerous accounts and
-goverment services. I found the address format quite confusing initially, but after
+goverment services. Initially, I found the address format a bit confusing, but after
 some research it makes a lot more sense now.
 
 It turns out, there are two address formats in Singapore. One for multi-unit buildings
