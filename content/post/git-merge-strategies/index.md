@@ -24,6 +24,19 @@ The simplest way to merge a branch is to use the `git merge` command. This creat
 
 This stategy is useful when you want to preserve the history of the source branch. However, it can lead to a cluttered history with many merge commits. The feature branch is usually deleted after merging but this is not mandatory.
 
+### Merge commands
+
+```bash
+git checkout main
+git merge feature
+```
+
+First, switch to the target branch (main) and then merge the source branch (feature) into it.
+
+## Squash
+
+Squashing is a way to combine multiple commits from the source branch into a single commit on the target branch. This can make the history cleaner and easier to read. It's useful when you have many small commits that are related and you want to group them together.
+
 ## Rebase
 
 Rebasing is an alternative to merging that moves the commits from the source branch onto the tip of the target branch. This results in a linear history without any merge commits. It will create new commits with different hashes, so it's not recommended to rebase commits that have already been pushed to a public branch. This is because it can cause conflicts for other contributors.
