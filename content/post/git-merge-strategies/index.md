@@ -1,5 +1,5 @@
 ---
-title: Git branch merging strategies
+title: Git merging strategies
 description: A concise guide to git merge, rebase and squash
 date: '2024-08-27T11:12:28+08:00'
 draft: true
@@ -9,6 +9,10 @@ tags: [git, workflow]
 ## Introduction
 
 When contributing to a git based repository, it's common practice to work in isolation on your own feature branch. At some point though, you'll want to merge your changes back into the main branch. This is where git merge strategies come into play.
+
+![Main branch (blue) with feature branch (green)](feature-branch.png)
+
+In the above diagram, the feature branch (green) contains changes that need to be merged back into the main branch (blue).
 
 Git offers several ways to merge branches, each with its own pros and cons. In this guide, we'll cover the most common strategies: **merge**, **rebase** and **squash**.
 
