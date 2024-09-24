@@ -20,7 +20,9 @@ Git offers several ways to merge branches, each with its own pros and cons. In t
 
 The simplest way to merge a branch is to use the `git merge` command. This creates a new commit on the target branch called the **merge commit** that combines the changes from the source branch into the target branch.
 
-This stategy is useful when you want to preserve the history of the source branch. However, it can lead to a cluttered history with many merge commits.
+![Main branch with new merge commit (m5)](merge.png)
+
+This stategy is useful when you want to preserve the history of the source branch. However, it can lead to a cluttered history with many merge commits. The feature branch is usually deleted after merging but this is not mandatory.
 
 ## Rebase
 
