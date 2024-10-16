@@ -23,3 +23,9 @@ social:
     weight: 4
     params:
       icon: brand-twitter
+  - identifier: rss
+    name: RSS
+    url: /index.xml
+    weight: 5
+    params:
+      icon: rss
