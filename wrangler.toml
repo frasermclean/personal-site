@@ -4,4 +4,4 @@ compatibility_date = "2024-08-14"
 compatibility_flags = [ "nodejs_compat" ]
 
 [vars]
-HUGO_VERSION = "0.132.1"
+HUGO_VERSION = "0.142.0"
