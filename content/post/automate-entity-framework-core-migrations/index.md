@@ -3,13 +3,14 @@ title: 'Automate Entity Framework Core Migrations'
 description: 'A guide on how to automate Entity Framework Core migrations in a GitHub Actions workflow'
 date: '2025-01-24T10:36:09+08:00'
 image: cover.jpg
+categories: ['guide']
 tags: ['azure', 'azure-sql', 'github-actions', 'automation', 'entity-framework-core', 'migrations', 'ci-cd']
-draft: true
+draft: false
 ---
 
 ## Introduction
 
-When working with [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/), it's common practice to use migrations to manage changes to your database schema. As time goes by when you're working on your app, your initial database design might need to be updated. 
+As time goes by when you're working on your app and adding new features, your initial database design might need to be updated. When working with [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/), it's common practice to use migrations to manage changes to your database schema.  
 
 Migrations allow you to define changes to your database schema in code and apply them to your database. This is a powerful feature that can help you keep your database schema in sync with your codebase.
 
@@ -240,6 +241,8 @@ jobs:
 
 ## Conclusion
 
-In this guide, we've learned how to automate Entity Framework Core migrations in a GitHub Actions workflow. This is a powerful feature that can help you keep your database schema in sync with your codebase and ensure that your database is up-to-date before deploying your application. I hope you found this guide helpful and that you can apply these concepts to your own projects!
+In this guide, we've learned how to automate Entity Framework Core migrations in a GitHub Actions workflow. This is a powerful feature that can help you keep your database schema in sync with your codebase and ensure that your database is up-to-date before deploying your application.
+
+I hope you found this guide helpful and that you can apply these concepts to your own projects! Happy coding! 🚀
 
 > Cover photo by [Pixabay](https://www.pexels.com/photo/flock-of-geese-ion-tilt-shift-lens-55832)
