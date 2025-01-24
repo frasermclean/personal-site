@@ -1,6 +1,6 @@
 ---
-title: 'Automate Entity Framework Core Migrations'
-description: 'A guide on how to automate Entity Framework Core migrations in a GitHub Actions workflow'
+title: Automate Entity Framework Core migrations
+description: A guide on how to automate Entity Framework Core migrations in a GitHub Actions workflow
 date: '2025-01-24T10:36:09+08:00'
 image: cover.jpg
 categories: ['guide']
