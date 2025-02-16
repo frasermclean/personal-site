@@ -1,9 +1,19 @@
 comments:
   enabled: true
-  provider: cusdis
-  cusdis:
-    host: https://cusdis.com
-    id: dbf6256a-a36d-403b-8cf6-a54719963716
+  provider: giscus
+  giscus:
+    repo: frasermclean/personal-site
+    repoID: R_kgDOKbrs5Q
+    category: General
+    categoryID: DIC_kwDOKbrs5c4CnAse
+    mapping: pathname
+    strict: 1
+    lightTheme: light
+    darkTheme: dark
+    reactionsEnabled: 1
+    emitMetadata: 0
+    inputPosition: bottom
+    lang: en
 
 turnstile:
   siteKey: 0x4AAAAAAAhX2PdPqj0Cojk1
