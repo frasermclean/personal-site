@@ -8,8 +8,8 @@ comments:
     categoryID: DIC_kwDOKbrs5c4CnAse
     mapping: pathname
     strict: 1
-    lightTheme: light
-    darkTheme: dark
+    lightTheme: noborder_light
+    darkTheme: noborder_dark
     reactionsEnabled: 1
     emitMetadata: 0
     inputPosition: bottom
