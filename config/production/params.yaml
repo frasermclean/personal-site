@@ -1,6 +1,9 @@
 comments:
   enabled: true
-  provider: disqus 
+  provider: cusdis
+  cusdis:
+    host: https://cusdis.com
+    id: dbf6256a-a36d-403b-8cf6-a54719963716
 
 turnstile:
   siteKey: 0x4AAAAAAAhX2PdPqj0Cojk1
