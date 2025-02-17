@@ -4,8 +4,6 @@ description: 'Personal review of Fastmail email service.'
 date: '2023-11-08T19:42:58+08:00'
 draft: false
 image: cover.jpg
-aliases:
-  - /2023/01/14/protect-your-online-identity-with-fastmail/
 categories: [ review ]
 tags: [ fastmail, email, privacy, dns ]
 links:
