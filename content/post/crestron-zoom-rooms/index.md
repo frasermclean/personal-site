@@ -19,4 +19,4 @@ I implemented the module using Crestron SIMPL#Pro and was able to implement near
 
 ## Discontinued
 
-Due to Zoom Room deprecating the ZR-CSAPI, the module development slowed and was eventually abandoned. The module was only used internally for a few clients and was never released to the public.
+Due to Zoom discontinuing development of the ZR-CSAPI, the module development slowed and was eventually abandoned. The module was only used internally for a few clients and was never released to the public.
