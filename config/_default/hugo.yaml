@@ -12,3 +12,7 @@ pagination:
   disableAliases: false
   pagerSize: 5
   path: page
+
+permalinks:
+  post: /post/:year/:month/:slug/
+  page: /:slug/
