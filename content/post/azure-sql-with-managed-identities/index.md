@@ -27,6 +27,14 @@ In this guide, we will explore how to use managed identities to connect to Azure
 
 What this means in practice is that you can do away with storing connection strings, passwords, and other sensitive information in your code or configuration files. Instead, you can use managed identities to authenticate your applications and services to Azure resources.
 
+## Create an Azure SQL Database using Bicep
+
+We need to create a new Azure SQL Database to experiment with managed identities. We can use [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) to define the infrastructure as code. Here is an example Bicep file that creates an Azure SQL Database:
+
+{{< code language="bicep" source="/content/post/azure-sql-with-managed-identities/database.bicep" >}}
+
+You can download the above Bicep file from [here](database.bicep).
+
 ## SQL Script
 
 After creating the Azure SQL Database, we need to run a SQL script to set up the necessary permissions for the managed identity. Here is an example SQL script that grants the necessary permissions to the managed identity:
