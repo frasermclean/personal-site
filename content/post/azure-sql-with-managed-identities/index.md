@@ -2,7 +2,7 @@
 title: 'Using Azure SQL with managed identities'
 date: '2025-02-18T12:45:08+08:00'
 image: 'cover.png'
-draft: true
+draft: false
 categories: ['guide']
 tags: ['azure', 'azure-sql', 'sql', 'automation', 'ci-cd', 'managed-identities', 'entra', 'github-actions', 'bicep']
 links:
