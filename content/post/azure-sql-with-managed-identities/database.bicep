@@ -1,9 +1,9 @@
 param location string = resourceGroup().location
 
-@description('The name of the user that will be the SQL Server administrator.')
+@description('SQL Server administrator user display name.')
 param adminName string
 
-@description('The object ID of the user that will be the SQL Server administrator.')
+@description('SQL Server administrator user object ID.')
 param adminObjectId string
 
 var resourcePrefix = uniqueString(resourceGroup().id)
@@ -37,6 +37,15 @@ resource sqlServer 'Microsoft.Sql/servers@2024-05-01-preview' = {
     }
     properties: {
       collation: 'SQL_Latin1_General_CP1_CI_AS'
+    }
+  }
+
+  // allow azure services to access the database
+  resource allowAzureRule 'firewallRules' = {
+    name: 'allow-azure-rule'
+    properties: {
+      startIpAddress: '0.0.0.0'
+      endIpAddress: '0.0.0.0'
     }
   }
 }

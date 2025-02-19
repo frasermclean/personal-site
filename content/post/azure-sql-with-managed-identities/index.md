@@ -1,5 +1,5 @@
 ---
-title: 'Azure SQL with managed identities'
+title: 'Using Azure SQL with managed identities'
 date: '2025-02-18T12:45:08+08:00'
 image: 'cover.png'
 draft: true
@@ -74,15 +74,23 @@ az deployment group create `
   --template-file database.bicep `
   --parameters adminName=$adminName adminObjectId=$adminObjectId
 ```
+### Allow your IP address to connect to the Azure SQL Database
 
+Azure SQL Database has a firewall that restricts access to the database. By default, the firewall blocks all access to the database. To allow your IP address to connect to the database, you need to add a firewall rule to the database. The simplest way to do this is to use the Azure Portal.
 
-## SQL Script
+![Azure SQL Database firewall rules](sql-server-firewall.png)
+
+Another way of adding the firewall rule is to attempt to connect to the database using [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/what-is-azure-data-studio). When you try to connect to the database, you will be prompted to add a firewall rule.
+
+## SQL Script to assign database permissions
 
 After creating the Azure SQL Database, we need to run a SQL script to set up the necessary permissions for the managed identity. Here is an example SQL script that grants the necessary permissions to the managed identity:
 
 ```sql
+-- Change the name of the managed identity as needed
 :setvar APP_PRINCIPAL_NAME "jobs-01-func"
 
+-- Ensure the user doesn't already exist (idempotent)
 IF NOT EXISTS (
   SELECT [name]
   FROM sys.database_principals
@@ -96,7 +104,13 @@ BEGIN
 END
 ```
 
-In this script, we are creating a new user in the database for the managed identity and granting it the necessary permissions to read, write, and execute DDL statements on the database. The script makes use of `sqlcmd` variables to parameterize the name of the managed identity: `APP_PRINCIPAL_NAME`. This allows us to reuse the script for different identities.
+### Application principal name (user name)
+
+In this script, we are creating a new user in the database for the managed identity and granting it the necessary permissions to read, write, and execute DDL statements on the database.  
+
+The script assumes there is already a Azure application with a system assigned identity with the name `jobs-01-func`. This name can and should be changed to match the name of the managed identity you are using.
+
+The script makes use of `sqlcmd` variables to parameterize the name of the managed identity: `APP_PRINCIPAL_NAME`. This allows us to reuse the script for different identities.
 
 > It's important to note that we are using the name of the managed identity as the name of the user in the database. In other Azure RBAC assignments, we would use the object ID of the managed identity. However, in the case of Azure SQL Database, we use the name of the managed identity as the user name in the database.
 
@@ -104,3 +118,13 @@ The variable `APP_PRINCIPAL_NAME` can be set using a few methods:
 * It can be set using the `:setvar` command in `sqlcmd` mode. This is the method used in the script above.
 * It can be set using the `-v` command-line option when running `sqlcmd`.
 * It can be set from an environment variable. This is useful when running the script in an automated environment like GitHub Actions.
+
+### Executing the SQL script
+
+I would suggest running the script under Azure Data Studio with SQLCMD mode enabled. This will allow you to set the `APP_PRINCIPAL_NAME` variable and execute the script. If all goes well, you should see output similar to the following:
+
+```
+Started executing query at Line 2
+Commands completed successfully.
+Total execution time: 00:00:00.365
+```
