@@ -86,23 +86,7 @@ Another way of adding the firewall rule is to attempt to connect to the database
 
 After creating the Azure SQL Database, we need to run a SQL script to set up the necessary permissions for the managed identity. Here is an example SQL script that grants the necessary permissions to the managed identity:
 
-```sql
--- Change the name of the managed identity as needed
-:setvar APP_PRINCIPAL_NAME "jobs-01-func"
-
--- Ensure the user doesn't already exist (idempotent)
-IF NOT EXISTS (
-  SELECT [name]
-  FROM sys.database_principals
-  WHERE [name] = '$(APP_PRINCIPAL_NAME)'
-)
-BEGIN
-  CREATE USER [$(APP_PRINCIPAL_NAME)] FROM EXTERNAL PROVIDER;
-  ALTER ROLE db_datareader ADD MEMBER [$(APP_PRINCIPAL_NAME)];
-  ALTER ROLE db_datawriter ADD MEMBER [$(APP_PRINCIPAL_NAME)];
-  ALTER ROLE db_ddladmin ADD MEMBER [$(APP_PRINCIPAL_NAME)];
-END
-```
+{{< code language="sql" source="/content/post/azure-sql-with-managed-identities/grant-access.sql" >}}
 
 ### Application principal name (user name)
 
@@ -128,3 +112,68 @@ Started executing query at Line 2
 Commands completed successfully.
 Total execution time: 00:00:00.365
 ```
+
+With the script executed, the managed identity now has the necessary permissions to read and write to the database 😊
+
+## Bonus: Automating the process with GitHub Actions
+
+As part of a CI/CD pipeline, you can automate the process of deploying your Azure infrasructure and setting up the necessary database permissions for the managed identity. You can use GitHub Actions to achieve this and I have created a sample workflow that demonstrates how to do this.
+
+```yaml
+name: Deploy infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Environment to deploy to
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy infrastructure
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    permissions:
+      id-token: write
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Login to Azure
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}     
+
+      # Deploy database
+      - name: Deploy database
+        uses: azure/arm-deploy@v2
+        id: deploy_database
+        with:
+          scope: resourcegroup
+          resourceGroupName: azsql-test-rg
+          template: ${{ github.workspace }}/database.bicep
+          parameters: >-
+            adminName=${{ secrets.ADMIN_NAME }}
+            adminObjectId=${{ secrets.ADMIN_OBJECT_ID }}
+
+      # Grant app database access
+      - name: Grant API app database access
+        uses: azure/sql-action@v2.3
+        with:
+          path: ${{ github.workspace }}/grant-access.sql
+          connection-string: ${{ secrets.DB_CONNECTION_STRING }}
+        env:
+          APP_PRINCIPAL_NAME: ${{ secrets.APP_PRINCIPAL_NAME }}
+```
+
+This workflow will deploy the Azure SQL Database using the Bicep template and then run the SQL script to grant the necessary permissions to the managed identity. The workflow uses secrets to store sensitive information like the Azure AD object ID of the user and the connection string to the database.
+
+## Conclusion
+
+In this guide, we explored how to use managed identities to connect to Azure SQL Database. We also looked at how to automate the process of creating a new Azure SQL Database and setting up the necessary permissions for the managed identity. Managed identities are a great way to secure your applications and services by eliminating the need to store credentials in your code or configuration files. I hope you found this guide helpful and that you can use it to secure your applications and services in Azure!
