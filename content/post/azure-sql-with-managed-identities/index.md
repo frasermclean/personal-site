@@ -5,6 +5,13 @@ image: 'cover.png'
 draft: true
 categories: ['guide']
 tags: ['azure', 'azure-sql', 'sql', 'automation', 'ci-cd', 'managed-identities', 'entra', 'github-actions', 'bicep']
+links:
+  - title: Azure SQL Database
+    description: Azure SQL Database is a fully managed relational database as a service offering provided by Microsoft.
+    website: https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql
+  - title: Managed identities
+    description: Managed identities are a feature of Microsoft Entra that allows you to securely authenticate your applications and services without needing to manage credentials.
+    website: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
 ---
 
 ## Introduction
