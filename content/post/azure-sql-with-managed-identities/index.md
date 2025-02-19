@@ -113,7 +113,7 @@ Commands completed successfully.
 Total execution time: 00:00:00.365
 ```
 
-With the script executed, the managed identity now has the necessary permissions to read and write to the database 😊
+With the script executed, the managed identity now has the necessary permissions to read and write to the database. 😎
 
 ## Bonus: Automating the process with GitHub Actions
 
@@ -176,4 +176,6 @@ This workflow will deploy the Azure SQL Database using the Bicep template and th
 
 ## Conclusion
 
-In this guide, we explored how to use managed identities to connect to Azure SQL Database. We also looked at how to automate the process of creating a new Azure SQL Database and setting up the necessary permissions for the managed identity. Managed identities are a great way to secure your applications and services by eliminating the need to store credentials in your code or configuration files. I hope you found this guide helpful and that you can use it to secure your applications and services in Azure!
+In this guide, we explored how to use managed identities to connect to Azure SQL Database. We also looked at how to automate the process of creating a new Azure SQL Database and setting up the necessary permissions for the managed identity. Managed identities are a great way to secure your applications and services by eliminating the need to store credentials in your code or configuration files.
+
+I hope you found this guide helpful and that you can use it to secure your applications and services in Azure! 🚀
