@@ -29,11 +29,52 @@ What this means in practice is that you can do away with storing connection stri
 
 ## Create an Azure SQL Database using Bicep
 
-We need to create a new Azure SQL Database to experiment with managed identities. We can use [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) to define the infrastructure as code. Here is an example Bicep file that creates an Azure SQL Database:
+We need to create a new Azure SQL Database to experiment with managed identities. We can use [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) to define the infrastructure as code. We will be creating a database that makes strict use of Entra for authentication. The template will assign your user account as the database administrator.
+
+> Entra was formerly known as Azure Active Directory which is why you will see references to AzureAD / AAD in the code.
+
+Here is an example Bicep file that creates an Azure SQL Database:
 
 {{< code language="bicep" source="/content/post/azure-sql-with-managed-identities/database.bicep" >}}
 
 You can download the above Bicep file from [here](database.bicep).
+
+### Deploying the Bicep template
+
+First, we need to ensure we are logged in to Azure using the Azure CLI.
+
+```text
+az login
+```
+
+We will need a resource group to deploy the Azure SQL Database to. If you don't have a resource group, you can create one using the following command:
+
+```text
+$rgName = az group create `
+  --name azsql-test-rg `
+  --location australiaeast `
+  --query name `
+  --output tsv
+```
+
+> This command make use of multiline strings with backticks (`). This is a feature of PowerShell that allows you to write multiline strings without needing to escape newlines. You may need to adjust the command if you are using a different shell.
+
+The Bicep template has a couple of mandatory parameters that need to be provided when deploying the template. These are the `adminName` and `adminObjectId` parameters. We will assign these to variables for ease of use.
+
+```text
+$adminName = az ad signed-in-user show --query displayName --output tsv
+$adminObjectId = az ad signed-in-user show --query id --output tsv
+```
+
+Now we can finally deploy the Bicep template using the following command.
+
+```text
+az deployment group create `
+  --resource-group $rgName `
+  --template-file database.bicep `
+  --parameters adminName=$adminName adminObjectId=$adminObjectId
+```
+
 
 ## SQL Script
 
