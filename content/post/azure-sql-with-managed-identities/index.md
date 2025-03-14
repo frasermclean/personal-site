@@ -1,5 +1,6 @@
 ---
 title: 'Using Azure SQL with managed identities'
+description: 'An in-depth guide on how to use managed identities to connect to Azure SQL Database and automate the process of creating a new Azure SQL Database and setting up the necessary permissions for the managed identity.'
 date: '2025-02-18T12:45:08+08:00'
 image: 'cover.png'
 draft: false
