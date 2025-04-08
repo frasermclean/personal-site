@@ -1,12 +1,12 @@
 {
   "name": "personal-site",
   "dependencies": {
-    "resend": "^3.5.0"
+    "resend": "^4.2.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250121.0",
     "@types/cloudflare-turnstile": "^0.2.2",
-    "typescript": "^5.7.3",
-    "wrangler": "^3.105.0"
+    "typescript": "^5.8.3",
+    "wrangler": "^4.8.0"
   }
 }
