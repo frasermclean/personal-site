@@ -130,6 +130,17 @@ At this point, you have a working AdGuard Home instance that can block ads and t
 
 Log in to your router's administration interface and look for the DNS settings. Usually the router will assign itself as the primary DNS server by default but you can override this setting with the IP address of your AdGuard Home instance. Change the primary DNS server to the IP address of your Docker Compose host running AdGuard Home. Save the changes and restart your router to apply the new settings.
 
+## Updating the software
+
+Occasionally, the team behind AdGuard Home releases updates to the software. To update your AdGuard Home instance, you can use the following command:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+This command will pull the latest version of the AdGuard Home image from Docker Hub and restart the container with the updated image. You can check for updates periodically to ensure you are running the latest version of AdGuard Home.
+
 ## Conclusion
 
 Congratulations! You've successfully set up AdGuard Home using Docker Compose. You now have a network-wide ad-and-tracker blocking DNS server that can protect all devices on your local network. Enjoy a cleaner, faster, and more secure browsing experience with AdGuard Home.
