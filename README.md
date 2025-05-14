@@ -11,4 +11,6 @@ the repository. The file should be structured as follows:
 
 ```plaintext
 CONTACT_ADDRESS=email@example.com
+RESEND_API_KEY=secret
+TURNSTILE_SECRET_KEY=secret
 ```
