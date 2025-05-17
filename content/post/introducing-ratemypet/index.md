@@ -5,7 +5,9 @@ date: 2025-05-17T09:12:19+08:00
 image: cover.jpg
 hidden: false
 comments: true
-draft: true
+draft: false
+categories: [ project ]
+tags: [ 'pets', 'community', 'social', 'angular', 'aspnetcore', 'azure', 'github-actions' ]
 ---
 
 ## Introduction
@@ -60,7 +62,7 @@ For deployment, I used GitHub Actions to automate the build and deployment proce
 
 ### Infrastructure - Azure
 
-![Azure logo](logos/azure.png)
+![Application architecture diagram](architecture.png)
 
 For cloud infrastructure, I decided leverage my existing knowledge and use Azure. There are resources for everything I wanted and at a pricepoint that I could afford.
 
@@ -69,4 +71,9 @@ For cloud infrastructure, I decided leverage my existing knowledge and use Azure
 * **Backend Functions** - Azure Functions
 * **Database** - Azure SQL Database
 * **Storage** - Azure Storage
+* **DNS** - Azure DNS
 * **Analytics** - Azure Application Insights (the price for this could go up dramatically if the site gains popularity)
+
+## Conclusion
+
+I hope you enjoyed this introduction to RateMyPet. It's been a fun project to work on, and I'm excited to see where it goes. I plan to continue adding features and improving the site, so stay tuned for updates!
