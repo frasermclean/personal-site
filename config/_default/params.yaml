@@ -1,3 +1,4 @@
+description: Personal website of Fraser McLean, software engineer.
 favicon: /favicon.ico
 dateFormat:
   published: 2 January 2006
@@ -8,7 +9,7 @@ mainSections:
   - post
 
 sidebar:
-  subtitle: Adventures in the world of software development
+  subtitle: Software engineer, open-source advocate, and tech enthusiast
   avatar:
     enabled: true
     local: true
