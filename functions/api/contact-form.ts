@@ -78,7 +78,10 @@ async function validateToken(
     }
   );
 
-  const result = await response.json<{success: boolean, 'error-codes': string[]}>();
+  const result = await response.json<{
+    success: boolean;
+    'error-codes': string[];
+  }>();
 
   if (!result.success) {
     console.error('Failed to validate token', result['error-codes']);
@@ -127,7 +130,7 @@ async function sendEmail(
   const response = await resend.emails.send({
     from: 'Contact Form <contact-form@updates.frasermclean.com>',
     to,
-    reply_to: data.email,
+    replyTo: data.email,
     subject: `Message from ${data.name}`,
     text: data.message,
   });
