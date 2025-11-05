@@ -1,0 +1,16 @@
+---
+import Button from '@/components/starwind/button';
+import { Card } from '@/components/starwind/card';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 - Not Found">
+  <Card class="mx-auto mt-16 max-w-xl p-4 text-center">
+    <h1 class="mb-4">404 - Not Found</h1>
+    <p class="my-4 text-lg">The page you are looking for does not exist.</p>
+    <nav class="flex flex-wrap justify-center gap-4">
+      <Button href="/" class="w-40"> Back to Home </Button>
+      <Button href="/blog" class="w-40"> Read the Blog </Button>
+    </nav>
+  </Card>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import Button from './starwind/button';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  primaryCta?: CallToAction;
+  secondaryCta?: CallToAction;
+}
+
+interface CallToAction {
+  label: string;
+  href: string;
+}
+
+const { title, subtitle, primaryCta, secondaryCta } = Astro.props;
+const hasCtas = !!primaryCta || !!secondaryCta;
+---
+
+<section class="w-full py-6 md:py-10">
+  <div class="mx-auto max-w-5xl px-4 text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight text-primary md:text-6xl">{title}</h1>
+    {subtitle && <p class="mx-auto mt-4 max-w-2xl text-lg md:text-xl">{subtitle}</p>}
+  </div>
+  {
+    hasCtas && (
+      <nav class="mt-8 flex flex-wrap justify-center gap-4">
+        {primaryCta && (
+          <Button variant="primary" href={primaryCta.href} class="w-40">
+            {primaryCta.label}
+          </Button>
+        )}
+        {secondaryCta && (
+          <Button variant="outline" href={secondaryCta.href} class="w-40">
+            {secondaryCta.label}
+          </Button>
+        )}
+      </nav>
+    )
+  }
+</section>

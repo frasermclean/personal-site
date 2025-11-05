@@ -1,7 +1,13 @@
 ---
+import HeroSection from '@/components/HeroSection.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Home Page">
-  <h1>Home page</h1>
+  <HeroSection
+    title="Fraser McLean"
+    subtitle="Software engineer and technology enthusiast."
+    primaryCta={{ label: 'View Projects', href: '/projects' }}
+    secondaryCta={{ label: 'Read Blog', href: '/blog' }}
+  />
 </BaseLayout>

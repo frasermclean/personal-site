@@ -3,7 +3,9 @@ import Toolbar from '@/components/Toolbar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
 import '@fontsource-variable/geist';
+import geistFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2';
 import '@fontsource-variable/sora';
+import soraFont from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2';
 
 interface Props {
   title?: string;
@@ -23,10 +25,12 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <meta name="generator" content={Astro.generator} />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin />
   </head>
   <body>
     <Toolbar />
-    <main class="mx-auto max-w-6xl p-2 md:p-3">
+    <main class="mx-auto max-w-6xl px-2 py-8 md:px-3">
       <slot />
     </main>
   </body>

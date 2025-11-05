@@ -68,13 +68,13 @@
 
 @layer base {
   :root {
-    --background: var(--color-white);
-    --foreground: var(--color-neutral-950);
-    --card: var(--color-white);
+    --background: var(--color-neutral-50);
+    --foreground: var(--color-neutral-900);
+    --card: var(--color-neutral-100);
     --card-foreground: var(--color-neutral-950);
     --popover: var(--color-white);
     --popover-foreground: var(--color-neutral-950);
-    --primary: var(--color-blue-700);
+    --primary: var(--color-teal-500);
     --primary-foreground: var(--color-neutral-50);
     --secondary: var(--color-fuchsia-700);
     --secondary-foreground: var(--color-neutral-50);
@@ -97,13 +97,13 @@
   }
 
   .dark {
-    --background: var(--color-neutral-950);
+    --background: var(--color-neutral-900);
     --foreground: var(--color-neutral-50);
-    --card: var(--color-neutral-900);
+    --card: var(--color-neutral-800);
     --card-foreground: var(--color-neutral-50);
     --popover: var(--color-neutral-800);
     --popover-foreground: var(--color-neutral-50);
-    --primary: var(--color-blue-700);
+    --primary: var(--color-teal-600);
     --primary-foreground: var(--color-neutral-50);
     --secondary: var(--color-fuchsia-300);
     --secondary-foreground: var(--color-neutral-950);
