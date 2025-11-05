@@ -1,4 +1,5 @@
 ---
+import Toolbar from '@/components/Toolbar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
 
@@ -11,15 +12,20 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <title>{title}</title>
     <meta charset="utf-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
-    <slot />
+    <Toolbar />
+    <main class="mx-auto max-w-6xl py-16">
+      <slot />
+    </main>
   </body>
 </html>

@@ -1,0 +1,14 @@
+---
+import logo from '@/assets/site-logo.png';
+import { Image } from 'astro:assets';
+
+interface Props {
+  size?: number;
+}
+
+const { size = 44 } = Astro.props;
+---
+
+<a href="/" class="rounded-md border-2 border-neutral-500 hover:border-primary/40">
+  <Image src={logo} alt="Site Logo" width={size} height={size} />
+</a>

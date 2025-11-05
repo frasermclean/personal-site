@@ -1,0 +1,23 @@
+---
+import GithubIcon from '@tabler/icons/outline/brand-github.svg';
+import InstagramIcon from '@tabler/icons/outline/brand-instagram.svg';
+import LinkedinIcon from '@tabler/icons/outline/brand-linkedin.svg';
+import YouTubeIcon from '@tabler/icons/outline/brand-youtube.svg';
+
+const links = [
+  { href: 'https://github.com/frasermclean', Icon: GithubIcon, label: 'GitHub' },
+  { href: 'https://linkedin.com/in/frasermclean', Icon: LinkedinIcon, label: 'LinkedIn' },
+  { href: 'https://www.instagram.com/frasermclean81/', Icon: InstagramIcon, label: 'Instagram' },
+  { href: 'https://www.youtube.com/@FraserMcLean81', Icon: YouTubeIcon, label: 'YouTube' },
+];
+---
+
+<nav class="hidden items-center gap-2 md:flex">
+  {
+    links.map(({ href, Icon, label }) => (
+      <a href={href} target="_blank" class="text-neutral-50 hover:text-primary" aria-label={label}>
+        <Icon width={28} height={28} stroke-width={1.33} />
+      </a>
+    ))
+  }
+</nav>

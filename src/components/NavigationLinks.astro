@@ -1,0 +1,25 @@
+---
+const links = [
+  { href: '/', text: 'Home' },
+  { href: '/about', text: 'About' },
+  { href: '/portfolio', text: 'Portfolio' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/contact', text: 'Contact' },
+];
+
+function isActive(href: string) {
+  const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+  const subpath = pathname.match(/[^\/]+/g);
+  return href === pathname || href === '/' + (subpath?.[0] || '');
+}
+---
+
+<nav class="hidden grow md:flex">
+  {
+    links.map(({ href, text }) => (
+      <a href={href} class={`rounded-md px-4 py-2 text-lg hover:bg-primary/40 ${isActive(href) ? 'underline' : ''}`}>
+        {text}
+      </a>
+    ))
+  }
+</nav>
