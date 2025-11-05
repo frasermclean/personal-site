@@ -1,11 +1,5 @@
 ---
-const links = [
-  { href: '/', text: 'Home' },
-  { href: '/about', text: 'About' },
-  { href: '/portfolio', text: 'Portfolio' },
-  { href: '/blog', text: 'Blog' },
-  { href: '/contact', text: 'Contact' },
-];
+import { NAVIGATION_LINKS as links } from '@/constants';
 
 function isActive(href: string) {
   const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
@@ -14,10 +8,10 @@ function isActive(href: string) {
 }
 ---
 
-<nav class="hidden grow md:flex">
+<nav class="hidden md:flex">
   {
     links.map(({ href, text }) => (
-      <a href={href} class={`rounded-md px-4 py-2 text-lg hover:bg-primary/40 ${isActive(href) ? 'underline' : ''}`}>
+      <a href={href} class={`rounded-md px-3 py-2 text-lg hover:bg-primary/40 ${isActive(href) ? 'underline' : ''}`}>
         {text}
       </a>
     ))

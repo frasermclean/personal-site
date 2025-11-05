@@ -1,0 +1,24 @@
+---
+import { Button } from '@/components/starwind/button';
+import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from '@/components/starwind/dropdown';
+import { NAVIGATION_LINKS as links } from '@/constants';
+import MenuIcon from '@tabler/icons/outline/menu-2.svg';
+---
+
+<Dropdown class="md:hidden">
+  <DropdownTrigger asChild>
+    <Button size="icon-sm">
+      <MenuIcon />
+    </Button>
+  </DropdownTrigger>
+  <DropdownContent align="end">
+    {
+      links.map(({ href, text, Icon }) => (
+        <DropdownItem as="a" href={href}>
+          {Icon && <Icon width={28} stroke-width={1.25} />}
+          {text}
+        </DropdownItem>
+      ))
+    }
+  </DropdownContent>
+</Dropdown>
