@@ -6,5 +6,10 @@
     "cssVariables": true
   },
   "componentDir": "src/components",
-  "components": []
+  "components": [
+    {
+      "name": "button",
+      "version": "2.2.0"
+    }
+  ]
 }

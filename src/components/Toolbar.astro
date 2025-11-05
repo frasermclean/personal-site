@@ -2,12 +2,16 @@
 import NavigationLinks from './NavigationLinks.astro';
 import SiteLogo from './SiteLogo.astro';
 import SocialLinks from './SocialLinks.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="w-full items-center bg-neutral-600 p-3 text-neutral-50 shadow-md">
+<header
+  class="w-full items-center bg-neutral-600 p-3 text-neutral-50 shadow-md dark:bg-neutral-800 dark:text-neutral-100"
+>
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4">
     <SiteLogo />
     <NavigationLinks />
     <SocialLinks />
+    <ThemeToggle />
   </div>
 </header>

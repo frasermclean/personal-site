@@ -1,0 +1,42 @@
+---
+import MoonIcon from '@tabler/icons/outline/moon.svg';
+import SunIcon from '@tabler/icons/outline/sun.svg';
+import Button from './starwind/button';
+---
+
+<Button size="sm" id="toggle-theme">
+  <MoonIcon class="hidden dark:block" />
+  <SunIcon class="block dark:hidden" />
+  Theme
+</Button>
+
+<script>
+  updateDom(getPreferrredTheme()); // set initial theme based on user preference
+
+  // add click event listener to the button
+  const button = document.getElementById('toggle-theme');
+  button?.addEventListener('click', () => {
+    const theme = getPreferrredTheme() === 'dark' ? 'light' : 'dark'; // toggle theme
+    localStorage.setItem('theme', theme);
+    updateDom(theme);
+  });
+
+  function getPreferrredTheme(): 'light' | 'dark' {
+    // check localStorage first
+    const storedTheme = localStorage?.getItem('theme');
+    if (storedTheme) {
+      return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'light';
+    }
+
+    // read the user's system preference (and default to light if no match)
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function updateDom(theme: 'light' | 'dark') {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+</script>
