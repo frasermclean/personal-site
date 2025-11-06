@@ -11,7 +11,10 @@ function isActive(href: string) {
 <nav class="hidden md:flex">
   {
     links.map(({ href, text }) => (
-      <a href={href} class={`rounded-md px-3 py-2 text-lg hover:bg-primary/40 ${isActive(href) ? 'underline' : ''}`}>
+      <a
+        href={href}
+        class={`rounded-md px-3 py-2 text-lg hover:bg-primary/40 hover:text-foreground ${isActive(href) ? 'font-bold text-primary underline' : ''}`}
+      >
         {text}
       </a>
     ))
