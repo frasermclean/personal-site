@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = CollectionEntry<'posts'>['data'];
+
+const { title, description, heroImage } = Astro.props;
+console.log(heroImage);
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="mb-8 text-center">
+    <Image src={heroImage} width={1200} height={630} alt="" layout="constrained" class="my-8 rounded-4xl md:my-12" />
+    <h1 class="mb-4 px-8 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
+    <p class="px-8 text-lg text-muted-foreground md:text-xl">{description}</p>
+  </section>
+
+  <slot />
+</BaseLayout>
