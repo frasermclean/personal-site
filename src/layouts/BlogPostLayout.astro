@@ -1,20 +1,49 @@
 ---
+import FormattedDate from '@/components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'posts'>['data'];
 
-const { title, description, heroImage } = Astro.props;
-console.log(heroImage);
+const { title, description, heroImage, publishDate } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="mb-8 text-center">
-    <Image src={heroImage} width={1200} height={630} alt="" layout="constrained" class="my-8 rounded-4xl md:my-12" />
-    <h1 class="mb-4 px-8 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
+  <section class="my-8 flex flex-col items-center text-center md:my-12">
+    <h1 class="px-8 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
+    <FormattedDate date={publishDate} class="text-sm text-muted-foreground" />
+    <Image src={heroImage} width={1120} height={580} alt="" layout="constrained" class="my-8 rounded-4xl md:my-12" />
     <p class="px-8 text-lg text-muted-foreground md:text-xl">{description}</p>
   </section>
 
   <slot />
 </BaseLayout>
+
+<style is:global>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+
+  h2 {
+    margin-top: calc(var(--spacing) * 12);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  p {
+    margin-top: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  pre {
+    border-radius: var(--radius-md);
+    padding: calc(var(--spacing) * 4);
+  }
+</style>
