@@ -1,7 +1,7 @@
 ---
 title: 'Singapore Address Format'
 description: 'A short guide on how to understand the physical address format in Singapore'
-pubDate: '2023-11-05T07:41:38Z'
+publishDate: '2023-11-05T07:41:38Z'
 heroImage: '../../assets/images/singapore-marina-bay.jpg'
 tags: [ 'travel', 'singapore' ]
 ---
