@@ -3,7 +3,7 @@ import BlogPostCard from '@/components/BlogPostCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('posts')).sort(
+const collection = (await getCollection('posts')).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 ---
@@ -16,6 +16,6 @@ const posts = (await getCollection('posts')).sort(
 
   <h2 class="mb-4 font-heading text-3xl font-semibold md:text-4xl">All Posts</h2>
   <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-    {posts.map((post) => <BlogPostCard id={post.id} {...post.data} />)}
+    {collection.map((entry) => <BlogPostCard id={entry.id} {...entry.data} />)}
   </nav>
 </BaseLayout>
