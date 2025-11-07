@@ -9,7 +9,6 @@ import BaseLayout from './BaseLayout.astro';
 type Props = CollectionEntry<'posts'>['data'] & { readingTime?: string };
 
 const { title, description, heroImage, publishDate, readingTime } = Astro.props;
-console.log(Astro.props);
 ---
 
 <BaseLayout title={title} description={description}>
