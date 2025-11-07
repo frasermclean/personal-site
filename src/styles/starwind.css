@@ -68,19 +68,19 @@
 
 @layer base {
   :root {
-    --background: var(--color-neutral-50);
+    --background: var(--color-neutral-100);
     --foreground: var(--color-neutral-900);
-    --card: var(--color-neutral-100);
+    --card: var(--color-neutral-200);
     --card-foreground: var(--color-neutral-950);
     --popover: var(--color-white);
     --popover-foreground: var(--color-neutral-950);
-    --primary: var(--color-teal-500);
+    --primary: var(--color-sky-500);
     --primary-foreground: var(--color-neutral-50);
     --secondary: var(--color-fuchsia-700);
     --secondary-foreground: var(--color-neutral-50);
     --muted: var(--color-neutral-100);
     --muted-foreground: var(--color-neutral-600);
-    --accent: var(--color-neutral-100);
+    --accent: var(--color-amber-500);
     --accent-foreground: var(--color-neutral-900);
     --info: var(--color-sky-300);
     --info-foreground: var(--color-sky-950);
@@ -103,13 +103,13 @@
     --card-foreground: var(--color-neutral-50);
     --popover: var(--color-neutral-800);
     --popover-foreground: var(--color-neutral-50);
-    --primary: var(--color-teal-600);
+    --primary: var(--color-sky-600);
     --primary-foreground: var(--color-neutral-50);
     --secondary: var(--color-fuchsia-300);
     --secondary-foreground: var(--color-neutral-950);
     --muted: var(--color-neutral-800);
     --muted-foreground: var(--color-neutral-400);
-    --accent: var(--color-neutral-700);
+    --accent: var(--color-amber-600);
     --accent-foreground: var(--color-neutral-100);
     --info: var(--color-sky-300);
     --info-foreground: var(--color-sky-950);
