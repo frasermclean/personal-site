@@ -14,7 +14,7 @@ const posts = (await getCollection('posts')).sort(
     <p>Collection of blog posts.</p>
   </section>
 
-  <h2 class="mb-4 font-heading text-4xl font-semibold">All Posts</h2>
+  <h2 class="mb-4 font-heading text-3xl font-semibold md:text-4xl">All Posts</h2>
   <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     {posts.map((post) => <BlogPostCard id={post.id} {...post.data} />)}
   </nav>
