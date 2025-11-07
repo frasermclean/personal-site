@@ -1,14 +1,20 @@
 ---
 import { NAVIGATION_LINKS as links } from '@/constants';
 
+interface Props {
+  class: string;
+}
+
 function isActive(href: string) {
   const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
   const subpath = pathname.match(/[^\/]+/g);
   return href === pathname || href === '/' + (subpath?.[0] || '');
 }
+
+const { class: className } = Astro.props;
 ---
 
-<nav class="hidden md:flex">
+<nav class={className}>
   {
     links.map(({ href, text, Icon }) => (
       <a

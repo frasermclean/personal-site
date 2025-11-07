@@ -6,12 +6,10 @@ import SocialLinks from './SocialLinks.astro';
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header
-  class="w-full items-center bg-neutral-600 p-2 text-neutral-50 shadow-md md:p-3 dark:bg-neutral-800 dark:text-neutral-100"
->
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4">
+<header class="w-full bg-neutral-600 text-neutral-50 shadow-md dark:bg-neutral-800 dark:text-neutral-100">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 p-2 md:p-3">
     <SiteLogo />
-    <NavigationLinks />
+    <NavigationLinks class="hidden md:flex" />
     <div class="grow"></div>
     <SocialLinks class="hidden items-center gap-2 md:flex" />
     <ThemeToggle />
