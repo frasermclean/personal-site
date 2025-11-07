@@ -1,4 +1,5 @@
 ---
+import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
@@ -16,6 +17,7 @@ const { id, title, description, heroImage, publishDate } = Astro.props;
       <CardDescription>{description}</CardDescription>
     </CardHeader>
     <CardFooter class="p-0">
+      <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
       <FormattedDate date={publishDate} class="text-sm font-semibold" />
     </CardFooter>
   </Card>
