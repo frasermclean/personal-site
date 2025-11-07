@@ -10,11 +10,12 @@ function isActive(href: string) {
 
 <nav class="hidden md:flex">
   {
-    links.map(({ href, text }) => (
+    links.map(({ href, text, Icon }) => (
       <a
         href={href}
-        class={`rounded-md px-3 py-2 text-lg hover:bg-primary/40 hover:text-foreground ${isActive(href) ? 'font-bold text-primary underline' : ''}`}
+        class={`rounded-lg px-3 py-2 text-lg hover:bg-accent/80 hover:text-neutral-50 ${isActive(href) ? 'font-bold text-primary' : ''}`}
       >
+        <Icon width={22} height={22} class="mr-1 mb-1 hidden lg:inline-block" stroke-width={isActive(href) ? 2 : 1} />
         {text}
       </a>
     ))

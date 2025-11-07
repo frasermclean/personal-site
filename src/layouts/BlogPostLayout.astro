@@ -1,5 +1,6 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
+import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
@@ -10,40 +11,118 @@ const { title, description, heroImage, publishDate } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="my-8 flex flex-col items-center text-center md:my-12">
-    <h1 class="px-8 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
-    <FormattedDate date={publishDate} class="text-sm text-muted-foreground" />
-    <Image src={heroImage} width={1120} height={580} alt="" layout="constrained" class="my-8 rounded-4xl md:my-12" />
-    <p class="px-8 text-lg text-muted-foreground md:text-xl">{description}</p>
+  <Image
+    src={heroImage}
+    width={1120}
+    height={580}
+    alt=""
+    layout="constrained"
+    class="my-8 rounded-4xl shadow-xl md:my-12"
+  />
+  <section class="my-8 flex flex-col md:my-12">
+    <h1 class="mb-4 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
+    <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
+    <div class="text-sm text-muted-foreground/80">
+      <CalendarIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+      <span class="">Published:</span>
+      <FormattedDate date={publishDate} class="text-md font-semibold" />
+    </div>
   </section>
 
-  <slot />
+  <article class="prose">
+    <slot />
+  </article>
 </BaseLayout>
 
 <style is:global>
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     color: var(--color-primary);
     font-family: var(--font-heading);
   }
 
-  h2 {
+  .prose h2 {
     margin-top: calc(var(--spacing) * 12);
+    margin-bottom: calc(var(--spacing) * 4);
     font-size: var(--text-3xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose h3 {
+    margin-top: calc(var(--spacing) * 8);
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-2xl);
     font-weight: var(--font-weight-semibold);
   }
 
-  p {
+  .prose h4 {
+    margin-top: calc(var(--spacing) * 6);
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prose p {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-light);
     margin-top: calc(var(--spacing) * 4);
     margin-bottom: calc(var(--spacing) * 4);
   }
 
-  pre {
+  .prose ul,
+  .prose ol {
+    margin-top: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 4);
+    padding-left: calc(var(--spacing) * 6);
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose li {
+    margin-top: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 2);
+    margin-left: calc(var(--spacing) * 2);
+  }
+
+  .prose ul ul,
+  .prose ol ol,
+  .prose ul ol,
+  .prose ol ul {
+    margin-top: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .prose ul ul {
+    list-style-type: circle;
+  }
+
+  .prose ul ul ul {
+    list-style-type: square;
+  }
+
+  .prose pre {
     border-radius: var(--radius-md);
     padding: calc(var(--spacing) * 4);
+  }
+
+  /* Dark mode syntax highlighting overrides */
+  .dark .prose pre,
+  .dark .prose .astro-code,
+  .dark .prose .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
   }
 </style>

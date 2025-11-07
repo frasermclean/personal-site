@@ -1,9 +1,21 @@
 ---
+import BlogPostCard from '@/components/BlogPostCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
 ---
 
 <BaseLayout>
-  <h1>Blog Index</h1>
-  <p>Welcome to the blog index page.</p>
-  <a href="/blog/singapore-address-format" class="underline">Example Post: Singapore Address Format</a>
+  <section class="my-8">
+    <h1 class="mb-4 font-heading text-4xl font-bold tracking-tight text-primary md:text-6xl">Blog</h1>
+    <p>Collection of blog posts.</p>
+  </section>
+
+  <h2 class="mb-4 font-heading text-4xl font-semibold">All Posts</h2>
+  <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {posts.map((post) => <BlogPostCard id={post.id} {...post.data} />)}
+  </nav>
 </BaseLayout>
