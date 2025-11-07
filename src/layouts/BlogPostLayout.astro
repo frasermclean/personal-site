@@ -1,13 +1,15 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
+import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
-type Props = CollectionEntry<'posts'>['data'];
+type Props = CollectionEntry<'posts'>['data'] & { readingTime?: string };
 
-const { title, description, heroImage, publishDate } = Astro.props;
+const { title, description, heroImage, publishDate, readingTime } = Astro.props;
+console.log(Astro.props);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -22,10 +24,15 @@ const { title, description, heroImage, publishDate } = Astro.props;
   <section class="my-8 flex flex-col md:my-12">
     <h1 class="mb-4 font-heading text-4xl font-bold text-primary md:text-5xl">{title}</h1>
     <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
-    <div class="text-sm text-muted-foreground/80">
+
+    <div class="mb-1 text-sm text-muted-foreground/80">
       <CalendarIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
-      <span class="">Published:</span>
-      <FormattedDate date={publishDate} class="text-md font-semibold" />
+      <FormattedDate date={publishDate} />
+    </div>
+
+    <div class="text-sm text-muted-foreground/80">
+      <ClockIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+      <span>{readingTime}</span>
     </div>
   </section>
 
