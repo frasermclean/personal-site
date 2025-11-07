@@ -18,6 +18,10 @@
     {
       "name": "card",
       "version": "1.3.0"
+    },
+    {
+      "name": "separator",
+      "version": "1.0.0"
     }
   ]
 }

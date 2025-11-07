@@ -1,4 +1,6 @@
 ---
+import Footer from '@/components/Footer.astro';
+import Separator from '@/components/starwind/separator';
 import Toolbar from '@/components/Toolbar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
@@ -31,8 +33,10 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   </head>
   <body>
     <Toolbar />
-    <main class="mx-auto max-w-6xl p-2 md:p-4">
+    <main class="mx-auto my-4 max-w-6xl px-2 md:px-3">
       <slot />
     </main>
+    <Separator class="my-4" />
+    <Footer />
   </body>
 </html>
