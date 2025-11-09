@@ -10,7 +10,7 @@ export const SITE_DESCRIPTION = 'The personal website of Fraser McLean - full-st
 export const NAVIGATION_LINKS = [
   { href: '/', text: 'Home', Icon: HomeIcon },
   { href: '/about', text: 'About', Icon: UserIcon },
-  { href: '/portfolio', text: 'Portfolio', Icon: ChecklistIcon },
+  { href: '/projects', text: 'Projects', Icon: ChecklistIcon },
   { href: '/blog', text: 'Blog', Icon: ArticleIcon },
   { href: '/contact', text: 'Contact', Icon: MailIcon },
 ];
