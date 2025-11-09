@@ -11,11 +11,12 @@ export const input = tv({
     'file:text-foreground file:my-auto file:mr-4 file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium',
     'disabled:cursor-not-allowed disabled:opacity-50',
     'peer placeholder:text-muted-foreground',
+    'user-valid:border-success user-invalid:border-error'
   ],
   variants: {
-    size: { sm: 'h-9 px-2 text-sm', md: 'h-11 px-3 text-base', lg: 'h-12 px-4 text-lg' },
+    size: { sm: 'h-9 px-2 text-sm', md: 'h-11 px-3 text-base', lg: 'h-12 px-4 text-lg' }
   },
-  defaultVariants: { size: 'md' },
+  defaultVariants: { size: 'md' }
 });
 
 const { size, class: className, ...rest } = Astro.props;

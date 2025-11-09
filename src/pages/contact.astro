@@ -7,18 +7,11 @@ import { Label } from '@/components/starwind/label';
 import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
-import { actions } from 'astro:actions';
-
-// enable on demand server-side rendering
-export const prerender = false;
-
-const { data, error } = Astro.getActionResult(actions.processContactForm);
-console.log(data, error);
 ---
 
 <BaseLayout title="Contact Me">
   <HeroSection title="Contact Me" subtitle="If you have any questions or inquiries, I'd love to hear from you!" />
-  <form method="POST" action={actions.processContactForm} class="mx-auto max-w-md">
+  <form class="mx-auto max-w-md">
     <Card>
       <CardHeader class="p-4 md:p-6">
         <CardTitle>Get in Touch</CardTitle>
@@ -27,19 +20,19 @@ console.log(data, error);
       <CardContent class="space-y-4 p-4 md:p-6">
         <div class="space-y-2">
           <Label for="name">Name</Label>
-          <Input id="name" name="name" type="text" placeholder="Bob Jones" autocomplete="name" />
+          <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
         </div>
         <div class="space-y-2">
           <Label for="email">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" />
+          <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
         </div>
         <div class="space-y-2">
           <Label for="message">Message</Label>
-          <Textarea id="message" name="message" placeholder="Hi there" rows="6" />
+          <Textarea id="message" placeholder="Hi there" rows="6" required />
         </div>
       </CardContent>
       <CardFooter class="p-4 md:p-6">
-        <Button class="w-full" variant="primary" type="submit">
+        <Button id="submit-button" class="w-full" variant="primary" type="submit">
           <MailIcon class="mr-2" />
           Send Message
         </Button>
@@ -47,3 +40,29 @@ console.log(data, error);
     </Card>
   </form>
 </BaseLayout>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  const submitButton = document.querySelector<HTMLButtonElement>('#submit-button');
+  const nameInput = document.querySelector<HTMLInputElement>('#name');
+  const emailInput = document.querySelector<HTMLInputElement>('#email');
+  const messageInput = document.querySelector<HTMLTextAreaElement>('#message');
+
+  submitButton?.addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const { data, error } = await actions.processContactForm({
+      name: nameInput?.value || '',
+      email: emailInput?.value || '',
+      message: messageInput?.value || ''
+    });
+
+    if (error) {
+      alert('There was an error sending your message. Please try again later.');
+      return;
+    }
+
+    console.log('Form submitted successfully:', data);
+  });
+</script>
