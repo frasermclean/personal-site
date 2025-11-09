@@ -1,8 +1,42 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
+import { Button } from '@/components/starwind/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
+import { Input } from '@/components/starwind/input';
+import { Label } from '@/components/starwind/label';
+import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import MailIcon from '@tabler/icons/outline/mail.svg';
 ---
 
 <BaseLayout title="Contact Me">
   <HeroSection title="Contact Me" subtitle="If you have any questions or inquiries, I'd love to hear from you!" />
+  <form class="mx-auto max-w-md">
+    <Card>
+      <CardHeader>
+        <CardTitle>Get in Touch</CardTitle>
+        <CardDescription>Fill out the form below to contact me.</CardDescription>
+      </CardHeader>
+      <CardContent class="space-y-4">
+        <div class="space-y-2">
+          <Label for="name">Name</Label>
+          <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" />
+        </div>
+        <div class="space-y-2">
+          <Label for="email">Email</Label>
+          <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" />
+        </div>
+        <div class="space-y-2">
+          <Label for="message">Message</Label>
+          <Textarea id="message" placeholder="Hi there" rows="6" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button class="w-full" variant="primary" type="submit">
+          <MailIcon class="mr-2" />
+          Send Message
+        </Button>
+      </CardFooter>
+    </Card>
+  </form>
 </BaseLayout>
