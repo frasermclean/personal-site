@@ -76,7 +76,7 @@
     --popover-foreground: var(--color-neutral-950);
     --primary: var(--color-sky-500);
     --primary-foreground: var(--color-neutral-50);
-    --secondary: var(--color-fuchsia-700);
+    --secondary: var(--color-teal-500);
     --secondary-foreground: var(--color-neutral-50);
     --muted: var(--color-neutral-100);
     --muted-foreground: var(--color-neutral-600);
@@ -105,7 +105,7 @@
     --popover-foreground: var(--color-neutral-50);
     --primary: var(--color-sky-600);
     --primary-foreground: var(--color-neutral-50);
-    --secondary: var(--color-fuchsia-300);
+    --secondary: var(--color-teal-400);
     --secondary-foreground: var(--color-neutral-950);
     --muted: var(--color-neutral-800);
     --muted-foreground: var(--color-neutral-400);
