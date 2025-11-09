@@ -1,6 +1,5 @@
 import { defineAction } from 'astro:actions';
 import { z } from 'astro:schema';
-export const prerender = false;
 
 export const processContactForm = defineAction({
   input: z.object({
