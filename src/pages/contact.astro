@@ -7,31 +7,38 @@ import { Label } from '@/components/starwind/label';
 import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
+import { actions } from 'astro:actions';
+
+// enable on demand server-side rendering
+export const prerender = false;
+
+const { data, error } = Astro.getActionResult(actions.processContactForm);
+console.log(data, error);
 ---
 
 <BaseLayout title="Contact Me">
   <HeroSection title="Contact Me" subtitle="If you have any questions or inquiries, I'd love to hear from you!" />
-  <form class="mx-auto max-w-md">
+  <form method="POST" action={actions.processContactForm} class="mx-auto max-w-md">
     <Card>
-      <CardHeader>
+      <CardHeader class="p-4 md:p-6">
         <CardTitle>Get in Touch</CardTitle>
         <CardDescription>Fill out the form below to contact me.</CardDescription>
       </CardHeader>
-      <CardContent class="space-y-4">
+      <CardContent class="space-y-4 p-4 md:p-6">
         <div class="space-y-2">
           <Label for="name">Name</Label>
-          <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" />
+          <Input id="name" name="name" type="text" placeholder="Bob Jones" autocomplete="name" />
         </div>
         <div class="space-y-2">
           <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" />
+          <Input id="email" name="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" />
         </div>
         <div class="space-y-2">
           <Label for="message">Message</Label>
-          <Textarea id="message" placeholder="Hi there" rows="6" />
+          <Textarea id="message" name="message" placeholder="Hi there" rows="6" />
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter class="p-4 md:p-6">
         <Button class="w-full" variant="primary" type="submit">
           <MailIcon class="mr-2" />
           Send Message
