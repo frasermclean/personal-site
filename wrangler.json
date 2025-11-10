@@ -13,7 +13,7 @@
   "observability": {
     "enabled": true
   },
-  "define": {
-    "import.meta.env.TURNSTILE_SITE_KEY": "0x4AAAAAAAhX3M5VG0JFivUl"
+  "vars": {
+    "PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAAAhX3M5VG0JFivUl"
   }
 }
