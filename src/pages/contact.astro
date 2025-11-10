@@ -7,7 +7,11 @@ import { Label } from '@/components/starwind/label';
 import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
+import { TURNSTILE_SITE_KEY } from 'astro:env/client';
 ---
+
+<link rel="preconnect" href="https://challenges.cloudflare.com" slot="head" />
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer slot="head"></script>
 
 <BaseLayout title="Contact Me">
   <HeroSection title="Contact Me" subtitle="If you have any questions or inquiries, I'd love to hear from you!" />
@@ -32,7 +36,8 @@ import MailIcon from '@tabler/icons/outline/mail.svg';
         </div>
       </CardContent>
       <CardFooter class="p-4 md:p-6">
-        <Button id="submit-button" class="w-full" variant="primary" type="submit">
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+        <Button class="w-full" variant="primary" type="submit" disabled>
           <MailIcon class="mr-2" />
           Send Message
         </Button>
@@ -44,25 +49,53 @@ import MailIcon from '@tabler/icons/outline/mail.svg';
 <script>
   import { actions } from 'astro:actions';
 
-  const submitButton = document.querySelector<HTMLButtonElement>('#submit-button');
-  const nameInput = document.querySelector<HTMLInputElement>('#name');
-  const emailInput = document.querySelector<HTMLInputElement>('#email');
-  const messageInput = document.querySelector<HTMLTextAreaElement>('#message');
+  const form = document.querySelector<HTMLFormElement>('form');
+  const nameInput = document?.querySelector<HTMLInputElement>('#name');
+  const emailInput = document?.querySelector<HTMLInputElement>('#email');
+  const messageInput = document?.querySelector<HTMLTextAreaElement>('#message');
 
-  submitButton?.addEventListener('click', async (event) => {
+  nameInput?.addEventListener('input', validateForm);
+  emailInput?.addEventListener('input', validateForm);
+  messageInput?.addEventListener('input', validateForm);
+
+  function validateForm() {
+    const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    if (!nameInput || !emailInput || !messageInput || !submitButton) {
+      console.error('Form elements not found');
+      return;
+    }
+    const isValid = nameInput.checkValidity() && emailInput.checkValidity() && messageInput.checkValidity();
+    submitButton.disabled = !isValid;
+  }
+
+  function getFormValues() {
+    const tokenInput = form?.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');
+    return {
+      name: nameInput?.value.trim(),
+      email: emailInput?.value.trim(),
+      message: messageInput?.value.trim(),
+      token: tokenInput?.value
+    };
+  }
+
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const { data, error } = await actions.processContactForm({
-      name: nameInput?.value || '',
-      email: emailInput?.value || '',
-      message: messageInput?.value || ''
-    });
+    const { name, email, message, token } = getFormValues();
+
+    if (!name || !email || !message || !token) {
+      alert('Form is incomplete. Please fill out all fields.');
+      return;
+    }
+
+    const { error } = await actions.processContactForm({ name, email, message, token });
 
     if (error) {
       alert('There was an error sending your message. Please try again later.');
       return;
     }
 
-    console.log('Form submitted successfully:', data);
+    form.reset();
   });
 </script>

@@ -32,6 +32,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin />
+    <slot name="head" />
   </head>
   <body>
     <Toolbar />

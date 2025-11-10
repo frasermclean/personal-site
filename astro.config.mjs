@@ -1,7 +1,7 @@
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import { remarkReadingTime } from './src/lib/reading-time.js';
 
 // https://astro.build/config
@@ -10,6 +10,14 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: 'compile'
   }),
+  env: {
+    schema: {
+      CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
+      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
+      TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' })
+    }
+  },
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
