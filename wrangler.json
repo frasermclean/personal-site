@@ -14,6 +14,6 @@
     "enabled": true
   },
   "define": {
-    "TURNSTILE_SITE_KEY": "0x4AAAAAAAhX3M5VG0JFivUl"
+    "import.meta.env.TURNSTILE_SITE_KEY": "0x4AAAAAAAhX3M5VG0JFivUl"
   }
 }
