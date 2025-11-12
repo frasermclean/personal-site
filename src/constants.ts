@@ -12,5 +12,5 @@ export const NAVIGATION_LINKS = [
   { href: '/about', text: 'About', Icon: UserIcon },
   { href: '/projects', text: 'Projects', Icon: ChecklistIcon },
   { href: '/blog', text: 'Blog', Icon: ArticleIcon },
-  { href: '/contact', text: 'Contact', Icon: MailIcon },
+  { href: '/contact', text: 'Contact', Icon: MailIcon }
 ];

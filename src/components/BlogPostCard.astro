@@ -4,12 +4,12 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './starwind/card';
-type Props = CollectionEntry<'posts'>['data'] & { id: string };
+type Props = CollectionEntry<'posts'>['data'] & { href: string };
 
-const { id, title, description, heroImage, publishDate } = Astro.props;
+const { href, title, description, heroImage, publishDate } = Astro.props;
 ---
 
-<a href={`/blog/${id}`} class="block h-full">
+<a href={href} class="block h-full">
   <Card class="flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3">
     <Image src={heroImage} width={768} height={576} alt="" layout="constrained" class="mb-4 w-full rounded-xl" />
     <CardHeader class="mb-4 grow p-0">
