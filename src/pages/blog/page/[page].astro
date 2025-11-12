@@ -1,7 +1,14 @@
 ---
 import BlogPostCard from '@/components/BlogPostCard.astro';
 import HeroSection from '@/components/HeroSection.astro';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/starwind/pagination';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/starwind/pagination';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
@@ -35,6 +42,13 @@ const description =
     <Pagination>
       <PaginationContent>
         {
+          page.url.prev && (
+            <PaginationItem>
+              <PaginationPrevious href={page.url.prev} />
+            </PaginationItem>
+          )
+        }
+        {
           Array.from({ length: page.lastPage }, (_, i) => (
             <PaginationItem>
               <PaginationLink href={`/blog/page/${i + 1}`} isActive={i + 1 === page.currentPage}>
@@ -42,6 +56,13 @@ const description =
               </PaginationLink>
             </PaginationItem>
           ))
+        }
+        {
+          page.url.next && (
+            <PaginationItem>
+              <PaginationNext href={page.url.next} />
+            </PaginationItem>
+          )
         }
       </PaginationContent>
     </Pagination>
