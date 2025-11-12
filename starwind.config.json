@@ -28,6 +28,10 @@
       "version": "1.2.0"
     },
     {
+      "name": "pagination",
+      "version": "3.0.1"
+    },
+    {
       "name": "separator",
       "version": "1.0.0"
     },
