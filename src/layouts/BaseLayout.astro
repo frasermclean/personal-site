@@ -1,4 +1,5 @@
 ---
+import defaultOgImage from '@/assets/default-og-image.png';
 import Footer from '@/components/Footer.astro';
 import Separator from '@/components/starwind/separator';
 import Toolbar from '@/components/Toolbar.astro';
@@ -9,14 +10,18 @@ import '@fontsource-variable/geist-mono';
 import geistFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2';
 import '@fontsource-variable/sora';
 import soraFont from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   title?: string;
   description?: string;
+  isArticle?: boolean;
+  image?: ImageMetadata;
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, isArticle = false, image = defaultOgImage } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image.src, Astro.site);
 ---
 
 <!doctype html>
@@ -28,13 +33,27 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Font preloads -->
     <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin />
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={isArticle ? 'article' : 'website'} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={image.width.toString()} />
+    <meta property="og:image:height" content={image.height.toString()} />
+
     <slot name="head" />
   </head>
   <body>

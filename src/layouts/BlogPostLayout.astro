@@ -11,7 +11,7 @@ type Props = CollectionEntry<'posts'>['data'] & { readingTime?: string };
 const { title, description, heroImage, publishDate, readingTime } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} isArticle={true} image={heroImage}>
   <Image
     src={heroImage}
     width={1120}
