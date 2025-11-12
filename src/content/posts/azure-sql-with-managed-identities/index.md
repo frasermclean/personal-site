@@ -96,8 +96,6 @@ resource sqlServer 'Microsoft.Sql/servers@2024-05-01-preview' = {
 }
 ```
 
-You can download the above Bicep file from [here](database.bicep).
-
 ### Deploying the Bicep template
 
 First, we need to ensure we are logged in to Azure using the Azure CLI.
