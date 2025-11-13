@@ -19,7 +19,7 @@ const { class: className } = Astro.props;
     links.map(({ href, text, Icon }) => (
       <a
         href={href}
-        class={`rounded-lg px-3 py-2 text-lg hover:bg-accent/80 hover:text-neutral-50 ${isActive(href) ? 'font-bold text-primary' : ''}`}
+        class={`rounded-lg px-3 py-2 text-lg transition-colors hover:bg-accent/80 hover:text-neutral-50 ${isActive(href) ? 'font-bold text-primary' : ''}`}
       >
         <Icon width={22} height={22} class="mr-1 mb-1 hidden lg:inline-block" stroke-width={isActive(href) ? 2 : 1} />
         {text}
