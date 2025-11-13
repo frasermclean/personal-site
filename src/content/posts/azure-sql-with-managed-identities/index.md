@@ -20,13 +20,13 @@ In this guide, we will explore how to use managed identities to connect to Azure
 
 ## Azure SQL Database
 
-![Azure SQL Database icon](database.png)
+![Azure SQL Database icon](/src/assets/icons/azure-sql-database.png)
 
 [Azure SQL Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) is a fully managed relational database as a service offering provided by Microsoft. It is built on top of the venerable SQL Server engine.  It is a cloud-based service that is highly available, scalable, and secure. Azure SQL is a great choice for building modern applications that require a relational database.
 
 ## Managed identities
 
-![Managed identity icon](mi.png)
+![Managed identity icon](/src/assets/icons/managed-identity.png)
 
 [Managed identities](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) are a feature of [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/what-is-entra) that allows you to securely authenticate your applications and services without needing to manage credentials. Managed identities are a great way to secure your applications and services by eliminating the need to store credentials in your code or configuration files.
 
