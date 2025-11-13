@@ -1,0 +1,27 @@
+---
+import { getImage, Image } from 'astro:assets';
+
+interface Props {
+  text: string;
+  headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  imageSrc: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+}
+
+const { text, headingTag = 'h2', imageSrc, imageAlt, imageWidth = 40, imageHeight = 40 } = Astro.props;
+
+const image = await getImage({
+  src: imageSrc,
+  width: imageWidth,
+  height: imageHeight
+});
+
+const HeadingTag = headingTag;
+---
+
+<div class="flex items-center gap-4">
+  <HeadingTag>{text}</HeadingTag>
+  <Image src={image.src} alt={imageAlt ?? text} width={imageWidth} height={imageHeight} class="not-prose" />
+</div>
