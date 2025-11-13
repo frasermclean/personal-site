@@ -1,22 +1,24 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
 import Prose from '@/components/Prose.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
+import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
-type Props = CollectionEntry<'posts'>['data'] & { readingTime?: string };
+type Props = CollectionEntry<'posts'>['data'] & { headings: MarkdownHeading[]; readingTime?: string };
 
-const { title, description, heroImage, publishDate, readingTime } = Astro.props;
+const { title, description, heroImage, publishDate, readingTime, headings } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} isArticle={true} image={heroImage}>
   <Image
     src={heroImage}
-    width={1120}
-    height={580}
+    width={1280}
+    height={660}
     alt=""
     layout="constrained"
     class="my-8 rounded-4xl shadow-xl md:my-12"
@@ -38,7 +40,12 @@ const { title, description, heroImage, publishDate, readingTime } = Astro.props;
     </div>
   </section>
 
-  <Prose>
-    <slot />
-  </Prose>
+  <div class="flex w-full">
+    <Prose class="w-full max-w-none xl:max-w-prose">
+      <slot />
+    </Prose>
+    <aside class="sticky top-24 hidden h-fit grow self-start pl-4 xl:block">
+      <TableOfContents headings={headings} />
+    </aside>
+  </div>
 </BaseLayout>

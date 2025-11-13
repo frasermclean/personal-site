@@ -1,0 +1,46 @@
+---
+import { Card } from '@/components/starwind/card';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+const { headings } = Astro.props;
+
+const depthClasses: Record<number, string> = {
+  2: 'ml-0 font-semibold',
+  3: 'ml-4 text-md',
+  4: 'ml-8 text-sm'
+};
+---
+
+<h2 class="mb-2 font-heading text-xl font-bold text-secondary">Article Contents</h2>
+<Card class="card max-h-[calc(100vh-8rem)] overflow-y-auto px-6 py-4">
+  <nav>
+    <ul class="space-y-2">
+      {
+        headings.map((heading) => (
+          <li class={`relative list-none ${depthClasses[heading.depth]}`}>
+            <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</Card>
+
+<style>
+  .card {
+    scrollbar-width: auto;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+
+  li::before {
+    content: '•';
+    position: absolute;
+    left: -0.75rem;
+    color: hsl(var(--muted-foreground) / 0.5);
+  }
+</style>
