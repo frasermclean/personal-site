@@ -129,7 +129,7 @@
     @apply border-border;
   }
   html {
-    @apply bg-background text-foreground scheme-light dark:scheme-dark;
+    @apply scroll-smooth bg-background text-foreground scheme-light dark:scheme-dark;
   }
   button {
     @apply cursor-pointer;
