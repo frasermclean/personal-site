@@ -1,11 +1,13 @@
 ---
 import { Card } from '@/components/starwind/card';
+import ListTreeIcon from '@tabler/icons/outline/list-tree.svg';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
+  title?: string;
   headings: MarkdownHeading[];
 }
-const { headings } = Astro.props;
+const { title = 'Contents', headings } = Astro.props;
 
 const depthClasses: Record<number, string> = {
   2: 'ml-0 font-semibold',
@@ -14,22 +16,27 @@ const depthClasses: Record<number, string> = {
 };
 ---
 
-<h2 class="mb-2 font-heading text-xl font-bold text-secondary">Article Contents</h2>
-<Card class="card max-h-[calc(100vh-8rem)] overflow-y-auto px-6 py-4">
-  <nav>
-    <ul class="space-y-2">
-      {
-        headings.map((heading) => (
-          <li class={`relative list-none ${depthClasses[heading.depth]}`}>
-            <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
-              {heading.text}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-</Card>
+<section>
+  <div class="mb-2 flex items-center gap-2 text-secondary">
+    <ListTreeIcon width={20} height={20} />
+    <h2 class="font-heading text-xl font-bold">{title}</h2>
+  </div>
+  <Card class="card max-h-[calc(100vh-12rem)] overflow-y-auto px-6 py-4">
+    <nav>
+      <ul class="space-y-2">
+        {
+          headings.map((heading) => (
+            <li class={`relative list-none ${depthClasses[heading.depth]}`}>
+              <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
+                {heading.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </Card>
+</section>
 
 <style>
   .card {
