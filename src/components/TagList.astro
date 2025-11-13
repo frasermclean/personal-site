@@ -1,0 +1,34 @@
+---
+import TagIcon from '@tabler/icons/outline/tag.svg';
+
+interface Props {
+  title?: string;
+  tags: string[];
+}
+
+const { title = 'Tags', tags } = Astro.props;
+---
+
+<section>
+  <div class="mb-2 flex items-center gap-2 text-secondary">
+    <TagIcon width={20} height={20} />
+    <h2 class="font-heading text-xl font-bold">{title}</h2>
+  </div>
+
+  <nav>
+    <ul class="flex flex-wrap items-center gap-2">
+      {
+        tags.map((tag) => (
+          <li>
+            <a
+              href={`/blog/tag/${tag}`}
+              class="inline-block rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent hover:bg-accent/20"
+            >
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</section>

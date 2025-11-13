@@ -2,6 +2,7 @@
 import FormattedDate from '@/components/FormattedDate.astro';
 import Prose from '@/components/Prose.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
+import TagList from '@/components/TagList.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import type { MarkdownHeading } from 'astro';
@@ -11,7 +12,7 @@ import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'posts'>['data'] & { headings: MarkdownHeading[]; readingTime?: string };
 
-const { title, description, heroImage, publishDate, readingTime, headings } = Astro.props;
+const { title, description, heroImage, publishDate, readingTime, headings, tags } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} isArticle={true} image={heroImage}>
@@ -44,8 +45,9 @@ const { title, description, heroImage, publishDate, readingTime, headings } = As
     <Prose class="w-full max-w-none xl:max-w-prose">
       <slot />
     </Prose>
-    <aside class="sticky top-24 hidden h-fit grow self-start pl-4 xl:block">
+    <aside class="sticky top-24 hidden h-fit grow flex-col gap-6 self-start pl-4 xl:flex">
       <TableOfContents headings={headings} />
+      <TagList tags={tags} />
     </aside>
   </div>
 </BaseLayout>
