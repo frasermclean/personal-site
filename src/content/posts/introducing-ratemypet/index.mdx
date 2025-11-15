@@ -12,7 +12,7 @@ tags: ['pets', 'community', 'social', 'angular', 'aspnetcore', 'azure', 'github-
 import angularLogo from '@/assets/icons/angular.png';
 import azureSqlLogo from '@/assets/icons/azure-sql-database.png';
 import githubActionsLogo from '@/assets/icons/github-actions.png';
-import ImageHeading from '@/components/ImageHeading.astro';
+import { Image } from 'astro:assets';
 
 ## Introduction
 
@@ -36,7 +36,9 @@ I was looking for a project to build while learning new technologies, and I thou
 
 The entire project is open-source and contained in a single repository. It's available on [GitHub](https://github.com/frasermclean/ratemypet).
 
-<ImageHeading text="Frontend - Angular" headingTag="h3" imageSrc={angularLogo} imageAlt="Angular logo" />
+### Frontend - Angular
+
+<Image src={angularLogo} alt="Angular logo" width={96} height={96} class="mx-auto" />
 
 The frontend is built using [Angular](https://angular.dev) - my personal favorite JavaScript framework. I love Angular because it's a strongly opinionated framework that provides the developer a _**batteries included**_ approach to building modern web applications.
 
@@ -48,18 +50,17 @@ For the backend, I used ASP.NET Core Web API for the main API and Azure Function
 
 Azure Functions is a serverless compute service that allows me to run code in response to events. I used it for features that don't require an immediate response, such as sending emails and processing images. This allows me to offload some of the work from the main API and scale it independently.
 
-<ImageHeading text="Database - Azure SQL Database" headingTag="h3" imageSrc={azureSqlLogo} imageAlt="Azure SQL logo" />
+### Database - Azure SQL Database
+
+<Image src={azureSqlLogo} alt="Azure SQL logo" width={96} height={96} class="mx-auto" />
 
 For the database, I settled upon Azure SQL Database. This meant that I could test locally using a SQL Server container, and then deploy to Azure SQL Database without any changes. I also used Entity Framework Core for data access, which is a powerful ORM that makes it easy to work with databases in .NET applications.
 
 Another factor in my decision was cost. Azure SQL Database has a basic tier which is very affordable, and it allows me to scale up as needed. I also like that it has built-in support for backups, scaling, and other features that make it easy to manage.
 
-<ImageHeading
-  text="Deployment - GitHub Actions"
-  headingTag="h3"
-  imageSrc={githubActionsLogo}
-  imageAlt="GitHub Actions logo"
-/>
+### Deployment - GitHub Actions
+
+<Image src={githubActionsLogo} alt="GitHub Actions logo" width={96} height={96} class="mx-auto" />
 
 For deployment, I used GitHub Actions to automate the build and deployment process. This allows me to easily deploy changes to the frontend and backend just merging a pull request. I set up workflows that build the frontend and backend, runs tests, and deploy to my Azure resources.
 
