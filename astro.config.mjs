@@ -13,6 +13,7 @@ export default defineConfig({
   }),
   env: {
     schema: {
+      TRACKING_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
