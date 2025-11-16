@@ -14,6 +14,8 @@
     "enabled": true
   },
   "define": {
+    "COMMENTS_HOST": "\"https://comments.frasermclean.com\"",
+    "COMMENTS_SITE_ID": "\"frasermclean-site\"",
     "TRACKING_WEBSITE_ID": "\"d449089e-d868-4f4c-8e42-8c15c48f7a64\"",
     "TURNSTILE_SITE_KEY": "\"0x4AAAAAAAhX3M5VG0JFivUl\""
   }
