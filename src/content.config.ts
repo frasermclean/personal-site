@@ -11,7 +11,8 @@ const posts = defineCollection({
       updatedDate: z.coerce.date().optional(),
       heroImage: image(),
       category: z.string().optional(),
-      tags: z.array(z.string())
+      tags: z.array(z.string()),
+      enableComments: z.boolean().default(true)
     })
 });
 

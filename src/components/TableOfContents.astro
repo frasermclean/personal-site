@@ -6,8 +6,17 @@ import type { MarkdownHeading } from 'astro';
 interface Props {
   title?: string;
   headings: MarkdownHeading[];
+  includeCommentLink?: boolean;
 }
-const { title = 'Contents', headings } = Astro.props;
+const { title = 'Contents', headings, includeCommentLink = true } = Astro.props;
+
+if (includeCommentLink) {
+  headings.push({
+    depth: 2,
+    slug: 'comments',
+    text: 'Comments'
+  });
+}
 
 const depthClasses: Record<number, string> = {
   2: 'ml-0 font-semibold',
