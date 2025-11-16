@@ -9,6 +9,8 @@ declare global {
   }
 }
 
+const COMMENTS_SCRIPT_ID = 'comments-script';
+
 const getCurrentTheme = (): 'light' | 'dark' => {
   return typeof window !== 'undefined' && window.document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 };
@@ -18,9 +20,9 @@ const getCurrentTheme = (): 'light' | 'dark' => {
  * @param id The ID of the script element to insert.
  * @param parentElement The parent element to which the script will be appended.
  */
-const insertScript = (id: string, parentElement: HTMLElement) => {
+const insertScript = (parentElement: HTMLElement) => {
   const script = document.createElement('script');
-  script.id = id;
+  script.id = COMMENTS_SCRIPT_ID;
   script.type = 'text/javascript';
   script.async = true;
 
@@ -48,8 +50,8 @@ const insertScript = (id: string, parentElement: HTMLElement) => {
  * @param id The ID of the script element to remove.
  * @param parentElement The parent element from which to remove the script.
  */
-const removeScript = (id: string, parentElement: HTMLElement) => {
-  const script = window.document.getElementById(id);
+const removeScript = (parentElement: HTMLElement) => {
+  const script = parentElement.querySelector(`#${COMMENTS_SCRIPT_ID}`);
   if (script) {
     parentElement.removeChild(script);
   }
@@ -61,12 +63,10 @@ export function Comments() {
 
   // Use effect to manage the Remark42 script.
   useEffect(() => {
-    if (document.getElementById('remark42')) {
-      insertScript('comments-script', document.body);
-    }
+    insertScript(document.body);
 
     // Return a cleanup function to remove the script when the component unmounts.
-    return () => removeScript('comments-script', document.body);
+    return () => removeScript(document.body);
   }, []);
 
   // Use effect to observe theme changes on the document element.
@@ -86,9 +86,7 @@ export function Comments() {
 
   // Use effect to update the theme when it changes.
   useEffect(() => {
-    if (window.REMARK42) {
-      window.REMARK42.changeTheme(theme);
-    }
+    window.REMARK42?.changeTheme(theme);
   }, [theme]);
 
   return (
