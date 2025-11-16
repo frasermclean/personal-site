@@ -1,0 +1,17 @@
+services:
+  comments:
+    image: ghcr.io/umputun/remark42:latest
+    restart: unless-stopped
+    environment:
+      REMARK_URL: ${COMMENTS_HOST:-http://localhost:8080}
+      SITE: ${COMMENTS_SITE_ID:-frasermclean-dev}
+      SECRET: supers3cret!
+      AUTH_ANON: 'true' # enable anonymous commenting
+    volumes:
+      - comments-data:/srv/var
+    ports:
+      - 8080:8080
+
+volumes:
+  comments-data:
+    driver: local
