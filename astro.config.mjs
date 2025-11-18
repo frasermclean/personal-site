@@ -16,7 +16,6 @@ export default defineConfig({
     schema: {
       TRACKING_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
       COMMENTS_HOST: envField.string({ context: 'client', access: 'public', default: 'http://localhost:8080' }),
-      COMMENTS_SITE_ID: envField.string({ context: 'client', access: 'public', default: 'frasermclean-dev' }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
