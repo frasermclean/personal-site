@@ -1,0 +1,36 @@
+name: fmsite-services
+
+services:
+  # Postgres database
+  database:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-comentario}
+      POSTGRES_USER: ${POSTGRES_USER:-comentario}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-superS3CRET!}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-comentario} -d ${POSTGRES_DB:-comentario}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Commentario comments system
+  comments:
+    image: registry.gitlab.com/comentario/comentario
+    environment:
+      BASE_URL: http://localhost:8080/
+      SECRETS_FILE: /secrets.yaml
+    ports:
+      - 8080:80
+    volumes:
+      - ./comentario-secrets.yml:/secrets.yaml:ro
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+    driver: local
