@@ -17,12 +17,6 @@ if (includeCommentLink) {
     text: 'Comments'
   });
 }
-
-const depthClasses: Record<number, string> = {
-  2: 'ml-0 font-semibold',
-  3: 'ml-4 text-md',
-  4: 'ml-8 text-sm'
-};
 ---
 
 <section>
@@ -30,12 +24,12 @@ const depthClasses: Record<number, string> = {
     <ListTreeIcon width={20} height={20} />
     <h2 class="font-heading text-xl font-bold">{title}</h2>
   </div>
-  <Card class="card max-h-[calc(100vh-12rem)] overflow-y-auto px-6 py-4">
+  <Card class="card max-h-[calc(100vh-12rem)] overflow-y-auto px-8 py-4">
     <nav>
       <ul class="space-y-2">
         {
           headings.map((heading) => (
-            <li class={`relative ${depthClasses[heading.depth]}`}>
+            <li class={`relative depth-${heading.depth}`}>
               <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
                 {heading.text}
               </a>
@@ -47,6 +41,46 @@ const depthClasses: Record<number, string> = {
   </Card>
 </section>
 
+<script>
+  let currentActiveId: string | null = null;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      // Find all currently intersecting headings
+      const intersectingEntries = entries.filter((entry) => entry.isIntersecting);
+
+      if (intersectingEntries.length > 0) {
+        // Get the topmost intersecting heading
+        const topEntry = intersectingEntries.reduce((prev, current) => {
+          return current.boundingClientRect.top < prev.boundingClientRect.top ? current : prev;
+        });
+
+        const id = topEntry.target.getAttribute('id');
+        if (id && id !== currentActiveId) {
+          // Remove active class from previous link
+          if (currentActiveId) {
+            const prevLink = document.querySelector(`a[href="#${currentActiveId}"]`);
+            prevLink?.parentElement?.classList.remove('active');
+          }
+
+          // Add active class to new link
+          const newLink = document.querySelector(`a[href="#${id}"]`);
+          newLink?.parentElement?.classList.add('active');
+          currentActiveId = id;
+        }
+      }
+    },
+    {
+      rootMargin: '-100px 0px -66% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1]
+    }
+  );
+
+  document.querySelectorAll('h2[id], h3[id], h4[id]').forEach((section) => {
+    observer.observe(section);
+  });
+</script>
+
 <style>
   .card {
     scrollbar-width: auto;
@@ -54,9 +88,58 @@ const depthClasses: Record<number, string> = {
   }
 
   li::before {
-    content: '•';
+    content: '';
+    top: 0.5rem;
     position: absolute;
-    left: -0.75rem;
+    border-radius: 50%;
     color: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* H2 - Large filled circle */
+  li.depth-2 {
+    margin-left: 0;
+    font-weight: 600;
+  }
+
+  li.depth-2::before {
+    width: 8px;
+    height: 8px;
+    left: -1rem;
+    background-color: currentColor;
+  }
+
+  /* H3 - Medium hollow circle */
+  li.depth-3 {
+    margin-left: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  li.depth-3::before {
+    width: 6px;
+    height: 6px;
+    left: -0.875rem;
+    border: 1.5px solid currentColor;
+  }
+
+  /* H4 - Small hollow circle */
+  li.depth-4 {
+    margin-left: 2rem;
+    font-size: 0.875rem;
+  }
+
+  li.depth-4::before {
+    width: 4px;
+    height: 4px;
+    left: -0.75rem;
+    border: 1px solid currentColor;
+  }
+
+  li.depth-2.active > a {
+    color: var(--color-primary);
+  }
+
+  li.depth-3.active > a,
+  li.depth-4.active > a {
+    color: var(--color-secondary);
   }
 </style>
