@@ -3,7 +3,7 @@
 @mixin theme-props($theme: light) {
   // Light theme properties
   @if $theme == light {
-    --cmntr-bg: #{colours.$white};
+    --cmntr-bg: #{colours.$neutral-200};
     --cmntr-bg-shade: #{colours.$neutral-100};
     --cmntr-bg-highlight: #{colours.$indigo-200};
     --cmntr-bg-blink: #{colours.$yellow-300};
@@ -33,11 +33,14 @@
     --cmntr-sticky-color: #{colours.$yellow-400};
     --cmntr-success-color: #{colours.$green-700};
     --cmntr-warning-color: #{colours.$yellow-700};
+    --cmntr-primary-color: #{colours.$sky-500};
+    --cmntr-secondary-color: #{colours.$teal-500};
 
     --cmntr-card-border: #{colours.$neutral-100};
     --cmntr-dlg-border: #{colours.$neutral-500};
     --cmntr-pending-border: #{colours.$yellow-600};
     --cmntr-table-border: #{colours.$neutral-300};
+    --cmntr-host-border: #{colours.$neutral-300};
 
     // Dark theme properties
   } @else {
@@ -71,10 +74,13 @@
     --cmntr-sticky-color: #{colours.$yellow-500};
     --cmntr-success-color: #{colours.$green-200};
     --cmntr-warning-color: #{colours.$yellow-200};
+    --cmntr-primary-color: #{colours.$sky-600};
+    --cmntr-secondary-color: #{colours.$teal-600};
 
     --cmntr-card-border: #{colours.$neutral-800};
     --cmntr-dlg-border: #{colours.$neutral-600};
     --cmntr-pending-border: #{colours.$yellow-300};
     --cmntr-table-border: #{colours.$neutral-600};
+    --cmntr-host-border: #{colours.$neutral-700};
   }
 }

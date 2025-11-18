@@ -23,7 +23,7 @@
   line-height: 20px;
   padding: 6px 12px;
   border: 1px solid transparent;
-  border-radius: 0.15rem;
+  border-radius: 8px;
   margin: 5px;
   transition:
     color 0.4s,
@@ -71,6 +71,24 @@
   font-size: 20px;
 }
 
+.comentario-btn-primary {
+  --cmntr-btn-color: #{colours.$white};
+  --cmntr-btn-bg: var(--cmntr-primary-color);
+  --cmntr-btn-hover-color: #{colours.$white};
+  --cmntr-btn-hover-bg: color-mix(in srgb, var(--cmntr-primary-color) 85%, white);
+  --cmntr-btn-active-color: #{colours.$white};
+  --cmntr-btn-active-bg: color-mix(in srgb, var(--cmntr-primary-color) 85%, black);
+}
+
+.comentario-btn-secondary {
+  --cmntr-btn-color: #{colours.$white};
+  --cmntr-btn-bg: var(--cmntr-secondary-color);
+  --cmntr-btn-hover-color: #{colours.$white};
+  --cmntr-btn-hover-bg: color-mix(in srgb, var(--cmntr-secondary-color) 85%, white);
+  --cmntr-btn-active-color: #{colours.$white};
+  --cmntr-btn-active-bg: color-mix(in srgb, var(--cmntr-secondary-color) 85%, black);
+}
+
 @mixin make-btn($name, $color, $bg-color) {
   .comentario-btn-#{$name} {
     --cmntr-btn-color: #{$color};
@@ -82,8 +100,6 @@
   }
 }
 
-@include make-btn('primary', colours.$white, colours.$primary);
-@include make-btn('secondary', colours.$white, colours.$secondary);
 @include make-btn('dark', colours.$white, colours.$dark);
 @include make-btn('danger', colours.$white, colours.$red-800);
 @include make-btn('facebook', colours.$white, #1877f2);

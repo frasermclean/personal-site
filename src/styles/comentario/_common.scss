@@ -41,12 +41,15 @@ blockquote {
   align-content: center;
   background-color: var(--cmntr-bg);
   font-size: 15px;
+  padding: 8px;
+  border-radius: 16px;
 
   // Only show border and such when there's no editor inserted
   &:not(.comentario-editor-inserted) {
-    min-height: 130px;
-    border: 1px solid colours.$neutral-200;
-    border-radius: 3px;
+    min-height: 128px;
+    border: 1px solid;
+    border-color: var(--cmntr-host-border);
+    border-radius: 16px;
     cursor: text;
 
     .comentario-add-comment-placeholder {

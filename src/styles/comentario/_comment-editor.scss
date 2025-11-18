@@ -1,5 +1,6 @@
 @use 'colours';
 @use 'mixins';
+@use 'input';
 
 .comentario-comment-editor {
   width: 100%;
@@ -11,14 +12,15 @@
     flex-wrap: wrap;
     justify-content: end;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 8px;
   }
 
   .comentario-comment-editor-preview {
-    min-height: 130px; // Consistent with the min-height of a textarea
-    padding: 8px;
-    border: 1px solid colours.$violet-200;
-    border-radius: 3px;
+    min-height: input.$textarea-min-height;
+    padding: input.$textarea-padding;
+    border: 1px solid;
+    border-color: var(--cmntr-table-border);
+    border-radius: 8px;
 
     @include mixins.comment-text();
   }
