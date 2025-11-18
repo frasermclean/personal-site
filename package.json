@@ -24,6 +24,7 @@
     "mdast-util-to-string": "^4.0.0",
     "preact": "^10.27.2",
     "reading-time": "^1.5.0",
+    "rehype-figure": "^1.0.1",
     "resend": "^6.4.2",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.1.1",

@@ -4,6 +4,7 @@ import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
+import rehypeFigure from 'rehype-figure';
 import { remarkReadingTime } from './src/lib/reading-time.js';
 
 // https://astro.build/config
@@ -25,6 +26,7 @@ export default defineConfig({
   integrations: [sitemap(), mdx(), preact()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeFigure],
     shikiConfig: {
       themes: {
         light: 'light-plus',

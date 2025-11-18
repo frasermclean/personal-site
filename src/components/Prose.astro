@@ -11,7 +11,8 @@ const { class: className = '' } = Astro.props;
     className,
     'prose prose-neutral md:prose-lg lg:prose-xl dark:prose-invert', // base
     'prose-headings:scroll-mt-24 prose-headings:font-heading prose-h2:text-primary prose-h3:text-secondary prose-h4:text-secondary/90', // headings
-    'prose-a:text-accent prose-a:no-underline prose-a:hover:underline' // links
+    'prose-a:text-accent prose-a:no-underline prose-a:hover:underline', // links
+    'prose-figure:flex prose-figure:flex-col prose-figure:items-center prose-figcaption:mt-2 prose-figcaption:text-sm prose-figcaption:text-muted-foreground' // figures
   ]}
 >
   <slot />
