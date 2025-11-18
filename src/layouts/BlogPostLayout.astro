@@ -1,5 +1,5 @@
 ---
-import { Comments } from '@/components/Comments';
+import Comments from '@/components/Comments.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
 import Prose from '@/components/Prose.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
@@ -52,5 +52,5 @@ const { title, description, heroImage, publishDate, readingTime, headings, tags,
     </aside>
   </div>
 
-  {enableComments && <Comments client:idle />}
+  {enableComments && <Comments />}
 </BaseLayout>

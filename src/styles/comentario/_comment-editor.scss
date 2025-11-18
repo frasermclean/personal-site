@@ -1,0 +1,25 @@
+@use 'colours';
+@use 'mixins';
+
+.comentario-comment-editor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .comentario-comment-editor-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .comentario-comment-editor-preview {
+    min-height: 130px; // Consistent with the min-height of a textarea
+    padding: 8px;
+    border: 1px solid colours.$violet-200;
+    border-radius: 3px;
+
+    @include mixins.comment-text();
+  }
+}

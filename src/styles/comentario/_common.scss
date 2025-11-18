@@ -1,0 +1,136 @@
+@use 'colours';
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--cmntr-link-color);
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:not(.comentario-btn) {
+    &:hover,
+    &:focus {
+      color: var(--cmntr-link-hover-color);
+    }
+  }
+}
+
+blockquote {
+  margin: 0 0 0 8px;
+  padding: 0 0 0 5px;
+  border-left: 2px solid colours.$neutral-500;
+  color: var(--cmntr-muted-color);
+}
+
+.comentario-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+.comentario-add-comment-host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: var(--cmntr-bg);
+  font-size: 15px;
+
+  // Only show border and such when there's no editor inserted
+  &:not(.comentario-editor-inserted) {
+    min-height: 130px;
+    border: 1px solid colours.$neutral-200;
+    border-radius: 3px;
+    cursor: text;
+
+    .comentario-add-comment-placeholder {
+      display: block;
+      color: var(--cmntr-input-ph-color);
+    }
+  }
+
+  // Placeholder saying "Add a comment", only visible without the editor inserted
+  .comentario-add-comment-placeholder {
+    display: none;
+  }
+}
+
+// Margins
+
+.comentario-ms-1 {
+  margin-left: 0.25em !important;
+}
+
+.comentario-ms-2 {
+  margin-left: 0.5em !important;
+}
+
+.comentario-me-1 {
+  margin-right: 0.25em !important;
+}
+
+// Padding
+
+.comentario-py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+// Font weight
+
+.comentario-fw-bold {
+  font-weight: bold !important;
+}
+
+// Font size
+
+.comentario-small {
+  font-size: 85%;
+}
+
+// Utilities
+
+.comentario-hidden {
+  display: none !important;
+}
+
+.comentario-disabled {
+  opacity: 0.75;
+}
+
+.comentario-text-center {
+  text-align: center !important;
+}
+
+.comentario-flex {
+  display: flex !important;
+}
+
+.comentario-flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.comentario-flex-50 {
+  flex: 1 1 50%;
+}
+
+// Colourising
+
+.comentario-text-muted {
+  color: var(--cmntr-muted-color) !important;
+}
+.comentario-text-success {
+  color: var(--cmntr-success-color) !important;
+}
+.comentario-text-danger {
+  color: var(--cmntr-danger-color) !important;
+}
+.comentario-text-warning {
+  color: var(--cmntr-warning-color) !important;
+}

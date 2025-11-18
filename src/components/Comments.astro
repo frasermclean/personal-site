@@ -1,0 +1,36 @@
+---
+import { COMMENTS_HOST } from 'astro:env/client';
+import '@/styles/comentario/comentario.scss';
+---
+
+<script is:inline defer src={`${COMMENTS_HOST}/comentario.js`}></script>
+
+<script>
+  function getCurrentTheme() {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentsContainer = document.querySelector('comentario-comments');
+    if (commentsContainer) {
+      commentsContainer.setAttribute('theme', getCurrentTheme());
+
+      const observer = new MutationObserver(() => {
+        commentsContainer.setAttribute('theme', getCurrentTheme());
+      });
+
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
+  });
+</script>
+
+<section class="my-8">
+  <h2 id="comments" class="mb-4 font-heading text-2xl font-bold text-primary md:text-4xl">Comments</h2>
+  <comentario-comments css-override="false"></comentario-comments>
+</section>
+
+<style is:global>
+  commentario-comments {
+    background-color: red !important;
+  }
+</style>

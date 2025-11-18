@@ -1,0 +1,40 @@
+@use 'sass:meta';
+@use 'theme';
+@use 'colours';
+
+// The root web component tag
+comentario-comments {
+  // Default theme properties (light)
+  @include theme.theme-props();
+
+  // Dark theme properties selected explicitly with [theme="dark"] on the element
+  &[theme='dark'] {
+    @include theme.theme-props(dark);
+  }
+}
+
+.comentario-root {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--cmntr-color);
+
+  @include meta.load-css('common');
+  @include meta.load-css('animations');
+  @include meta.load-css('button');
+  @include meta.load-css('table');
+  @include meta.load-css('input');
+  @include meta.load-css('badge');
+  @include meta.load-css('dialog');
+  @include meta.load-css('footer');
+  @include meta.load-css('comment-editor');
+  @include meta.load-css('comment-card');
+  @include meta.load-css('page-controls');
+  @include meta.load-css('placeholders');
+  @include meta.load-css('spinners');
+  @include meta.load-css('thread-toolbar');
+  @include meta.load-css('toolbar');
+}

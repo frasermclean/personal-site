@@ -1,0 +1,11 @@
+@use 'colours';
+
+.comentario-footer {
+  display: flex;
+  justify-content: end;
+  margin: 12px 0;
+  padding-right: 12px;
+  font-size: 13px;
+  line-height: 24px;
+  color: var(--cmntr-muted-color);
+}

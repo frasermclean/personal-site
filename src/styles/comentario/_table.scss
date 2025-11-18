@@ -1,0 +1,18 @@
+@use 'sass:color';
+@use 'colours';
+
+.comentario-table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.comentario-table {
+  tr {
+    &:not(:last-child) {
+      border-bottom: 1px solid color.adjust(colours.$neutral-600, $alpha: -0.5);
+    }
+    td {
+      padding: 4px 8px;
+    }
+  }
+}

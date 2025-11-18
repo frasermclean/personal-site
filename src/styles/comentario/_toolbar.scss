@@ -1,0 +1,40 @@
+@use "colours";
+
+.comentario-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .comentario-toolbar-section {
+        display: flex;
+        align-items: center;
+    }
+
+    .comentario-btn-tool {
+        --cmntr-btn-color: var(--cmntr-muted-color);
+
+        margin: 0;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        opacity: 0.5;
+
+        &.comentario-btn-lg {
+            width: 40px;
+            height: 40px;
+
+            .comentario-icon {
+                width: 1.25em;
+                height: 1.25em;
+            }
+        }
+    }
+
+    &.comentario-disabled {
+        background-color: var(--cmntr-bg-shade);
+
+        .comentario-btn-tool {
+            pointer-events: none;
+        }
+    }
+}

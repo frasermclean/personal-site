@@ -1,0 +1,100 @@
+@use 'sass:color';
+
+@use 'colours';
+@use 'mixins';
+
+.comentario-btn {
+  // Vars
+  --cmntr-btn-color: var(--cmntr-link-color);
+  --cmntr-btn-bg: transparent;
+  --cmntr-btn-hover-color: var(--cmntr-link-hover-color);
+  --cmntr-btn-hover-bg: transparent;
+  --cmntr-btn-active-color: var(--cmntr-link-hover-color);
+  --cmntr-btn-active-bg: transparent;
+
+  color: var(--cmntr-btn-color);
+  background-color: var(--cmntr-btn-bg);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  line-height: 20px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 0.15rem;
+  margin: 5px;
+  transition:
+    color 0.4s,
+    background-color 0.4s;
+  white-space: nowrap;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--cmntr-btn-hover-color);
+      background-color: var(--cmntr-btn-hover-bg);
+      opacity: 1;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed !important;
+    opacity: 0.3 !important;
+  }
+
+  &:not(.comentario-btn-link):not(.comentario-btn-tool).comentario-btn-active {
+    color: var(--cmntr-btn-active-color);
+    background-color: var(--cmntr-btn-active-bg);
+    @include mixins.btn-active-shadow();
+  }
+
+  &:not(.comentario-btn-link):not(.comentario-btn-tool):not(.comentario-btn-active) {
+    @include mixins.btn-shadow();
+  }
+
+  &.comentario-btn-link.comentario-btn-active {
+    font-weight: bold;
+  }
+}
+
+.comentario-btn-sm {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 3px 6px;
+  margin: 2.5px;
+}
+
+.comentario-submit-icon {
+  font-size: 20px;
+}
+
+@mixin make-btn($name, $color, $bg-color) {
+  .comentario-btn-#{$name} {
+    --cmntr-btn-color: #{$color};
+    --cmntr-btn-bg: #{$bg-color};
+    --cmntr-btn-hover-color: #{$color};
+    --cmntr-btn-hover-bg: #{color.adjust($bg-color, $lightness: 15%)};
+    --cmntr-btn-active-color: #{$color};
+    --cmntr-btn-active-bg: #{color.adjust($bg-color, $lightness: -15%)};
+  }
+}
+
+@include make-btn('primary', colours.$white, colours.$primary);
+@include make-btn('secondary', colours.$white, colours.$secondary);
+@include make-btn('dark', colours.$white, colours.$dark);
+@include make-btn('danger', colours.$white, colours.$red-800);
+@include make-btn('facebook', colours.$white, #1877f2);
+@include make-btn('github', colours.$white, colours.$black);
+@include make-btn('gitlab', colours.$white, #fc6d26);
+@include make-btn('google', colours.$white, #4285f4);
+@include make-btn('twitter', colours.$white, #1da1f2);
+@include make-btn('sso', colours.$white, #7275ab);
+
+.comentario-oauth-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

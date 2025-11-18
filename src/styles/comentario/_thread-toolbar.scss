@@ -1,0 +1,46 @@
+@use "colours";
+
+.comentario-thread-toolbar {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: var(--cmntr-muted-color);
+    font-size: 12px;
+
+    // Clearfix
+    &::after {
+        display: block;
+        clear: both;
+        content: "";
+    }
+
+    .comentario-thread-buttons {
+        flex-grow: 0;
+        text-align: left;
+    }
+
+    .comentario-comment-count {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .comentario-sort-buttons {
+        flex-grow: 0;
+        text-align: right;
+    }
+
+    .comentario-btn {
+
+        // The down caret icon
+        .comentario-icon {
+            width: 8px;
+            height: 8px;
+            transition: transform 0.2s;
+        }
+
+        &.comentario-sort-asc .comentario-icon {
+            transform: rotate(180deg);
+        }
+    }
+}

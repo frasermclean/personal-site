@@ -1,0 +1,157 @@
+@use "colours";
+@use "mixins";
+
+.comentario-card {
+    display: flex;
+    margin-top: 16px;
+    border-top: 1px solid var(--cmntr-card-border);
+    width: 100%;
+
+    // Replaces the .comentario-card-expand-toggler in a card that has no children
+    .comentario-card-expand-spacer {
+        flex: 0 0 12px;
+    }
+
+    // Clickable toggler on the left side of a card that has children
+    .comentario-card-expand-toggler {
+        flex: 0 0 12px;
+        cursor: pointer;
+        transition: border-left-width 0.1s linear;
+
+        &:hover:not(.comentario-collapsed) {
+            border-left-width: 4px !important;
+        }
+
+        &.comentario-collapsed {
+            border-left-style: dotted !important;
+        }
+    }
+
+    // Content of the card, taking up the remaining space right of the spacer or toggler
+    .comentario-card-expand-body {
+        flex: 1 1 100%;
+        overflow: hidden; // Don't allow it to grow beyond its parent's width
+
+        // Hide the content of the card when there's an editor inside it (immediate child only, not nested ones)
+        &.comentario-editor-inserted > .comentario-card-self {
+            display: none;
+        }
+    }
+
+    .comentario-card-self {
+        padding-top: 12px;
+    }
+
+    .comentario-card-children {
+        &.comentario-card-children-unnest {
+            margin-left: -12px; // To compensate for the spacer/toggler width
+        }
+    }
+
+    .comentario-card-header {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: start;
+        margin-bottom: 6px;
+    }
+
+    .comentario-name-container {
+        display: flex;
+        flex: 1 1;
+        flex-direction: column;
+        justify-content: start;
+        margin-bottom: 6px;
+    }
+
+    .comentario-name-wrap {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .comentario-name {
+        font-weight: bold;
+        font-size: 14px;
+        color: var(--cmntr-color) !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .comentario-subtitle {
+        color: var(--cmntr-muted-color);
+        font-size: 12px;
+
+        a {
+            color: var(--cmntr-muted-color);
+        }
+    }
+
+    .comentario-score {
+        display: inline;
+        color: var(--cmntr-score-color);
+        font-weight: 700;
+        transition: color 0.2s;
+    }
+
+    .comentario-upvoted {
+        color: var(--cmntr-score-up-color);
+    }
+
+    .comentario-downvoted {
+        color: var(--cmntr-score-down-color);
+    }
+
+    .comentario-is-sticky {
+        color: var(--cmntr-sticky-color) !important;
+    }
+
+    .comentario-card-body {
+        @include mixins.comment-text();
+    }
+
+    .comentario-moderation-notice {
+        width: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        color: var(--cmntr-warning-color);
+    }
+}
+
+.comentario-deleted {
+    opacity: 0.33;
+    filter: grayscale(0.8);
+}
+
+.comentario-pending {
+    background-color: var(--cmntr-pending-bg);
+    border: var(--cmntr-pending-border) dashed 1px;
+}
+
+.comentario-rejected {
+    background-color: var(--cmntr-rejected-bg);
+}
+
+.comentario-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cmntr-bg);
+    font-size: 20px;
+    margin-right: 10px;
+    border: 0 transparent;
+}
+
+.comentario-avatar-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}

@@ -1,0 +1,20 @@
+@use 'colours';
+
+.comentario-badge {
+  display: inline-block;
+  font-size: 9px;
+  margin-left: 8px;
+  padding: 2px 6px 2px 6px;
+  border-radius: 100px;
+  line-height: 17px;
+  text-transform: uppercase;
+  color: colours.$neutral-50;
+}
+
+.comentario-badge-moderator {
+  background: colours.$teal-700;
+}
+
+.comentario-badge-pending {
+  background: colours.$yellow-600;
+}
