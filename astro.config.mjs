@@ -10,7 +10,7 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://next.frasermclean.com',
+  site: 'https://frasermclean.com',
   adapter: cloudflare({
     imageService: 'compile'
   }),
