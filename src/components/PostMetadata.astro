@@ -2,32 +2,63 @@
 import FormattedDate from '@/components/FormattedDate.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
+import PencilCheckIcon from '@tabler/icons/outline/pencil-check.svg';
 
 interface Props {
   class?: string;
   title: string;
   description: string;
   publishDate: Date;
+  updatedDate?: Date;
   readingTime?: string;
 }
 
-const { class: className, title, description, publishDate, readingTime } = Astro.props as Props;
+const { class: className, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
 ---
 
 <section class={`flex flex-col text-center ${className}`}>
   <h1 class="mb-4 font-heading text-3xl font-bold md:text-5xl">{title}</h1>
   <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
 
-  <div class="grap-4 flex w-full items-center justify-center space-x-6 md:space-x-8">
-    <div class="text-sm text-muted-foreground/80">
-      <CalendarIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+  <div
+    class="space-2 md:space-4 flex w-full flex-col items-center justify-center gap-4 text-sm text-muted-foreground/80 sm:flex-row"
+  >
+    <div aria-label="Published on">
+      <CalendarIcon
+        width={20}
+        height={20}
+        class="mr-2 inline-block text-muted-foreground"
+        stroke-width={1}
+        aria-hidden="true"
+      />
       <FormattedDate date={publishDate} />
     </div>
 
     {
+      updatedDate && (
+        <div aria-label="Last updated on">
+          <PencilCheckIcon
+            width={20}
+            height={20}
+            class="mr-2 inline-block text-muted-foreground"
+            stroke-width={1}
+            aria-hidden="true"
+          />
+          <FormattedDate date={updatedDate} />
+        </div>
+      )
+    }
+
+    {
       readingTime && (
-        <div class="text-sm text-muted-foreground/80">
-          <ClockIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+        <div aria-label="Estimated reading time">
+          <ClockIcon
+            width={20}
+            height={20}
+            class="mr-2 inline-block text-muted-foreground"
+            stroke-width={1}
+            aria-hidden="true"
+          />
           <span>{readingTime}</span>
         </div>
       )

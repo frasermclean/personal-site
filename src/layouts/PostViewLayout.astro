@@ -12,7 +12,8 @@ import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'posts'>['data'] & { headings: MarkdownHeading[]; readingTime?: string };
 
-const { title, description, heroImage, publishDate, readingTime, headings, tags, enableComments } = Astro.props;
+const { title, description, heroImage, publishDate, updatedDate, readingTime, headings, tags, enableComments } =
+  Astro.props;
 ---
 
 <BaseLayout {title} {description} isArticle={true} {heroImage}>
@@ -25,7 +26,7 @@ const { title, description, heroImage, publishDate, readingTime, headings, tags,
     class="mt-4 mb-8 rounded-4xl shadow-xl md:my-12"
   />
 
-  <PostMetadata {title} {description} {publishDate} {readingTime} class="my-8 md:my-12" />
+  <PostMetadata {title} {description} {publishDate} {updatedDate} {readingTime} class="my-8 md:my-12" />
   <PostBreadcrumbs {title} class="mb-8 hidden md:block" />
 
   <div class="flex w-full">
