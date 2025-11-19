@@ -1,5 +1,5 @@
 ---
-import BlogPostLayout from '@/layouts/BlogPostLayout.astro';
+import PostViewLayout from '@/layouts/PostViewLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -13,8 +13,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<BlogPostLayout headings={headings} readingTime={remarkPluginFrontmatter.readingTime} {...entry.data}>
+<PostViewLayout {headings} {readingTime} {...entry.data}>
   <Content />
-</BlogPostLayout>
+</PostViewLayout>
