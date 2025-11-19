@@ -9,7 +9,7 @@ interface Props {
   title: string;
   description: string;
   publishDate: Date;
-  updatedDate?: Date;
+  updatedDate?: string;
   readingTime?: string;
 }
 
@@ -44,7 +44,7 @@ const { class: className, title, description, publishDate, updatedDate, readingT
             stroke-width={1}
             aria-hidden="true"
           />
-          <FormattedDate date={updatedDate} />
+          <FormattedDate date={new Date(updatedDate)} />
         </div>
       )
     }
