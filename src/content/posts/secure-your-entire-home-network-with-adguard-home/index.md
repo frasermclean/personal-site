@@ -6,7 +6,7 @@ heroImage:
   src: adguard-home-guide.png
   alt: 'AdGuard Home setup guide illustration'
 draft: false
-categories: [ guide ]
+category: guide
 tags: [ docker, ad-block, privacy, dns, raspberry-pi, self-hosted ]
 links:
   - title: AdGuard Home

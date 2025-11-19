@@ -4,7 +4,7 @@ description: 'Personal review of Fastmail email service.'
 publishDate: '2023-11-08T19:42:58+08:00'
 heroImage:  
   src: hacker-monitors.jpg
-categories: [ review ]
+category: review
 tags: [ fastmail, email, privacy, dns ]
 links:
   - title: Fastmail

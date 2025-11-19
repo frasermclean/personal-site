@@ -5,7 +5,7 @@ publishDate: 2025-10-28T09:37:59+08:00
 heroImage: 
   src: self-hosted-notifications.jpg
 comments: true
-categories: [ guide ]
+category: guide
 tags: [ self-hosted, notifications, ntfy, apprise, docker ]
 links:
   - title: ntfy

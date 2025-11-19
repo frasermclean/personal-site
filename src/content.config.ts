@@ -12,7 +12,7 @@ const posts = defineCollection({
         src: image(),
         alt: z.string().optional()
       }),
-      category: z.string().optional(),
+      category: z.enum(['guide', 'project']).optional(),
       tags: z.array(z.string()),
       enableComments: z.boolean().default(true)
     })
