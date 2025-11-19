@@ -1,8 +1,11 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Project Portfolio';
+const description = 'A showcase of my work and contributions.';
 ---
 
-<BaseLayout title="Project Portfolio">
-  <HeroSection title="Project Portfolio" subtitle="A showcase of my work and contributions." />
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
 </BaseLayout>

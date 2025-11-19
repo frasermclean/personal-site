@@ -8,13 +8,17 @@ import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
 import { TURNSTILE_SITE_KEY } from 'astro:env/client';
+
+const title = 'Contact Me';
+const subtitle = "If you have any questions or inquiries, I'd love to hear from you!";
+const description = 'Get in touch with me through the contact form.';
 ---
 
 <link rel="preconnect" href="https://challenges.cloudflare.com" slot="head" />
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer slot="head"></script>
 
-<BaseLayout title="Contact Me">
-  <HeroSection title="Contact Me" subtitle="If you have any questions or inquiries, I'd love to hear from you!" />
+<BaseLayout {title} {description}>
+  <HeroSection {title} {subtitle} />
   <form class="mx-auto max-w-md">
     <Card>
       <CardHeader class="p-4 md:p-6">

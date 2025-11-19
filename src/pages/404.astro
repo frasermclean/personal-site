@@ -4,9 +4,12 @@ import Button from '@/components/starwind/button';
 import { Card } from '@/components/starwind/card';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+
+const title = '404 - Not Found';
+const description = 'The page you are looking for does not exist.';
 ---
 
-<BaseLayout title="404 - Not Found">
+<BaseLayout {title} {description}>
   <Card class="mx-auto mt-16 max-w-md p-4 text-center">
     <h1 class="mb-2 font-heading text-6xl md:text-8xl">404</h1>
     <p class="mb-4 text-xl text-muted-foreground md:text-2xl">Not Found</p>
