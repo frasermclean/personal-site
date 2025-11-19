@@ -1,0 +1,62 @@
+---
+import BlogPostCard from '@/components/BlogPostCard.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/starwind/pagination';
+import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/BaseLayout.astro';
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props extends BaseLayoutProps {
+  listTitle: string;
+  page: Page<CollectionEntry<'posts'>>;
+}
+
+const { title, description, listTitle, page, ...baseLayoutProps } = Astro.props;
+---
+
+<BaseLayout {title} {description} {...baseLayoutProps}>
+  <HeroSection {title} subtitle={description} />
+
+  <section class="my-8">
+    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">{listTitle}</h2>
+    <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {page.data.map((entry) => <BlogPostCard href={`/blog/${entry.id}`} {...entry.data} />)}
+    </nav>
+  </section>
+
+  {
+    page.lastPage > 1 && (
+      <section class="my-8">
+        <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">More Posts</h2>
+        <Pagination>
+          <PaginationContent>
+            {page.url.prev && (
+              <PaginationItem>
+                <PaginationPrevious href={page.url.prev} />
+              </PaginationItem>
+            )}
+            {Array.from({ length: page.lastPage }, (_, i) => (
+              <PaginationItem>
+                <PaginationLink href={`/blog/page/${i + 1}`} isActive={i + 1 === page.currentPage}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            {page.url.next && (
+              <PaginationItem>
+                <PaginationNext href={page.url.next} />
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
+      </section>
+    )
+  }
+</BaseLayout>

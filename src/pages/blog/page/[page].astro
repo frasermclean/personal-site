@@ -1,15 +1,5 @@
 ---
-import BlogPostCard from '@/components/BlogPostCard.astro';
-import HeroSection from '@/components/HeroSection.astro';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@/components/starwind/pagination';
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostListLayout from '@/layouts/PostListLayout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 
@@ -25,46 +15,7 @@ const { page } = Astro.props;
 const title = 'Blog Posts';
 const description =
   'A collection of blog posts on various topics including web development, programming, and technology.';
+const listTitle = page.currentPage === 1 ? 'Recent Posts' : `Recent Posts - Page ${page.currentPage}`;
 ---
 
-<BaseLayout title={title} description={description}>
-  <HeroSection title={title} subtitle={description} />
-
-  <section class="my-8">
-    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">Recent Posts</h2>
-    <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map((entry) => <BlogPostCard href={`/blog/${entry.id}`} {...entry.data} />)}
-    </nav>
-  </section>
-
-  <section class="my-8">
-    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">More Posts</h2>
-    <Pagination>
-      <PaginationContent>
-        {
-          page.url.prev && (
-            <PaginationItem>
-              <PaginationPrevious href={page.url.prev} />
-            </PaginationItem>
-          )
-        }
-        {
-          Array.from({ length: page.lastPage }, (_, i) => (
-            <PaginationItem>
-              <PaginationLink href={`/blog/page/${i + 1}`} isActive={i + 1 === page.currentPage}>
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
-          ))
-        }
-        {
-          page.url.next && (
-            <PaginationItem>
-              <PaginationNext href={page.url.next} />
-            </PaginationItem>
-          )
-        }
-      </PaginationContent>
-    </Pagination>
-  </section>
-</BaseLayout>
+<PostListLayout {title} {description} {listTitle} {page} />
