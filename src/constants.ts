@@ -7,6 +7,8 @@ import UserIcon from '@tabler/icons/outline/user.svg';
 export const SITE_TITLE = 'Fraser McLean';
 export const SITE_DESCRIPTION = 'The personal website of Fraser McLean - full-stack developer and tech enthusiast.';
 
+export const POSTS_PAGE_SIZE = 6;
+
 export const NAVIGATION_LINKS = [
   { href: '/', text: 'Home', Icon: HomeIcon },
   { href: '/about', text: 'About', Icon: UserIcon },
