@@ -10,7 +10,11 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
-type Props = CollectionEntry<'posts'>['data'] & { headings: MarkdownHeading[]; readingTime?: string };
+type Props = CollectionEntry<'posts'>['data'] & {
+  headings: MarkdownHeading[];
+  readingTime?: string;
+  updatedDate?: string;
+};
 
 const { title, description, heroImage, publishDate, updatedDate, readingTime, headings, tags, enableComments } =
   Astro.props;
