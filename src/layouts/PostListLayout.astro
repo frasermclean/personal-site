@@ -9,6 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/starwind/pagination';
+import { POSTS_PATH } from '@/constants';
 import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/BaseLayout.astro';
 import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
@@ -19,7 +20,14 @@ interface Props extends BaseLayoutProps {
   paginationBasePath?: string;
 }
 
-const { title, description, listTitle, page, paginationBasePath = '/blog/page/', ...baseLayoutProps } = Astro.props;
+const {
+  title,
+  description,
+  listTitle,
+  page,
+  paginationBasePath = `${POSTS_PATH}/page/`,
+  ...baseLayoutProps
+} = Astro.props;
 ---
 
 <BaseLayout {title} {description} {...baseLayoutProps}>
@@ -28,7 +36,7 @@ const { title, description, listTitle, page, paginationBasePath = '/blog/page/',
   <section class="my-8">
     <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">{listTitle}</h2>
     <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map((entry) => <BlogPostCard href={`/blog/${entry.id}`} {...entry.data} />)}
+      {page.data.map((entry) => <BlogPostCard href={`${POSTS_PATH}/${entry.id}`} {...entry.data} />)}
     </nav>
   </section>
 

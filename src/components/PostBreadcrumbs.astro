@@ -7,6 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/starwind/breadcrumb';
+import { HOME_PATH, POSTS_PATH } from '@/constants';
 import ArticleIcon from '@tabler/icons/outline/article.svg';
 import HomeIcon from '@tabler/icons/outline/home.svg';
 
@@ -21,16 +22,16 @@ const { title, class: className } = Astro.props;
 <Breadcrumb class={className}>
   <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/">
+      <BreadcrumbLink href={HOME_PATH}>
         <HomeIcon width={16} height={16} class="mr-1 mb-0.5 inline-block" stroke-width={1} />
         Home
       </BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator>/</BreadcrumbSeparator>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/blog">
+      <BreadcrumbLink href={POSTS_PATH}>
         <ArticleIcon width={16} height={16} class="mr-1 mb-0.5 inline-block" stroke-width={1} />
-        Blog
+        Posts
       </BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator>/</BreadcrumbSeparator>

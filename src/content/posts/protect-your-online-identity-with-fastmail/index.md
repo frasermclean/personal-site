@@ -20,7 +20,7 @@ After a bit of research, I came across [Fastmail](https://ref.fm/u29228064) – 
 
 There is a bit of DNS work that needs to be done with any email hosting provider. Essentially you need to let other servers on the internet know about your hosting provider. This involves adding DNS records to your zone. The whole process was pretty painless, and I had the required records added to my DNS Zone in about 5 minutes.
 
-For those using Azure DNS, I have created another [post](/blog/fastmail-dns-bicep) where I have created a Bicep template to automate the process.
+For those using Azure DNS, I have created another [post](/posts/fastmail-dns-bicep) where I have created a Bicep template to automate the process.
 
 ## Migration from Gmail
 

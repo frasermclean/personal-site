@@ -9,10 +9,18 @@ export const SITE_DESCRIPTION = 'The personal website of Fraser McLean - full-st
 
 export const POSTS_PAGE_SIZE = 6;
 
+// route paths
+export const HOME_PATH = '/';
+export const ABOUT_PATH = '/about';
+export const PROJECTS_PATH = '/projects';
+export const POSTS_PATH = '/posts';
+export const CONTACT_PATH = '/contact';
+export const TAGS_PATH = '/tags';
+
 export const NAVIGATION_LINKS = [
-  { href: '/', text: 'Home', Icon: HomeIcon },
-  { href: '/about', text: 'About', Icon: UserIcon },
-  { href: '/projects', text: 'Projects', Icon: ChecklistIcon },
-  { href: '/blog', text: 'Blog', Icon: ArticleIcon },
-  { href: '/contact', text: 'Contact', Icon: MailIcon }
+  { href: HOME_PATH, text: 'Home', Icon: HomeIcon },
+  { href: ABOUT_PATH, text: 'About', Icon: UserIcon },
+  { href: PROJECTS_PATH, text: 'Projects', Icon: ChecklistIcon },
+  { href: POSTS_PATH, text: 'Posts', Icon: ArticleIcon },
+  { href: CONTACT_PATH, text: 'Contact', Icon: MailIcon }
 ];

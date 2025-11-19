@@ -1,4 +1,4 @@
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants';
+import { POSTS_PATH, SITE_DESCRIPTION, SITE_TITLE } from '@/constants';
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
@@ -14,7 +14,7 @@ export async function GET(context) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishDate,
-      link: `/posts/${post.id}`
+      link: `${POSTS_PATH}/${post.id}`
     })),
     stylesheet: '/pretty-feed-v3.xsl'
   });

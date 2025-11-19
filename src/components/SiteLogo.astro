@@ -1,5 +1,6 @@
 ---
 import logo from '@/assets/site-logo.png';
+import { HOME_PATH } from '@/constants';
 import { Image } from 'astro:assets';
 
 interface Props {
@@ -9,6 +10,6 @@ interface Props {
 const { size = 44 } = Astro.props;
 ---
 
-<a href="/" class="rounded-md border-2 border-neutral-500 hover:border-accent/80" aria-label="Home">
+<a href={HOME_PATH} class="rounded-md border-2 border-neutral-500 hover:border-accent/80" aria-label="Home">
   <Image src={logo} alt="Site Logo" width={size} height={size} layout="fixed" />
 </a>
