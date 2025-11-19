@@ -1,12 +1,10 @@
 ---
 import Comments from '@/components/Comments.astro';
-import FormattedDate from '@/components/FormattedDate.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
+import PostMetadata from '@/components/PostMetadata.astro';
 import Prose from '@/components/Prose.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
-import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
-import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
@@ -26,24 +24,9 @@ const { title, description, heroImage, publishDate, readingTime, headings, tags,
     layout="constrained"
     class="mt-4 mb-8 rounded-4xl shadow-xl md:my-12"
   />
-  <section class="my-8 flex flex-col text-center md:my-12">
-    <h1 class="mb-4 font-heading text-3xl font-bold md:text-5xl">{title}</h1>
-    <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
 
-    <div class="grap-4 flex w-full items-center justify-center space-x-6 md:space-x-8">
-      <div class="text-sm text-muted-foreground/80">
-        <CalendarIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
-        <FormattedDate date={publishDate} />
-      </div>
-
-      <div class="text-sm text-muted-foreground/80">
-        <ClockIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
-        <span>{readingTime}</span>
-      </div>
-    </div>
-  </section>
-
-  <PostBreadcrumbs title={title} class="mb-8 hidden md:block" />
+  <PostMetadata {title} {description} {publishDate} {readingTime} class="my-8 md:my-12" />
+  <PostBreadcrumbs {title} class="mb-8 hidden md:block" />
 
   <div class="flex w-full">
     <Prose class="w-full max-w-none xl:max-w-prose">

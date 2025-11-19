@@ -1,0 +1,36 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
+import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
+
+interface Props {
+  class?: string;
+  title: string;
+  description: string;
+  publishDate: Date;
+  readingTime?: string;
+}
+
+const { class: className, title, description, publishDate, readingTime } = Astro.props as Props;
+---
+
+<section class={`flex flex-col text-center ${className}`}>
+  <h1 class="mb-4 font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+  <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
+
+  <div class="grap-4 flex w-full items-center justify-center space-x-6 md:space-x-8">
+    <div class="text-sm text-muted-foreground/80">
+      <CalendarIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+      <FormattedDate date={publishDate} />
+    </div>
+
+    {
+      readingTime && (
+        <div class="text-sm text-muted-foreground/80">
+          <ClockIcon width={20} height={20} class="mr-2 inline-block text-muted-foreground" stroke-width={1} />
+          <span>{readingTime}</span>
+        </div>
+      )
+    }
+  </div>
+</section>
