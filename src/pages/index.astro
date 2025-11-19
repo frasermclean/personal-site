@@ -2,12 +2,15 @@
 import HeroSection from '@/components/HeroSection.astro';
 import SkillsSection from '@/components/SkillsSection.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Fraser McLean';
+const description = 'Software engineer and technology enthusiast.';
 ---
 
-<BaseLayout>
+<BaseLayout title={title} description={description}>
   <HeroSection
-    title="Fraser McLean"
-    subtitle="Software engineer and technology enthusiast."
+    title={title}
+    subtitle={description}
     primaryCta={{ label: 'View Projects', href: '/projects' }}
     secondaryCta={{ label: 'Read Blog', href: '/blog' }}
   />
