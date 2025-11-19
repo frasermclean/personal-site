@@ -1,0 +1,41 @@
+---
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from '@/components/starwind/breadcrumb';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
+import HomeIcon from '@tabler/icons/outline/home.svg';
+
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<Breadcrumb class={className}>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">
+        <HomeIcon width={16} height={16} class="mr-1 mb-0.5 inline-block" stroke-width={1} />
+        Home
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator>/</BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/blog">
+        <ArticleIcon width={16} height={16} class="mr-1 mb-0.5 inline-block" stroke-width={1} />
+        Blog
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator>/</BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbPage>{title}</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
