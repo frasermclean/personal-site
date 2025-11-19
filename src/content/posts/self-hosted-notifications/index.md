@@ -2,10 +2,9 @@
 title: Self-hosted notifications with ntfy and Apprise
 description: In this comprehensive guide, I walk through the process of setting up self-hosted notifications using ntfy and Apprise with Docker Compose.
 publishDate: 2025-10-28T09:37:59+08:00
-heroImage: self-hosted-notifications.jpg
-hidden: false
+heroImage: 
+  src: self-hosted-notifications.jpg
 comments: true
-draft: false
 categories: [ guide ]
 tags: [ self-hosted, notifications, ntfy, apprise, docker ]
 links:

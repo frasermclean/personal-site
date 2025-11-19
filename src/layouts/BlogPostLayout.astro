@@ -16,12 +16,12 @@ type Props = CollectionEntry<'posts'>['data'] & { headings: MarkdownHeading[]; r
 const { title, description, heroImage, publishDate, readingTime, headings, tags, enableComments } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} isArticle={true} image={heroImage}>
+<BaseLayout {title} {description} isArticle={true} {heroImage}>
   <Image
-    src={heroImage}
+    src={heroImage.src}
+    alt={heroImage.alt || `Hero image for ${title} post`}
     width={1280}
     height={660}
-    alt=""
     layout="constrained"
     class="my-8 rounded-4xl shadow-xl md:my-12"
   />

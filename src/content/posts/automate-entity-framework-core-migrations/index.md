@@ -2,7 +2,9 @@
 title: 'Automate Entity Framework Core migrations'
 description: 'A guide on how to automate Entity Framework Core migrations in a GitHub Actions workflow'
 publishDate: '2025-01-24T10:36:09+08:00'
-heroImage: 'geese-flying.jpg'
+heroImage: 
+  src: 'geese-flying.jpg'
+  alt: 'Geese flying in a group during a migration'
 category: 'guide'
 tags: ['azure', 'azure-sql', 'github-actions', 'automation', 'entity-framework-core', 'migrations', 'ci-cd']
 ---

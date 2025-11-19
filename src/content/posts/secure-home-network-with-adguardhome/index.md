@@ -2,7 +2,9 @@
 title: 'Secure your entire home network with AdGuard Home'
 description: 'Block ads on your home network via AdGuard Home and Docker Compose'
 publishDate: '2024-04-29T08:22:40+08:00'
-heroImage: secure-home-network-with-adguardhome.jpg
+heroImage: 
+  src: adguard-home-guide.png
+  alt: 'AdGuard Home setup guide illustration'
 draft: false
 categories: [ guide ]
 tags: [ docker, ad-block, privacy, dns, raspberry-pi, self-hosted ]

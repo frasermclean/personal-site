@@ -9,7 +9,10 @@ const posts = defineCollection({
       description: z.string(),
       publishDate: z.coerce.date(), // coerce to Date object
       updatedDate: z.coerce.date().optional(),
-      heroImage: image(),
+      heroImage: z.object({
+        src: image(),
+        alt: z.string().optional()
+      }),
       category: z.string().optional(),
       tags: z.array(z.string()),
       enableComments: z.boolean().default(true)

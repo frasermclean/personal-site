@@ -2,7 +2,8 @@
 title: 'Speed up Azure local development'
 description: 'A guide on how to speed up local development via a custom TokenCredential factory'
 publishDate: '2024-10-14T09:07:15+08:00'
-heroImage: speed-up-azure-local-development.jpg
+heroImage: 
+  src: speed-up-azure-local-development.jpg
 tags: [ 'azure', 'dotnet', 'development', 'security', 'authentication' ]
 categories: [ 'guide' ]
 draft: false

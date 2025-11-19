@@ -11,7 +11,7 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
 
 <a href={href} class="block h-full">
   <Card class="flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3">
-    <Image src={heroImage} width={640} height={330} alt="" layout="constrained" class="w-full rounded-xl" />
+    <Image src={heroImage.src} width={640} height={330} alt="" layout="constrained" class="w-full rounded-xl" />
     <CardHeader class="my-4 grow p-0">
       <CardTitle class="font-heading">{title}</CardTitle>
       <CardDescription>{description}</CardDescription>

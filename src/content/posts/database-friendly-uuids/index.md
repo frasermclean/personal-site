@@ -3,7 +3,8 @@ title: 'Database Friendly UUIDs'
 description: 'Make use of UUIDv7 to generate database optimzed primary key values'
 publishDate: '2024-07-08T12:04:14+08:00'
 draft: false
-heroImage: database-friendly-uuids.jpg
+heroImage: 
+  src: database-friendly-uuids.jpg
 tags: [ 'database', 'uuid', 'guid', 'dotnet', 'linq', 'uuidnext' ]
 links:
   - title: UUIDNext

@@ -17,11 +17,15 @@ export interface Props {
   title: string;
   description: string;
   isArticle?: boolean;
-  image?: ImageMetadata;
+  heroImage?: {
+    src: ImageMetadata;
+    alt?: string;
+  };
 }
 
-const { title, description, isArticle = false, image = defaultOgImage } = Astro.props;
+const { title, description, isArticle = false, heroImage } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const image = heroImage?.src || defaultOgImage;
 const imageUrl = new URL(image.src, Astro.site);
 ---
 

@@ -2,7 +2,8 @@
 title: 'Plausible Analytics self-hosted guide'
 description: 'Self host your own privacy focussed website analytics tool'
 publishDate: '2023-12-14T09:11:23+08:00'
-heroImage: plausible-analytics-self-hosted-guide.jpg
+heroImage: 
+  src: plausible-analytics-self-hosted-guide.jpg
 category: guide
 tags: [ analytics, self-hosted, plausible, docker, containers ]
 links:
