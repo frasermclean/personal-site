@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './starwind/card';
+
 type Props = CollectionEntry<'posts'>['data'] & { href: string };
 
 const { href, title, description, heroImage, publishDate } = Astro.props;
