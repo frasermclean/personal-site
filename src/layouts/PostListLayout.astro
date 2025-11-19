@@ -16,9 +16,10 @@ import type { CollectionEntry } from 'astro:content';
 interface Props extends BaseLayoutProps {
   listTitle: string;
   page: Page<CollectionEntry<'posts'>>;
+  paginationBasePath?: string;
 }
 
-const { title, description, listTitle, page, ...baseLayoutProps } = Astro.props;
+const { title, description, listTitle, page, paginationBasePath = '/blog/page/', ...baseLayoutProps } = Astro.props;
 ---
 
 <BaseLayout {title} {description} {...baseLayoutProps}>
@@ -44,7 +45,7 @@ const { title, description, listTitle, page, ...baseLayoutProps } = Astro.props;
             )}
             {Array.from({ length: page.lastPage }, (_, i) => (
               <PaginationItem>
-                <PaginationLink href={`/blog/page/${i + 1}`} isActive={i + 1 === page.currentPage}>
+                <PaginationLink href={`${paginationBasePath}${i + 1}`} isActive={i + 1 === page.currentPage}>
                   {i + 1}
                 </PaginationLink>
               </PaginationItem>

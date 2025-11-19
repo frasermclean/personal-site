@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths = (async () => {
+  const allPosts = await getCollection('posts');
+
+  // Get all unique tags
+  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+
+  // Create routes for each tag
+  return uniqueTags.map((tag) => ({
+    params: { tag }
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+
+// Rewrite to the first page of the tag
+return Astro.rewrite(`/blog/tag/${tag}/1`);
+---
