@@ -17,20 +17,13 @@ import type { CollectionEntry } from 'astro:content';
 interface Props extends BaseLayoutProps {
   listTitle: string;
   page: Page<CollectionEntry<'posts'>>;
-  paginationBasePath?: string;
+  paginationBasePath: string;
 }
 
-const {
-  title,
-  description,
-  listTitle,
-  page,
-  paginationBasePath = `${POSTS_PATH}/page/`,
-  ...baseLayoutProps
-} = Astro.props;
+const { title, description, listTitle, page, paginationBasePath, ...rest } = Astro.props;
 ---
 
-<BaseLayout {title} {description} {...baseLayoutProps}>
+<BaseLayout {title} {description} {...rest}>
   <HeroSection {title} subtitle={description} />
 
   <section class="my-8">
@@ -46,21 +39,30 @@ const {
         <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">More Posts</h2>
         <Pagination>
           <PaginationContent>
-            {page.url.prev && (
+            {page.currentPage > 1 && (
               <PaginationItem>
-                <PaginationPrevious href={page.url.prev} />
+                <PaginationPrevious
+                  href={
+                    page.currentPage === 2
+                      ? `${paginationBasePath}`
+                      : `${paginationBasePath}/page/${page.currentPage - 1}`
+                  }
+                />
               </PaginationItem>
             )}
             {Array.from({ length: page.lastPage }, (_, i) => (
               <PaginationItem>
-                <PaginationLink href={`${paginationBasePath}${i + 1}`} isActive={i + 1 === page.currentPage}>
+                <PaginationLink
+                  href={i === 0 ? `${paginationBasePath}` : `${paginationBasePath}/page/${i + 1}`}
+                  isActive={i + 1 === page.currentPage}
+                >
                   {i + 1}
                 </PaginationLink>
               </PaginationItem>
             ))}
-            {page.url.next && (
+            {page.currentPage < page.lastPage && (
               <PaginationItem>
-                <PaginationNext href={page.url.next} />
+                <PaginationNext href={`${paginationBasePath}/page/${page.currentPage + 1}`} />
               </PaginationItem>
             )}
           </PaginationContent>

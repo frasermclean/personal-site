@@ -19,7 +19,13 @@ export const getStaticPaths = (async ({ paginate }) => {
     return paginate(filteredPosts, {
       params: { category },
       pageSize: POSTS_PAGE_SIZE
-    });
+    }).map((result) => ({
+      ...result,
+      params: {
+        category,
+        page: result.props.page.currentPage === 1 ? undefined : `page/${result.props.page.currentPage}`
+      }
+    }));
   });
 }) satisfies GetStaticPaths;
 
@@ -34,4 +40,4 @@ const description =
 const listTitle = page.lastPage === 1 ? 'Matching Posts' : `Matching Posts - Page ${page.currentPage}`;
 ---
 
-<PostListLayout {title} {description} {listTitle} {page} paginationBasePath={`${CATEGORIES_PATH}/${category}/`} />
+<PostListLayout {title} {description} {listTitle} {page} paginationBasePath={`${CATEGORIES_PATH}/${category}`} />
