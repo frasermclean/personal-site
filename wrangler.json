@@ -4,6 +4,7 @@
   "name": "frasermclean-site",
   "compatibility_date": "2025-11-09",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
