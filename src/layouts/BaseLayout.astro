@@ -60,6 +60,14 @@ const imageUrl = new URL(image.src, Astro.site);
     <meta property="og:image:width" content={image.width.toString()} />
     <meta property="og:image:height" content={image.height.toString()} />
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@frasermclean81" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+
     <slot name="head" />
 
     <!-- Analytics -->
