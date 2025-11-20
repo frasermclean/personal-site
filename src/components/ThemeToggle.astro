@@ -19,6 +19,7 @@ import Button from './starwind/button';
     const theme = getPreferrredTheme() === 'dark' ? 'light' : 'dark'; // toggle theme
     localStorage.setItem('theme', theme);
     updateDom(theme);
+    umami.track('theme-change', { theme }); // track theme change event
   });
 
   function getPreferrredTheme(): 'light' | 'dark' {
@@ -33,7 +34,6 @@ import Button from './starwind/button';
   }
 
   function updateDom(theme: 'light' | 'dark') {
-    umami.track('theme-change', { theme }); // track theme change event
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
