@@ -18,6 +18,7 @@ export default defineConfig({
   env: {
     schema: {
       TRACKING_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
+      TRACKING_SCRIPT_SRC: envField.string({ context: 'client', access: 'public' }),
       COMMENTS_HOST: envField.string({ context: 'client', access: 'public', default: 'http://localhost:8080' }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
