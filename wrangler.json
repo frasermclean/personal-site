@@ -9,13 +9,23 @@
     "binding": "ASSETS",
     "directory": "./dist",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "html_handling": "drop-trailing-slash"
   },
   "vars": {
     "COMMENTS_HOST": "https://comments.frasermclean.com",
     "TRACKING_WEBSITE_ID": "a366d3c3-624c-4f34-9071-7d155090ac6a",
     "TURNSTILE_SITE_KEY": "0x4AAAAAAAhX2PdPqj0Cojk1"
   },
+  "routes": [
+    {
+      "pattern": "frasermclean.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.frasermclean.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
     "enabled": true
   },
