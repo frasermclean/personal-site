@@ -4,7 +4,17 @@
   "name": "frasermclean-site",
   "compatibility_date": "2025-11-09",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "workers_dev": false,
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "frasermclean.com/*",
+      "zone_name": "frasermclean.com"
+    },
+    {
+      "pattern": "www.frasermclean.com/*",
+      "zone_name": "frasermclean.com"
+    }
+  ],
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
