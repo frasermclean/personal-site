@@ -1,0 +1,19 @@
+---
+import { CATEGORIES_PATH } from '@/constants';
+import CategoryIcon from '@tabler/icons/outline/category.svg';
+import RoundedLink from './RoundedLink.astro';
+
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+---
+
+<section>
+  <div class="mb-2 flex items-center gap-2 text-secondary">
+    <CategoryIcon width={20} height={20} />
+    <h2 class="font-heading text-xl font-bold">Category</h2>
+  </div>
+  <RoundedLink href={`${CATEGORIES_PATH}/${category}`}>{category}</RoundedLink>
+</section>
