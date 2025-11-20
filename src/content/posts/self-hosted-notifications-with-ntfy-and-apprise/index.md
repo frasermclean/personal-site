@@ -78,7 +78,7 @@ Here, I will guide you through the steps to set up ntfy and Apprise using Docker
 
 ### Docker Compose file
 
-Here is a [sample Docker Compose file](compose.yml) which defines the ntfy and Apprise services and a persistent volumes for data storage. You may need to adjust the configuration to fit your specific needs. Save this file as `compose.yml` in an empty directory of your choice.
+Here is a sample Docker Compose file which defines the ntfy and Apprise services and a persistent volumes for data storage. You may need to adjust the configuration to fit your specific needs. Save this file as `compose.yml` in an empty directory of your choice.
 
 The file makes use of environment variables with default values provided (such as `PUID`, `PGID`, and `TZ`). You will probably want to create a `.env` file to override these defaults.
 
