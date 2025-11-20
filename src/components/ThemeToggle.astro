@@ -33,6 +33,7 @@ import Button from './starwind/button';
   }
 
   function updateDom(theme: 'light' | 'dark') {
+    umami.track('theme-change', { theme }); // track theme change event
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
