@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { title, description, image, publishDate, updatedDate } = Astro.props;
+const imageUrl = new URL(image.src, Astro.site);
 
 function createUrlWithoutTrailingSlash(urlString: string | URL): URL {
   const url = new URL(urlString);
@@ -26,7 +27,7 @@ function createUrlWithoutTrailingSlash(urlString: string | URL): URL {
     '@type': 'Article',
     headline: title,
     description: description,
-    image: [image.src],
+    image: [imageUrl],
     url: Astro.url,
     datePublished: publishDate.toISOString(),
     dateModified: updatedDate ? new Date(updatedDate).toISOString() : publishDate.toISOString(),
