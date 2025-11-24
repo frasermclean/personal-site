@@ -3,6 +3,7 @@ import CategoryLink from '@/components/CategoryLink.astro';
 import Comments from '@/components/Comments.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
+import PostStructuredData from '@/components/PostStructuredData.astro';
 import Prose from '@/components/Prose.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
@@ -32,6 +33,8 @@ const {
 ---
 
 <BaseLayout {title} {description} isArticle={true} {heroImage}>
+  <PostStructuredData {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
+
   <Image
     src={heroImage.src}
     alt={heroImage.alt || `Hero image for ${title} post`}
