@@ -23,7 +23,8 @@ export default defineConfig({
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
-      TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' })
+      TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
+      WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' })
     }
   },
   integrations: [sitemap(), mdx(), preact()],
