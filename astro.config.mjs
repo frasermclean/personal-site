@@ -13,7 +13,7 @@ export default defineConfig({
   site: 'https://frasermclean.com',
   trailingSlash: 'never',
   adapter: cloudflare({
-    imageService: 'compile'
+    imageService: 'cloudflare'
   }),
   env: {
     schema: {
