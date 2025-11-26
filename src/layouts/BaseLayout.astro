@@ -71,7 +71,12 @@ const imageUrl = new URL(image.src, Astro.site);
     <slot name="head" />
 
     <!-- Analytics -->
-    <script is:inline defer src={TRACKING_SCRIPT_SRC} data-website-id={TRACKING_WEBSITE_ID}></script>
+    <script
+      is:inline
+      defer
+      src={TRACKING_SCRIPT_SRC}
+      data-website-id={TRACKING_WEBSITE_ID}
+      data-domains="frasermclean.com"></script>
   </head>
   <body>
     <Toolbar />
