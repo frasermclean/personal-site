@@ -4,6 +4,7 @@ description: 'PowerShell script to automate updating CORS settings on an Azure A
 publishDate: '2024-01-30T11:29:55+08:00'
 heroImage: 
   src: app-service-cors-update-cover.jpg
+  alt: Abstract Azure cloud service art with CORS concept
 tags: ['azure', 'powershell', 'app-service', 'cors']
 links:
   - title: Static Web Apps

@@ -4,6 +4,7 @@ description: In this comprehensive guide, I walk through the process of setting 
 publishDate: 2025-10-28T09:37:59+08:00
 heroImage: 
   src: self-hosted-notifications.jpg
+  alt: Logos of ntfy, Apprise, and Docker on a dark background
 comments: true
 category: guide
 tags: [ self-hosted, notifications, ntfy, apprise, docker ]

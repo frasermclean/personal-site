@@ -4,6 +4,7 @@ description: 'A guide on how to speed up local development via a custom TokenCre
 publishDate: '2024-10-14T09:07:15+08:00'
 heroImage: 
   src: speed-up-azure-local-development.jpg
+  alt: Abstract Azure cloud development art
 tags: [ 'azure', 'dotnet', 'development', 'security', 'authentication' ]
 category: 'guide'
 draft: false
