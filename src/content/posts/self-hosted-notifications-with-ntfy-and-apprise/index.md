@@ -134,7 +134,7 @@ volumes:
 
 By default, Docker Compose looks for a file named `.env` in the same directory as the `compose.yml` file to define environment variables. Here is a sample `.env` file that you can use to set the necessary environment variables for the services:
 
-```env
+```dotenv
 TZ="Asia/Singapore" # adjust to local timezone (affects log timestamps)
 PUID=1000 # user ID to run services as (use 'id -u' to find your UID)
 PGID=100 # group ID to run services as (use 'id -g' to find your GID)
