@@ -48,8 +48,8 @@ const imageUrl = new URL(image.src, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Font preloads -->
-    <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin fetchpriority="high" />
-    <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin fetchpriority="high" />
+    <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin />
 
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
