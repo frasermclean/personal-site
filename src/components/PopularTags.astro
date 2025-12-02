@@ -17,8 +17,6 @@ const tagCounts = allTags.reduce(
   {} as Record<string, number>
 );
 
-console.log(tagCounts);
-
 // get the most popular tags sorted by count, then alphabetically
 const popularTags = Object.entries(tagCounts)
   .sort((a, b) => b[1] - a[1])
