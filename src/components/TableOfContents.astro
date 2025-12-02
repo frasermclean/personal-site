@@ -2,21 +2,35 @@
 import { Card } from '@/components/starwind/card';
 import ListTreeIcon from '@tabler/icons/outline/list-tree.svg';
 import type { MarkdownHeading } from 'astro';
+import { fade } from 'astro:transitions';
 
 interface Props {
   title?: string;
   headings: MarkdownHeading[];
   includeCommentLink?: boolean;
+  includeRelatedPostsLink?: boolean;
 }
-const { title = 'Contents', headings, includeCommentLink = true } = Astro.props;
+const { title = 'Contents', headings, includeCommentLink = false, includeRelatedPostsLink = false } = Astro.props;
+
+const additionalLinks = [];
 
 if (includeCommentLink) {
-  headings.push({
+  additionalLinks.push({
     depth: 2,
     slug: 'comments',
     text: 'Comments'
   });
 }
+
+if (includeRelatedPostsLink) {
+  additionalLinks.push({
+    depth: 2,
+    slug: 'related-posts',
+    text: 'Related Posts'
+  });
+}
+
+const tocHeadings = [...headings, ...additionalLinks];
 ---
 
 <section>
@@ -28,7 +42,7 @@ if (includeCommentLink) {
     <nav>
       <ul class="space-y-2">
         {
-          headings.map((heading) => (
+          tocHeadings.map((heading) => (
             <li class={`relative depth-${heading.depth}`}>
               <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
                 {heading.text}

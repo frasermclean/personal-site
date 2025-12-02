@@ -5,20 +5,24 @@ import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
 import PostStructuredData from '@/components/PostStructuredData.astro';
 import Prose from '@/components/Prose.astro';
+import RelatedPosts from '@/components/RelatedPosts.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
+import { getRelatedPosts } from '@/lib/related-posts';
 import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'posts'>['data'] & {
+  slug: string;
   headings: MarkdownHeading[];
   readingTime?: string;
   updatedDate?: string;
 };
 
 const {
+  slug,
   title,
   description,
   heroImage,
@@ -30,6 +34,8 @@ const {
   tags,
   enableComments
 } = Astro.props;
+
+const relatedPosts = await getRelatedPosts(slug, category, tags);
 ---
 
 <BaseLayout {title} {description} isArticle={true} {heroImage}>
@@ -52,11 +58,17 @@ const {
       <slot />
     </Prose>
     <aside class="sticky top-24 hidden h-fit grow flex-col gap-6 self-start pl-4 xl:flex">
-      <TableOfContents headings={headings} includeCommentLink={enableComments} />
+      <TableOfContents
+        headings={headings}
+        includeCommentLink={enableComments}
+        includeRelatedPostsLink={relatedPosts.length > 0}
+      />
       {category && <CategoryLink category={category} />}
       <TagList tags={tags} />
     </aside>
   </div>
 
   {enableComments && <Comments />}
+
+  {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
 </BaseLayout>
