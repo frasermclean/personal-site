@@ -1,0 +1,34 @@
+---
+import TagIcon from '@tabler/icons/outline/tag.svg';
+import { getCollection } from 'astro:content';
+import RoundedLink from './RoundedLink.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const posts = await getCollection('posts');
+const TAG_LIMIT = 25;
+
+// extract all tags and count their occurrences
+const allTags = posts.flatMap((post) => post.data.tags);
+const tagCounts = allTags.reduce(
+  (acc, tag) => {
+    acc[tag] = (acc[tag] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
+
+// get the most popular tags sorted by count, then alphabetically
+const popularTags = Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, TAG_LIMIT)
+  .map(([tag]) => tag)
+  .sort();
+---
+
+<section class="flex h-full flex-col">
+  <SectionHeading Icon={TagIcon} text="Popular Tags" />
+
+  <div class="flex h-full grow flex-wrap items-center justify-center gap-2">
+    {popularTags.map((tag) => <RoundedLink href={`/tags/${tag}`}>{tag}</RoundedLink>)}
+  </div>
+</section>

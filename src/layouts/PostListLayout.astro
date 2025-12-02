@@ -1,6 +1,7 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
 import PostCardLink from '@/components/PostCardLink.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
 import {
   Pagination,
   PaginationContent,
@@ -11,6 +12,7 @@ import {
 } from '@/components/starwind/pagination';
 import { POSTS_PATH } from '@/constants';
 import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/BaseLayout.astro';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
 import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 
@@ -26,8 +28,10 @@ const { title, description, listTitle, page, paginationBasePath, ...rest } = Ast
 <BaseLayout {title} {description} {...rest}>
   <HeroSection {title} subtitle={description} />
 
+  <slot />
+
   <section class="my-8">
-    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">{listTitle}</h2>
+    <SectionHeading Icon={ArticleIcon} text={listTitle} />
     <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {page.data.map((entry) => <PostCardLink href={`${POSTS_PATH}/${entry.id}`} {...entry.data} />)}
     </nav>
@@ -36,7 +40,7 @@ const { title, description, listTitle, page, paginationBasePath, ...rest } = Ast
   {
     page.lastPage > 1 && (
       <section class="my-8">
-        <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">More Posts</h2>
+        <SectionHeading text="More Posts" />
         <Pagination>
           <PaginationContent>
             {page.currentPage > 1 && (

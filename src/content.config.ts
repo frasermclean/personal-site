@@ -14,7 +14,8 @@ const posts = defineCollection({
       }),
       category: z.enum(['guide', 'project', 'review']).optional(),
       tags: z.array(z.string()),
-      enableComments: z.boolean().default(true)
+      enableComments: z.boolean().default(true),
+      isFeatured: z.boolean().optional()
     })
 });
 
