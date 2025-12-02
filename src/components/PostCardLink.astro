@@ -5,32 +5,41 @@ import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './starwind/card';
 
-type Props = CollectionEntry<'posts'>['data'] & { href: string };
+type Props = CollectionEntry<'posts'>['data'] & {
+  href: string;
+  variant?: 'standard' | 'wide';
+};
 
-const { href, title, description, heroImage, publishDate } = Astro.props;
+const { href, title, description, heroImage, publishDate, variant = 'standard' } = Astro.props;
+const isWide = variant === 'wide';
 ---
 
 <a href={href} class="block h-full" aria-label={`Read blog post ${title}`}>
   <Card
-    class="group flex h-full max-h-96 flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
+    class:list={[
+      'group flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
+      { 'md:flex-row': isWide }
+    ]}
   >
-    <div class="overflow-hidden rounded-xl">
+    <div class:list={['overflow-hidden rounded-xl', { 'md:w-1/2 md:shrink-0': isWide }]}>
       <Image
         src={heroImage.src}
         alt={heroImage.alt}
         width={640}
         height={330}
         layout="constrained"
-        class="w-full transition-transform duration-300 ease-out group-hover:scale-105"
+        class="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
       />
     </div>
-    <CardHeader class="my-4 grow p-0">
-      <CardTitle class="font-heading">{title}</CardTitle>
-      <CardDescription class="line-clamp-3">{description}</CardDescription>
-    </CardHeader>
-    <CardFooter class="p-0">
-      <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
-      <FormattedDate date={publishDate} class="text-sm font-semibold" />
-    </CardFooter>
+    <div class={isWide ? 'flex flex-col justify-between md:ml-6 md:flex-1' : null}>
+      <CardHeader class="my-4 grow p-0">
+        <CardTitle class="font-heading">{title}</CardTitle>
+        <CardDescription class="line-clamp-3">{description}</CardDescription>
+      </CardHeader>
+      <CardFooter class="p-0">
+        <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
+        <FormattedDate date={publishDate} class="text-sm font-semibold" />
+      </CardFooter>
+    </div>
   </Card>
 </a>
