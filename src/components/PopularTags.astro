@@ -25,10 +25,10 @@ const popularTags = Object.entries(tagCounts)
   .sort();
 ---
 
-<section>
+<section class="flex h-full flex-col">
   <SectionHeading Icon={TagIcon} text="Popular Tags" />
 
-  <div class="flex flex-wrap justify-center gap-2">
+  <div class="flex h-full grow flex-wrap items-center justify-center gap-2">
     {popularTags.map((tag) => <RoundedLink href={`/tags/${tag}`}>{tag}</RoundedLink>)}
   </div>
 </section>

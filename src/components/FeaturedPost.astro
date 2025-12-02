@@ -14,7 +14,7 @@ const featuredPost = sortedPosts.find((post) => post.data.isFeatured) || sortedP
 
 {
   featuredPost && (
-    <section>
+    <section class="flex h-full flex-col">
       <SectionHeading Icon={StarIcon} text="Featured Post" />
       <PostCardLink href={`${POSTS_PATH}/${featuredPost.id}`} {...featuredPost.data} variant="wide" />
     </section>
