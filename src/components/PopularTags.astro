@@ -2,6 +2,7 @@
 import TagIcon from '@tabler/icons/outline/tag.svg';
 import { getCollection } from 'astro:content';
 import RoundedLink from './RoundedLink.astro';
+import SectionHeading from './SectionHeading.astro';
 
 const posts = await getCollection('posts');
 const TAG_LIMIT = 25;
@@ -27,10 +28,7 @@ const popularTags = Object.entries(tagCounts)
 ---
 
 <section>
-  <div class="mb-4 flex items-center justify-center gap-2 text-secondary">
-    <TagIcon class="h-6 w-6 md:h-8 md:w-8" />
-    <h2 class="font-heading text-2xl font-semibold md:text-4xl">Popular Tags</h2>
-  </div>
+  <SectionHeading Icon={TagIcon} text="Popular Tags" />
 
   <div class="flex flex-wrap justify-center gap-2">
     {popularTags.map((tag) => <RoundedLink href={`/tags/${tag}`}>{tag}</RoundedLink>)}

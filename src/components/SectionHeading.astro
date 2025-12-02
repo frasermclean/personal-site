@@ -1,0 +1,16 @@
+---
+import type { ImageMetadata } from 'astro';
+import type { SvgComponent } from 'astro/types';
+
+interface Props {
+  Icon?: SvgComponent & ImageMetadata;
+  text: string;
+}
+
+const { Icon, text } = Astro.props;
+---
+
+<div class="mb-4 flex items-center justify-center gap-2 text-secondary">
+  {Icon && <Icon class="h-6 w-6 md:h-8 md:w-8" stroke-width={1.5} />}
+  <h2 class="font-heading text-2xl font-semibold text-secondary md:text-4xl">{text}</h2>
+</div>
