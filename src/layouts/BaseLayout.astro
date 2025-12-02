@@ -24,7 +24,7 @@ export interface Props {
 }
 
 const { title, description, isArticle = false, heroImage } = Astro.props;
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const canonicalUrl = Astro.url.pathname === '/' ? Astro.site!.origin : new URL(Astro.url.pathname, Astro.site).href;
 const image = heroImage?.src || defaultOgImage;
 const imageUrl = new URL(image.src, Astro.site);
 ---

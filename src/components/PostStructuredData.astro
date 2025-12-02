@@ -35,7 +35,7 @@ function createUrlWithoutTrailingSlash(urlString: string | URL): URL {
       {
         '@type': 'Person',
         name: 'Fraser McLean',
-        url: 'https://frasermclean.com'
+        url: Astro.site!.origin
       }
     ]
   })}
@@ -48,14 +48,14 @@ function createUrlWithoutTrailingSlash(urlString: string | URL): URL {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: createUrlWithoutTrailingSlash(new URL('/', Astro.site)) },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site!.origin },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Posts',
-        item: createUrlWithoutTrailingSlash(new URL(`${POSTS_PATH}`, Astro.site))
+        item: new URL(`${POSTS_PATH}`, Astro.site)
       },
-      { '@type': 'ListItem', position: 3, name: title, item: Astro.url }
+      { '@type': 'ListItem', position: 3, name: title, item: new URL(Astro.url.pathname, Astro.site) }
     ]
   })}
 />
