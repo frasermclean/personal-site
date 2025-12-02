@@ -2,7 +2,7 @@
 import { POSTS_PATH } from '@/constants';
 import StarIcon from '@tabler/icons/outline/star.svg';
 import { getCollection } from 'astro:content';
-import PostCardLink from './PostCardLink.astro';
+import FeaturedPostCard from './FeaturedPostCard.astro';
 import SectionHeading from './SectionHeading.astro';
 
 const sortedPosts = (await getCollection('posts')).sort(
@@ -16,7 +16,7 @@ const featuredPost = sortedPosts.find((post) => post.data.isFeatured) || sortedP
   featuredPost && (
     <section class="flex h-full flex-col">
       <SectionHeading Icon={StarIcon} text="Featured Post" />
-      <PostCardLink href={`${POSTS_PATH}/${featuredPost.id}`} {...featuredPost.data} variant="wide" />
+      <FeaturedPostCard href={`${POSTS_PATH}/${featuredPost.id}`} {...featuredPost.data} />
     </section>
   )
 }
