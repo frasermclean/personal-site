@@ -8,6 +8,7 @@ heroImage:
 draft: false
 category: guide
 tags: [ docker, ad-block, privacy, dns, raspberry-pi, self-hosted ]
+isFeatured: true
 links:
   - title: AdGuard Home
     description: AdGuard Home is a network-wide software for blocking ads & tracking.
