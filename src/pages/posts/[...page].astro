@@ -28,11 +28,11 @@ const description =
 <PostListLayout {title} {description} {page} paginationBasePath={`${POSTS_PATH}`}>
   {
     page.currentPage === 1 && (
-      <div class="my-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div class="md:col-span-2">
+      <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div class="lg:col-span-2">
           <FeaturedPost />
         </div>
-        <div class="md:col-span-1">
+        <div class="lg:col-span-1">
           <PopularTags />
         </div>
       </div>
