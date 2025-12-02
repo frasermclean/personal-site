@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import PostCardLink from './PostCardLink.astro';
+
+const sortedPosts = (await getCollection('posts')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const featuredPost = sortedPosts.find((post) => post.data.isFeatured) || sortedPosts[0];
+---
+
+{
+  featuredPost && (
+    <section>
+      <h2 class="mb-4 font-heading text-2xl font-semibold text-secondary md:text-4xl">Featured Post</h2>
+      <PostCardLink href={`/posts/${featuredPost.id}`} {...featuredPost.data} />
+    </section>
+  )
+}

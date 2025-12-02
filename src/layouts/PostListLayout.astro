@@ -15,19 +15,20 @@ import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props extends BaseLayoutProps {
-  listTitle: string;
   page: Page<CollectionEntry<'posts'>>;
   paginationBasePath: string;
 }
 
-const { title, description, listTitle, page, paginationBasePath, ...rest } = Astro.props;
+const { title, description, page, paginationBasePath, ...rest } = Astro.props;
 ---
 
 <BaseLayout {title} {description} {...rest}>
   <HeroSection {title} subtitle={description} />
 
+  <slot />
+
   <section class="my-8">
-    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">{listTitle}</h2>
+    <h2 class="mb-4 text-center font-heading text-2xl font-semibold text-secondary md:text-4xl">Recent Posts</h2>
     <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {page.data.map((entry) => <PostCardLink href={`${POSTS_PATH}/${entry.id}`} {...entry.data} />)}
     </nav>
