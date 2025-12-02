@@ -1,4 +1,5 @@
 ---
+import StarIcon from '@tabler/icons/outline/star.svg';
 import { getCollection } from 'astro:content';
 import PostCardLink from './PostCardLink.astro';
 
@@ -12,7 +13,11 @@ const featuredPost = sortedPosts.find((post) => post.data.isFeatured) || sortedP
 {
   featuredPost && (
     <section>
-      <h2 class="mb-4 font-heading text-2xl font-semibold text-secondary md:text-4xl">Featured Post</h2>
+      <div class="mb-4 flex items-center justify-center gap-2 text-secondary">
+        <StarIcon class="h-6 w-6 md:h-8 md:w-8" />
+        <h2 class="font-heading text-2xl font-semibold text-secondary md:text-4xl">Featured Post</h2>
+      </div>
+
       <PostCardLink href={`/posts/${featuredPost.id}`} {...featuredPost.data} />
     </section>
   )

@@ -12,7 +12,7 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
 
 <a href={href} class="block h-full" aria-label={`Read blog post ${title}`}>
   <Card
-    class="group flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
+    class="group flex h-full max-h-96 flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
   >
     <div class="overflow-hidden rounded-xl">
       <Image
@@ -26,7 +26,7 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
     </div>
     <CardHeader class="my-4 grow p-0">
       <CardTitle class="font-heading">{title}</CardTitle>
-      <CardDescription>{description}</CardDescription>
+      <CardDescription class="line-clamp-3">{description}</CardDescription>
     </CardHeader>
     <CardFooter class="p-0">
       <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
