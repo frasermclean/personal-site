@@ -1,4 +1,5 @@
 ---
+import { Badge } from '@/components/starwind/badge';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/starwind/carousel';
 import { POSTS_PATH } from '@/constants';
 import type { CollectionEntry } from 'astro:content';
@@ -14,10 +15,16 @@ const { posts } = Astro.props;
 {
   posts.length > 0 && (
     <section class="my-8">
-      <h2 id="related-posts" class="mb-4 font-heading text-2xl font-bold text-primary md:text-4xl">
-        Related Posts
-      </h2>
-      <Carousel class="mx-auto w-full max-w-6xl">
+      <div class="mb-4 flex items-center gap-2">
+        <h2 id="related-posts" class="font-heading text-2xl font-bold text-primary md:text-4xl">
+          Related Posts
+        </h2>
+        <Badge variant="ghost" size="md" class="h-8 w-8">
+          {posts.length}
+        </Badge>
+      </div>
+
+      <Carousel class="w-full">
         <CarouselContent>
           {posts.map((post) => (
             <CarouselItem class="md:basis-1/2 lg:basis-1/3">
