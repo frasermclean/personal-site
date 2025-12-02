@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  slug: string;
+  category?: string;
+  tags: string[];
+  maxResults?: number;
+}
+
+const { slug, category, tags, maxResults = 3 } = Astro.props;
+
+// fetch all posts except the current one
+const otherPosts = (await getCollection('posts')).filter((post) => post.id !== slug);
+
+// calculate relevance score for each post
+const scoredPosts = otherPosts.map((post) => {
+  let score = 0;
+
+  // same category adds points
+  if (category && post.data.category === category) {
+    score += 5;
+  }
+
+  // each shared tag adds points
+  const sharedTags = post.data.tags.filter((tag) => tags.includes(tag));
+  score += sharedTags.length * 2;
+
+  return { post, score };
+});
+
+// sort by score (descending) and take the top results
+const relatedPosts = scoredPosts
+  .filter((item) => item.score > 0) // Only include posts with some relevance
+  .sort((a, b) => b.score - a.score)
+  .slice(0, maxResults)
+  .map((item) => item.post);
+---
+
+{
+  relatedPosts.length > 0 && (
+    <section class="my-8">
+        <h2 id="related-posts" class="mb-4 font-heading text-2xl font-bold text-primary md:text-4xl">Related Posts</h2>
+    </section>
+    <ul>
+      {relatedPosts.map((post) => (
+        <li>
+          <a href={`/posts/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  )
+}

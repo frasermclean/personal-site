@@ -5,6 +5,7 @@ import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
 import PostStructuredData from '@/components/PostStructuredData.astro';
 import Prose from '@/components/Prose.astro';
+import RelatedPosts from '@/components/RelatedPosts.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
 import type { MarkdownHeading } from 'astro';
@@ -13,12 +14,14 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'posts'>['data'] & {
+  slug: string;
   headings: MarkdownHeading[];
   readingTime?: string;
   updatedDate?: string;
 };
 
 const {
+  slug,
   title,
   description,
   heroImage,
@@ -57,6 +60,8 @@ const {
       <TagList tags={tags} />
     </aside>
   </div>
+
+  <RelatedPosts {slug} {category} {tags} />
 
   {enableComments && <Comments />}
 </BaseLayout>
