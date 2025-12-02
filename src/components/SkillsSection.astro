@@ -5,48 +5,49 @@ import CodeIcon from '@tabler/icons/outline/code.svg';
 import DatabaseIcon from '@tabler/icons/outline/database.svg';
 import ProjectorIcon from '@tabler/icons/outline/device-projector.svg';
 import UxIcon from '@tabler/icons/outline/ux-circle.svg';
+import SectionHeading from './SectionHeading.astro';
 import { Card, CardContent, CardHeader, CardTitle } from './starwind/card';
 
 const skills = [
   {
     Icon: CodeIcon,
     name: 'Full Stack Development',
-    description: 'Building enterprise-grade web applications using modern frameworks and technologies.',
+    description: 'Building enterprise-grade web applications using modern frameworks and technologies.'
   },
   {
     Icon: DatabaseIcon,
     name: 'Databases & Caching',
     description:
-      'Designing and optimizing database schemas, and implementing caching strategies for improved performance.',
+      'Designing and optimizing database schemas, and implementing caching strategies for improved performance.'
   },
   {
     Icon: ProjectorIcon,
     name: 'Audio Visual Integration',
     description:
-      'Building custom AV solutions using Crestron, Extron, and AMX systems for seamless control and automation.',
+      'Building custom AV solutions using Crestron, Extron, and AMX systems for seamless control and automation.'
   },
   {
     Icon: UxIcon,
     name: 'User Experience Design',
-    description: 'Designing intuitive and engaging user experiences through research, prototyping, and testing.',
+    description: 'Designing intuitive and engaging user experiences through research, prototyping, and testing.'
   },
   {
     Icon: AutomationIcon,
     name: 'Testing and DevOps',
     description:
-      'Implementing CI/CD pipelines with GitHub Actions and Azure DevOps to ensure code quality and streamline deployments.',
+      'Implementing CI/CD pipelines with GitHub Actions and Azure DevOps to ensure code quality and streamline deployments.'
   },
   {
     Icon: CloudIcon,
     name: 'Cloud Infrastructure',
     description:
-      'Infrastructure as Code (IaC) using Bicep and Terraform to deploy and manage cloud resources efficiently.',
-  },
+      'Infrastructure as Code (IaC) using Bicep and Terraform to deploy and manage cloud resources efficiently.'
+  }
 ];
 ---
 
 <section class="my-8 flex w-full flex-col items-center p-2">
-  <h2 class="mb-4 font-heading text-3xl font-bold text-secondary md:text-4xl">Skills</h2>
+  <SectionHeading text="Skills" />
   <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     {
       skills.map(({ Icon, name, description }) => (
