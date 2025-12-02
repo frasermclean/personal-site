@@ -1,7 +1,9 @@
 ---
 import headshotImage from '@/assets/fraser-headshot.jpg';
 import HeroSection from '@/components/HeroSection.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import HandStopIcon from '@tabler/icons/outline/hand-stop.svg';
 import Image from 'astro/components/Image.astro';
 
 const title = 'About Me';
@@ -10,22 +12,33 @@ const description = 'A little bit about who I am and what I do.';
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
-  <section class="mx-auto flex w-full max-w-2xl flex-col-reverse gap-8 md:flex-row">
-    <div class="grow text-center md:text-right">
-      <h2 class="mb-4 font-heading text-4xl font-bold text-secondary">Hi there!</h2>
-      <p class="text-lg text-neutral-300">
-        My name is Fraser McLean, and I am a software developer with a passion for creating intuitive and efficient
-        applications. Welcome to my personal space on the web where I share my thoughts, projects, and experiences in
-        the world.
-      </p>
-    </div>
+  <div class="mx-auto flex max-w-3xl flex-col gap-8 text-center text-lg text-neutral-300">
+    <section class="flex w-full flex-col-reverse gap-8 md:flex-row">
+      <div class="grow">
+        <SectionHeading Icon={HandStopIcon} text="Hi there!" />
+        <p>
+          My name is Fraser McLean, and I am a software developer with a passion for creating intuitive and efficient
+          applications. Welcome to my personal space on the web where I share my thoughts, projects, and experiences in
+          the world.
+        </p>
+      </div>
 
-    <Image
-      src={headshotImage}
-      width={256}
-      height={256}
-      alt="Fraser McLean Headshot"
-      class="mx-auto rounded-full border-4"
-    />
-  </section>
+      <Image
+        src={headshotImage}
+        width={256}
+        height={256}
+        alt="Fraser McLean Headshot"
+        class="mx-auto rounded-full border-4"
+      />
+    </section>
+
+    <section>
+      <SectionHeading text="Background" />
+      <p>
+        I grew up in South Africa but have lived in the UK, Australia and now most recently in Singapore. I am currently
+        self-employed providing consulting services to a variety of clients. My expertise lies in full-stack web
+        development and cloud solution architecture.
+      </p>
+    </section>
+  </div>
 </BaseLayout>
