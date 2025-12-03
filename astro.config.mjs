@@ -12,6 +12,9 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 export default defineConfig({
   site: 'https://frasermclean.com',
   trailingSlash: 'never',
+  image: {
+    layout: 'constrained'
+  },
   adapter: cloudflare({
     imageService: 'compile'
   }),
