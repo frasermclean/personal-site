@@ -1,0 +1,72 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+import { POSTS_PATH } from '@/constants';
+import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
+import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
+import { Picture } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
+
+interface Props {
+  slug: string;
+  variant?: 'default' | 'featured';
+}
+
+const { slug, variant = 'default' } = Astro.props;
+const isFeatured = variant === 'featured';
+const isDefault = variant === 'default';
+
+// look up the post entry by slug
+const entry = await getEntry('posts', slug);
+if (!entry) {
+  throw new Error(`Post with slug "${Astro.props.slug}" not found.`);
+}
+
+const { title, description, heroImage, publishDate } = entry.data;
+
+// render the entry to extract reading time
+const { remarkPluginFrontmatter } = await render(entry);
+const { readingTime } = remarkPluginFrontmatter;
+---
+
+<a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
+  <article
+    class:list={[
+      'group flex flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
+      { 'md:flex-row': isFeatured, 'h-full min-h-96': isDefault }
+    ]}
+  >
+    <section class:list={['overflow-hidden rounded-xl', { 'md:w-1/2': isFeatured }]}>
+      <Picture
+        src={heroImage.src}
+        alt={heroImage.alt}
+        width={640}
+        height={330}
+        formats={['avif', 'webp']}
+        quality={75}
+        class:list={[
+          'w-full transition-transform duration-300 ease-out group-hover:scale-105',
+          { 'h-full object-cover': isDefault }
+        ]}
+      />
+    </section>
+
+    <section class:list={['flex grow flex-col justify-between gap-2', { 'md:w-1/2': isFeatured }]}>
+      <h3 class="font-heading text-xl leading-none font-semibold tracking-tight">{title}</h3>
+      <p class="line-clamp-3 grow text-base text-muted-foreground">{description}</p>
+      <footer class="flex justify-between text-xs font-light text-muted-foreground/80 md:text-sm">
+        <div class="flex gap-2">
+          <CalendarIcon width={20} height={20} class="inline-block" stroke-width={1} />
+          <FormattedDate date={publishDate} />
+        </div>
+        {
+          readingTime && (
+            <div class="flex gap-2">
+              <ClockIcon width={20} height={20} class="inline-block" stroke-width={1} />
+              <span>{readingTime}</span>
+            </div>
+          )
+        }
+      </footer>
+    </section>
+  </article>
+</a>

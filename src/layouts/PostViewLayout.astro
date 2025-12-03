@@ -10,7 +10,7 @@ import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
 import { getRelatedPosts } from '@/lib/related-posts';
 import type { MarkdownHeading } from 'astro';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 
@@ -41,13 +41,14 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
 <BaseLayout {title} {description} isArticle={true} {heroImage}>
   <PostStructuredData {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
 
-  <Image
+  <Picture
     src={heroImage.src}
     alt={heroImage.alt}
     width={1280}
     height={660}
-    layout="constrained"
+    formats={['avif', 'webp']}
     class="mt-4 mb-8 rounded-4xl shadow-xl md:my-12"
+    quality={85}
   />
 
   <PostMetadata {title} {description} {publishDate} {updatedDate} {readingTime} class="my-8 md:my-12" />
