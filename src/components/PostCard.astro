@@ -8,16 +8,18 @@ import type { CollectionEntry } from 'astro:content';
 type Props = CollectionEntry<'posts'>['data'] & { slug: string; variant?: 'default' | 'featured' };
 
 const { slug, title, description, heroImage, publishDate, variant = 'default' } = Astro.props;
+const isFeatured = variant === 'featured';
+const isDefault = variant === 'default';
 ---
 
 <a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
   <article
     class:list={[
-      'group flex h-full flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
-      { 'md:flex-row': variant === 'featured' }
+      'group flex flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
+      { 'md:flex-row': isFeatured, 'min-h-96': isDefault }
     ]}
   >
-    <section class:list={['overflow-hidden rounded-xl', { 'md:w-2/3': variant === 'featured' }]}>
+    <section class:list={['overflow-hidden rounded-xl', { 'md:w-1/2': isFeatured }]}>
       <Picture
         src={heroImage.src}
         alt={heroImage.alt}
@@ -25,11 +27,14 @@ const { slug, title, description, heroImage, publishDate, variant = 'default' } 
         height={330}
         formats={['avif', 'webp']}
         quality={75}
-        class="w-full transition-transform duration-300 ease-out group-hover:scale-105"
+        class:list={[
+          'w-full transition-transform duration-300 ease-out group-hover:scale-105',
+          { 'h-full object-cover': isDefault }
+        ]}
       />
     </section>
 
-    <section class:list={['flex grow flex-col justify-between gap-2', { 'md:w-1/3': variant === 'featured' }]}>
+    <section class:list={['flex grow flex-col justify-between gap-2', { 'md:w-1/2': isFeatured }]}>
       <h3 class="font-heading text-xl leading-none font-semibold tracking-tight">{title}</h3>
       <p class="line-clamp-3 grow text-base text-muted-foreground">{description}</p>
       <footer>
