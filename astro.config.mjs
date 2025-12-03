@@ -13,7 +13,9 @@ export default defineConfig({
   site: 'https://frasermclean.com',
   trailingSlash: 'never',
   image: {
-    layout: 'constrained'
+    layout: 'constrained',
+    objectFit: 'cover',
+    objectPosition: 'center'
   },
   adapter: cloudflare({
     imageService: 'compile'
