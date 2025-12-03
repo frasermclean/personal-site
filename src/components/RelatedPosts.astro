@@ -1,9 +1,8 @@
 ---
+import PostCard from '@/components/PostCard.astro';
 import { Badge } from '@/components/starwind/badge';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/starwind/carousel';
-import { POSTS_PATH } from '@/constants';
 import type { CollectionEntry } from 'astro:content';
-import PostCardLink from './PostCardLink.astro';
 
 interface Props {
   posts: CollectionEntry<'posts'>[];
@@ -28,7 +27,7 @@ const { posts } = Astro.props;
         <CarouselContent>
           {posts.map((post) => (
             <CarouselItem class="md:basis-1/2 lg:basis-1/3">
-              <PostCardLink href={`${POSTS_PATH}/${post.id}`} {...post.data} />
+              <PostCard slug={post.id} {...post.data} />
             </CarouselItem>
           ))}
         </CarouselContent>
