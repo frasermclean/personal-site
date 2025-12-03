@@ -4,7 +4,6 @@ import type { HTMLAttributes } from 'astro/types';
 import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './starwind/card';
 
 type Props = CollectionEntry<'posts'>['data'] & HTMLAttributes<'a'>;
 
@@ -12,8 +11,8 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
 ---
 
 <a href={href} class="block h-full" aria-label={`Read blog post ${title}`}>
-  <Card
-    class="group flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
+  <article
+    class="group flex h-full flex-col justify-between rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
   >
     <div class="overflow-hidden rounded-xl">
       <Picture
@@ -26,13 +25,15 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
         class="transition-transform duration-300 ease-out group-hover:scale-105"
       />
     </div>
-    <CardHeader class="my-4 grow p-0">
-      <CardTitle class="font-heading">{title}</CardTitle>
-      <CardDescription class="line-clamp-3">{description}</CardDescription>
-    </CardHeader>
-    <CardFooter class="p-0">
+
+    <section class="my-4 flex grow flex-col gap-2">
+      <h3 class="font-heading text-xl leading-none font-semibold tracking-tight">{title}</h3>
+      <p class="line-clamp-3 text-base text-muted-foreground">{description}</p>
+    </section>
+
+    <footer>
       <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
       <FormattedDate date={publishDate} class="text-sm font-semibold" />
-    </CardFooter>
-  </Card>
+    </footer>
+  </article>
 </a>
