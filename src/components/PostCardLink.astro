@@ -1,7 +1,7 @@
 ---
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import type { HTMLAttributes } from 'astro/types';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from './starwind/card';
@@ -16,12 +16,14 @@ const { href, title, description, heroImage, publishDate } = Astro.props;
     class="group flex h-full flex-col justify-between p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
   >
     <div class="overflow-hidden rounded-xl">
-      <Image
+      <Picture
         src={heroImage.src}
         alt={heroImage.alt}
         width={640}
         height={330}
-        class="h-full w-full transition-transform duration-300 ease-out group-hover:scale-105"
+        formats={['avif', 'webp']}
+        quality={75}
+        class="transition-transform duration-300 ease-out group-hover:scale-105"
       />
     </div>
     <CardHeader class="my-4 grow p-0">
