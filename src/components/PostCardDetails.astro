@@ -1,0 +1,21 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+}
+
+const { title, description, publishDate } = Astro.props as Props;
+---
+
+<section class="flex grow flex-col justify-between gap-2">
+  <h3 class="font-heading text-xl leading-none font-semibold tracking-tight">{title}</h3>
+  <p class="line-clamp-3 grow text-base text-muted-foreground">{description}</p>
+  <footer>
+    <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
+    <FormattedDate date={publishDate} class="text-sm font-semibold" />
+  </footer>
+</section>

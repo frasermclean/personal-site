@@ -1,38 +1,19 @@
 ---
+import PostCardDetails from '@/components/PostCardDetails.astro';
+import PostCardImage from '@/components/PostCardImage.astro';
 import { POSTS_PATH } from '@/constants';
-import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
-import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import FormattedDate from './FormattedDate.astro';
 
-type Props = CollectionEntry<'posts'>['data'] & { slug: string; variant?: 'default' | 'wide' };
+type Props = CollectionEntry<'posts'>['data'] & { slug: string };
 
-const { slug, title, description, heroImage, publishDate, variant = 'default' } = Astro.props;
+const { slug, title, description, heroImage, publishDate } = Astro.props;
 ---
 
 <a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
   <article
     class="group flex h-full flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3"
   >
-    <section class="overflow-hidden rounded-xl">
-      <Picture
-        src={heroImage.src}
-        alt={heroImage.alt}
-        width={640}
-        height={330}
-        formats={['avif', 'webp']}
-        quality={75}
-        class="transition-transform duration-300 ease-out group-hover:scale-105"
-      />
-    </section>
-
-    <section class="flex grow flex-col justify-between gap-2">
-      <h3 class="font-heading text-xl leading-none font-semibold tracking-tight">{title}</h3>
-      <p class="line-clamp-3 text-base text-muted-foreground">{description}</p>
-      <footer>
-        <CalendarIcon width={20} height={20} class="mr-2 inline-block" stroke-width={1} />
-        <FormattedDate date={publishDate} class="text-sm font-semibold" />
-      </footer>
-    </section>
+    <PostCardImage src={heroImage.src} alt={heroImage.alt} />
+    <PostCardDetails {title} {description} {publishDate} />
   </article>
 </a>
