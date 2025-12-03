@@ -10,14 +10,14 @@ type Props = CollectionEntry<'posts'>['data'] & { slug: string; variant?: 'defau
 const { slug, title, description, heroImage, publishDate, variant = 'default' } = Astro.props;
 ---
 
-<a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
+<a href={`${POSTS_PATH}/${slug}`} class="block" aria-label={`Read blog post ${title}`}>
   <article
     class:list={[
-      'group flex h-full flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
-      { 'md:flex-row': variant === 'featured' }
+      'group flex flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
+      { 'md:h-80 md:flex-row': variant === 'featured' }
     ]}
   >
-    <section class:list={['overflow-hidden rounded-xl', { 'md:w-2/3': variant === 'featured' }]}>
+    <section class:list={['overflow-hidden rounded-xl', { 'md:h-full md:w-2/3': variant === 'featured' }]}>
       <Picture
         src={heroImage.src}
         alt={heroImage.alt}
@@ -25,7 +25,10 @@ const { slug, title, description, heroImage, publishDate, variant = 'default' } 
         height={330}
         formats={['avif', 'webp']}
         quality={75}
-        class="w-full transition-transform duration-300 ease-out group-hover:scale-105"
+        class:list={[
+          'w-full transition-transform duration-300 ease-out group-hover:scale-105',
+          { 'md:h-full md:object-cover': variant === 'featured' }
+        ]}
       />
     </section>
 
