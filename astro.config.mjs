@@ -15,7 +15,8 @@ export default defineConfig({
   image: {
     layout: 'constrained',
     objectFit: 'cover',
-    objectPosition: 'center'
+    objectPosition: 'center',
+    responsiveStyles: true
   },
   adapter: cloudflare({
     imageService: 'compile'
