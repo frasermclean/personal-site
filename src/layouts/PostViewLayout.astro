@@ -48,6 +48,7 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
     height={660}
     formats={['avif', 'webp']}
     class="mt-4 mb-8 rounded-4xl shadow-xl md:my-12"
+    quality={85}
   />
 
   <PostMetadata {title} {description} {publishDate} {updatedDate} {readingTime} class="my-8 md:my-12" />
