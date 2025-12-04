@@ -28,6 +28,10 @@
       "version": "1.0.1"
     },
     {
+      "name": "dialog",
+      "version": "1.4.1"
+    },
+    {
       "name": "dropdown",
       "version": "1.2.0"
     },
