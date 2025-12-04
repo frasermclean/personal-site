@@ -20,35 +20,34 @@ const description =
 
 <BaseLayout {title} {description}>
   <HeroSection {title} {subtitle} />
-  <form class="mx-auto max-w-md">
-    <Card>
-      <CardHeader class="p-4 md:p-6">
-        <CardTitle>Get in Touch</CardTitle>
-        <CardDescription>Fill out the form below to contact me.</CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-4 p-4 md:p-6">
-        <div class="space-y-2">
-          <Label for="name">Name</Label>
-          <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
-        </div>
-        <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
-        </div>
-        <div class="space-y-2">
-          <Label for="message">Message</Label>
-          <Textarea id="message" placeholder="Hi there" rows="6" required />
-        </div>
-      </CardContent>
-      <CardFooter class="p-4 md:p-6">
-        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
-        <Button class="w-full" variant="primary" type="submit" disabled>
-          <MailIcon class="mr-2" />
-          Send Message
-        </Button>
-      </CardFooter>
-    </Card>
-  </form>
+
+  <Card class="mx-auto max-w-md p-4 md:p-6" as="form">
+    <CardHeader class="mb-4 p-0">
+      <CardTitle>Get in Touch</CardTitle>
+      <CardDescription>Fill out the form below to contact me.</CardDescription>
+    </CardHeader>
+    <CardContent class="my-4 space-y-4 p-0">
+      <div class="space-y-2">
+        <Label for="name">Name</Label>
+        <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
+      </div>
+      <div class="space-y-2">
+        <Label for="email">Email</Label>
+        <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
+      </div>
+      <div class="space-y-2">
+        <Label for="message">Message</Label>
+        <Textarea id="message" placeholder="Hi there" rows="6" required />
+      </div>
+    </CardContent>
+    <CardFooter class="flex-col gap-4 p-0">
+      <div class="cf-turnstile w-full" data-sitekey={TURNSTILE_SITE_KEY} data-size="flexible"></div>
+      <Button class="w-full" variant="primary" type="submit" disabled>
+        <MailIcon class="mr-2" />
+        Send Message
+      </Button>
+    </CardFooter>
+  </Card>
 </BaseLayout>
 
 <script>
