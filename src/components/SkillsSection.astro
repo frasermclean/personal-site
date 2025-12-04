@@ -51,7 +51,7 @@ const skills = [
   <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     {
       skills.map(({ Icon, name, description }) => (
-        <Card class="text-center">
+        <Card class="text-center" as="li">
           <CardHeader class="p-4">
             {Icon && <Icon class="mx-auto text-secondary" width={32} height={32} stroke-width={1.5} />}
             <CardTitle>{name}</CardTitle>

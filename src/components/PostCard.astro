@@ -1,5 +1,6 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
+import { Card } from '@/components/starwind/card';
 import { POSTS_PATH } from '@/constants';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
@@ -29,9 +30,10 @@ const { readingTime } = remarkPluginFrontmatter;
 ---
 
 <a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
-  <article
+  <Card
+    as="article"
     class:list={[
-      'group flex flex-col gap-4 rounded-2xl border bg-card p-2 text-card-foreground shadow-sm transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
+      'group flex flex-col gap-4 p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl md:p-3',
       { 'md:flex-row': isFeatured, 'h-full min-h-96': isDefault }
     ]}
   >
@@ -68,5 +70,5 @@ const { readingTime } = remarkPluginFrontmatter;
         }
       </footer>
     </section>
-  </article>
+  </Card>
 </a>

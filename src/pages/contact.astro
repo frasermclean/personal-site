@@ -2,6 +2,7 @@
 import HeroSection from '@/components/HeroSection.astro';
 import { Button } from '@/components/starwind/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/starwind/dialog';
 import { Input } from '@/components/starwind/input';
 import { Label } from '@/components/starwind/label';
 import { Textarea } from '@/components/starwind/textarea';
@@ -20,87 +21,127 @@ const description =
 
 <BaseLayout {title} {description}>
   <HeroSection {title} {subtitle} />
-  <form class="mx-auto max-w-md">
-    <Card>
-      <CardHeader class="p-4 md:p-6">
-        <CardTitle>Get in Touch</CardTitle>
-        <CardDescription>Fill out the form below to contact me.</CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-4 p-4 md:p-6">
-        <div class="space-y-2">
-          <Label for="name">Name</Label>
-          <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
-        </div>
-        <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
-        </div>
-        <div class="space-y-2">
-          <Label for="message">Message</Label>
-          <Textarea id="message" placeholder="Hi there" rows="6" required />
-        </div>
-      </CardContent>
-      <CardFooter class="p-4 md:p-6">
-        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
-        <Button class="w-full" variant="primary" type="submit" disabled>
-          <MailIcon class="mr-2" />
-          Send Message
-        </Button>
-      </CardFooter>
-    </Card>
-  </form>
+
+  <Card class="mx-auto max-w-md p-4 md:p-6" as="form">
+    <CardHeader class="mb-4 p-0">
+      <CardTitle>Get in Touch</CardTitle>
+      <CardDescription>Fill out the form below to contact me.</CardDescription>
+    </CardHeader>
+    <CardContent class="my-4 space-y-4 p-0">
+      <div class="space-y-2">
+        <Label for="name">Name</Label>
+        <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
+      </div>
+      <div class="space-y-2">
+        <Label for="email">Email</Label>
+        <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
+      </div>
+      <div class="space-y-2">
+        <Label for="message">Message</Label>
+        <Textarea id="message" placeholder="Hi there" rows="6" required />
+      </div>
+    </CardContent>
+    <CardFooter class="flex-col gap-4 p-0">
+      <div class="cf-turnstile w-full" data-sitekey={TURNSTILE_SITE_KEY} data-size="flexible"></div>
+      <Button class="w-full" variant="primary" type="submit" disabled>
+        <MailIcon class="mr-2" />
+        Send Message
+      </Button>
+    </CardFooter>
+  </Card>
+
+  <Dialog id="result-dialog">
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Title</DialogTitle>
+        <DialogDescription>Description</DialogDescription>
+      </DialogHeader>
+      <p id="dialog-message" class="pt-4">Message</p>
+    </DialogContent>
+  </Dialog>
+
+  <script>
+    import { actions } from 'astro:actions';
+
+    const form = document.querySelector<HTMLFormElement>('form');
+    const nameInput = document?.querySelector<HTMLInputElement>('#name');
+    const emailInput = document?.querySelector<HTMLInputElement>('#email');
+    const messageInput = document?.querySelector<HTMLTextAreaElement>('#message');
+
+    nameInput?.addEventListener('input', validateForm);
+    emailInput?.addEventListener('input', validateForm);
+    messageInput?.addEventListener('input', validateForm);
+
+    function validateForm() {
+      const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+      if (!nameInput || !emailInput || !messageInput || !submitButton) {
+        console.error('Form elements not found');
+        return;
+      }
+      const isValid = nameInput.checkValidity() && emailInput.checkValidity() && messageInput.checkValidity();
+      submitButton.disabled = !isValid;
+    }
+
+    function getFormValues() {
+      const tokenInput = form?.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');
+      return {
+        name: nameInput?.value.trim(),
+        email: emailInput?.value.trim(),
+        message: messageInput?.value.trim(),
+        token: tokenInput?.value
+      };
+    }
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const { name, email, message, token } = getFormValues();
+
+      if (!name || !email || !message || !token) {
+        showDialog('Error', 'Form is incomplete', 'Please fill out all fields before submitting the form.');
+        return;
+      }
+
+      const { error } = await actions.processContactForm({ name, email, message, token });
+
+      if (error) {
+        console.error('Error submitting form:', error);
+        showDialog('Error', 'Submission ailed', 'There was an error sending your message. Please try again later.');
+        return;
+      }
+
+      form.reset();
+      showDialog(
+        'Success',
+        'Message sent successfully',
+        `Thank you for reaching out, ${name}. I'll get back to you as soon as possible!`
+      );
+    });
+
+    function showDialog(title: string, description: string, message: string) {
+      const dialog = document.querySelector<HTMLDialogElement>('#result-dialog dialog');
+      const backdrop = document.querySelector<HTMLElement>('#result-dialog .starwind-dialog-backdrop');
+      const titleElement = document.querySelector<HTMLElement>('#result-dialog [data-slot="dialog-title"]');
+      const descriptionElement = document.querySelector<HTMLElement>('#result-dialog [data-slot="dialog-description"]');
+      const messageElement = document.querySelector<HTMLElement>('#dialog-message');
+
+      if (!dialog || !backdrop || !titleElement || !descriptionElement || !messageElement) {
+        console.error('Dialog elements not found');
+        return;
+      }
+
+      // update dialog content
+      titleElement.textContent = title;
+      descriptionElement.textContent = description;
+      messageElement.textContent = message;
+
+      // show the dialog and backdrop
+      document.body.classList.add('overflow-hidden');
+      dialog.showModal();
+      dialog.dataset.state = 'open';
+      backdrop.classList.remove('hidden');
+      backdrop.dataset.state = 'open';
+    }
+  </script>
 </BaseLayout>
-
-<script>
-  import { actions } from 'astro:actions';
-
-  const form = document.querySelector<HTMLFormElement>('form');
-  const nameInput = document?.querySelector<HTMLInputElement>('#name');
-  const emailInput = document?.querySelector<HTMLInputElement>('#email');
-  const messageInput = document?.querySelector<HTMLTextAreaElement>('#message');
-
-  nameInput?.addEventListener('input', validateForm);
-  emailInput?.addEventListener('input', validateForm);
-  messageInput?.addEventListener('input', validateForm);
-
-  function validateForm() {
-    const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
-
-    if (!nameInput || !emailInput || !messageInput || !submitButton) {
-      console.error('Form elements not found');
-      return;
-    }
-    const isValid = nameInput.checkValidity() && emailInput.checkValidity() && messageInput.checkValidity();
-    submitButton.disabled = !isValid;
-  }
-
-  function getFormValues() {
-    const tokenInput = form?.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');
-    return {
-      name: nameInput?.value.trim(),
-      email: emailInput?.value.trim(),
-      message: messageInput?.value.trim(),
-      token: tokenInput?.value
-    };
-  }
-
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const { name, email, message, token } = getFormValues();
-
-    if (!name || !email || !message || !token) {
-      alert('Form is incomplete. Please fill out all fields.');
-      return;
-    }
-
-    const { error } = await actions.processContactForm({ name, email, message, token });
-
-    if (error) {
-      alert('There was an error sending your message. Please try again later.');
-      return;
-    }
-
-    form.reset();
-  });
-</script>
