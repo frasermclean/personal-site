@@ -7,18 +7,20 @@ import HandStopIcon from '@tabler/icons/outline/hand-stop.svg';
 import Image from 'astro/components/Image.astro';
 
 const title = 'About Me';
-const description = 'A little bit about who I am and what I do.';
+const subtitle = 'A little bit about who I am and what I do.';
+const description =
+  'Learn about Fraser McLean, a software developer and consultant based in Singapore, specialising in full-stack web development and cloud solution architecture.';
 ---
 
 <BaseLayout {title} {description}>
-  <HeroSection {title} subtitle={description} />
+  <HeroSection {title} {subtitle} />
   <div class="mx-auto flex max-w-3xl flex-col gap-8 text-center text-lg text-neutral-300">
     <section class="flex w-full flex-col-reverse gap-8 md:flex-row">
       <div class="grow">
         <SectionHeading Icon={HandStopIcon} text="Hi there!" />
         <p>
           My name is Fraser McLean, and I am a software developer with a passion for creating intuitive and efficient
-          applications. Welcome to my personal space on the web where I share my thoughts, projects, and experiences in
+          applications. Welcome to my little corner of the web where I share my thoughts, projects, and experiences in
           the world.
         </p>
       </div>
@@ -35,9 +37,9 @@ const description = 'A little bit about who I am and what I do.';
     <section>
       <SectionHeading text="Background" />
       <p>
-        I grew up in South Africa but have lived in the UK, Australia and now most recently in Singapore. I am currently
-        self-employed providing consulting services to a variety of clients. My expertise lies in full-stack web
-        development and cloud solution architecture.
+        I grew up in South Africa but have lived in the UK, spent almost 20 years in Australia and now most recently, I
+        am calling Singapore home. I am currently self-employed providing consulting services to a variety of clients.
+        My expertise lies in full-stack web development and cloud solution architecture.
       </p>
     </section>
   </div>
