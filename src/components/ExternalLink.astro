@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { class: className, href, ...rest } = Astro.props as Props;
+---
+
+<a
+  href={href}
+  class={className}
+  target="_blank"
+  rel="nofollow noopener noreferrer"
+  data-umami-event="external-link-click"
+  data-umami-event-url={href}
+  {...rest}
+>
+  <slot />
+</a>

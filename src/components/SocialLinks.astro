@@ -3,6 +3,7 @@ import GithubIcon from '@tabler/icons/outline/brand-github.svg';
 import InstagramIcon from '@tabler/icons/outline/brand-instagram.svg';
 import LinkedinIcon from '@tabler/icons/outline/brand-linkedin.svg';
 import YouTubeIcon from '@tabler/icons/outline/brand-youtube.svg';
+import ExternalLink from './ExternalLink.astro';
 
 interface Props {
   class: string;
@@ -21,9 +22,9 @@ const links = [
 <nav class={className}>
   {
     links.map(({ href, Icon, label }) => (
-      <a href={href} target="_blank" class="text-neutral-50 hover:text-accent" rel="nofollow" aria-label={label}>
+      <ExternalLink href={href} class="text-neutral-50 hover:text-accent" aria-label={label}>
         <Icon width={28} height={28} stroke-width={1.25} />
-      </a>
+      </ExternalLink>
     ))
   }
 </nav>
