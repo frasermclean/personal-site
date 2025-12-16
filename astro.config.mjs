@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import rehypeFigure from 'rehype-figure';
+import { remarkExternalLinks } from './src/lib/remark-external-links.ts';
 import { remarkReadingTime } from './src/lib/remark-reading-time.js';
 import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 
@@ -35,7 +36,7 @@ export default defineConfig({
   },
   integrations: [sitemap(), mdx(), preact()],
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkUpdatedDate],
+    remarkPlugins: [remarkReadingTime, remarkUpdatedDate, remarkExternalLinks],
     rehypePlugins: [rehypeFigure],
     shikiConfig: {
       themes: {
