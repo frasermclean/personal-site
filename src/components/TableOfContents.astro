@@ -44,7 +44,12 @@ const tocHeadings = [...headings, ...additionalLinks];
         {
           tocHeadings.map((heading) => (
             <li class={`relative depth-${heading.depth}`}>
-              <a href={`#${heading.slug}`} class="hover:text-accent hover:underline">
+              <a
+                href={`#${heading.slug}`}
+                class="hover:text-accent hover:underline"
+                data-umami-event="toc-link-click"
+                data-umami-event-slug={heading.slug}
+              >
                 {heading.text}
               </a>
             </li>
