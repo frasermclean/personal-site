@@ -5,12 +5,17 @@ import type { SvgComponent } from 'astro/types';
 interface Props {
   Icon?: SvgComponent & ImageMetadata;
   text: string;
+  href?: string;
 }
 
-const { Icon, text } = Astro.props;
+const { Icon, text, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
 ---
 
-<div class="mb-4 flex items-center justify-center gap-2 text-secondary">
+<Tag
+  href={href}
+  class:list={['mb-4 flex items-center justify-center gap-2 text-secondary', { 'hover:underline': href }]}
+>
   {Icon && <Icon class="h-6 w-6 md:h-8 md:w-8" stroke-width={1.5} />}
   <h2 class="font-heading text-2xl font-semibold text-secondary md:text-4xl">{text}</h2>
-</div>
+</Tag>
