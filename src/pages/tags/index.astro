@@ -1,0 +1,53 @@
+---
+import HeroSection from '@/components/HeroSection.astro';
+import RoundedLink from '@/components/RoundedLink.astro';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/starwind/table';
+import { TAGS_PATH } from '@/constants';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Tags';
+const subtitle = 'A list of all tags used in my blog posts.';
+
+const posts = await getCollection('posts');
+const tagCounts = posts
+  .flatMap((post) => post.data.tags)
+  .reduce(
+    (acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+const tagsWithCounts = Object.entries(tagCounts).sort(([tagA], [tagB]) =>
+  tagA.localeCompare(tagB, undefined, { sensitivity: 'base' })
+);
+---
+
+<BaseLayout {title} description={subtitle}>
+  <HeroSection {title} {subtitle} />
+
+  <section class="my-8">
+    <Table class="mx-auto max-w-md">
+      <TableHeader>
+        <TableRow class="font-heading tracking-wide uppercase">
+          <TableHead class="text-secondary">Tag</TableHead>
+          <TableHead class="text-right text-secondary">Posts</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {
+          tagsWithCounts.map(([tag, count]) => (
+            <TableRow>
+              <TableCell>
+                <RoundedLink href={`${TAGS_PATH}/${tag}`}>{tag}</RoundedLink>
+              </TableCell>
+              <TableCell class="text-right">{count}</TableCell>
+            </TableRow>
+          ))
+        }
+      </TableBody>
+    </Table>
+  </section>
+</BaseLayout>
