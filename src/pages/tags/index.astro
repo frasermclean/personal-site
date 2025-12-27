@@ -6,8 +6,8 @@ import { TAGS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const title = 'Tags';
-const subtitle = 'A list of all tags used in my blog posts.';
+const title = 'List of Tags';
+const subtitle = 'A list of unique tags used in across all blog posts.';
 
 const posts = await getCollection('posts');
 const tagCounts = posts
