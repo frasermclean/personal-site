@@ -1,4 +1,5 @@
 ---
+import { TAGS_PATH } from '@/constants';
 import TagIcon from '@tabler/icons/outline/tag.svg';
 import { getCollection } from 'astro:content';
 import RoundedLink from './RoundedLink.astro';
@@ -26,9 +27,9 @@ const popularTags = Object.entries(tagCounts)
 ---
 
 <section class="flex h-full flex-col">
-  <SectionHeading Icon={TagIcon} text="Popular Tags" />
+  <SectionHeading Icon={TagIcon} text="Tags" href={TAGS_PATH} />
 
   <div class="flex h-full grow flex-wrap items-center justify-center gap-2">
-    {popularTags.map((tag) => <RoundedLink href={`/tags/${tag}`}>{tag}</RoundedLink>)}
+    {popularTags.map((tag) => <RoundedLink href={`${TAGS_PATH}/${tag}`}>{tag}</RoundedLink>)}
   </div>
 </section>
