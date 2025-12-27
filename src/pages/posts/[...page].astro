@@ -25,7 +25,7 @@ const description =
   'A collection of blog posts on various topics including web development, programming, and technology.';
 ---
 
-<PostListLayout {title} {description} {page} listTitle="Recent Posts" paginationBasePath={`${POSTS_PATH}`}>
+<PostListLayout {title} {description} {page} listTitle="Recent" paginationBasePath={`${POSTS_PATH}`}>
   {
     page.currentPage === 1 && (
       <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
