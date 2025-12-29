@@ -39,9 +39,15 @@ You will need to configure a VPN server on your homelab and install a VPN client
 
 ## Port Forwarding
 
-Port forwarding is the original and most straightforward method of exposing applications. It requires that you have a publicly accessible IP address and that you configure your router to forward incoming traffic on specific ports to the internal IP address and port of your self-hosted application. 
+Port forwarding is the original and most straightforward method of exposing applications. It requires that you have a [publicly accessible IP address](#public-ip-address) and that you configure your router to forward incoming traffic on specific ports to the internal IP address and port of your self-hosted application.
 
-While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule. A [reverse proxy](#reverse-proxy) is often used in conjunction with port forwarding to manage multiple applications, provide SSL/TLS encryption and adding authorization layers.
+![Simple port forwarding example with multiple applications](port-forwarding-example.png)
+
+In the example above, the router is configured to forward traffics on ports `8080`, `8081`, and `3000` to the respective applications running on the homelab servers. Therefore, accessing `http://12.87.96.2:8080` from the internet would route the request to the first application.
+
+While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule.
+
+A [reverse proxy](#reverse-proxy) is often used in conjunction with port forwarding to manage multiple applications, provide SSL/TLS encryption and adding authorization layers.
 
 ### Port Forwarding Pros
 - Initially simple to set up and does not require additional software or services.

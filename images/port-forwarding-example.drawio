@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0" version="29.2.9">
+  <diagram name="Page-1" id="oL3LUnaFerM0BOrbsi3p">
+    <mxGraphModel dx="699" dy="679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=1 4;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontSize=14;spacingBottom=0;" value="Private Network" vertex="1">
+          <mxGeometry height="240" width="290" x="590" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="eiM0vpI2SDL8AnYc-MX_-7" parent="1" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/laptop_client.svg;strokeColor=light-dark(#000000,#999999);" value="Internet Client&lt;br&gt;Public&amp;nbsp;IP: 140.56.72.1" vertex="1">
+          <mxGeometry height="65" width="58.5" x="200" y="367.5" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-3" edge="1" parent="1" source="eiM0vpI2SDL8AnYc-MX_-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="fOjnue2FI-_sqgE1qcBk-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eiM0vpI2SDL8AnYc-MX_-9" parent="1" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/internet_cloud.svg;strokeColor=light-dark(#000000,#999999);" value="Internet" vertex="1">
+          <mxGeometry height="90" width="142.86" x="350" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="eiM0vpI2SDL8AnYc-MX_-16" parent="1" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/generic_node.svg;strokeColor=light-dark(#000000,#999999);" value="App 1: 192.168.0.2:8080" vertex="1">
+          <mxGeometry height="30" width="30.61" x="780" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="eiM0vpI2SDL8AnYc-MX_-18" parent="1" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/generic_node.svg;strokeColor=light-dark(#000000,#999999);" value="App 2: 192.168.0.2:8081" vertex="1">
+          <mxGeometry height="30" width="30.61" x="780" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="eiM0vpI2SDL8AnYc-MX_-19" parent="1" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/generic_node.svg;strokeColor=light-dark(#000000,#999999);" value="App 3: 192.168.0.3:3000" vertex="1">
+          <mxGeometry height="30" width="30.61" x="780" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-4" edge="1" parent="1" source="fOjnue2FI-_sqgE1qcBk-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="eiM0vpI2SDL8AnYc-MX_-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-5" edge="1" parent="1" source="fOjnue2FI-_sqgE1qcBk-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="eiM0vpI2SDL8AnYc-MX_-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-6" edge="1" parent="1" source="fOjnue2FI-_sqgE1qcBk-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="eiM0vpI2SDL8AnYc-MX_-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-1" parent="1" style="image;html=1;image=img/lib/clip_art/networking/Router_Icon_128x128.png" value="Router&lt;div&gt;Public IP: 12.87.96.2&lt;/div&gt;&lt;div&gt;Private IP: 192.168.0.1&lt;/div&gt;&lt;div&gt;Forwarded Ports: 8080,8081,3000&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="550" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="fOjnue2FI-_sqgE1qcBk-2" edge="1" parent="1" source="eiM0vpI2SDL8AnYc-MX_-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.556;entryDx=0;entryDy=0;entryPerimeter=0;" target="eiM0vpI2SDL8AnYc-MX_-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
