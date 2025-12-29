@@ -1,6 +1,6 @@
 ---
 title: Remotely accessing self-hosted applications
-description: Comparison of private and public access methods for homelab applications, from VPNs and Tailscale to port forwarding and Cloudflare Tunnel.
+description: Comparison of private and public access methods for self-hosted applications, from VPNs and Tailscale to port forwarding and Cloudflare Tunnel.
 publishDate: 2025-12-22T19:30:17+13:00
 heroImage: 
   src: badger-laptop.jpg
