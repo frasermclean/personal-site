@@ -36,7 +36,21 @@ You will need to configure a VPN server on your homelab and install a VPN client
 
 ### TailScale
 
-[TailScale](https://tailscale.com) is a very popular modern VPN solution that simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices, allowing you to access your self-hosted applications without the need for complex VPN configurations. TailScale automatically handles NAT traversal and firewall rules, making it easy to set up and use.
+[TailScale](https://tailscale.com) is a very popular modern VPN solution that greatly simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices. Notably, it can get around CGNAT and firewall restrictions that typically hinder traditional VPNs. It is particularly well-suited for homelabs due to its ease of setup and use.
+
+TailScale creates a virtual network adapter on each device and assigns each device a fixed unique IP address in the 100.x.x.x range, allowing them to communicate securely over the internet as if they were on the same local network.
+
+![TailScale machines example](tailscale-machines.png)
+
+In the example above, each device is connected to the TailScale network, allowing you to access the machine directly using its TailScale IP address (e.g. `100.121.214.63`) or MagicDNS (e.g. `lurker`) name.
+
+#### TailScale Pros
+- Extremely easy to set up and use, with minimal configuration required.
+- Works seamlessly across different networks and firewalls, including CGNAT.
+- Multiplatform support, including Windows, macOS, Linux, iOS, and Android.
+  
+#### TailScale Cons
+- TailScale requires an account with TailScale, which is a third-party service. While the service is free for personal use with some limitations, it does introduce a dependency on an external provider.
 
 ## Public Access Methods
 
