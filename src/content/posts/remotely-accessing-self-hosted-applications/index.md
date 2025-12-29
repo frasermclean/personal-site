@@ -65,14 +65,17 @@ You may want to expose your self-hosted applications to the public internet. For
 
 Port forwarding is the original and most straightforward method of exposing applications. It requires that you have a publicly accessible IP address and that you configure your router to forward incoming traffic on specific ports to the internal IP address and port of your self-hosted application. 
 
-While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule.
+While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule. A [reverse proxy](#reverse-proxy) is often used in conjunction with port forwarding to manage multiple applications, provide SSL/TLS encryption and adding authorization layers.
 
-#### Port Forwarding Considerations
+#### Port Forwarding Pros
+- Initially simple to set up and does not require additional software or services.
+- Direct access to applications without the need for intermediary services.
 
+#### Port Forwarding Cons
 - Poking holes in your firewall (opening ports) can expose your network to automated attacks from bots scanning for vulnerabilities. Ensure that any exposed services are kept up to date and secured with strong authentication.
 - Dynamic IP addresses can complicate access. If your ISP changes your public IP address, you may need to use a [Dynamic DNS](#dynamic-dns) service to keep track of your current IP.
 - Reveals your public IP address, which can be a privacy concern.
-- SSL/TLS encryption must be managed manually, often requiring the use of reverse proxies and certificate management tools like [Let's Encrypt](https://letsencrypt.org).
+- SSL/TLS encryption must be managed manually, often requiring the use of [reverse proxies](#reverse-proxy) and certificate management tools like [Let's Encrypt](https://letsencrypt.org).
 
 ### Cloudflare Tunnel
 
@@ -100,3 +103,9 @@ Dynamic DNS (DDNS) is a service that automatically updates the DNS records for a
 
 ### CGNAT
 CGNAT (Carrier-Grade Network Address Translation) is a technique used by ISPs to conserve IPv4 addresses by allowing multiple customers to share a single public IP address. While this helps alleviate the shortage of IPv4 addresses, it can complicate remote access to self-hosted applications, as traditional port forwarding may not work. [Read more about CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT).
+
+### Reverse Proxy
+A reverse proxy is a server that sits between client devices and backend servers, forwarding client requests to the appropriate backend server and returning the server's response to the client. Reverse proxies are commonly used to improve security, load balancing, and performance for web applications. Popular reverse proxy software includes:
+- [Nginx](https://www.nginx.com/) 
+- [Traefik](https://traefik.io/)
+- [Caddy](https://caddyserver.com/)
