@@ -29,7 +29,12 @@ It's a great option if you predominantly access applications locally from truste
 
 You will need to configure a VPN server on your homelab and install a VPN client on your remote device. A lot of popular consumer routers have built-in VPN server capabilities, or you can use dedicated software like [OpenVPN](https://openvpn.net) or [WireGuard](https://www.wireguard.com).
 
-#### VPN Considerations
+#### VPN Pros
+- Strong security and privacy, as all traffic is encrypted.
+- Access to the entire home network, allowing you to use local services and resources.
+- No need to expose individual applications to the internet.
+
+#### VPN Cons
 - Requires publicly routable IP address and/or Dynamic DNS service to connect from outside your home network. If your ISP imposes CGNAT, VPN access may not be possible.
 - VPN clients must be installed and configured on each remote device. The user of each remote device needs to initiate the VPN connection before accessing applications. This can be less convenient than other methods that provide direct access.
 - Care should be taken around VPN client credentials as they can provide access to your entire home network if they are compromised.
