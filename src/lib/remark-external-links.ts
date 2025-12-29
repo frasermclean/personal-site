@@ -7,7 +7,7 @@ export function remarkExternalLinks() {
       const url = link.url;
 
       // ignore internal links
-      if (!url || (url.startsWith('/') && !url.startsWith('#') && !url.startsWith('mailto:'))) {
+      if (!url || url.startsWith('/') || url.startsWith('#') || url.startsWith('mailto:')) {
         return;
       }
 
