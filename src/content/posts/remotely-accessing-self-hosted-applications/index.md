@@ -91,11 +91,14 @@ As pictured in the example above, you can see how the published route `example.c
 
 As implied in the name, Cloudflare Tunnel relies on Cloudflare's infrastructure, so you'll need to have a Cloudflare account and configure your domain to use Cloudflare's DNS services. However, the benefits of not having to manage port forwarding or expose your public IP address often outweigh this dependency.
 
+### Cloudflare Access
+[Cloudflare Access](https://www.cloudflare.com/products/cloudflare-access/) is an additional security layer that can be used in conjunction with Cloudflare Tunnel. It allows you to enforce authentication and authorization policies for accessing your self-hosted applications. With Cloudflare Access, you can require users to log in using various identity providers (like Google, GitHub, or even your own self-hosted provider) before they can access your applications. This adds an extra layer of security, ensuring that only authorized users can reach your services.
+
 ### Cloudflare Tunnel Pros
 - No need to open ports on your router, enhancing security.
 - Easily manage multiple applications through a single tunnel configuration.
 - Built-in SSL/TLS encryption and DDoS protection through Cloudflare's network.
-- Access to applications can be controlled via [Cloudflare Access](https://www.cloudflare.com/products/cloudflare-access/) for added security.
+- Access to applications can be controlled via **Cloudflare Access** for added security.
 - Can be run in a Docker container, simplifying deployment and integration with existing applications.
 
 ### Cloudflare Tunnel Cons
