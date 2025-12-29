@@ -65,7 +65,7 @@ A [reverse proxy](#reverse-proxy) is often used in conjunction with port forward
 
 [TailScale](https://tailscale.com) is a very popular modern VPN solution that greatly simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices. Notably, it can get around [CGNAT](#cgnat) and firewall restrictions that typically hinder traditional VPNs. It is particularly well-suited for homelabs due to its ease of setup and use.
 
-TailScale creates a virtual network adapter on each device and assigns each device a fixed unique IP address in the 100.x.x.x range, allowing them to communicate securely over the internet as if they were on the same local network.
+TailScale creates a virtual network adapter on each device and assigns each device a fixed unique IP address in the `100.x.x.x` range, allowing them to communicate securely over the internet as if they were on the same local network.
 
 ![TailScale machines example](tailscale-machines.png)
 
@@ -116,9 +116,9 @@ As implied in the name, Cloudflare Tunnel relies on Cloudflare's infrastructure,
 
 ![Pangolin logo](../../../assets/icons/pangolin.png)
 
-[Pangolin](https://pangolin.net) is an awesome open-source alternative to Cloudflare Tunnel that allows you to expose your self-hosted applications securely without opening ports on your router. Similar to Cloudflare Tunnel, Pangolin creates an outbound connection from your homelab to a public relay server, which then routes incoming traffic to your application. The server includes a built-in reverse proxy to handle multiple application routes along with SSL/TLS encryption. It also supports authentication mechanisms to restrict access to your applications.
+[Pangolin](https://pangolin.net) is an awesome open-source project that allows you to expose your self-hosted applications securely without opening ports on your router. Similar to **Cloudflare Tunnel**, Pangolin creates an outbound connection from your homelab to a public relay server, which then routes incoming traffic to your application. The server includes a built-in reverse proxy to handle multiple application routes along with SSL/TLS encryption. It also includes rich access control mechanisms to restrict access to your applications to authorized users only.
 
-The key difference is that Pangolin can be self-hosted, meaning you can run your own server on a [VPS](#vps) to act as the relay. This gives you ultimate control over your data and eliminates dependency on third-party services.
+The key difference is that Pangolin can be self-hosted, meaning you can run your own server on a [VPS](#vps) to act as the relay. This gives you ultimate control over your data and eliminates dependency on third-party services. Pangolin also offers a [paid hosted service](https://pangolin.net/pricing) if you prefer not to manage your own server.
 
 ### Pangolin Pros
 - No need to open ports on your router, enhancing security.
