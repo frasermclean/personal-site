@@ -1,6 +1,6 @@
 ---
-title: Exposing and accessing self-hosted applications
-description: Comparing private and public access methods for homelab applications, from VPNs and Tailscale to port forwarding and Cloudflare Tunnel.
+title: Remotely accessing self-hosted applications
+description: Comparison of private and public access methods for homelab applications, from VPNs and Tailscale to port forwarding and Cloudflare Tunnel.
 publishDate: 2025-12-22T19:30:17+13:00
 heroImage: 
   src: badger-laptop.jpg
@@ -11,17 +11,26 @@ tags: [ self-hosted, docker, homelab, networking, vpn, cloudflare, pangolin ]
 
 ## Introduction
 
-I've been running a homelab in various forms for several years now, hosting applications such as file servers, media servers, home automation platforms, and development environments. One of the challenges I've faced is determining the best way to access these applications, both from within my local network and remotely over the internet. 
+I've been running a homelab in various forms for several years now, hosting applications such as file servers, media servers, home automation platforms, and development environments. One of the challenges I've faced over the years is determining the best way to access these applications, both from within my local network and remotely over the internet. 
 
-Recently, I've been researching and experimenting with different methods to expose and access my self-hosted applications, and in this post, I want to share my findings and experiences.
+While there are many options available, each comes with its own set of trade-offs in terms of security, ease of use, and cost. I wanted to share some of the methods I've explored for remotely accessing self-hosted applications, along with their pros and cons.
 
 ## Private Access Methods
 
-In many cases, you may want to keep your self-hosted applications private and only accessible from within your local network or through secure remote access methods. Here are some common private access methods:
+In many cases, you may wish to keep your self-hosted applications private and only accessible to yourself or a select group of individuals. Here are some common private access methods:
 
 ### VPN (Virtual Private Network)
 
-Used widely for secure remote access, a VPN allows you to create a secure connection to your homelab network from anywhere in the world. By connecting to the VPN, you can access your self-hosted applications as if you were on the local network. This method provides strong security and privacy, as all traffic is encrypted. You will need to configure a VPN server on your homelab and install a VPN client on your remote device. A lot of popular consumer routers have built-in VPN server capabilities, or you can use dedicated software like [OpenVPN](https://openvpn.net) or [WireGuard](https://www.wireguard.com).
+Used widely for secure remote access, a VPN allows you to create a secure connection to your homelab network from anywhere in the world. By connecting to the VPN, you can access your self-hosted applications as if you were on the local network. This method provides strong security and privacy, as all traffic is encrypted. 
+
+It's a great option if you predominantly access applications locally from trusted devices and only occasionally need remote access.
+
+You will need to configure a VPN server on your homelab and install a VPN client on your remote device. A lot of popular consumer routers have built-in VPN server capabilities, or you can use dedicated software like [OpenVPN](https://openvpn.net) or [WireGuard](https://www.wireguard.com).
+
+#### VPN Considerations
+- Requires publicly routable IP address and/or Dynamic DNS service to connect from outside your home network. If your ISP imposes CGNAT, VPN access may not be possible.
+- VPN clients must be installed and configured on each remote device. The user of each remote device needs to initiate the VPN connection before accessing applications. This can be less convenient than other methods that provide direct access.
+- Care should be taken around VPN client credentials as they can provide access to your entire home network if they are compromised.
 
 ### TailScale
 
