@@ -35,13 +35,13 @@ You will need to configure a VPN server on your homelab and install a VPN client
 - No need to expose individual applications to the internet.
 
 #### VPN Cons
-- Requires publicly routable IP address and/or Dynamic DNS service to connect from outside your home network. If your ISP imposes CGNAT, VPN access may not be possible.
+- Requires a [publicly routable IP address](#public-ip-address) and/or [Dynamic DNS](#dynamic-dns) service to connect from outside your home network. If your ISP imposes [CGNAT](#cgnat), VPN access may not be possible.
 - VPN clients must be installed and configured on each remote device. The user of each remote device needs to initiate the VPN connection before accessing applications. This can be less convenient than other methods that provide direct access.
 - Care should be taken around VPN client credentials as they can provide access to your entire home network if they are compromised.
 
 ### TailScale
 
-[TailScale](https://tailscale.com) is a very popular modern VPN solution that greatly simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices. Notably, it can get around CGNAT and firewall restrictions that typically hinder traditional VPNs. It is particularly well-suited for homelabs due to its ease of setup and use.
+[TailScale](https://tailscale.com) is a very popular modern VPN solution that greatly simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices. Notably, it can get around [CGNAT](#cgnat) and firewall restrictions that typically hinder traditional VPNs. It is particularly well-suited for homelabs due to its ease of setup and use.
 
 TailScale creates a virtual network adapter on each device and assigns each device a fixed unique IP address in the 100.x.x.x range, allowing them to communicate securely over the internet as if they were on the same local network.
 
@@ -70,7 +70,7 @@ While this method is simple to set up, it has several drawbacks. It exposes your
 #### Port Forwarding Considerations
 
 - Poking holes in your firewall (opening ports) can expose your network to automated attacks from bots scanning for vulnerabilities. Ensure that any exposed services are kept up to date and secured with strong authentication.
-- Dynamic IP addresses can complicate access. If your ISP changes your public IP address, you may need to use a Dynamic DNS service to keep track of your current IP.
+- Dynamic IP addresses can complicate access. If your ISP changes your public IP address, you may need to use a [Dynamic DNS](#dynamic-dns) service to keep track of your current IP.
 - Reveals your public IP address, which can be a privacy concern.
 - SSL/TLS encryption must be managed manually, often requiring the use of reverse proxies and certificate management tools like [Let's Encrypt](https://letsencrypt.org).
 
@@ -87,3 +87,16 @@ Cloudflare Tunnel provides several benefits, including built-in DDoS protection,
 ### Pangolin
 
 [Pangolin](https://pangolin.net) is an open-source alternative to Cloudflare Tunnel that allows you to expose your self-hosted applications securely without opening ports on your router. Similar to Cloudflare Tunnel, Pangolin creates an outbound connection from your homelab to a public relay server, which then routes incoming traffic to your application.
+
+## Networking Terminology
+
+### Public IP Address
+A public IP address is an IP address that is accessible from the internet. It is assigned by your Internet Service Provider (ISP) and is used to identify your network on the global internet. Public IP addresses are usually assigned dynamically, meaning they can change over time, although some ISPs offer static public IP addresses for an additional fee.
+
+### Dynamic DNS
+Dynamic DNS (DDNS) is a service that automatically updates the DNS records for a domain name whenever the associated IP address changes. This is particularly useful for home networks that often have dynamic public IP addresses assigned by ISPs. By using a DDNS service, you can access your self-hosted applications using a consistent domain name, even if your public IP address changes. Some popular DDNS providers are:
+- [No-IP](https://www.noip.com/) 
+- [FreeDNS](https://freedns.afraid.org/)
+
+### CGNAT
+CGNAT (Carrier-Grade Network Address Translation) is a technique used by ISPs to conserve IPv4 addresses by allowing multiple customers to share a single public IP address. While this helps alleviate the shortage of IPv4 addresses, it can complicate remote access to self-hosted applications, as traditional port forwarding may not work. [Read more about CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT).
