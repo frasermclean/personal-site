@@ -6,7 +6,7 @@ heroImage:
   src: badger-laptop.jpg
   alt: A cute badger using a laptop
 comments: true
-tags: [ self-hosted, docker, homelab, networking, vpn, cloudflare, pangolin ]
+tags: [ self-hosted, docker, homelab, networking, vpn, cloudflare, pangolin, tailscale, dns ]
 ---
 
 ## Introduction
@@ -37,6 +37,22 @@ You will need to configure a VPN server on your homelab and install a VPN client
 - VPN clients must be installed and configured on each remote device. The user of each remote device needs to initiate the VPN connection before accessing applications. This can be less convenient than other methods that provide direct access.
 - Care should be taken around VPN client credentials as they can provide access to your entire home network if they are compromised.
 
+## Port Forwarding
+
+Port forwarding is the original and most straightforward method of exposing applications. It requires that you have a publicly accessible IP address and that you configure your router to forward incoming traffic on specific ports to the internal IP address and port of your self-hosted application. 
+
+While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule. A [reverse proxy](#reverse-proxy) is often used in conjunction with port forwarding to manage multiple applications, provide SSL/TLS encryption and adding authorization layers.
+
+### Port Forwarding Pros
+- Initially simple to set up and does not require additional software or services.
+- Direct access to applications without the need for intermediary services.
+
+### Port Forwarding Cons
+- Opening ports on your router can expose your network to automated attacks from bots scanning for vulnerabilities. Ensure that any exposed services are kept up to date and secured with strong authentication!
+- Dynamic IP addresses can complicate access. If your ISP changes your public IP address, you may need to use a [Dynamic DNS](#dynamic-dns) service to keep track of your current IP.
+- Reveals your public IP address, which can be a privacy concern.
+- SSL/TLS encryption must be managed manually, often requiring the use of [reverse proxies](#reverse-proxy) and certificate management tools like [Let's Encrypt](https://letsencrypt.org).
+
 ## TailScale
 
 ![TailScale logo](../../../assets/icons/tailscale.png)
@@ -62,22 +78,6 @@ internet to specific applications on your TailScale-connected devices without ne
 - TailScale requires an account with TailScale, which is a third-party service. While the service is free for personal use with some limitations, it does introduce a dependency on an external provider.
 - You need to make use of the domain name provided by TailScale, which may not be ideal for all users.
 - Traffic sent over a Funnel is subject to non-configurable bandwidth limits. This may not be suitable for high-bandwidth applications like video streaming.
-
-## Port Forwarding
-
-Port forwarding is the original and most straightforward method of exposing applications. It requires that you have a publicly accessible IP address and that you configure your router to forward incoming traffic on specific ports to the internal IP address and port of your self-hosted application. 
-
-While this method is simple to set up, it has several drawbacks. It exposes your applications directly to the internet, which can be a security risk if not properly configured. Additionally, managing multiple applications can become cumbersome, as each application requires its own port forwarding rule. A [reverse proxy](#reverse-proxy) is often used in conjunction with port forwarding to manage multiple applications, provide SSL/TLS encryption and adding authorization layers.
-
-### Port Forwarding Pros
-- Initially simple to set up and does not require additional software or services.
-- Direct access to applications without the need for intermediary services.
-
-### Port Forwarding Cons
-- Opening ports on your router can expose your network to automated attacks from bots scanning for vulnerabilities. Ensure that any exposed services are kept up to date and secured with strong authentication!
-- Dynamic IP addresses can complicate access. If your ISP changes your public IP address, you may need to use a [Dynamic DNS](#dynamic-dns) service to keep track of your current IP.
-- Reveals your public IP address, which can be a privacy concern.
-- SSL/TLS encryption must be managed manually, often requiring the use of [reverse proxies](#reverse-proxy) and certificate management tools like [Let's Encrypt](https://letsencrypt.org).
 
 ## Cloudflare Tunnel
 
