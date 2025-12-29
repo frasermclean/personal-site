@@ -23,9 +23,11 @@ In many cases, you may wish to keep your self-hosted applications private and on
 
 Used widely for secure remote access, a VPN allows you to create a secure connection to your homelab network from anywhere in the world. By connecting to the VPN, you can access your self-hosted applications as if you were on the local network. This method provides strong security and privacy, as all traffic is encrypted.
 
-![Simplified VPN Diagram](vpn-example.png)
-
 It's a great option if you predominantly access applications locally from trusted devices and only occasionally need remote access.
+
+![Simple VPN example with multiple applications](vpn-example.png)
+
+In the example above, a user on the laptop connects to the homelab VPN server. The VPN server provides with with an IP address of `192.168.0.128`, which allows them to access the applications running on the homelab network (192.168.0.x).
 
 You will need to configure a VPN server on your homelab and install a VPN client on your remote device. A lot of popular consumer routers have built-in VPN server capabilities, or you can use dedicated software like [OpenVPN](https://openvpn.net) or [WireGuard](https://www.wireguard.com).
 
