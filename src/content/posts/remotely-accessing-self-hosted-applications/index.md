@@ -41,6 +41,8 @@ You will need to configure a VPN server on your homelab and install a VPN client
 
 ### TailScale
 
+![TailScale logo](../../../assets/icons/tailscale.png)
+
 [TailScale](https://tailscale.com) is a very popular modern VPN solution that greatly simplifies the process of creating a secure network between your devices. It uses the WireGuard protocol to provide encrypted connections between all your devices. Notably, it can get around [CGNAT](#cgnat) and firewall restrictions that typically hinder traditional VPNs. It is particularly well-suited for homelabs due to its ease of setup and use.
 
 TailScale creates a virtual network adapter on each device and assigns each device a fixed unique IP address in the 100.x.x.x range, allowing them to communicate securely over the internet as if they were on the same local network.
@@ -81,15 +83,44 @@ While this method is simple to set up, it has several drawbacks. It exposes your
 
 [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) (formerly known as Argo Tunnel) is a service that allows you to securely expose your self-hosted applications to the internet without opening any ports on your router. It achieves this by creating an outbound connection from your homelab to Cloudflare's network, which then routes incoming traffic to your application.
 
-![Cloudflare Tunnel example](./cloudflare-tunnel-example.png)
+What's really nifty about Cloudflare Tunnel is that it can run in a Docker container, making it easy to connect to your existing applications via Docker networking. You can define multiple application routes in a single tunnel configuration, allowing you to expose several applications through different subdomains or paths.
 
-As pictured in the example above, you need to define published application routes that map to your internal services.
+![Cloudflare Tunnel published application routes example](./cloudflare-tunnel-example.png)
 
-Cloudflare Tunnel provides several benefits, including built-in DDoS protection, SSL encryption, and easy management through the Cloudflare dashboard. It also allows you to use custom domains and take advantage of Cloudflare's performance optimizations.
+As pictured in the example above, you can see how the published route `example.com` maps to the homepage application running at `http://homepage:3000`.
+
+As implied in the name, Cloudflare Tunnel relies on Cloudflare's infrastructure, so you'll need to have a Cloudflare account and configure your domain to use Cloudflare's DNS services. However, the benefits of not having to manage port forwarding or expose your public IP address often outweigh this dependency.
+
+#### Cloudflare Tunnel Pros
+- No need to open ports on your router, enhancing security.
+- Easily manage multiple applications through a single tunnel configuration.
+- Built-in SSL/TLS encryption and DDoS protection through Cloudflare's network.
+- Access to applications can be controlled via [Cloudflare Access](https://www.cloudflare.com/products/cloudflare-access/) for added security.
+- Can be run in a Docker container, simplifying deployment and integration with existing applications.
+
+#### Cloudflare Tunnel Cons
+- Dependency on Cloudflare's services, which may not be suitable for all users or use cases. Theorietically, if Cloudflare experiences an outage, your applications may become inaccessible. Additionally, there are privacy considerations when routing traffic through a third-party service.
+- Potential latency introduced by routing traffic through Cloudflare's network, although this is often negligible for most applications.
+- Free tier term of service has limitations on features and usage such as video streaming, which may limit certain use cases.
 
 ### Pangolin
 
-[Pangolin](https://pangolin.net) is an open-source alternative to Cloudflare Tunnel that allows you to expose your self-hosted applications securely without opening ports on your router. Similar to Cloudflare Tunnel, Pangolin creates an outbound connection from your homelab to a public relay server, which then routes incoming traffic to your application.
+![Pangolin logo](../../../assets/icons/pangolin.png)
+
+[Pangolin](https://pangolin.net) is an awesome open-source alternative to Cloudflare Tunnel that allows you to expose your self-hosted applications securely without opening ports on your router. Similar to Cloudflare Tunnel, Pangolin creates an outbound connection from your homelab to a public relay server, which then routes incoming traffic to your application. The server includes a built-in reverse proxy to handle multiple application routes along with SSL/TLS encryption. It also supports authentication mechanisms to restrict access to your applications.
+
+The key difference is that Pangolin can be self-hosted, meaning you can run your own server on a [VPS](#vps) to act as the relay. This gives you ultimate control over your data and eliminates dependency on third-party services.
+
+#### Pangolin Pros
+- No need to open ports on your router, enhancing security.
+- Can be self-hosted, giving you full control over your data and eliminating third-party dependencies.
+- Built-in certificate management for handling multiple applications with SSL/TLS encryption.
+- Authentication mechanisms to restrict access to your applications.
+
+#### Pangolin Cons
+- Self-hosting requires more technical knowledge and effort to set up and maintain.
+- Financial costs associated with running a VPS to host the relay server.
+- Potential latency introduced by routing traffic through the relay server, depending on its location and performance. Ideally, the VPS should be geographically close to your homelab for optimal performance.
 
 ## Networking Terminology
 
@@ -109,3 +140,9 @@ A reverse proxy is a server that sits between client devices and backend servers
 - [Nginx](https://www.nginx.com/) 
 - [Traefik](https://traefik.io/)
 - [Caddy](https://caddyserver.com/)
+
+### VPS
+A VPS (Virtual Private Server) is a virtualized server that runs on a physical server, providing users with dedicated resources and control over their own server environment. VPS hosting is commonly used for hosting websites, applications, and services that require more control and flexibility than shared hosting. Popular VPS providers include:
+- [DigitalOcean](https://www.digitalocean.com/)
+- [Linode](https://www.linode.com/)
+- [Hetzner](https://www.hetzner.com/)
