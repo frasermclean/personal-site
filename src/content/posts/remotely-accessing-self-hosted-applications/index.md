@@ -1,6 +1,6 @@
 ---
 title: Remotely accessing self-hosted applications
-description: Comparison of private and public access methods for self-hosted applications, from VPNs and Tailscale to port forwarding and Cloudflare Tunnel.
+description: Comparison of private and public access methods for self-hosted applications, from VPNs and Tailscale to port forwarding and tunneling services.
 publishDate: 2025-12-22T19:30:17+13:00
 heroImage: 
   src: badger-laptop.jpg
@@ -121,6 +121,14 @@ The key difference is that Pangolin can be self-hosted, meaning you can run your
 - Self-hosting requires more technical knowledge and effort to set up and maintain.
 - Financial costs associated with running a VPS to host the relay server.
 - Potential latency introduced by routing traffic through the relay server, depending on its location and performance. Ideally, the VPS should be geographically close to your homelab for optimal performance.
+
+## Personal Recommendation
+
+I've gone over a few of the most popular methods for remotely accessing self-hosted applications, each with its own advantages and disadvantages. As always, the best choice depends on your specific needs and circumstances. I will try and summarise my personal recommendations below:
+
+- Best for ease of use and setup: [TailScale](#tailscale)
+- Best for cost-effectiveness and features: [Cloudflare Tunnel](#cloudflare-tunnel)
+- Best for control and privacy: [Pangolin](#pangolin) (self-hosted)
 
 ## Networking Terminology
 
