@@ -14,11 +14,21 @@ interface Props {
 }
 
 const { class: className, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
+
+const updatedDateAsDate = updatedDate ? new Date(updatedDate) : null;
+const showUpdatedDate =
+  updatedDateAsDate &&
+  (() => {
+    const hoursDiff = (updatedDateAsDate.getTime() - publishDate.getTime()) / (1000 * 60 * 60);
+    return hoursDiff >= 24;
+  })();
 ---
 
-<section class={`flex flex-col text-center ${className}`}>
-  <h1 class="mb-4 font-heading text-3xl font-bold md:text-5xl">{title}</h1>
-  <p class="mb-4 text-lg text-muted-foreground md:text-xl">{description}</p>
+<section class={`space-y-2 md:space-y-4 ${className}`}>
+  <hgroup class="mx-auto mb-4 max-w-6xl space-y-2 text-center text-balance md:space-y-4">
+    <h1 class="font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    <p class="text-lg text-muted-foreground md:text-xl">{description}</p>
+  </hgroup>
 
   <div
     class="space-2 md:space-4 flex w-full flex-col items-center justify-center gap-4 text-sm text-muted-foreground/80 sm:flex-row"
@@ -35,7 +45,7 @@ const { class: className, title, description, publishDate, updatedDate, readingT
     </div>
 
     {
-      updatedDate && (
+      showUpdatedDate && (
         <div aria-label="Last updated on">
           <PencilCheckIcon
             width={20}
@@ -44,7 +54,7 @@ const { class: className, title, description, publishDate, updatedDate, readingT
             stroke-width={1}
             aria-hidden="true"
           />
-          <FormattedDate date={new Date(updatedDate)} />
+          <FormattedDate date={updatedDateAsDate} />
         </div>
       )
     }
