@@ -3,8 +3,8 @@ title: Remotely accessing self-hosted applications
 description: Comparison of private and public access methods for self-hosted applications, from VPNs and Tailscale to port forwarding and tunneling services.
 publishDate: 2025-12-30T07:54:00+08:00
 heroImage: 
-  src: badger-laptop.jpg
-  alt: A cute badger using a laptop
+  src: remotely-accessing-self-hosted-applications.png
+  alt: Post hero image showing logos of TailScale, Cloudflare and Pangolin
 comments: true
 tags: [ self-hosted, docker, homelab, networking, vpn, cloudflare, pangolin, tailscale, dns ]
 ---
