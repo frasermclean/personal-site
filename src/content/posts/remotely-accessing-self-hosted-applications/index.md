@@ -1,7 +1,7 @@
 ---
 title: Remotely accessing self-hosted applications
 description: Comparison of private and public access methods for self-hosted applications, from VPNs and Tailscale to port forwarding and tunneling services.
-publishDate: 2025-12-22T19:30:17+13:00
+publishDate: 2025-12-30T07:54:00+08:00
 heroImage: 
   src: badger-laptop.jpg
   alt: A cute badger using a laptop
