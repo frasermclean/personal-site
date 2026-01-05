@@ -68,6 +68,8 @@ const imageUrl = new URL(image.src, Astro.site);
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageUrl} />
 
+    <meta name="fediverse:creator" content="@frasermclean@mastodon.social" />
+
     <slot name="head" />
 
     <!-- Analytics -->

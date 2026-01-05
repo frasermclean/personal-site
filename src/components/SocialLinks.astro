@@ -1,8 +1,8 @@
 ---
 import GithubIcon from '@tabler/icons/outline/brand-github.svg';
-import InstagramIcon from '@tabler/icons/outline/brand-instagram.svg';
 import LinkedinIcon from '@tabler/icons/outline/brand-linkedin.svg';
-import YouTubeIcon from '@tabler/icons/outline/brand-youtube.svg';
+import MastodonIcon from '@tabler/icons/outline/brand-mastodon.svg';
+import RedditIcon from '@tabler/icons/outline/brand-reddit.svg';
 import ExternalLink from './ExternalLink.astro';
 
 interface Props {
@@ -14,15 +14,15 @@ const { class: className = '' } = Astro.props;
 const links = [
   { href: 'https://github.com/frasermclean', Icon: GithubIcon, label: 'GitHub' },
   { href: 'https://linkedin.com/in/frasermclean', Icon: LinkedinIcon, label: 'LinkedIn' },
-  { href: 'https://www.instagram.com/frasermclean81/', Icon: InstagramIcon, label: 'Instagram' },
-  { href: 'https://www.youtube.com/@FraserMcLean81', Icon: YouTubeIcon, label: 'YouTube' }
+  { href: 'https://mastodon.social/@frasermclean', Icon: MastodonIcon, label: 'Mastodon' },
+  { href: 'https://www.reddit.com/user/frasermclean/', Icon: RedditIcon, label: 'Reddit' }
 ];
 ---
 
 <nav class={className}>
   {
     links.map(({ href, Icon, label }) => (
-      <ExternalLink href={href} class="text-neutral-50 hover:text-accent" aria-label={label}>
+      <ExternalLink href={href} class="text-neutral-50 hover:text-accent" rel="me" aria-label={label}>
         <Icon width={28} height={28} stroke-width={1.25} />
       </ExternalLink>
     ))
