@@ -3,11 +3,14 @@ import CategoryLink from '@/components/CategoryLink.astro';
 import Comments from '@/components/Comments.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
-import PostStructuredData from '@/components/PostStructuredData.astro';
 import Prose from '@/components/Prose.astro';
 import RelatedPosts from '@/components/RelatedPosts.astro';
+import Article from '@/components/structured-data/Article.astro';
+import type { BreadcrumbItem } from '@/components/structured-data/BreadcrumbList.astro';
+import BreadcrumbList from '@/components/structured-data/BreadcrumbList.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
+import { POSTS_PATH } from '@/constants';
 import { getRelatedPosts } from '@/lib/related-posts';
 import type { MarkdownHeading } from 'astro';
 import { Picture } from 'astro:assets';
@@ -36,10 +39,17 @@ const {
 } = Astro.props;
 
 const relatedPosts = await getRelatedPosts(slug, category, tags);
+
+const breadcrumbItems: BreadcrumbItem[] = [
+  { title: 'Home', url: Astro.site!.origin },
+  { title: 'Posts', url: new URL(`${POSTS_PATH}`, Astro.site) },
+  { title }
+];
 ---
 
 <BaseLayout {title} {description} isArticle={true} {heroImage}>
-  <PostStructuredData {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
+  <Article {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
+  <BreadcrumbList items={breadcrumbItems} slot="head" />
 
   <Picture
     src={heroImage.src}
