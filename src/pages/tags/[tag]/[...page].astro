@@ -1,4 +1,7 @@
 ---
+import type { BreadcrumbItem } from '@/components/structured-data/BreadcrumbList.astro';
+import BreadcrumbList from '@/components/structured-data/BreadcrumbList.astro';
+import TagsBreadcrumbs from '@/components/TagsBreadcrumbs.astro';
 import { POSTS_PAGE_SIZE, TAGS_PATH } from '@/constants';
 import PostListLayout from '@/layouts/PostListLayout.astro';
 import type { GetStaticPaths } from 'astro';
@@ -32,12 +35,21 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 const { tag } = Astro.params;
 
-const title = `Posts tagged with "${tag}"`;
+const title = `Tag: ${tag}`;
 const description =
   page.lastPage === 1
     ? `A collection of blog posts tagged with "${tag}".`
     : `Page ${page.currentPage} of ${page.lastPage} of blog posts tagged with "${tag}".`;
 const listTitle = page.lastPage === 1 ? 'Matching Posts' : `Matching Posts - Page ${page.currentPage}`;
+
+const breadcrumbItems: BreadcrumbItem[] = [
+  { title: 'Home', url: Astro.site!.origin },
+  { title: 'Tags', url: new URL(`${TAGS_PATH}`, Astro.site) },
+  { title }
+];
 ---
 
-<PostListLayout {title} {description} {listTitle} {page} paginationBasePath={`${TAGS_PATH}/${tag}`} />
+<PostListLayout {title} {description} {listTitle} {page} paginationBasePath={`${TAGS_PATH}/${tag}`}>
+  <BreadcrumbList items={breadcrumbItems} slot="head" />
+  <TagsBreadcrumbs {title} />
+</PostListLayout>

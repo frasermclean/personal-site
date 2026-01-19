@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  publishDate: Date;
+  updatedDate?: string;
+}
+
+const { title, description, image, publishDate, updatedDate } = Astro.props;
+const imageUrl = new URL(image.src, Astro.site);
+
+const scriptContent = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  image: [imageUrl],
+  url: Astro.url,
+  datePublished: publishDate.toISOString(),
+  dateModified: updatedDate ? new Date(updatedDate).toISOString() : publishDate.toISOString(),
+  author: [
+    {
+      '@type': 'Person',
+      name: 'Fraser McLean',
+      url: Astro.site!.origin
+    }
+  ]
+});
+---
+
+<script type="application/ld+json" is:inline set:html={scriptContent} />
