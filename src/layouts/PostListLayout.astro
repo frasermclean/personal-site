@@ -27,6 +27,7 @@ const { title, description, listTitle, page, paginationBasePath, ...rest } = Ast
 <BaseLayout {title} {description} {...rest}>
   <HeroSection {title} subtitle={description} />
 
+  <slot name="head" slot="head" />
   <slot />
 
   <section class="my-8">
