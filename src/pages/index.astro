@@ -4,16 +4,14 @@ import SkillsSection from '@/components/SkillsSection.astro';
 import { POSTS_PATH, PROJECTS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const title = 'Fraser McLean';
-const subtitle = 'Software engineer and technology enthusiast.';
 const description =
   'Personal website of Fraser McLean - software engineer and technology enthusiast. Showcasing projects, blog posts, and skills in software development.';
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title="Fraser McLean's Personal Website" description={description}>
   <HeroSection
-    title={title}
-    subtitle={subtitle}
+    title="Fraser McLean"
+    subtitle="Software engineer and technology enthusiast."
     primaryCta={{ label: 'View Projects', href: PROJECTS_PATH }}
     secondaryCta={{ label: 'Read Blog', href: POSTS_PATH }}
   />
