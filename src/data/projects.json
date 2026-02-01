@@ -2,18 +2,35 @@
   {
     "id": "personal-site",
     "name": "Personal Website",
-    "description": "The website you are currently visiting, which contains my portfolio and blog. It's a full rewrite of my previous Hugo site utilizing Astro for static site generation and Cloudflare Workers for serverless deployment.",
+    "description": [
+      "The website you are currently visiting, which contains my portfolio and blog.",
+      "It's a full rewrite of my previous Hugo site utilizing Astro for static site generation and Cloudflare Workers for serverless deployment."
+    ],
     "imageFile": "fmsite-home.png",
+    "projectUrl": "https://frasermclean.com",
     "repositoryUrl": "https://github.com/frasermclean/frasermclean-site",
-    "technologies": ["Astro", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
+    "technologies": ["Astro", "HTML", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
   },
   {
     "id": "ratemypet",
     "name": "Rate My Pet",
-    "description": "A social networking site for pet lovers to share and rate pet photos and stories",
+    "description": [
+      "A social networking site for pet lovers to share and rate pet photos and stories.",
+      "I built this primarily to enhance and practice my skills with Angular and ASP.NET Core, while also exploring modern cloud deployment techniques using Azure Container Apps and Infrastructure as Code with Bicep."
+    ],
     "imageFile": "ratemypet-posts.png",
     "projectUrl": "https://ratemy.pet",
     "repositoryUrl": "https://github.com/frasermclean/ratemypet",
-    "technologies": ["Angular", "ASP.NET Core", "SQL Server", "Azure Container Apps", "Bicep", "GitHub Actions"]
+    "technologies": [
+      "Angular",
+      "TypeScript",
+      "C#",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "SQL Server",
+      "Azure Container Apps",
+      "Bicep",
+      "GitHub Actions"
+    ]
   }
 ]

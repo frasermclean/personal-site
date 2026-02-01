@@ -23,7 +23,7 @@ const projects = defineCollection({
   loader: file('src/data/projects.json'),
   schema: z.object({
     name: z.string(),
-    description: z.string(),
+    description: z.array(z.string()),
     imageFile: z.string().optional(),
     projectUrl: z.string().url().optional(),
     repositoryUrl: z.string().url(),

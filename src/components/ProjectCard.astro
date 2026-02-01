@@ -21,6 +21,10 @@ if (!project) {
 
 const { name, description, projectUrl, repositoryUrl, technologies } = project.data;
 const imageAlt = `Screenshot of ${name} project`;
+const links = [
+  { href: projectUrl, label: 'Website', Icon: WorldWwwIcon },
+  { href: repositoryUrl, label: 'Source Code', Icon: GithubIcon }
+];
 ---
 
 <Card as="li" class="grid grid-cols-1 gap-4 p-4 md:grid-cols-3 md:p-6">
@@ -31,7 +35,7 @@ const imageAlt = `Screenshot of ${name} project`;
         alt={imageAlt}
         width={320}
         formats={['avif', 'webp']}
-        class="mb-4 w-full rounded-md object-cover md:col-start-3 md:row-start-1"
+        class="mb-4 w-full rounded-md object-cover shadow-lg md:col-start-3 md:row-start-1"
       />
     )
   }
@@ -39,12 +43,14 @@ const imageAlt = `Screenshot of ${name} project`;
   <section class="flex flex-col gap-4 md:col-span-2 md:col-start-1 md:row-start-1">
     <section>
       <h3 class="mb-4 font-heading text-xl leading-none font-semibold tracking-tight">{name}</h3>
-      <p class="text-muted-foreground">{description}</p>
+      <div class="flex flex-col gap-2">
+        {description.map((line) => <p class="text-muted-foreground">{line}</p>)}
+      </div>
     </section>
 
     <section>
-      <h3 class="mb-2 text-lg font-semibold">Technologies</h3>
-      <ul class="mb-4 flex flex-wrap gap-2">
+      <h4 class="mb-2 font-heading text-lg font-semibold">Technologies</h4>
+      <ul class="flex flex-wrap gap-2">
         {
           technologies.map((tech) => (
             <li class="rounded-full bg-neutral-300 px-3 py-1 text-sm dark:bg-neutral-700">{tech}</li>
@@ -53,16 +59,15 @@ const imageAlt = `Screenshot of ${name} project`;
       </ul>
     </section>
 
-    <nav class="flex gap-2">
+    <nav class="mt-3 flex gap-2">
       {
-        projectUrl && (
-          <Button variant="primary" href={projectUrl}>
-            <WorldWwwIcon class="mr-1 inline-block h-4 w-4" />
-            Website
+        links.map(({ label, href, Icon }) => (
+          <Button variant={label === 'Website' ? 'primary' : 'default'} {href} target="_blank" rel="noopener nofollow">
+            <Icon class="mr-1" width={16} height={16} />
+            {label}
           </Button>
-        )
+        ))
       }
-      <Button href={repositoryUrl}><GithubIcon class="mr-1 inline-block h-4 w-4" />Source Code</Button>
     </nav>
   </section>
 </Card>
