@@ -1,11 +1,17 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
 const title = 'Project Portfolio';
 const description = 'A showcase of my work and contributions.';
+const collection = await getCollection('projects');
 ---
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
+  <ul class="mx-auto flex max-w-3xl flex-col gap-4">
+    {collection.map((project) => <ProjectCard projectId={project.id} />)}
+  </ul>
 </BaseLayout>

@@ -2,6 +2,17 @@
   {
     "id": "personal-site",
     "name": "Personal Website",
-    "description": "The website you are currently visiting, which contains my portfolio and blog."
+    "description": "The website you are currently visiting, which contains my portfolio and blog.",
+    "projectUrl": "https://frasermclean.com",
+    "repositoryUrl": "https://github.com/frasermclean/frasermclean-site",
+    "technologies": ["Astro", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
+  },
+  {
+    "id": "ratemypet",
+    "name": "Rate My Pet",
+    "description": "A social networking site for pet lovers to share and rate pet photos and stories",
+    "projectUrl": "https://ratemy.pet",
+    "repositoryUrl": "https://github.com/frasermclean/ratemypet",
+    "technologies": ["Angular", "ASP.NET Core", "SQL Server", "Azure", "Bicep", "GitHub Actions"]
   }
 ]

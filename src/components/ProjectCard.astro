@@ -1,0 +1,43 @@
+---
+import { Button } from '@/components/starwind/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
+import GithubIcon from '@tabler/icons/outline/brand-github.svg';
+import LinkIcon from '@tabler/icons/outline/link.svg';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  projectId: string;
+}
+
+const project = await getEntry('projects', Astro.props.projectId);
+if (!project) {
+  throw new Error(`Project with ID "${Astro.props.projectId}" not found.`);
+}
+
+const { name, description, projectUrl, repositoryUrl, technologies } = project.data;
+---
+
+<Card as="li">
+  <CardHeader>
+    <CardTitle>{name}</CardTitle>
+    <CardDescription>{description}</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <section>
+      <h3 class="mb-2 text-lg font-semibold">Technologies</h3>
+      <ul class="mb-4 flex flex-wrap gap-2">
+        {
+          technologies.map((tech) => (
+            <li class="rounded-full bg-neutral-400 px-3 py-1 text-sm dark:bg-neutral-700">{tech}</li>
+          ))
+        }
+      </ul>
+    </section>
+  </CardContent>
+  <CardFooter>
+    <nav class="flex gap-2">
+      <Button variant="primary" href={projectUrl}><LinkIcon class="mr-1 inline-block h-4 w-4" />View Project</Button>
+      <Button href={repositoryUrl}><GithubIcon class="mr-1 inline-block h-4 w-4" />Source Code</Button>
+    </nav>
+  </CardFooter>
+</Card>
