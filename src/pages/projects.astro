@@ -6,7 +6,7 @@ import type { ImageMetadata } from 'astro';
 import { getCollection } from 'astro:content';
 
 const title = 'Project Portfolio';
-const description = 'A showcase of my work and contributions.';
+const description = 'A selection of public projects that I have worked on over the years.';
 const collection = await getCollection('projects');
 
 const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
@@ -23,7 +23,7 @@ async function getProjectImage(imageFile?: string) {
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
-  <ul class="mx-auto flex max-w-3xl flex-col gap-4">
+  <ul class="mx-auto flex max-w-4xl flex-col gap-4">
     {
       collection.map(async (project) => {
         const image = await getProjectImage(project.data.imageFile);

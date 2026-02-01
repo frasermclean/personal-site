@@ -2,7 +2,7 @@
   {
     "id": "personal-site",
     "name": "Personal Website",
-    "description": "The website you are currently visiting, which contains my portfolio and blog.",
+    "description": "The website you are currently visiting, which contains my portfolio and blog. It's a full rewrite of my previous Hugo site utilizing Astro for static site generation and Cloudflare Workers for serverless deployment.",
     "imageFile": "fmsite-home.png",
     "repositoryUrl": "https://github.com/frasermclean/frasermclean-site",
     "technologies": ["Astro", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
@@ -14,6 +14,6 @@
     "imageFile": "ratemypet-posts.png",
     "projectUrl": "https://ratemy.pet",
     "repositoryUrl": "https://github.com/frasermclean/ratemypet",
-    "technologies": ["Angular", "ASP.NET Core", "SQL Server", "Azure", "Bicep", "GitHub Actions"]
+    "technologies": ["Angular", "ASP.NET Core", "SQL Server", "Azure Container Apps", "Bicep", "GitHub Actions"]
   }
 ]
