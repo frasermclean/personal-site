@@ -7,8 +7,10 @@
       "It's a full rewrite of my previous Hugo site utilizing Astro for static site generation and Cloudflare Workers for serverless deployment."
     ],
     "imageFile": "fmsite-home.png",
-    "projectUrl": "https://frasermclean.com",
-    "repositoryUrl": "https://github.com/frasermclean/frasermclean-site",
+    "links": {
+      "website": "https://frasermclean.com",
+      "source": "https://github.com/frasermclean/frasermclean-site"
+    },
     "technologies": ["Astro", "HTML", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
   },
   {
@@ -19,8 +21,10 @@
       "I built this primarily to enhance and practice my skills with Angular and ASP.NET Core, while also exploring modern cloud deployment techniques using Azure Container Apps and Infrastructure as Code with Bicep."
     ],
     "imageFile": "ratemypet-posts.png",
-    "projectUrl": "https://ratemy.pet",
-    "repositoryUrl": "https://github.com/frasermclean/ratemypet",
+    "links": {
+      "website": "https://ratemypet.azurewebsites.net",
+      "source": "https://github.com/frasermclean/ratemypet"
+    },
     "technologies": [
       "Angular",
       "TypeScript",
