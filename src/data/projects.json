@@ -22,7 +22,7 @@
     ],
     "imageFile": "ratemypet-posts.png",
     "links": {
-      "website": "https://ratemypet.azurewebsites.net",
+      "website": "https://ratemy.pet",
       "source": "https://github.com/frasermclean/ratemypet"
     },
     "technologies": [
