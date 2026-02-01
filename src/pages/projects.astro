@@ -2,16 +2,33 @@
 import HeroSection from '@/components/HeroSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { ImageMetadata } from 'astro';
 import { getCollection } from 'astro:content';
 
 const title = 'Project Portfolio';
 const description = 'A showcase of my work and contributions.';
 const collection = await getCollection('projects');
+
+const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
+
+async function getProjectImage(imageFile?: string) {
+  const imagePath = `/src/assets/projects/${imageFile}`;
+
+  if (!projectImages[imagePath]) return undefined;
+
+  const image = await projectImages[imagePath]();
+  return image.default;
+}
 ---
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
   <ul class="mx-auto flex max-w-3xl flex-col gap-4">
-    {collection.map((project) => <ProjectCard projectId={project.id} />)}
+    {
+      collection.map(async (project) => {
+        const image = await getProjectImage(project.data.imageFile);
+        return <ProjectCard id={project.id} {image} />;
+      })
+    }
   </ul>
 </BaseLayout>

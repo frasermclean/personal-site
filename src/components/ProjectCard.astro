@@ -2,22 +2,28 @@
 import { Button } from '@/components/starwind/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
 import GithubIcon from '@tabler/icons/outline/brand-github.svg';
-import LinkIcon from '@tabler/icons/outline/link.svg';
+import WorldWwwIcon from '@tabler/icons/outline/world-www.svg';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
 
 interface Props {
-  projectId: string;
+  id: string;
+  image?: ImageMetadata;
 }
 
-const project = await getEntry('projects', Astro.props.projectId);
+const { id, image } = Astro.props;
+
+const project = await getEntry('projects', id);
 if (!project) {
-  throw new Error(`Project with ID "${Astro.props.projectId}" not found.`);
+  throw new Error(`Project with ID "${Astro.props.id}" not found.`);
 }
 
 const { name, description, projectUrl, repositoryUrl, technologies } = project.data;
 ---
 
 <Card as="li">
+  {image && <Image src={image} alt={name} class="w-full rounded-t-lg object-cover" loading="lazy" />}
   <CardHeader>
     <CardTitle>{name}</CardTitle>
     <CardDescription>{description}</CardDescription>
@@ -28,7 +34,7 @@ const { name, description, projectUrl, repositoryUrl, technologies } = project.d
       <ul class="mb-4 flex flex-wrap gap-2">
         {
           technologies.map((tech) => (
-            <li class="rounded-full bg-neutral-400 px-3 py-1 text-sm dark:bg-neutral-700">{tech}</li>
+            <li class="rounded-full bg-neutral-300 px-3 py-1 text-sm dark:bg-neutral-700">{tech}</li>
           ))
         }
       </ul>
@@ -36,7 +42,14 @@ const { name, description, projectUrl, repositoryUrl, technologies } = project.d
   </CardContent>
   <CardFooter>
     <nav class="flex gap-2">
-      <Button variant="primary" href={projectUrl}><LinkIcon class="mr-1 inline-block h-4 w-4" />View Project</Button>
+      {
+        projectUrl && (
+          <Button variant="primary" href={projectUrl}>
+            <WorldWwwIcon class="mr-1 inline-block h-4 w-4" />
+            View Project
+          </Button>
+        )
+      }
       <Button href={repositoryUrl}><GithubIcon class="mr-1 inline-block h-4 w-4" />Source Code</Button>
     </nav>
   </CardFooter>
