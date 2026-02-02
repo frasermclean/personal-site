@@ -41,8 +41,8 @@ const linksArray = [
   }
 
   <section class="flex flex-col gap-4 md:col-span-2 md:col-start-1 md:row-start-1">
+    <h2 class="font-heading text-xl leading-none font-semibold tracking-tight">{name}</h2>
     <section>
-      <h3 class="mb-4 font-heading text-xl leading-none font-semibold tracking-tight">{name}</h3>
       <div class="flex flex-col gap-2">
         {description.map((line) => <p class="text-muted-foreground">{line}</p>)}
       </div>
@@ -51,7 +51,7 @@ const linksArray = [
     {
       features.length > 0 && (
         <section>
-          <h4 class="mb-2 font-heading text-lg font-semibold">Notable Features</h4>
+          <h3 class="mb-2 font-heading text-lg font-semibold">Notable Features</h3>
           <ul class="list-outside list-disc space-y-1 pl-6">
             {features.map((feature) => (
               <li class="text-muted-foreground">{feature}</li>
@@ -62,7 +62,7 @@ const linksArray = [
     }
 
     <section>
-      <h4 class="mb-2 font-heading text-lg font-semibold">Technologies</h4>
+      <h3 class="mb-2 font-heading text-lg font-semibold">Technologies</h3>
       <ul class="flex flex-wrap gap-2">
         {
           technologies.map((tech) => (
