@@ -12,6 +12,8 @@ const collection = await getCollection('projects');
 const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
 
 async function getProjectImage(imageFile?: string) {
+  if (!imageFile) return undefined;
+
   const imagePath = `/src/assets/projects/${imageFile}`;
 
   if (!projectImages[imagePath]) return undefined;
