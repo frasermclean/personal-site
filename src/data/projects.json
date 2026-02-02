@@ -11,6 +11,13 @@
       "website": "https://frasermclean.com",
       "source": "https://github.com/frasermclean/frasermclean-site"
     },
+    "features": [
+      "Static site generation with Astro for fast load times and SEO benefits",
+      "Contact form with serverless submission handling via Cloudflare Workers",
+      "Responsive design using Tailwind CSS",
+      "TypeScript for type safety and improved developer experience",
+      "Deployed on Cloudflare Workers for low-latency global access"
+    ],
     "technologies": ["Astro", "HTML", "Tailwind CSS", "TypeScript", "Cloudflare Workers"]
   },
   {
@@ -18,13 +25,22 @@
     "name": "Rate My Pet",
     "description": [
       "A social networking site for pet lovers to share and rate pet photos and stories.",
-      "I built this primarily to enhance and practice my skills with Angular and ASP.NET Core, while also exploring modern cloud deployment techniques using Azure Container Apps and Infrastructure as Code with Bicep."
+      "I built this primarily to enhance and practice my skills with Angular and ASP.NET Core, while also exploring modern cloud deployment techniques using Azure Container Apps and Infrastructure as Code with Bicep.",
+      "Aspire orchestration was added to spin up and manage the various services that make up the application."
     ],
     "imageFile": "ratemypet-posts.png",
     "links": {
       "website": "https://ratemy.pet",
       "source": "https://github.com/frasermclean/ratemypet"
     },
+    "features": [
+      "User authentication and profile management",
+      "Photo uploads with AI assisted tagging and moderation pipeline",
+      "SSR enabled Angular frontend for improved performance and SEO",
+      "Social commenting and reaction features",
+      "Database schema changes using Entity Framework Core migrations",
+      "CI/CD pipeline using GitHub Actions for automated testing and deployment"
+    ],
     "technologies": [
       "Angular",
       "TypeScript",
@@ -32,6 +48,7 @@
       "ASP.NET Core",
       "Entity Framework Core",
       "SQL Server",
+      "Aspire",
       "Azure Container Apps",
       "Bicep",
       "GitHub Actions"

@@ -19,7 +19,7 @@ if (!project) {
   throw new Error(`Project with ID "${Astro.props.id}" not found.`);
 }
 
-const { name, description, links, technologies } = project.data;
+const { name, description, links, features, technologies } = project.data;
 const imageAlt = `Screenshot of ${name} project`;
 const linksArray = [
   { href: links.website, label: 'Website', Icon: WwwIcon },
@@ -47,6 +47,19 @@ const linksArray = [
         {description.map((line) => <p class="text-muted-foreground">{line}</p>)}
       </div>
     </section>
+
+    {
+      features.length > 0 && (
+        <section>
+          <h4 class="mb-2 font-heading text-lg font-semibold">Notable Features</h4>
+          <ul class="list-outside list-disc space-y-1 pl-6">
+            {features.map((feature) => (
+              <li class="text-muted-foreground">{feature}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     <section>
       <h4 class="mb-2 font-heading text-lg font-semibold">Technologies</h4>
