@@ -1,10 +1,11 @@
 ---
-import Button from '@/components/starwind/button';
+import Button, { ButtonVariants } from '@/components/starwind/button';
 import { isExternalUrl } from '@/lib/external-url';
 import type { HTMLAttributes } from 'astro/types';
+import type { VariantProps } from 'tailwind-variants';
 
 interface Props extends HTMLAttributes<'button'>, Omit<HTMLAttributes<'a'>, 'type'> {
-  variant: 'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'info' | 'success' | 'warning' | 'error';
+  variant?: VariantProps<typeof ButtonVariants.button>['variant'];
 }
 
 const { href, class: className, variant = 'default', ...rest } = Astro.props as Props;
