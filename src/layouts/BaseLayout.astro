@@ -1,8 +1,8 @@
 ---
 import defaultOgImage from '@/assets/default-og-image.png';
 import Footer from '@/components/Footer.astro';
+import Navbar from '@/components/navbar/Navbar.astro';
 import Separator from '@/components/starwind/separator';
-import Toolbar from '@/components/Toolbar.astro';
 import { SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
 import '@fontsource-variable/geist';
@@ -84,7 +84,7 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
       data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
   </head>
   <body>
-    <Toolbar />
+    <Navbar />
     <main class="mx-auto my-4 max-w-7xl px-2 md:px-3">
       <slot />
     </main>
