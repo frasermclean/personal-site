@@ -1,5 +1,5 @@
 ---
-import Button from './starwind/button';
+import ButtonLink from '@/components/links/ButtonLink.astro';
 
 interface Props {
   title: string;
@@ -26,14 +26,14 @@ const hasCtas = !!primaryCta || !!secondaryCta;
     hasCtas && (
       <nav class="mt-8 flex flex-wrap justify-center gap-4">
         {primaryCta && (
-          <Button variant="primary" href={primaryCta.href} class="w-40">
+          <ButtonLink variant="primary" href={primaryCta.href} class="w-40">
             {primaryCta.label}
-          </Button>
+          </ButtonLink>
         )}
         {secondaryCta && (
-          <Button variant="outline" href={secondaryCta.href} class="w-40">
+          <ButtonLink variant="outline" href={secondaryCta.href} class="w-40">
             {secondaryCta.label}
-          </Button>
+          </ButtonLink>
         )}
       </nav>
     )

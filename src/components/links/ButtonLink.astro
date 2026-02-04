@@ -1,0 +1,21 @@
+---
+import Button from '@/components/starwind/button';
+import { isExternalUrl } from '@/lib/external-url';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'button'>, Omit<HTMLAttributes<'a'>, 'type'> {
+  variant: 'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'info' | 'success' | 'warning' | 'error';
+}
+
+const { href, class: className, variant = 'default', ...rest } = Astro.props as Props;
+
+const isExternal = isExternalUrl(href);
+
+const rel = isExternal ? 'nofollow noopener noreferrer' : null;
+const target = isExternal ? '_blank' : null;
+const dataProps = isExternal ? { 'data-umami-event': 'external-link-click', 'data-umami-event-url': href } : null;
+---
+
+<Button {href} {variant} class={className} {rel} {target} {...dataProps} {...rest}>
+  <slot />
+</Button>

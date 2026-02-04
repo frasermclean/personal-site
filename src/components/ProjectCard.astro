@@ -1,5 +1,5 @@
 ---
-import { Button } from '@/components/starwind/button';
+import ButtonLink from '@/components/links/ButtonLink.astro';
 import { Card } from '@/components/starwind/card';
 import SourceCodeIcon from '@tabler/icons/outline/source-code.svg';
 import WwwIcon from '@tabler/icons/outline/world-www.svg';
@@ -77,10 +77,10 @@ const linksArray = [
         linksArray
           .filter(({ href }) => href !== undefined)
           .map(({ label, href, Icon }) => (
-            <Button variant={label === 'Website' ? 'primary' : 'default'} {href} target="_blank" rel="noopener">
+            <ButtonLink variant={label === 'Website' ? 'primary' : 'default'} href={href} rel="noopener">
               <Icon class="mr-1" width={16} height={16} />
               {label}
-            </Button>
+            </ButtonLink>
           ))
       }
     </nav>
