@@ -1,12 +1,12 @@
 ---
+import ExternalLink from '@/components/links/ExternalLink.astro';
+import Button from '@/components/starwind/button';
 import { CONTACT_PATH } from '@/constants';
 import ChevronLeftIcon from '@tabler/icons/outline/chevron-left.svg';
 import ChevronRightIcon from '@tabler/icons/outline/chevron-right.svg';
 import MailIcon from '@tabler/icons/outline/mail.svg';
 import RssIcon from '@tabler/icons/outline/rss.svg';
 import SitemapIcon from '@tabler/icons/outline/sitemap.svg';
-import ExternalLink from './ExternalLink.astro';
-import Button from './starwind/button';
 
 const currentYear = new Date().getFullYear();
 const host = Astro.site?.hostname;

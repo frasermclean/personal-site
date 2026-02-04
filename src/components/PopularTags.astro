@@ -1,9 +1,9 @@
 ---
+import RoundedLink from '@/components/links/RoundedLink.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
 import { TAGS_PATH } from '@/constants';
 import TagIcon from '@tabler/icons/outline/tag.svg';
 import { getCollection } from 'astro:content';
-import RoundedLink from './RoundedLink.astro';
-import SectionHeading from './SectionHeading.astro';
 
 const posts = await getCollection('posts');
 const TAG_LIMIT = 25;

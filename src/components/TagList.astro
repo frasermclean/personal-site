@@ -1,7 +1,6 @@
 ---
-import { TAGS_PATH } from '@/constants';
+import TagLink from '@/components/links/TagLink.astro';
 import TagIcon from '@tabler/icons/outline/tag.svg';
-import RoundedLink from './RoundedLink.astro';
 
 interface Props {
   title?: string;
@@ -22,7 +21,7 @@ const { title = 'Tags', tags } = Astro.props;
       {
         tags.map((tag) => (
           <li>
-            <RoundedLink href={`${TAGS_PATH}/${tag}`}>{tag}</RoundedLink>
+            <TagLink tag={tag} />
           </li>
         ))
       }
