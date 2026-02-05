@@ -1,0 +1,12 @@
+---
+import { getAttributesForUrl } from '@/lib/url-parsing';
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+const { href, rel, ...rest } = Astro.props as Props;
+const attributes = getAttributesForUrl(href, rel);
+---
+
+<a {href} {...attributes} {...rest}>
+  <slot />
+</a>

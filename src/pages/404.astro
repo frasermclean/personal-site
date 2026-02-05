@@ -1,6 +1,6 @@
 ---
 import johnMeme from '@/assets/pulp-fiction-john-travolta.gif';
-import Button from '@/components/starwind/button';
+import ButtonLink from '@/components/links/ButtonLink.astro';
 import { Card } from '@/components/starwind/card';
 import { POSTS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -23,8 +23,8 @@ const description = 'The page you are looking for does not exist.';
     />
     <p class="my-4 text-lg">The page you are looking for does not exist.</p>
     <nav class="flex flex-wrap justify-center gap-4">
-      <Button href="/" class="w-40" variant="primary"> Back to Home </Button>
-      <Button href={POSTS_PATH} class="w-40"> Read the Blog </Button>
+      <ButtonLink href="/" class="w-40" variant="primary"> Back to Home </ButtonLink>
+      <ButtonLink href={POSTS_PATH} class="w-40"> Read the Blog </ButtonLink>
     </nav>
   </Card>
 </BaseLayout>

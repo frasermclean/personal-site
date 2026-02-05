@@ -1,5 +1,6 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
+import Link from '@/components/links/Link.astro';
 import { Card } from '@/components/starwind/card';
 import { POSTS_PATH } from '@/constants';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
@@ -29,7 +30,7 @@ const { remarkPluginFrontmatter } = await render(entry);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<a href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
+<Link href={`${POSTS_PATH}/${slug}`} class="block h-full" aria-label={`Read blog post ${title}`}>
   <Card
     as="article"
     class:list={[
@@ -71,4 +72,4 @@ const { readingTime } = remarkPluginFrontmatter;
       </footer>
     </section>
   </Card>
-</a>
+</Link>

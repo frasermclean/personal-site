@@ -1,8 +1,8 @@
 ---
 import defaultOgImage from '@/assets/default-og-image.png';
 import Footer from '@/components/Footer.astro';
+import Navbar from '@/components/navbar/Navbar.astro';
 import Separator from '@/components/starwind/separator';
-import Toolbar from '@/components/Toolbar.astro';
 import { SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
 import '@fontsource-variable/geist';
@@ -83,12 +83,12 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
       data-domains={Astro.site?.hostname || null}
       data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
   </head>
-  <body>
-    <Toolbar />
-    <main class="mx-auto my-4 max-w-7xl px-2 md:px-3">
+  <body class="flex min-h-screen flex-col">
+    <Navbar />
+    <main class="mx-auto max-w-7xl flex-1 px-2 md:px-3">
       <slot />
     </main>
-    <Separator class="my-8" />
+    <Separator class="mt-8" />
     <Footer />
   </body>
 </html>

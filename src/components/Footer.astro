@@ -1,12 +1,12 @@
 ---
+import ButtonLink from '@/components/links/ButtonLink.astro';
+import Link from '@/components/links/Link.astro';
 import { CONTACT_PATH } from '@/constants';
 import ChevronLeftIcon from '@tabler/icons/outline/chevron-left.svg';
 import ChevronRightIcon from '@tabler/icons/outline/chevron-right.svg';
 import MailIcon from '@tabler/icons/outline/mail.svg';
 import RssIcon from '@tabler/icons/outline/rss.svg';
 import SitemapIcon from '@tabler/icons/outline/sitemap.svg';
-import ExternalLink from './ExternalLink.astro';
-import Button from './starwind/button';
 
 const currentYear = new Date().getFullYear();
 const host = Astro.site?.hostname;
@@ -25,41 +25,41 @@ const links = [
 ];
 ---
 
-<footer class="mx-auto my-8 flex max-w-6xl flex-col items-center px-2 md:px-3">
+<footer class="mx-auto flex flex-col items-center px-2 py-8 md:px-3">
   <h2 class="font-heading text-2xl text-accent md:text-3xl">Want to get in touch?</h2>
-  <Button href={CONTACT_PATH} variant="outline" class="mt-4 mb-8">
+  <ButtonLink href={CONTACT_PATH} variant="outline" class="mt-4 mb-6">
     <MailIcon class="mr-2" width={24} height={24} stroke-width={1.25} />
     Contact Me
-  </Button>
+  </ButtonLink>
   <p class="mb-2 text-center text-sm text-muted-foreground">&copy; {currentYear} Fraser McLean. All rights reserved.</p>
   <nav>
     <ul class="flex gap-4 text-sm text-neutral-500">
       {
         links.map(({ href, label, Icon }) => (
           <li>
-            <a href={href} class="text-sm text-neutral-500 hover:text-accent/90 hover:underline">
+            <Link href={href} class="text-sm text-neutral-500 hover:text-accent/90 hover:underline">
               <Icon class="mr-1 inline-block" width={16} height={16} stroke-width={1.5} />
               {label}
-            </a>
+            </Link>
           </li>
         ))
       }
       <li>
-        <ExternalLink
+        <Link
           href={`https://fediring.net/previous?host=${host}`}
           class="hover:text-accent/90"
           aria-label="Previous site in Fediring"
         >
           <ChevronLeftIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
-        </ExternalLink>
-        <ExternalLink href="https://fediring.net/" class="hover:text-accent/90 hover:underline">Fediring</ExternalLink>
-        <ExternalLink
+        </Link>
+        <Link href="https://fediring.net/" class="hover:text-accent/90 hover:underline">Fediring</Link>
+        <Link
           href={`https://fediring.net/next?host=${host}`}
           class="hover:text-accent/90"
           aria-label="Next site in Fediring"
         >
           <ChevronRightIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
-        </ExternalLink>
+        </Link>
       </li>
     </ul>
   </nav>

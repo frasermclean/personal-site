@@ -1,9 +1,9 @@
 ---
+import Link from '@/components/links/Link.astro';
 import GithubIcon from '@tabler/icons/outline/brand-github.svg';
 import LinkedinIcon from '@tabler/icons/outline/brand-linkedin.svg';
 import MastodonIcon from '@tabler/icons/outline/brand-mastodon.svg';
 import RedditIcon from '@tabler/icons/outline/brand-reddit.svg';
-import ExternalLink from './ExternalLink.astro';
 
 interface Props {
   class: string;
@@ -22,9 +22,9 @@ const links = [
 <nav class={className}>
   {
     links.map(({ href, Icon, label }) => (
-      <ExternalLink href={href} class="text-neutral-50 hover:text-accent" rel="me" aria-label={label}>
+      <Link href={href} class="text-neutral-50 hover:text-accent" rel="me" aria-label={label}>
         <Icon width={28} height={28} stroke-width={1.25} />
-      </ExternalLink>
+      </Link>
     ))
   }
 </nav>
