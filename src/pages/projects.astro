@@ -25,7 +25,7 @@ async function getProjectImage(imageFile?: string) {
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
-  <ul class="mx-auto flex max-w-4xl flex-col gap-4">
+  <ul class="mx-auto flex max-w-4xl flex-col gap-4 pb-8">
     {
       await Promise.all(
         collection.map(async (project) => {
