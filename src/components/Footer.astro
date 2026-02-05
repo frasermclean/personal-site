@@ -1,6 +1,6 @@
 ---
 import ButtonLink from '@/components/links/ButtonLink.astro';
-import ExternalLink from '@/components/links/ExternalLink.astro';
+import Link from '@/components/links/Link.astro';
 import { CONTACT_PATH } from '@/constants';
 import ChevronLeftIcon from '@tabler/icons/outline/chevron-left.svg';
 import ChevronRightIcon from '@tabler/icons/outline/chevron-right.svg';
@@ -37,29 +37,29 @@ const links = [
       {
         links.map(({ href, label, Icon }) => (
           <li>
-            <a href={href} class="text-sm text-neutral-500 hover:text-accent/90 hover:underline">
+            <Link href={href} class="text-sm text-neutral-500 hover:text-accent/90 hover:underline">
               <Icon class="mr-1 inline-block" width={16} height={16} stroke-width={1.5} />
               {label}
-            </a>
+            </Link>
           </li>
         ))
       }
       <li>
-        <ExternalLink
+        <Link
           href={`https://fediring.net/previous?host=${host}`}
           class="hover:text-accent/90"
           aria-label="Previous site in Fediring"
         >
           <ChevronLeftIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
-        </ExternalLink>
-        <ExternalLink href="https://fediring.net/" class="hover:text-accent/90 hover:underline">Fediring</ExternalLink>
-        <ExternalLink
+        </Link>
+        <Link href="https://fediring.net/" class="hover:text-accent/90 hover:underline">Fediring</Link>
+        <Link
           href={`https://fediring.net/next?host=${host}`}
           class="hover:text-accent/90"
           aria-label="Next site in Fediring"
         >
           <ChevronRightIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
-        </ExternalLink>
+        </Link>
       </li>
     </ul>
   </nav>

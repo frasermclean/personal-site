@@ -1,11 +1,12 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import Link from './Link.astro';
 
 type Props = HTMLAttributes<'a'>;
 const { href, class: className, ...rest } = Astro.props as Props;
 ---
 
-<a
+<Link
   href={href}
   class:list={[
     'inline-block rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent hover:bg-accent/20',
@@ -14,4 +15,4 @@ const { href, class: className, ...rest } = Astro.props as Props;
   {...rest}
 >
   <slot />
-</a>
+</Link>

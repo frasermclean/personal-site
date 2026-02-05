@@ -2,7 +2,7 @@
 import { Card } from '@/components/starwind/card';
 import ListTreeIcon from '@tabler/icons/outline/list-tree.svg';
 import type { MarkdownHeading } from 'astro';
-import { fade } from 'astro:transitions';
+import Link from '@/components/links/Link.astro';
 
 interface Props {
   title?: string;
@@ -44,14 +44,14 @@ const tocHeadings = [...headings, ...additionalLinks];
         {
           tocHeadings.map((heading) => (
             <li class={`relative depth-${heading.depth}`}>
-              <a
+              <Link
                 href={`#${heading.slug}`}
                 class="hover:text-accent hover:underline"
                 data-umami-event="toc-link-click"
                 data-umami-event-slug={heading.slug}
               >
                 {heading.text}
-              </a>
+              </Link>
             </li>
           ))
         }
