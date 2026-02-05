@@ -83,9 +83,9 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
       data-domains={Astro.site?.hostname || null}
       data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
   </head>
-  <body>
+  <body class="flex min-h-screen flex-col">
     <Navbar />
-    <main class="mx-auto my-4 max-w-7xl px-2 md:px-3">
+    <main class="mx-auto my-4 max-w-7xl flex-1 px-2 md:px-3">
       <slot />
     </main>
     <Separator class="my-8" />
