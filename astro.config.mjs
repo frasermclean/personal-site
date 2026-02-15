@@ -1,6 +1,5 @@
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
-import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
@@ -34,7 +33,7 @@ export default defineConfig({
       WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' })
     }
   },
-  integrations: [sitemap(), mdx(), preact()],
+  integrations: [sitemap(), mdx()],
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkUpdatedDate, remarkExternalLinks],
     rehypePlugins: [rehypeFigure],
