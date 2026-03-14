@@ -23,8 +23,16 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      TRACKING_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
-      TRACKING_SCRIPT_SRC: envField.string({ context: 'client', access: 'public' }),
+      ANALYTICS_WEBSITE_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        default: '55f291f0-9c21-4f23-8187-6d11ba817c64'
+      }),
+      ANALYTICS_SCRIPT_SRC: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'https://analytics.frasermclean.com/script.js'
+      }),
       COMMENTS_HOST: envField.string({ context: 'client', access: 'public', default: 'http://localhost:8080' }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),

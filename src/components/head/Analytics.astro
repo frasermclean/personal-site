@@ -1,0 +1,10 @@
+---
+import { ANALYTICS_SCRIPT_SRC, ANALYTICS_WEBSITE_ID, WORKERS_CI_COMMIT_SHA } from 'astro:env/client';
+---
+
+<script
+  is:inline
+  defer
+  src={ANALYTICS_SCRIPT_SRC}
+  data-website-id={ANALYTICS_WEBSITE_ID}
+  data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
