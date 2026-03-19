@@ -20,7 +20,10 @@ export default defineConfig({
     responsiveStyles: true
   },
   adapter: cloudflare({
-    imageService: { build: 'compile', runtime: 'cloudflare-binding' }
+    imageService: {
+      build: 'compile',
+      runtime: 'cloudflare-binding'
+    }
   }),
   env: {
     schema: {
