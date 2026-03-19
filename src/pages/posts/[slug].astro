@@ -1,18 +1,18 @@
 ---
 import PostViewLayout from '@/layouts/PostViewLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
-export async function getStaticPaths() {
-  const collection = await getCollection('posts');
-
-  return collection.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry }
-  }));
+const slug = Astro.params.slug;
+if (!slug) {
+  throw new Error('Post slug is missing from route parameters.');
 }
 
-const { entry } = Astro.props;
-const { slug } = Astro.params;
+const entry = await getEntry('posts', slug);
+if (!entry) {
+  Astro.response.status = 404;
+  throw new Error(`Post with slug "${slug}" not found.`);
+}
+
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const { updatedDate, readingTime } = remarkPluginFrontmatter;
 const props = { ...entry.data, slug, headings, updatedDate, readingTime };
