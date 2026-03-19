@@ -35,7 +35,7 @@ export default defineConfig({
         default: 'https://analytics.frasermclean.com/script.js'
       }),
       COMMENTS_HOST: envField.string({ context: 'client', access: 'public', default: 'http://localhost:8080' }),
-      CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
+      CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public', default: '1x00000000000000000000AA' }),
       TURNSTILE_SECRET_KEY: envField.string({

@@ -53,6 +53,11 @@ async function validateToken(token: string, remoteIp: string): Promise<void> {
  * @returns True if the email was sent successfully
  */
 async function sendEmail(fromName: string, fromEmail: string, message: string) {
+  if (!CONTACT_EMAIL) {
+    console.error('CONTACT_EMAIL is not configured');
+    throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: 'Email service is not configured' });
+  }
+
   const resend = new Resend(RESEND_API_KEY);
 
   const response = await resend.emails.send({
