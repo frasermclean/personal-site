@@ -53,16 +53,14 @@ async function validateToken(token: string, remoteIp: string): Promise<void> {
  * @returns True if the email was sent successfully
  */
 async function sendEmail(fromName: string, fromEmail: string, message: string) {
-  if (!CONTACT_EMAIL) {
-    console.error('CONTACT_EMAIL is not configured');
-    throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: 'Email service is not configured' });
-  }
+  const contactEmail = ensureValidSecret('CONTACT_EMAIL', CONTACT_EMAIL);
+  const resendApiKey = ensureValidSecret('RESEND_API_KEY', RESEND_API_KEY);
 
-  const resend = new Resend(RESEND_API_KEY);
+  const resend = new Resend(resendApiKey);
 
   const response = await resend.emails.send({
     from: 'Contact Form <contact-form@updates.frasermclean.com>',
-    to: CONTACT_EMAIL,
+    to: contactEmail,
     replyTo: fromEmail,
     subject: `Message from ${fromName}`,
     text: message
@@ -75,4 +73,16 @@ async function sendEmail(fromName: string, fromEmail: string, message: string) {
       message: 'Failed to send email'
     });
   }
+}
+
+function ensureValidSecret(name: string, value?: string): string {
+  if (value) {
+    return value;
+  }
+
+  console.error(`Missing required server secret: ${name}`);
+  throw new ActionError({
+    code: 'INTERNAL_SERVER_ERROR',
+    message: 'Server is not configured correctly. Please try again later.'
+  });
 }
