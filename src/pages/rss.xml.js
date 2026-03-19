@@ -2,6 +2,8 @@ import { POSTS_PATH, SITE_DESCRIPTION, SITE_TITLE } from '@/constants';
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
+export const prerender = true;
+
 export async function GET(context) {
   const posts = (await getCollection('posts')).sort(
     (a, b) => new Date(b.data.publishDate) - new Date(a.data.publishDate)
