@@ -12,6 +12,7 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 export default defineConfig({
   site: 'https://frasermclean.com',
   trailingSlash: 'never',
+  output: 'server',
   image: {
     layout: 'constrained',
     objectFit: 'cover',
@@ -19,7 +20,7 @@ export default defineConfig({
     responsiveStyles: true
   },
   adapter: cloudflare({
-    imageService: 'compile'
+    imageService: { build: 'compile', runtime: 'cloudflare-binding' }
   }),
   env: {
     schema: {
