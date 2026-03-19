@@ -12,16 +12,17 @@ import {
 } from '@/components/starwind/pagination';
 import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/BaseLayout.astro';
 import ArticleIcon from '@tabler/icons/outline/article.svg';
-import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props extends BaseLayoutProps {
   listTitle: string;
-  page: Page<CollectionEntry<'posts'>>;
-  paginationBasePath: string;
+  entries: CollectionEntry<'posts'>[];
+  currentPage: number;
+  lastPage: number;
+  basePath: string;
 }
 
-const { title, description, listTitle, page, paginationBasePath, ...rest } = Astro.props;
+const { title, description, listTitle, entries, currentPage, lastPage, basePath, ...rest } = Astro.props;
 ---
 
 <BaseLayout {title} {description} {...rest}>
@@ -33,40 +34,34 @@ const { title, description, listTitle, page, paginationBasePath, ...rest } = Ast
   <section class="my-8">
     <SectionHeading Icon={ArticleIcon} text={listTitle} />
     <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map((entry) => <PostCard slug={entry.id} {...entry.data} />)}
+      {entries.map((entry) => <PostCard slug={entry.id} {...entry.data} />)}
     </nav>
   </section>
 
   {
-    page.lastPage > 1 && (
+    lastPage > 1 && (
       <section class="mt-8">
         <SectionHeading text="More Posts" />
         <Pagination>
           <PaginationContent>
-            {page.currentPage > 1 && (
+            {currentPage > 1 && (
               <PaginationItem>
-                <PaginationPrevious
-                  href={
-                    page.currentPage === 2
-                      ? `${paginationBasePath}`
-                      : `${paginationBasePath}/page/${page.currentPage - 1}`
-                  }
-                />
+                <PaginationPrevious href={currentPage === 2 ? `${basePath}` : `${basePath}?page=${currentPage - 1}`} />
               </PaginationItem>
             )}
-            {Array.from({ length: page.lastPage }, (_, i) => (
+            {Array.from({ length: lastPage }, (_, i) => (
               <PaginationItem>
                 <PaginationLink
-                  href={i === 0 ? `${paginationBasePath}` : `${paginationBasePath}/page/${i + 1}`}
-                  isActive={i + 1 === page.currentPage}
+                  href={i === 0 ? `${basePath}` : `${basePath}?page=${i + 1}`}
+                  isActive={i + 1 === currentPage}
                 >
                   {i + 1}
                 </PaginationLink>
               </PaginationItem>
             ))}
-            {page.currentPage < page.lastPage && (
+            {currentPage < lastPage && (
               <PaginationItem>
-                <PaginationNext href={`${paginationBasePath}/page/${page.currentPage + 1}`} />
+                <PaginationNext href={`${basePath}?page=${currentPage + 1}`} />
               </PaginationItem>
             )}
           </PaginationContent>
