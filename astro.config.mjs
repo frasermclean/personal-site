@@ -12,7 +12,7 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 export default defineConfig({
   site: 'https://frasermclean.com',
   trailingSlash: 'never',
-  output: 'server',
+  output: 'static',
   image: {
     layout: 'constrained',
     objectFit: 'cover',

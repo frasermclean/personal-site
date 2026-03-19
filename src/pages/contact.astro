@@ -10,6 +10,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
 import { TURNSTILE_SITE_KEY } from 'astro:env/client';
 
+export const prerender = false;
+
 const title = 'Contact Me';
 const subtitle = "If you have any questions or inquiries, I'd love to hear from you!";
 const description =
