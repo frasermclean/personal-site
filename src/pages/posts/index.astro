@@ -1,38 +1,64 @@
 ---
 import FeaturedPost from '@/components/FeaturedPost.astro';
+import HeroSection from '@/components/HeroSection.astro';
 import PopularTags from '@/components/PopularTags.astro';
-import { POSTS_PAGE_SIZE, POSTS_PATH } from '@/constants';
-import PostListLayout from '@/layouts/PostListLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import PostsPagination from '@/components/PostsPagination.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { POSTS_PAGE_SIZE } from '@/constants';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
 import { getCollection } from 'astro:content';
 
-const sortedEntries = (await getCollection('posts'))
-  .filter((post) => !post.data.isFeatured)
+// query parameters
+const page = Astro.url.searchParams.get('page') ?? '1';
+const tag = Astro.url.searchParams.get('tag');
+const category = Astro.url.searchParams.get('category');
+
+// filter and sort posts
+const filteredEntries = (await getCollection('posts'))
+  .filter((post) => {
+    if (tag) {
+      return post.data.tags.includes(tag);
+    }
+
+    if (category) {
+      return post.data.category === category;
+    }
+
+    return !post.data.isFeatured;
+  })
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
-const pageParam = Astro.url.searchParams.get('page');
-const currentPage = pageParam ? Math.max(1, parseInt(pageParam)) : 1;
+const pageNumber = parseInt(page, 10);
+const totalPages = Math.ceil(filteredEntries.length / POSTS_PAGE_SIZE);
 
-const totalPages = Math.ceil(sortedEntries.length / POSTS_PAGE_SIZE);
-const startIndex = (currentPage - 1) * POSTS_PAGE_SIZE;
+const startIndex = (pageNumber - 1) * POSTS_PAGE_SIZE;
 const endIndex = startIndex + POSTS_PAGE_SIZE;
-const pageEntries = sortedEntries.slice(startIndex, endIndex);
+const pageEntries = filteredEntries.slice(startIndex, endIndex);
 
-const title = currentPage === 1 ? 'Blog Posts' : `Blog Posts - Page ${currentPage}`;
-const description =
-  'A collection of blog posts on various topics including web development, programming, and technology.';
+const title = tag
+  ? `Tag: ${tag}`
+  : category
+    ? `Category: ${category}`
+    : pageNumber === 1
+      ? 'Blog Posts'
+      : `Blog Posts - Page ${pageNumber}`;
+
+const description = tag
+  ? `A collection of blog posts tagged with "${tag}".`
+  : category
+    ? `A collection of blog posts in the "${category}" category.`
+    : 'A collection of blog posts on various topics including web development, programming, and technology.';
+
+const listTitle = tag || category ? 'Matching Posts' : 'Recent Posts';
 ---
 
-<PostListLayout
-  {title}
-  {description}
-  entries={pageEntries}
-  currentPage={currentPage}
-  lastPage={totalPages}
-  listTitle="Recent"
-  basePath={`${POSTS_PATH}`}
->
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+
   {
-    currentPage === 1 && (
+    pageNumber === 1 && !tag && !category && (
       <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div class="lg:col-span-2">
           <FeaturedPost />
@@ -43,4 +69,13 @@ const description =
       </div>
     )
   }
-</PostListLayout>
+
+  <section class="my-8">
+    <SectionHeading Icon={ArticleIcon} text={listTitle} />
+    <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {pageEntries.map((entry) => <PostCard slug={entry.id} {...entry.data} />)}
+    </nav>
+  </section>
+
+  <PostsPagination {pageNumber} {totalPages} {tag} {category} />
+</BaseLayout>
