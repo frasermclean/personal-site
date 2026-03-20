@@ -1,5 +1,5 @@
 ---
-import { TAGS_PATH } from '@/constants';
+import { POSTS_PATH } from '@/constants';
 import RoundedLink from './RoundedLink.astro';
 
 interface Props {
@@ -9,4 +9,4 @@ interface Props {
 const { tag } = Astro.props;
 ---
 
-<RoundedLink href={`${TAGS_PATH}/${tag}`}>{tag}</RoundedLink>
+<RoundedLink href={`${POSTS_PATH}?tag=${tag}`}>{tag}</RoundedLink>

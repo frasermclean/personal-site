@@ -1,5 +1,5 @@
 ---
-import { CATEGORIES_PATH } from '@/constants';
+import { POSTS_PATH } from '@/constants';
 import CategoryIcon from '@tabler/icons/outline/category.svg';
 import RoundedLink from './RoundedLink.astro';
 
@@ -15,5 +15,5 @@ const { category } = Astro.props;
     <CategoryIcon width={20} height={20} />
     <h2 class="font-heading text-xl font-bold">Category</h2>
   </div>
-  <RoundedLink href={`${CATEGORIES_PATH}/${category}`}>{category}</RoundedLink>
+  <RoundedLink href={`${POSTS_PATH}?category=${category}`}>{category}</RoundedLink>
 </section>
