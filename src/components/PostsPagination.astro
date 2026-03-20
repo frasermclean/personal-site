@@ -1,0 +1,68 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/starwind/pagination';
+import { POSTS_PATH } from '@/constants';
+
+interface Props {
+  pageNumber: number;
+  totalPages: number;
+  tag: string | null;
+  category: string | null;
+}
+
+const { pageNumber, totalPages, tag, category } = Astro.props as Props;
+
+function getPageUrl(page: number) {
+  const url = new URL(POSTS_PATH, Astro.url);
+
+  if (tag) {
+    url.searchParams.set('tag', tag);
+  }
+
+  if (category) {
+    url.searchParams.set('category', category);
+  }
+
+  if (page > 1) {
+    url.searchParams.set('page', page.toString());
+  }
+
+  return url;
+}
+---
+
+{
+  totalPages > 1 && (
+    <section class="mt-8">
+      <SectionHeading text="More Posts" />
+      <Pagination>
+        <PaginationContent>
+          {pageNumber !== 1 && (
+            <PaginationItem>
+              <PaginationPrevious href={getPageUrl(pageNumber - 1)} />
+            </PaginationItem>
+          )}
+          {Array.from({ length: totalPages }, (_, i) => (
+            <PaginationItem>
+              <PaginationLink href={getPageUrl(i + 1)} isActive={i + 1 === pageNumber}>
+                {i + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          {pageNumber !== totalPages && (
+            <PaginationItem>
+              <PaginationNext href={getPageUrl(pageNumber + 1)} />
+            </PaginationItem>
+          )}
+        </PaginationContent>
+      </Pagination>
+    </section>
+  )
+}
