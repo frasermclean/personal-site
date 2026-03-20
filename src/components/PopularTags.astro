@@ -27,7 +27,7 @@ const popularTags = Object.entries(tagCounts)
 ---
 
 <section class="flex h-full flex-col">
-  <SectionHeading Icon={TagIcon} text="Tags" href={TAGS_PATH} />
+  <SectionHeading Icon={TagIcon} text="Popular Tags" href={TAGS_PATH} />
 
   <div class="flex h-full grow flex-wrap items-center justify-center gap-2">
     {popularTags.map((tag) => <TagLink tag={tag} />)}
