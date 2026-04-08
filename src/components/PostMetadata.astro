@@ -1,8 +1,10 @@
 ---
+import avatarImage from '@/assets/avatar_bnw.png';
 import FormattedDate from '@/components/FormattedDate.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import PencilCheckIcon from '@tabler/icons/outline/pencil-check.svg';
+import { Image } from 'astro:assets';
 
 interface Props {
   class?: string;
@@ -43,6 +45,17 @@ const showUpdatedDate =
       />
       <FormattedDate date={publishDate} class="dt-published" />
     </div>
+
+    <a href={Astro.site} class="p-author flex items-center gap-2" rel="author">
+      <Image
+        src={avatarImage}
+        alt="Author's avatar"
+        class="h-6 w-6 rounded-full object-cover object-center"
+        width={24}
+        height={24}
+      />
+      Fraser McLean
+    </a>
 
     {
       showUpdatedDate && (
