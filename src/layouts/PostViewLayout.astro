@@ -47,7 +47,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
 ];
 ---
 
-<BaseLayout {title} {description} isArticle={true} {heroImage}>
+<BaseLayout {title} {description} isArticle={true} {heroImage} bodyClass="h-entry">
   <Article {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
   <BreadcrumbList items={breadcrumbItems} slot="head" />
 
