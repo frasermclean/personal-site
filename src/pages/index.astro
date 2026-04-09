@@ -1,19 +1,53 @@
 ---
-import HeroSection from '@/components/HeroSection.astro';
+import headshotImage from '@/assets/fraser-headshot.jpg';
+import ButtonLink from '@/components/links/ButtonLink.astro';
 import SkillsSection from '@/components/SkillsSection.astro';
-import { POSTS_PATH, PROJECTS_PATH } from '@/constants';
+import { ABOUT_PATH, POSTS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
+import UserIcon from '@tabler/icons/outline/user.svg';
+import Image from 'astro/components/Image.astro';
 
 const description =
   'Personal website of Fraser McLean - software engineer and technology enthusiast. Showcasing projects, blog posts, and skills in software development.';
 ---
 
 <BaseLayout title="Fraser McLean's Personal Website" description={description}>
-  <HeroSection
-    title="Fraser McLean"
-    subtitle="Software engineer and technology enthusiast."
-    primaryCta={{ label: 'View Projects', href: PROJECTS_PATH }}
-    secondaryCta={{ label: 'Read Blog', href: POSTS_PATH }}
-  />
+  <section class="h-card mx-auto flex w-full max-w-4xl flex-col items-center gap-3 pt-10 md:gap-8">
+    <a href={Astro.site} class="u-url u-uid hidden" aria-hidden="true">Fraser McLean</a>
+    <h1 class="p-name font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+      Fraser McLean
+    </h1>
+    <div class="flex grow flex-col-reverse items-center gap-3 md:flex-row md:gap-4">
+      <section class="text-md flex flex-col gap-3 text-center sm:gap-4 sm:text-lg md:text-right">
+        <p class="p-note">
+          Hi there! My name is Fraser, and I'm a software engineer currently based in
+          <span class="p-locality">London</span>. I'm into technology and open-source software. Welcome to my personal
+          space on the web!
+        </p>
+        <p>
+          Occasionally, I like to share my thoughts on software development, technology trends, and the occasional
+          project update.
+        </p>
+        <nav class="flex flex-wrap justify-center gap-3 md:justify-end">
+          <ButtonLink variant="primary" href={ABOUT_PATH} class="w-32">
+            <UserIcon class="mr-2" width={16} height={16} /> About Me
+          </ButtonLink>
+          <ButtonLink variant="secondary" href={POSTS_PATH} class="w-32">
+            <ArticleIcon class="mr-2" width={16} height={16} /> Read Blog
+          </ButtonLink>
+        </nav>
+      </section>
+
+      <Image
+        src={headshotImage}
+        width={256}
+        height={256}
+        alt="Fraser McLean Headshot"
+        class="u-photo mr-0 w-48 rounded-full border-4 sm:w-64 md:mr-4"
+      />
+    </div>
+  </section>
+
   <SkillsSection />
 </BaseLayout>

@@ -1,5 +1,5 @@
 ---
-import headshotImage from '@/assets/fraser-headshot.jpg';
+import headshotImage from '@/assets/headshot2.png';
 import HeroSection from '@/components/HeroSection.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -13,10 +13,10 @@ const description =
 
 <BaseLayout {title} {description}>
   <HeroSection {title} {subtitle} />
-  <div class="mx-auto flex max-w-3xl flex-col gap-8 text-center text-lg text-neutral-300">
+  <div class="mx-auto flex max-w-3xl flex-col gap-8 text-center text-lg">
     <section class="flex w-full flex-col-reverse gap-8 md:flex-row">
       <div class="grow">
-        <SectionHeading text="Hi there!" />
+        <SectionHeading text="Hello" />
         <p>
           My name is Fraser McLean, and I am a software developer with a passion for creating intuitive and efficient
           applications. Welcome to my little corner of the web where I share my thoughts, projects, and experiences in
@@ -36,10 +36,44 @@ const description =
     <section>
       <SectionHeading text="Background" />
       <p>
-        I grew up in South Africa but have lived in the UK, spent almost 20 years in Australia and now most recently, I
-        am calling Singapore home. I am currently self-employed providing consulting services to a variety of clients.
-        My expertise lies in full-stack web development and cloud solution architecture.
+        I was born in Zimbabwe, but grew up in South Africa where I developed an early interest in technology. After
+        finishing high school, I studied network engineering, systems administration, and software development.
       </p>
+      <p>
+        In the early 2000s I moved to London and came across the world of AV integration, which I found fascinating. I
+        loved the blend of hardware and software, and seeing the results of my work in real-world applications. I spent
+        several years working in the AV industry, designing and implementing solutions for a variety of clients.
+      </p>
+
+      <p>
+        I moved to Melbourne, Australia, to pursue a degree in another of my passions: game development. I enjoyed
+        attending RMIT University and learning all about game design and development. I attained my degree in 2010, but
+        ultimately decided to remain working in the local AV industry. I ran my own business for several years and
+        worked for some of largest AV integrators in the country, designing and implementing solutions for a wide range
+        of clients.
+      </p>
+
+      <p>
+        While I loved working in the AV industry, I was also draw to the world of web development and cloud computing. I
+        had the opportunity to build a prototype web application that facilitated control systems monitoring and
+        reporting out in the field. From then on, I was hooked on web development and cloud computing, and I have been
+        learning and building in that space ever since. I have worked as a software engineer and consultant,
+        specialising in full-stack web development and cloud solution architecture.
+      </p>
+
+      <p>
+        In 2023, I relocated to Singapore with my wife in order to pursue an exciting career opportunity for her. As I
+        didn't have local work authorization, I started my own consulting business, focussing on Azure solution
+        architecture and development.
+      </p>
+
+      <p>In 2026, we moved back to London for a second time where I am currently looking for new opportunities.</p>
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  p {
+    margin-bottom: 1.5rem;
+  }
+</style>

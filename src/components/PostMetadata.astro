@@ -1,8 +1,10 @@
 ---
+import authorImage from '@/assets/fraser-headshot.jpg';
 import FormattedDate from '@/components/FormattedDate.astro';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import PencilCheckIcon from '@tabler/icons/outline/pencil-check.svg';
+import { Image } from 'astro:assets';
 
 interface Props {
   class?: string;
@@ -26,8 +28,8 @@ const showUpdatedDate =
 
 <section class={`space-y-2 md:space-y-4 ${className}`}>
   <hgroup class="mx-auto mb-4 max-w-6xl space-y-2 text-center text-balance md:space-y-4">
-    <h1 class="font-heading text-3xl font-bold md:text-5xl">{title}</h1>
-    <p class="text-lg text-muted-foreground md:text-xl">{description}</p>
+    <h1 class="p-name font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    <p class="p-summary text-lg text-muted-foreground md:text-xl">{description}</p>
   </hgroup>
 
   <div
@@ -41,8 +43,19 @@ const showUpdatedDate =
         stroke-width={1}
         aria-hidden="true"
       />
-      <FormattedDate date={publishDate} />
+      <FormattedDate date={publishDate} class="dt-published" />
     </div>
+
+    <a href={Astro.site} class="flex items-center gap-2" rel="author">
+      <Image
+        src={authorImage}
+        alt="Fraser McLean"
+        class="h-6 w-6 rounded-full object-cover object-center"
+        width={24}
+        height={24}
+      />
+      Fraser McLean
+    </a>
 
     {
       showUpdatedDate && (
