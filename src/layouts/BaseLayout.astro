@@ -30,6 +30,8 @@ const image = heroImage?.src || defaultOgImage;
 const imageUrl = new URL(image.src, Astro.site);
 
 const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
+
+const includeUidLink = bodyClass === 'h-entry';
 ---
 
 <!doctype html>
@@ -85,6 +87,7 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
       data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
   </head>
   <body class:list={['flex min-h-screen flex-col', bodyClass]}>
+    {includeUidLink && <link href={canonicalUrl} class="u-url hidden" />}
     <Navbar />
     <main class="mx-auto max-w-7xl flex-1 px-2 md:px-3">
       <slot />
