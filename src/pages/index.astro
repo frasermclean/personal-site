@@ -13,15 +13,15 @@ const description =
 ---
 
 <BaseLayout title="Fraser McLean's Personal Website" description={description}>
-  <section class="mx-auto flex w-full max-w-4xl items-center gap-3 py-10 text-right md:gap-8">
+  <section class="h-card mx-auto flex w-full max-w-4xl items-center gap-3 py-10 text-right md:gap-8">
     <div class="flex grow flex-col gap-2 md:gap-4">
-      <a href={Astro.url} class="h-card u-url u-uid">
-        <h1 class="font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
-          Fraser McLean
-        </h1>
-      </a>
+      <h1 class="p-name font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+        Fraser McLean
+      </h1>
 
-      <div class="text-md flex flex-col gap-2 text-muted-foreground sm:text-lg">
+      <a href={Astro.site} class="u-url u-uid hidden">Fraser McLean</a>
+
+      <section class="text-md flex flex-col gap-2 sm:text-lg">
         <p>
           Hi there! My name is Fraser, and I'm a software engineer currently based in London. Welcome to my personal
           space on the web.
@@ -30,7 +30,7 @@ const description =
           Ocassionally, I like to share my thoughts on software development, technology trends, and the occasional
           project update.
         </p>
-      </div>
+      </section>
 
       <nav class="hidden flex-wrap justify-end gap-2 sm:flex">
         <ButtonLink variant="primary" href={ABOUT_PATH} class="w-32">
