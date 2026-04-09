@@ -13,42 +13,40 @@ const description =
 ---
 
 <BaseLayout title="Fraser McLean's Personal Website" description={description}>
-  <section class="h-card mx-auto flex w-full max-w-4xl items-center gap-3 py-10 text-right md:gap-8">
-    <div class="flex grow flex-col gap-2 md:gap-4">
-      <h1 class="p-name font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
-        Fraser McLean
-      </h1>
-
-      <a href={Astro.site} class="u-url u-uid hidden">Fraser McLean</a>
-
-      <section class="text-md flex flex-col gap-2 sm:text-lg">
+  <section class="h-card mx-auto flex w-full max-w-4xl flex-col items-center gap-3 pt-10 md:gap-8">
+    <a href={Astro.site} class="u-url u-uid hidden" aria-hidden="true">Fraser McLean</a>
+    <h1 class="p-name font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+      Fraser McLean
+    </h1>
+    <div class="flex grow flex-col-reverse items-center gap-3 md:flex-row md:gap-4">
+      <section class="text-md flex flex-col gap-3 text-center sm:gap-4 sm:text-lg md:text-right">
         <p class="p-note">
-          Hi there! My name is , and I'm a software engineer currently based in
-          <span class="p-locality">London</span>. Welcome to my personal space on the web.
+          Hi there! My name is Fraser, and I'm a software engineer currently based in
+          <span class="p-locality">London</span>. I'm into technology and open-source software. Welcome to my personal
+          space on the web!
         </p>
-        <p class="hidden md:block">
-          Ocassionally, I like to share my thoughts on software development, technology trends, and the occasional
+        <p>
+          Occasionally, I like to share my thoughts on software development, technology trends, and the occasional
           project update.
         </p>
+        <nav class="flex flex-wrap justify-center gap-3 md:justify-end">
+          <ButtonLink variant="primary" href={ABOUT_PATH} class="w-32">
+            <UserIcon class="mr-2" width={16} height={16} /> About Me
+          </ButtonLink>
+          <ButtonLink variant="secondary" href={POSTS_PATH} class="w-32">
+            <ArticleIcon class="mr-2" width={16} height={16} /> Read Blog
+          </ButtonLink>
+        </nav>
       </section>
 
-      <nav class="hidden flex-wrap justify-end gap-2 sm:flex">
-        <ButtonLink variant="primary" href={ABOUT_PATH} class="w-32">
-          <UserIcon class="mr-2" width={16} height={16} /> About Me
-        </ButtonLink>
-        <ButtonLink variant="secondary" href={POSTS_PATH} class="w-32">
-          <ArticleIcon class="mr-2" width={16} height={16} /> Read Blog
-        </ButtonLink>
-      </nav>
+      <Image
+        src={headshotImage}
+        width={256}
+        height={256}
+        alt="Fraser McLean Headshot"
+        class="u-photo mr-0 w-48 rounded-full border-4 sm:w-64 md:mr-4"
+      />
     </div>
-
-    <Image
-      src={headshotImage}
-      width={256}
-      height={256}
-      alt="Fraser McLean Headshot"
-      class="u-photo mx-auto w-32 rounded-full border-4 sm:w-48 md:w-64"
-    />
   </section>
 
   <SkillsSection />
