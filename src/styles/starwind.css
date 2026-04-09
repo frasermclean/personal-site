@@ -70,7 +70,7 @@
 @layer base {
   :root {
     --background: var(--color-neutral-100);
-    --foreground: var(--color-neutral-900);
+    --foreground: var(--color-neutral-700);
     --card: var(--color-neutral-200);
     --card-foreground: var(--color-neutral-950);
     --popover: var(--color-white);
@@ -99,15 +99,15 @@
 
   .dark {
     --background: var(--color-neutral-900);
-    --foreground: var(--color-neutral-50);
+    --foreground: var(--color-neutral-300);
     --card: var(--color-neutral-800);
     --card-foreground: var(--color-neutral-50);
     --popover: var(--color-neutral-800);
     --popover-foreground: var(--color-neutral-50);
     --primary: var(--color-sky-600);
     --primary-foreground: var(--color-neutral-50);
-    --secondary: var(--color-teal-400);
-    --secondary-foreground: var(--color-neutral-950);
+    --secondary: var(--color-teal-600);
+    --secondary-foreground: var(--color-neutral-50);
     --muted: var(--color-neutral-800);
     --muted-foreground: var(--color-neutral-400);
     --accent: var(--color-amber-600);
