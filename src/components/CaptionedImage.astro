@@ -14,6 +14,6 @@ const { image, caption, class: className, width, height } = Astro.props;
 ---
 
 <figure class={className}>
-  <Image src={image} alt={caption} width={width} height={height} class="mx-auto" />
+  <Image src={image} alt={caption} width={width} height={height} class="mx-auto rounded" />
   <figcaption class="mt-2 text-center text-sm text-neutral-500">{caption}</figcaption>
 </figure>

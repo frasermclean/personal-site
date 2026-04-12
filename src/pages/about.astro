@@ -1,5 +1,7 @@
 ---
 import headshotImage from '@/assets/headshot2.png';
+import melbourneImage from '@/assets/melbourne-2006.jpg';
+import singaporeBayImage from '@/assets/singapore-bay.jpg';
 import trs80Image from '@/assets/trs-80-pocket-edition.jpg';
 import CaptionedImage from '@/components/CaptionedImage.astro';
 import HeroSection from '@/components/HeroSection.astro';
@@ -69,13 +71,16 @@ const description =
         <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
           Melbourne and University
         </h3>
-        <p>
-          I moved to Melbourne, Australia, to pursue a degree in another of my passions: game development. I enjoyed
-          attending RMIT University and learning all about game design and development. I attained my degree in 2010,
-          but ultimately decided to remain working in the local AV industry. I ran my own business for several years and
-          worked for some of largest AV integrators in the country, designing and implementing solutions for a wide
-          range of clients.
-        </p>
+        <div class="mb-4 flex flex-col items-center gap-2 sm:flex-row">
+          <p class="max-w-2/3">
+            I moved to Melbourne, Australia, to pursue a degree in another of my passions: game development. I enjoyed
+            attending RMIT University and learning all about game design and development. I attained my degree in 2010,
+            but ultimately decided to remain working in the local AV industry. I ran my own business for several years
+            and worked for some of largest AV integrators in the country, designing and implementing solutions for a
+            wide range of clients.
+          </p>
+          <CaptionedImage image={melbourneImage} caption="Melbourne skyline circa 2006" width={192} />
+        </div>
       </section>
 
       <section class="mb-4">
@@ -96,11 +101,15 @@ const description =
           Singapore and Consulting
         </h3>
 
-        <p>
-          In 2023, I relocated to Singapore with my wife in order to pursue an exciting career opportunity for her. It's
-          an amazing place with excellent travel opportunities around South East Asia. As I didn't have local work
-          authorization, I started my own consulting business, focussing on Azure solution architecture and development.
-        </p>
+        <div class="mb-4 flex flex-col items-center gap-2 sm:flex-row">
+          <p class="max-w-2/3">
+            In 2023, I relocated to Singapore with my wife in order to support her in pursuing an exciting career
+            opportunity. It's an amazing place with excellent travel opportunities around South East Asia. As I didn't
+            have local work authorization, I started my own consulting business, focussing on Azure solution
+            architecture and development.
+          </p>
+          <CaptionedImage image={singaporeBayImage} caption="Singapore bay is truly beautiful" width={192} />
+        </div>
       </section>
 
       <section>
