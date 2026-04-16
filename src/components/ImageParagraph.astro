@@ -1,0 +1,24 @@
+---
+import CaptionedImage from './CaptionedImage.astro';
+
+interface Props {
+  image: ImageMetadata;
+  headingText: string;
+  caption: string;
+  class?: string;
+}
+
+const { image, headingText, caption, class: className } = Astro.props;
+---
+
+<section class={className}>
+  <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
+    {headingText}
+  </h3>
+  <div class="flex flex-col items-center justify-between gap-2 sm:flex-row">
+    <p class="w-full max-w-xl text-justify">
+      <slot />
+    </p>
+    <CaptionedImage {image} {caption} width={256} class="w-64" />
+  </div>
+</section>

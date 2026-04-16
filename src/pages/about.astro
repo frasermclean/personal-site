@@ -3,8 +3,8 @@ import headshotImage from '@/assets/headshot2.png';
 import melbourneImage from '@/assets/melbourne-2006.jpg';
 import singaporeBayImage from '@/assets/singapore-bay.jpg';
 import trs80Image from '@/assets/trs-80-pocket-edition.jpg';
-import CaptionedImage from '@/components/CaptionedImage.astro';
 import HeroSection from '@/components/HeroSection.astro';
+import ImageParagraph from '@/components/ImageParagraph.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Image from 'astro/components/Image.astro';
 
@@ -16,78 +16,62 @@ const description =
 
 <BaseLayout {title} {description}>
   <HeroSection {title} {subtitle} />
-  <div class="mx-auto flex max-w-3xl flex-col gap-8 text-lg">
+  <div class="mx-auto flex max-w-4xl flex-col gap-8 text-lg">
     <section class="flex w-full flex-col-reverse items-center gap-4 text-center sm:flex-row">
       <div class="grow">
         <h2 class="mb-4 font-heading text-2xl font-semibold text-secondary md:text-4xl">Hello</h2>
-        <p>
+        <p class="text-justify">
           My name is Fraser McLean, and I am a software developer with a passion for creating intuitive and efficient
           applications. Welcome to my little corner of the web where I share my thoughts, projects, and experiences in
           the world.
         </p>
       </div>
 
-      <Image
-        src={headshotImage}
-        width={256}
-        height={256}
-        alt="Fraser McLean Headshot"
-        class="rounded-full border-4 sm:mr-4"
-      />
+      <Image src={headshotImage} width={256} height={256} alt="Fraser McLean Headshot" class="rounded-full border-4" />
     </section>
 
-    <section>
-      <h2 class="mb-4 font-heading text-2xl font-semibold text-secondary md:text-4xl" id="background">Background</h2>
+    <section class="flex flex-col gap-4">
+      <h2 class="font-heading text-2xl font-semibold text-secondary md:text-4xl" id="background">Background</h2>
 
-      <section class="mb-4">
-        <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
-          Growing Up in Africa
-        </h3>
-        <div class="mb-4 flex flex-col items-center gap-2 sm:flex-row">
-          <p class="max-w-2/3">
-            I was born in Zimbabwe, but grew up in South Africa where I developed an early interest in technology. I
-            remember being fascinated by programming BASIC on handheld computers at my first school. From then on, I
-            knew had to pursue a career in technology.
-          </p>
-          <CaptionedImage image={trs80Image} caption="Writing BASIC programs on a single line display" width={192} />
-        </div>
-        <p>
-          After finishing high school, I studied network engineering, systems administration, and software development.
-        </p>
-      </section>
+      <ImageParagraph
+        headingText="Growing Up in Africa"
+        image={trs80Image}
+        caption="Writing BASIC programs on a single line display"
+      >
+        I was born in Zimbabwe, but grew up in South Africa where I developed an early interest in technology. I
+        remember being fascinated by programming BASIC on handheld computers at my first school. From then on, I knew
+        had to pursue a career in technology. After finishing high school, I studied network engineering, systems
+        administration, and software development.
+      </ImageParagraph>
 
-      <section class="mb-4">
+      <section>
         <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
           First move to London and into AV Integration
         </h3>
-        <p>
+        <p class="text-justify">
           In the early 2000s I moved to London and came across the world of AV integration, which I found fascinating. I
           loved the blend of hardware and software, and seeing the results of my work in real-world applications. I
           spent several years working in the AV industry, designing and implementing solutions for a variety of clients.
         </p>
       </section>
 
-      <section class="mb-4">
-        <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
-          Melbourne and University
-        </h3>
-        <div class="mb-4 flex flex-col items-center gap-2 sm:flex-row">
-          <p class="max-w-2/3">
-            I moved to Melbourne, Australia, to pursue a degree in another of my passions: game development. I enjoyed
-            attending RMIT University and learning all about game design and development. I attained my degree in 2010,
-            but ultimately decided to remain working in the local AV industry. I ran my own business for several years
-            and worked for some of largest AV integrators in the country, designing and implementing solutions for a
-            wide range of clients.
-          </p>
-          <CaptionedImage image={melbourneImage} caption="Melbourne skyline circa 2006" width={192} />
-        </div>
-      </section>
+      <ImageParagraph
+        image={melbourneImage}
+        headingText="Melbourne and University"
+        caption="Melbourne skyline circa 2006"
+      >
+        I moved to Melbourne, Australia, to pursue a degree in another of my passions: game development. I enjoyed
+        attending RMIT University and learning all about game design and development. I attained my degree in 2010, but
+        ultimately decided to remain working in the local AV industry. I ran my own business for several years and
+        worked for some of largest AV integrators in the country, designing and implementing solutions for a wide range
+        of clients.
+      </ImageParagraph>
 
-      <section class="mb-4">
+      <section>
         <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
           Transition to Web Development and Cloud Computing
         </h3>
-        <p>
+        <p class="text-justify">
           While I loved working in the AV industry, I was also drawn to the world of web development and cloud
           computing. I had the opportunity to build a prototype web application that facilitated control systems
           monitoring and reporting out in the field. From then on, I was hooked on web development and cloud computing,
@@ -96,27 +80,22 @@ const description =
         </p>
       </section>
 
-      <section class="mb-4">
-        <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
-          Singapore and Consulting
-        </h3>
-
-        <div class="mb-4 flex flex-col items-center gap-2 sm:flex-row">
-          <p class="max-w-2/3">
-            In 2023, I relocated to Singapore with my wife in order to support her in pursuing an exciting career
-            opportunity. It's an amazing place with excellent travel opportunities around South East Asia. As I didn't
-            have local work authorization, I started my own consulting business, focussing on Azure solution
-            architecture and development.
-          </p>
-          <CaptionedImage image={singaporeBayImage} caption="Singapore bay is truly beautiful" width={192} />
-        </div>
-      </section>
+      <ImageParagraph
+        image={singaporeBayImage}
+        headingText="Singapore and Consulting"
+        caption="Singapore bay is truly beautiful"
+      >
+        In 2023, I relocated to Singapore with my wife in order to support her in pursuing an exciting career
+        opportunity. It's an amazing place with excellent travel opportunities around South East Asia. As I didn't have
+        local work authorization, I started my own consulting business, focussing on Azure solution architecture and
+        development.
+      </ImageParagraph>
 
       <section>
         <h3 class="mb-1 font-heading text-lg font-semibold tracking-wide text-secondary/80 sm:text-xl">
           Back to London and Looking to the Future
         </h3>
-        <p class="mb-4">
+        <p class="text-justify">
           In 2026, we moved back to London for a second time where I am currently looking for new opportunities.
         </p>
       </section>
