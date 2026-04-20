@@ -1,7 +1,6 @@
 ---
 import authorImage from '@/assets/fraser-headshot.jpg';
 import FormattedDate from '@/components/FormattedDate.astro';
-import { POSTS_PATH } from '@/constants';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import PencilCheckIcon from '@tabler/icons/outline/pencil-check.svg';
@@ -9,7 +8,6 @@ import { Image } from 'astro:assets';
 
 interface Props {
   class?: string;
-  slug: string;
   title: string;
   description: string;
   publishDate: Date;
@@ -17,7 +15,7 @@ interface Props {
   readingTime?: string;
 }
 
-const { class: className, slug, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
+const { class: className, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
 
 const updatedDateAsDate = updatedDate ? new Date(updatedDate) : null;
 const showUpdatedDate =
@@ -27,20 +25,20 @@ const showUpdatedDate =
     return hoursDiff >= 24;
   })();
 
-const canonicalUrl = new URL(`${POSTS_PATH}/${slug}`, Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <section class={`space-y-2 md:space-y-4 ${className}`}>
   <hgroup class="mx-auto mb-4 max-w-6xl space-y-2 text-center text-balance md:space-y-4">
-    <h1 class="p-name font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    <a href={canonicalUrl} class="u-url u-uid">
+      <h1 class="p-name font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    </a>
     <p class="p-summary text-lg text-muted-foreground md:text-xl">{description}</p>
   </hgroup>
 
   <div
     class="space-2 md:space-4 flex w-full flex-col items-center justify-center gap-4 text-sm text-muted-foreground/80 sm:flex-row"
   >
-    <a href={canonicalUrl} class="u-url hidden"> Permalink </a>
-
     <div aria-label="Published on">
       <CalendarIcon
         width={20}
