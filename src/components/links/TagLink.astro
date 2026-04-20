@@ -10,4 +10,4 @@ type Props = HTMLAttributes<'a'> & {
 const { tag } = Astro.props as Props;
 ---
 
-<RoundedLink href={`${TAGS_PATH}/${tag}`} class="p-category" rel="category tag">{tag}</RoundedLink>
+<RoundedLink href={`${TAGS_PATH}/${tag}`} class="p-category">{tag}</RoundedLink>
