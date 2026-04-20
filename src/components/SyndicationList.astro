@@ -20,7 +20,7 @@ const links = [
     {
       links.map(({ href, text }) => (
         <li>
-          <Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
+          <Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent" rel="syndication">
             {text} <ExternalLinkIcon width={16} height={16} />
           </Link>
         </li>
