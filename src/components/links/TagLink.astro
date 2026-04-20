@@ -1,12 +1,13 @@
 ---
 import { TAGS_PATH } from '@/constants';
+import type { HTMLAttributes } from 'astro/types';
 import RoundedLink from './RoundedLink.astro';
 
-interface Props {
+type Props = HTMLAttributes<'a'> & {
   tag: string;
-}
+};
 
-const { tag } = Astro.props;
+const { tag } = Astro.props as Props;
 ---
 
 <RoundedLink href={`${TAGS_PATH}/${tag}`} class="p-category">{tag}</RoundedLink>

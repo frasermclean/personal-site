@@ -9,8 +9,8 @@ const { href, class: className, ...rest } = Astro.props as Props;
 <Link
   href={href}
   class:list={[
-    'inline-block rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent hover:bg-accent/20',
-    className
+    className,
+    'inline-block rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent hover:bg-accent/20'
   ]}
   {...rest}
 >

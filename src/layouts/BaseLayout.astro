@@ -17,21 +17,19 @@ export interface Props {
   title: string;
   description: string;
   isArticle?: boolean;
-  bodyClass?: string;
+  mainClass?: string;
   heroImage?: {
     src: ImageMetadata;
     alt?: string;
   };
 }
 
-const { title, description, isArticle = false, heroImage, bodyClass = '' } = Astro.props;
+const { title, description, isArticle = false, heroImage, mainClass = '' } = Astro.props;
 const canonicalUrl = Astro.url.pathname === '/' ? Astro.site!.origin : new URL(Astro.url.pathname, Astro.site).href;
 const image = heroImage?.src || defaultOgImage;
 const imageUrl = new URL(image.src, Astro.site);
 
 const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
-
-const includeUidLink = bodyClass === 'h-entry';
 ---
 
 <!doctype html>
@@ -86,10 +84,9 @@ const includeUidLink = bodyClass === 'h-entry';
       data-domains={Astro.site?.hostname || null}
       data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
   </head>
-  <body class:list={['flex min-h-screen flex-col', bodyClass]}>
-    {includeUidLink && <link href={canonicalUrl} class="u-url hidden" />}
+  <body class="flex min-h-screen flex-col">
     <Navbar />
-    <main class="mx-auto max-w-7xl flex-1 px-2 md:px-3">
+    <main class:list={['mx-auto max-w-7xl flex-1 px-2 md:px-3', mainClass]}>
       <slot />
     </main>
     <Separator class="mt-8" />

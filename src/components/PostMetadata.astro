@@ -24,11 +24,15 @@ const showUpdatedDate =
     const hoursDiff = (updatedDateAsDate.getTime() - publishDate.getTime()) / (1000 * 60 * 60);
     return hoursDiff >= 24;
   })();
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <section class={`space-y-2 md:space-y-4 ${className}`}>
   <hgroup class="mx-auto mb-4 max-w-6xl space-y-2 text-center text-balance md:space-y-4">
-    <h1 class="p-name font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    <a href={canonicalUrl} class="u-url u-uid">
+      <h1 class="p-name font-heading text-3xl font-bold md:text-5xl">{title}</h1>
+    </a>
     <p class="p-summary text-lg text-muted-foreground md:text-xl">{description}</p>
   </hgroup>
 
@@ -46,11 +50,11 @@ const showUpdatedDate =
       <FormattedDate date={publishDate} class="dt-published" />
     </div>
 
-    <a href={Astro.site} class="flex items-center gap-2" rel="author">
+    <a href={Astro.site} class="p-author h-card flex items-center gap-2" rel="author">
       <Image
         src={authorImage}
         alt="Fraser McLean"
-        class="h-6 w-6 rounded-full object-cover object-center"
+        class="u-photo rounded-full object-cover object-center"
         width={24}
         height={24}
       />
@@ -67,7 +71,7 @@ const showUpdatedDate =
             stroke-width={1}
             aria-hidden="true"
           />
-          <FormattedDate date={updatedDateAsDate} />
+          <FormattedDate date={updatedDateAsDate} class="dt-updated" />
         </div>
       )
     }
