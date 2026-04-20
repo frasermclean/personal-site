@@ -1,6 +1,7 @@
 ---
 import authorImage from '@/assets/fraser-headshot.jpg';
 import FormattedDate from '@/components/FormattedDate.astro';
+import { POSTS_PATH } from '@/constants';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 import ClockIcon from '@tabler/icons/outline/clock-hour-4.svg';
 import PencilCheckIcon from '@tabler/icons/outline/pencil-check.svg';
@@ -8,6 +9,7 @@ import { Image } from 'astro:assets';
 
 interface Props {
   class?: string;
+  slug: string;
   title: string;
   description: string;
   publishDate: Date;
@@ -15,7 +17,7 @@ interface Props {
   readingTime?: string;
 }
 
-const { class: className, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
+const { class: className, slug, title, description, publishDate, updatedDate, readingTime } = Astro.props as Props;
 
 const updatedDateAsDate = updatedDate ? new Date(updatedDate) : null;
 const showUpdatedDate =
@@ -24,6 +26,8 @@ const showUpdatedDate =
     const hoursDiff = (updatedDateAsDate.getTime() - publishDate.getTime()) / (1000 * 60 * 60);
     return hoursDiff >= 24;
   })();
+
+const canonicalUrl = new URL(`${POSTS_PATH}/${slug}`, Astro.site);
 ---
 
 <section class={`space-y-2 md:space-y-4 ${className}`}>
@@ -35,6 +39,8 @@ const showUpdatedDate =
   <div
     class="space-2 md:space-4 flex w-full flex-col items-center justify-center gap-4 text-sm text-muted-foreground/80 sm:flex-row"
   >
+    <a href={canonicalUrl} class="u-url hidden"> Permalink </a>
+
     <div aria-label="Published on">
       <CalendarIcon
         width={20}
