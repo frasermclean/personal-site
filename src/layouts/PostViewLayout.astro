@@ -1,4 +1,5 @@
 ---
+import BubblesVoteCount from '@/components/BubblesVoteCount.astro';
 import Comments from '@/components/Comments.astro';
 import CategoryLink from '@/components/links/CategoryLink.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
@@ -80,6 +81,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
       <SyndicationList />
     </aside>
   </div>
+
+  <BubblesVoteCount />
 
   {enableComments && <Comments />}
 
