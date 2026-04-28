@@ -81,8 +81,8 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
       defer
       src={TRACKING_SCRIPT_SRC}
       data-website-id={TRACKING_WEBSITE_ID}
-      data-domains={Astro.site?.hostname || null}
-      data-tag={WORKERS_CI_COMMIT_SHA || null}></script>
+      data-tag={WORKERS_CI_COMMIT_SHA || null}
+      data-performance="true"></script>
   </head>
   <body class="flex min-h-screen flex-col">
     <Navbar />
