@@ -8,7 +8,8 @@
     ],
     "imageFile": "fmsite-home.png",
     "links": {
-      "source": "https://github.com/frasermclean/frasermclean-site"
+      "website": "https://frasermclean.com",
+      "source": "https://github.com/frasermclean/personal-site"
     },
     "features": [
       "Static site generation with Astro for fast load times and SEO benefits",
