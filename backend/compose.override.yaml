@@ -1,0 +1,11 @@
+# Local development overrides — applied automatically by Docker Compose.
+# Exposes service ports directly to the host for easy access without Traefik.
+
+services:
+  analytics:
+    ports:
+      - 8081:3000
+
+  comments:
+    ports:
+      - 8080:80

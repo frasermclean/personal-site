@@ -1,4 +1,4 @@
-name: site-backend
+name: backend
 
 services:
   # Postgres database
@@ -42,15 +42,6 @@ services:
     container_name: backend-analytics
     restart: unless-stopped
     init: true
-    environment:
-      DATABASE_URL: postgresql://${UMAMI_DB_USER}:${UMAMI_DB_PASSWORD}@backend-database:5432/${UMAMI_DB_NAME}
-      DATABASE_TYPE: postgresql
-      REDIS_URL: redis://backend-cache:6379
-      APP_SECRET: ${UMAMI_APP_SECRET}
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.umami.rule=Host(`analytics.${DOMAIN}`)
-      - traefik.http.routers.umami.tls.certresolver=cloudflare
     depends_on:
       database:
         condition: service_healthy
@@ -61,6 +52,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    environment:
+      DATABASE_URL: postgresql://${UMAMI_DB_USER}:${UMAMI_DB_PASSWORD}@backend-database:5432/${UMAMI_DB_NAME}
+      DATABASE_TYPE: postgresql
+      REDIS_URL: redis://backend-cache:6379
+      APP_SECRET: ${UMAMI_APP_SECRET}
 
   # Commentario comments system
   comments:
@@ -73,13 +69,13 @@ services:
     environment:
       BASE_URL: http://localhost:8080
       SECRETS_FILE: /comentario/secrets.yaml
-    ports:
-      - 8080:80
     volumes:
       - ./comentario-secrets.yml:/comentario/secrets.yaml:ro
 
 volumes:
   database-data:
     driver: local
+    name: backend-database-data
   cache-data:
     driver: local
+    name: backend-cache-data
