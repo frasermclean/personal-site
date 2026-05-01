@@ -1,4 +1,4 @@
-name: fmsite-services
+name: site-backend
 
 services:
   # Postgres database
