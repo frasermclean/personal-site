@@ -1,0 +1,81 @@
+name: backend
+
+services:
+  # Postgres database
+  database:
+    image: postgres:16-alpine
+    container_name: backend-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      UMAMI_DB_USER: ${UMAMI_DB_USER}
+      UMAMI_DB_PASSWORD: ${UMAMI_DB_PASSWORD}
+      UMAMI_DB_NAME: ${UMAMI_DB_NAME}
+      COMENTARIO_DB_USER: ${COMENTARIO_DB_USER}
+      COMENTARIO_DB_PASSWORD: ${COMENTARIO_DB_PASSWORD}
+      COMENTARIO_DB_NAME: ${COMENTARIO_DB_NAME}
+    volumes:
+      - database-data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis cache
+  cache:
+    image: redis:8-alpine
+    container_name: backend-cache
+    restart: unless-stopped
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Umami analytics
+  analytics:
+    image: ghcr.io/umami-software/umami:latest
+    container_name: backend-analytics
+    restart: unless-stopped
+    init: true
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl http://localhost:3000/api/heartbeat']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      DATABASE_URL: postgresql://${UMAMI_DB_USER}:${UMAMI_DB_PASSWORD}@backend-database:5432/${UMAMI_DB_NAME}
+      DATABASE_TYPE: postgresql
+      REDIS_URL: redis://backend-cache:6379
+      APP_SECRET: ${UMAMI_APP_SECRET}
+
+  # Commentario comments system
+  comments:
+    image: registry.gitlab.com/comentario/comentario
+    container_name: backend-comments
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      BASE_URL: http://localhost:8080
+      SECRETS_FILE: /comentario/secrets.yaml
+    volumes:
+      - ./comentario-secrets.yml:/comentario/secrets.yaml:ro
+
+volumes:
+  database-data:
+    driver: local
+    name: backend-database-data
+  cache-data:
+    driver: local
+    name: backend-cache-data

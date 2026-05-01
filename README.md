@@ -18,8 +18,8 @@ The project relies on a few environment variables for local development. You can
 ```env
 CONTACT_EMAIL="contact@example.com"
 RESEND_API_KEY="xxx"
-ANALYTICS_WEBSITE_ID="xxx"
-TRACKING_SCRIPT_SRC="https://analytics.frasermclean.com/script.js"
+TRACKING_WEBSITE_ID="xxx"
+TRACKING_SCRIPT_SRC="http://localhost:8081/script.js"
 TURNSTILE_SITE_KEY="xxx"
 TURNSTILE_SECRET_KEY="xxx"
 ```
