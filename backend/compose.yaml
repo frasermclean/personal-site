@@ -4,15 +4,60 @@ services:
   # Postgres database
   database:
     image: postgres:16-alpine
+    container_name: backend-database
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-comentario}
-      POSTGRES_USER: ${POSTGRES_USER:-comentario}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-superS3CRET!}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      UMAMI_DB_USER: ${UMAMI_DB_USER}
+      UMAMI_DB_PASSWORD: ${UMAMI_DB_PASSWORD}
+      UMAMI_DB_NAME: ${UMAMI_DB_NAME}
+      COMENTARIO_DB_USER: ${COMENTARIO_DB_USER}
+      COMENTARIO_DB_PASSWORD: ${COMENTARIO_DB_PASSWORD}
+      COMENTARIO_DB_NAME: ${COMENTARIO_DB_NAME}
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - database-data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-comentario} -d ${POSTGRES_DB:-comentario}']
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis cache
+  cache:
+    image: redis:8-alpine
+    container_name: backend-cache
+    restart: unless-stopped
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Umami analytics
+  analytics:
+    image: ghcr.io/umami-software/umami:latest
+    container_name: backend-analytics
+    restart: unless-stopped
+    init: true
+    environment:
+      DATABASE_URL: postgresql://${UMAMI_DB_USER}:${UMAMI_DB_PASSWORD}@backend-database:5432/${UMAMI_DB_NAME}
+      DATABASE_TYPE: postgresql
+      REDIS_URL: redis://backend-cache:6379
+      APP_SECRET: ${UMAMI_APP_SECRET}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.umami.rule=Host(`analytics.${DOMAIN}`)
+      - traefik.http.routers.umami.tls.certresolver=cloudflare
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl http://localhost:3000/api/heartbeat']
       interval: 5s
       timeout: 5s
       retries: 5
@@ -20,17 +65,21 @@ services:
   # Commentario comments system
   comments:
     image: registry.gitlab.com/comentario/comentario
+    container_name: backend-comments
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
     environment:
-      BASE_URL: http://localhost:8080/
+      BASE_URL: http://localhost:8080
       SECRETS_FILE: /secrets.yaml
     ports:
       - 8080:80
     volumes:
       - ./comentario-secrets.yml:/secrets.yaml:ro
-    depends_on:
-      database:
-        condition: service_healthy
 
 volumes:
-  postgres-data:
+  database-data:
+    driver: local
+  cache-data:
     driver: local
