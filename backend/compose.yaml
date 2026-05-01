@@ -72,11 +72,11 @@ services:
         condition: service_healthy
     environment:
       BASE_URL: http://localhost:8080
-      SECRETS_FILE: /secrets.yaml
+      SECRETS_FILE: /comentario/secrets.yaml
     ports:
       - 8080:80
     volumes:
-      - ./comentario-secrets.yml:/secrets.yaml:ro
+      - ./comentario-secrets.yml:/comentario/secrets.yaml:ro
 
 volumes:
   database-data:
