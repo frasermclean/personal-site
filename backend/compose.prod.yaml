@@ -3,18 +3,24 @@
 
 services:
   analytics:
+    networks:
+      - default
+      - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.umami.rule=Host(`analytics.${DOMAIN}`)
-      - traefik.http.services.umami.loadbalancer.server.port=3000
+      - traefik.http.routers.backend-analytics.rule=Host(`analytics.${DOMAIN}`)
+      - traefik.http.services.backend-analytics.loadbalancer.server.port=3000
 
   comments:
     environment:
       BASE_URL: https://comments.${DOMAIN}
+    networks:
+      - default
+      - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.comments.rule=Host(`comments.${DOMAIN}`)
-      - traefik.http.services.comments.loadbalancer.server.port=80
+      - traefik.http.routers.backend-comments.rule=Host(`comments.${DOMAIN}`)
+      - traefik.http.services.backend-comments.loadbalancer.server.port=80
 
 networks:
   default:
