@@ -9,3 +9,5 @@ services:
   comments:
     ports:
       - 8080:80
+    volumes:
+      - ./comentario-secrets.yml:/comentario/secrets.yaml:ro

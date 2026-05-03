@@ -69,8 +69,6 @@ services:
     environment:
       BASE_URL: http://localhost:8080
       SECRETS_FILE: /comentario/secrets.yaml
-    volumes:
-      - ./comentario-secrets.yml:/comentario/secrets.yaml:ro
 
 volumes:
   database-data:

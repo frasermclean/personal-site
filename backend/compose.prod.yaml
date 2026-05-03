@@ -21,6 +21,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.backend-comments.rule=Host(`comments.${DOMAIN}`)
       - traefik.http.services.backend-comments.loadbalancer.server.port=80
+    volumes:
+      - /etc/comentario/secrets.yaml:/comentario/secrets.yaml:ro
 
 networks:
   default:
