@@ -60,6 +60,13 @@ async function sendEmail(fromName: string, fromEmail: string, message: string) {
     });
   }
 
+  if (!RESEND_API_KEY) {
+    throw new ActionError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Missing RESEND_API_KEY server secret configuration'
+    });
+  }
+
   const resend = new Resend(RESEND_API_KEY);
 
   const response = await resend.emails.send({
