@@ -1,12 +1,12 @@
+import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { CONTACT_EMAIL, RESEND_API_KEY, TURNSTILE_SECRET_KEY } from 'astro:env/server';
-import { z } from 'astro:schema';
 import { Resend } from 'resend';
 
 export const processContactForm = defineAction({
   input: z.object({
     name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email address'),
+    email: z.email('Invalid email address'),
     message: z.string().min(1, 'Message is required'),
     token: z.string().min(1, 'Turnstile token is required')
   }),
