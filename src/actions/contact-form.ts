@@ -53,6 +53,13 @@ async function validateToken(token: string, remoteIp: string): Promise<void> {
  * @returns True if the email was sent successfully
  */
 async function sendEmail(fromName: string, fromEmail: string, message: string) {
+  if (!CONTACT_EMAIL) {
+    throw new ActionError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Missing CONTACT_EMAIL server secret configuration'
+    });
+  }
+
   const resend = new Resend(RESEND_API_KEY);
 
   const response = await resend.emails.send({
