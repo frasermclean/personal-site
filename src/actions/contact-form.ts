@@ -1,12 +1,12 @@
+import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { CONTACT_EMAIL, RESEND_API_KEY, TURNSTILE_SECRET_KEY } from 'astro:env/server';
-import { z } from 'astro:schema';
 import { Resend } from 'resend';
 
 export const processContactForm = defineAction({
   input: z.object({
     name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email address'),
+    email: z.email('Invalid email address'),
     message: z.string().min(1, 'Message is required'),
     token: z.string().min(1, 'Turnstile token is required')
   }),
@@ -53,6 +53,20 @@ async function validateToken(token: string, remoteIp: string): Promise<void> {
  * @returns True if the email was sent successfully
  */
 async function sendEmail(fromName: string, fromEmail: string, message: string) {
+  if (!CONTACT_EMAIL) {
+    throw new ActionError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Missing CONTACT_EMAIL server secret configuration'
+    });
+  }
+
+  if (!RESEND_API_KEY) {
+    throw new ActionError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Missing RESEND_API_KEY server secret configuration'
+    });
+  }
+
   const resend = new Resend(RESEND_API_KEY);
 
   const response = await resend.emails.send({

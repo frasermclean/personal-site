@@ -11,6 +11,7 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://frasermclean.com',
+  output: 'static',
   trailingSlash: 'never',
   image: {
     layout: 'constrained',
@@ -19,17 +20,28 @@ export default defineConfig({
     responsiveStyles: true
   },
   adapter: cloudflare({
-    imageService: 'compile'
+    imageService: {
+      build: 'compile',
+      runtime: 'cloudflare-binding'
+    }
   }),
   env: {
     schema: {
       TRACKING_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
-      TRACKING_SCRIPT_SRC: envField.string({ context: 'client', access: 'public' }),
+      TRACKING_SCRIPT_SRC: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'http://localhost:8081/script.js'
+      }),
       COMMENTS_HOST: envField.string({ context: 'client', access: 'public', default: 'http://localhost:8080' }),
-      CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
-      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
-      TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
+      CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret', default: '' }),
+      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', default: '' }),
+      TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public', default: '1x00000000000000000000AA' }),
+      TURNSTILE_SECRET_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: '1x0000000000000000000000000000000AA'
+      }),
       WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' })
     }
   },
