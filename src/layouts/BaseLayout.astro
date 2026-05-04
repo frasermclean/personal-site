@@ -72,7 +72,9 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageUrl} />
 
+    <!-- Fediverse -->
     <meta name="fediverse:creator" content="@frasermclean@mastodon.social" />
+    <meta name="bubbles:fediverse" content="@frasermclean@mastodon.social" />
 
     <slot name="head" />
 
