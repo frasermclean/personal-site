@@ -1,0 +1,25 @@
+---
+import Link from '@/components/links/Link.astro';
+import ChevronLeftIcon from '@tabler/icons/outline/chevron-left.svg';
+import ChevronRightIcon from '@tabler/icons/outline/chevron-right.svg';
+---
+
+<ul class="flex gap-1">
+  <li>
+    <Link
+      href="https://xn--sr8hvo.ws/previous"
+      class="hover:text-accent/90"
+      aria-label="Previous site in IndieWeb Webring"
+    >
+      <ChevronLeftIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
+    </Link>
+  </li>
+  <li>
+    <Link href="https://xn--sr8hvo.ws/" class="hover:text-accent/90 hover:underline">IndieWeb Webring</Link>
+  </li>
+  <li>
+    <Link href="https://xn--sr8hvo.ws/next" class="hover:text-accent/90" aria-label="Next site in IndieWeb Webring">
+      <ChevronRightIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
+    </Link>
+  </li>
+</ul>
