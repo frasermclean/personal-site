@@ -1,0 +1,26 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+---
+
+<section data-post-slug={slug}></section>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  const element = document.querySelector('[data-post-slug]');
+  const slug = element?.getAttribute('data-post-slug');
+
+  if (slug) {
+    const { data, error } = await actions.getPostLikes({ slug });
+
+    if (error) {
+      console.error('Error fetching post likes:', error);
+    } else {
+      console.log('Fetched post likes:', data);
+    }
+  }
+</script>
