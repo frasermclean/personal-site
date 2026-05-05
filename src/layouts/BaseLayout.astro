@@ -11,6 +11,7 @@ import geistFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.
 import '@fontsource-variable/sora';
 import soraFont from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2';
 import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
 import { TRACKING_SCRIPT_SRC, TRACKING_WEBSITE_ID, WORKERS_CI_COMMIT_SHA } from 'astro:env/client';
 
 export interface Props {
@@ -26,10 +27,11 @@ export interface Props {
 
 const { title, description, isArticle = false, heroImage, mainClass = '' } = Astro.props;
 const canonicalUrl = Astro.url.pathname === '/' ? Astro.site!.origin : new URL(Astro.url.pathname, Astro.site).href;
-const image = heroImage?.src || defaultOgImage;
-const imageUrl = new URL(image.src, Astro.site);
 
 const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
+
+const image = await getImage({ src: heroImage?.src || defaultOgImage, width: 1200, height: 630, format: 'png' });
+const imageUrl = new URL(image.src, Astro.site);
 ---
 
 <!doctype html>
@@ -61,8 +63,8 @@ const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={isArticle ? 'article' : 'website'} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content={image.width.toString()} />
-    <meta property="og:image:height" content={image.height.toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
