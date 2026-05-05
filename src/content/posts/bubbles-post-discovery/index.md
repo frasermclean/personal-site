@@ -7,6 +7,12 @@ heroImage:
   alt: Bubbles floating in the air
 category: review
 tags: ['indieweb', 'blogging', 'discovery', 'community']
+syndication:
+  indienews: https://news.indieweb.org/en/frasermclean.com/posts/bubbles-post-discovery
+  bubbles: https://bubbles.town/entry/138991
+  mastodon: https://mastodon.social/@frasermclean/116518288725933342
+  bluesky: https://bsky.app/profile/frasermclean.com/post/3mkkf5b5ruk2o
+  reddit: https://www.reddit.com/r/indieweb/comments/1sxx6oq/awesome_post_discovery_with_bubbles/
 ---
 
 ## Background

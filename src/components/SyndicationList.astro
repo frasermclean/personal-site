@@ -3,32 +3,41 @@ import ExternalLinkIcon from '@tabler/icons/outline/external-link.svg';
 import ShareIcon from '@tabler/icons/outline/share-3.svg';
 import Link from './links/Link.astro';
 
+interface Props {
+  indienews?: string;
+  bubbles?: string;
+  mastodon?: string;
+  bluesky?: string;
+  reddit?: string;
+}
+
+const { indienews, bubbles, mastodon, bluesky, reddit } = Astro.props as Props;
+
 const links = [
-  {
-    href: 'https://news.indieweb.org/en',
-    text: 'IndieNews'
-  },
-  {
-    href: 'https://bubbles.town/source/frasermclean.com/posts',
-    text: 'Bubbles'
-  }
-];
+  { href: indienews, text: 'IndieNews' },
+  { href: bubbles, text: 'Bubbles' },
+  { href: mastodon, text: 'Mastodon' },
+  { href: bluesky, text: 'Bluesky' },
+  { href: reddit, text: 'Reddit' }
+].filter((link) => link.href);
 ---
 
-<section>
-  <div class="mb-2 flex items-center gap-2 text-secondary">
-    <ShareIcon width={20} height={20} />
-    <h2 class="font-heading text-xl font-bold">Syndication</h2>
-  </div>
-  <ul class="ml-3">
-    {
-      links.map(({ href, text }) => (
-        <li>
-          <Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
-            {text} <ExternalLinkIcon width={16} height={16} />
-          </Link>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+{
+  links.length > 0 && (
+    <section>
+      <div class="mb-2 flex items-center gap-2 text-secondary">
+        <ShareIcon width={20} height={20} />
+        <h2 class="font-heading text-xl font-bold">Syndication</h2>
+      </div>
+      <ul class="ml-3">
+        {links.map(({ href, text }) => (
+          <li>
+            <Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
+              {text} <ExternalLinkIcon width={16} height={16} />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

@@ -1,0 +1,31 @@
+---
+import Link from '@/components/links/Link.astro';
+import ChevronLeftIcon from '@tabler/icons/outline/chevron-left.svg';
+import ChevronRightIcon from '@tabler/icons/outline/chevron-right.svg';
+
+const host = Astro.site?.hostname;
+---
+
+<ul class="flex gap-1">
+  <li>
+    <Link
+      href={`https://fediring.net/previous?host=${host}`}
+      class="hover:text-accent/90"
+      aria-label="Previous site in Fediring"
+    >
+      <ChevronLeftIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
+    </Link>
+  </li>
+  <li>
+    <Link href="https://fediring.net/" class="hover:text-accent/90 hover:underline">Fediring</Link>
+  </li>
+  <li>
+    <Link
+      href={`https://fediring.net/next?host=${host}`}
+      class="hover:text-accent/90"
+      aria-label="Next site in Fediring"
+    >
+      <ChevronRightIcon class="inline-block" width={16} height={16} stroke-width={1.5} />
+    </Link>
+  </li>
+</ul>
