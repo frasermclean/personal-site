@@ -16,7 +16,16 @@ const posts = defineCollection({
       category: z.enum(['guide', 'project', 'review']).optional(),
       tags: z.array(z.string()),
       enableComments: z.boolean().default(true),
-      isFeatured: z.boolean().optional()
+      isFeatured: z.boolean().optional(),
+      syndication: z
+        .object({
+          indienews: z.url().optional(),
+          bubbles: z.url().optional(),
+          mastodon: z.url().optional(),
+          bluesky: z.url().optional(),
+          reddit: z.url().optional()
+        })
+        .optional()
     })
 });
 

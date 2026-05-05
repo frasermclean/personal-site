@@ -37,8 +37,9 @@ const {
   headings,
   category,
   tags,
+  syndication,
   enableComments
-} = Astro.props;
+} = Astro.props as Props;
 
 const relatedPosts = await getRelatedPosts(slug, category, tags);
 
@@ -77,8 +78,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
         includeRelatedPostsLink={relatedPosts.length > 0}
       />
       {category && <CategoryLink category={category} />}
-      <TagList tags={tags} />
-      <SyndicationList />
+      {tags.length > 0 && <TagList tags={tags} />}
+      {syndication && <SyndicationList {...syndication} />}
     </aside>
   </div>
 
