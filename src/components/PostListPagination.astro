@@ -1,0 +1,88 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/starwind/pagination';
+import { POSTS_PATH } from '@/constants';
+
+interface Props {
+  page: number;
+  totalPages: number;
+  tag: string | null;
+  category: string | null;
+}
+
+const { page, totalPages, tag, category } = Astro.props;
+
+function getPreviousPageLink() {
+  if (tag) {
+    return `${POSTS_PATH}?tag=${encodeURIComponent(tag)}&page=${page - 1}`;
+  }
+
+  if (category) {
+    return `${POSTS_PATH}?category=${encodeURIComponent(category)}&page=${page - 1}`;
+  }
+
+  return page === 2 ? POSTS_PATH : `${POSTS_PATH}?page=${page - 1}`;
+}
+
+function getNextPageLink() {
+  if (tag) {
+    return `${POSTS_PATH}?tag=${encodeURIComponent(tag)}&page=${page + 1}`;
+  }
+
+  if (category) {
+    return `${POSTS_PATH}?category=${encodeURIComponent(category)}&page=${page + 1}`;
+  }
+
+  return `${POSTS_PATH}?page=${page + 1}`;
+}
+
+function getPageLink(pageNumber: number) {
+  if (tag) {
+    return `${POSTS_PATH}?tag=${encodeURIComponent(tag)}&page=${pageNumber}`;
+  }
+
+  if (category) {
+    return `${POSTS_PATH}?category=${encodeURIComponent(category)}&page=${pageNumber}`;
+  }
+
+  return pageNumber === 1 ? POSTS_PATH : `${POSTS_PATH}?page=${pageNumber}`;
+}
+---
+
+<section class="mt-8">
+  <SectionHeading text="More Posts" />
+  <Pagination>
+    <PaginationContent>
+      {
+        page > 1 && (
+          <PaginationItem>
+            <PaginationPrevious href={getPreviousPageLink()} />
+          </PaginationItem>
+        )
+      }
+      {
+        Array.from({ length: totalPages }, (_, i) => (
+          <PaginationItem>
+            <PaginationLink href={getPageLink(i + 1)} isActive={i + 1 === page}>
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))
+      }
+      {
+        page < totalPages && (
+          <PaginationItem>
+            <PaginationNext href={getNextPageLink()} />
+          </PaginationItem>
+        )
+      }
+    </PaginationContent>
+  </Pagination>
+</section>

@@ -3,16 +3,9 @@ import FeaturedPost from '@/components/FeaturedPost.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import PopularTags from '@/components/PopularTags.astro';
 import PostCard from '@/components/PostCard.astro';
+import PostListPagination from '@/components/PostListPagination.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@/components/starwind/pagination';
-import { POSTS_PAGE_SIZE, POSTS_PATH } from '@/constants';
+import { POSTS_PAGE_SIZE } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ArticleIcon from '@tabler/icons/outline/article.svg';
 import { getCollection } from 'astro:content';
@@ -102,35 +95,5 @@ const listTitle = isSearch ? 'Matching Posts' : 'Recent Posts';
     }
   </section>
 
-  {
-    totalPages > 1 && (
-      <section class="mt-8">
-        <SectionHeading text="More Posts" />
-        <Pagination>
-          <PaginationContent>
-            {page > 1 && (
-              <PaginationItem>
-                <PaginationPrevious href={page === 2 ? POSTS_PATH : `${POSTS_PATH}?page=${page - 1}`} />
-              </PaginationItem>
-            )}
-            {Array.from({ length: totalPages }, (_, i) => (
-              <PaginationItem>
-                <PaginationLink
-                  href={i === 0 ? `${POSTS_PATH}` : `${POSTS_PATH}?page=${i + 1}`}
-                  isActive={i + 1 === page}
-                >
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            {page < totalPages && (
-              <PaginationItem>
-                <PaginationNext href={`${POSTS_PATH}?page=${page + 1}`} />
-              </PaginationItem>
-            )}
-          </PaginationContent>
-        </Pagination>
-      </section>
-    )
-  }
+  {totalPages > 1 && <PostListPagination {page} {totalPages} {tag} {category} />}
 </BaseLayout>
