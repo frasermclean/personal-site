@@ -29,8 +29,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return response;
   }
 
-  // astro actions and API-like endpoints should never be cached
-  if (pathname.startsWith('/_actions') || pathname.startsWith('/api/') || pathname.startsWith('/actions/')) {
+  // astro actions should never be cached
+  if (pathname.startsWith('/_actions')) {
     response.headers.set('Cache-Control', 'no-store');
     return response;
   }
