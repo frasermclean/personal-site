@@ -103,8 +103,6 @@ async function sendEmail(fromName: string, fromEmail: string, message: string) {
  * @returns The client's IP address if available, otherwise undefined
  */
 function getClientIp(request: Request): string | undefined {
-  console.log('Request headers:', Object.fromEntries(request.headers.entries()));
-
   const cfConnectingIp = request.headers.get('cf-connecting-ip');
 
   if (cfConnectingIp) {
