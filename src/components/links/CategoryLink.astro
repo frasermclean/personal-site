@@ -15,5 +15,7 @@ const { category } = Astro.props;
     <CategoryIcon width={20} height={20} />
     <h2 class="font-heading text-xl font-bold">Category</h2>
   </div>
-  <RoundedLink href={`${POSTS_PATH}?category=${category}`} class="p-category">{category}</RoundedLink>
+  <RoundedLink href={`${POSTS_PATH}?category=${encodeURIComponent(category)}`} class="p-category">
+    {category}
+  </RoundedLink>
 </section>
