@@ -15,7 +15,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const response = await next();
 
-  // Respect explicit cache headers already set by a route.
+  // respect explicit cache headers already set by a route
   if (response.headers.has('Cache-Control') || response.headers.has('CDN-Cache-Control')) {
     return response;
   }
@@ -23,18 +23,19 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const method = request.method.toUpperCase();
   const pathname = url.pathname;
 
+  // mutating requests should never be cached
   if (method !== 'GET' && method !== 'HEAD') {
     response.headers.set('Cache-Control', 'no-store');
     return response;
   }
 
-  // Astro actions and API-like endpoints should never be cached.
+  // astro actions and API-like endpoints should never be cached
   if (pathname.startsWith('/_actions') || pathname.startsWith('/api/') || pathname.startsWith('/actions/')) {
     response.headers.set('Cache-Control', 'no-store');
     return response;
   }
 
-  // RSS and sitemap XML can be cached moderately.
+  // rss and sitemap XML can be cached moderately
   if (pathname.endsWith('.xml') || pathname.startsWith('/rss')) {
     response.headers.set('Cache-Control', 'public, max-age=300, must-revalidate');
     response.headers.set(
@@ -44,7 +45,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return response;
   }
 
-  // Public SSR pages: quick browser revalidation, warmer edge cache.
+  // public SSR pages: quick browser revalidation, warmer edge cache
   response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
   response.headers.set(
     'CDN-Cache-Control',
