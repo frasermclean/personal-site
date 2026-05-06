@@ -4,6 +4,7 @@ import HomeIcon from '@tabler/icons/outline/home.svg';
 import MailIcon from '@tabler/icons/outline/mail.svg';
 import UserIcon from '@tabler/icons/outline/user.svg';
 
+export const SITE_URL = 'https://frasermclean.com';
 export const SITE_TITLE = 'Fraser McLean';
 export const SITE_DESCRIPTION = 'The personal website of Fraser McLean - full-stack developer and tech enthusiast.';
 
