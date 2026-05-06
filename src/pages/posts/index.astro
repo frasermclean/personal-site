@@ -19,7 +19,8 @@ import { getCollection } from 'astro:content';
 
 // read page number from query parameter
 const pageParam = Astro.url.searchParams.get('page');
-const page = pageParam ? parseInt(pageParam, 10) : 1;
+const parsedPage = parseInt(pageParam ?? '1', 10);
+const page = isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
 
 // read tag and category from query parameters for filtering
 const tag = Astro.url.searchParams.get('tag');
