@@ -6,7 +6,7 @@ const { slug } = Astro.params;
 const entry = slug ? await getEntry('posts', slug) : undefined;
 
 if (!entry) {
-  return Astro.redirect('/404', 404);
+  return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
