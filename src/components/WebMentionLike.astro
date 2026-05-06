@@ -1,0 +1,28 @@
+---
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/starwind/tooltip';
+import type { WebMentionEntry } from '@/lib/webmention-types';
+import Image from 'astro/components/Image.astro';
+import Link from './links/Link.astro';
+
+interface Props {
+  entry: WebMentionEntry;
+}
+
+const { entry } = Astro.props as Props;
+---
+
+<Tooltip>
+  <TooltipTrigger>
+    <Link href={entry.author.url}>
+      <Image
+        src={entry.author.photo}
+        alt={entry.author.name}
+        loading="lazy"
+        width="40"
+        height="40"
+        class="rounded-full border border-border"
+      />
+    </Link>
+  </TooltipTrigger>
+  <TooltipContent side="bottom">{entry.author.name}</TooltipContent>
+</Tooltip>

@@ -1,7 +1,7 @@
 import { processContactForm } from './contact-form';
-import { getPostLikes } from './get-post-likes';
+import { getWebMentions } from './get-webmentions';
 
 export const server = {
   processContactForm,
-  getPostLikes
+  getWebMentions
 };
