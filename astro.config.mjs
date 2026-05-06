@@ -12,7 +12,7 @@ import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  output: 'static',
+  output: 'server',
   trailingSlash: 'never',
   image: {
     layout: 'constrained',

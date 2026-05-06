@@ -17,8 +17,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ArticleIcon from '@tabler/icons/outline/article.svg';
 import { getCollection } from 'astro:content';
 
-export const prerender = false;
-
 // read page number from query parameter
 const pageParam = Astro.url.searchParams.get('page');
 const page = pageParam ? parseInt(pageParam, 10) : 1;
