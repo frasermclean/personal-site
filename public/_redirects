@@ -1,4 +1,7 @@
 /2020/03/13/crestron-zoom-rooms/ /posts/zoom-rooms-crestron-module/ 301
 /2023/01/14/protect-your-online-identity-with-fastmail/ /posts/protect-your-online-identity-with-fastmail/ 301
+/posts/page/:page /posts?page=:page 301
+/tags/:tag /posts?tag=:tag 301
+/categories/:category /posts/category=:category 301
 /post/:year/:month/:slug/ /posts/:slug/ 301
 /p/:year/:month/:slug/ /posts/:slug/ 301
