@@ -1,7 +1,8 @@
 ---
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/starwind/tooltip';
+import { convertNameToInitials } from '@/lib/avatar-naming';
 import type { WebMentionEntry } from '@/lib/webmention-types';
-import Image from 'astro/components/Image.astro';
 import Link from './links/Link.astro';
 
 interface Props {
@@ -14,14 +15,10 @@ const { entry } = Astro.props as Props;
 <Tooltip>
   <TooltipTrigger>
     <Link href={entry.author.url}>
-      <Image
-        src={entry.author.photo}
-        alt={entry.author.name}
-        loading="lazy"
-        width="40"
-        height="40"
-        class="rounded-full border border-border"
-      />
+      <Avatar class="hover:border-accent">
+        <AvatarImage src={entry.author.photo} alt={entry.author.name} />
+        <AvatarFallback>{convertNameToInitials(entry.author.name)}</AvatarFallback>
+      </Avatar>
     </Link>
   </TooltipTrigger>
   <TooltipContent side="bottom">{entry.author.name}</TooltipContent>

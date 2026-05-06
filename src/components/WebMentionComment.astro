@@ -1,0 +1,30 @@
+---
+import Link from '@/components/links/Link.astro';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
+import { Card } from '@/components/starwind/card';
+import { convertNameToInitials } from '@/lib/avatar-naming';
+import type { WebMentionEntry } from '@/lib/webmention-types';
+
+interface Props {
+  entry: WebMentionEntry;
+}
+
+const { entry } = Astro.props as Props;
+---
+
+<Card class="p-2 sm:p-3">
+  <div class="flex gap-1 sm:gap-2">
+    <Avatar size="sm">
+      <AvatarImage src={entry.author.photo} alt={entry.author.name} />
+      <AvatarFallback>{convertNameToInitials(entry.author.name)}</AvatarFallback>
+    </Avatar>
+    <div class="w-full">
+      <header class="text-md">
+        <Link href={entry.url} class="text-md hover:text-accent/90 hover:underline">
+          <span>{entry.author.name}</span> on {new Date(entry.published ?? entry['wm-received']).toLocaleDateString()}
+        </Link>
+      </header>
+      <p class="mt-1 text-sm text-muted-foreground">{entry.content?.text}</p>
+    </div>
+  </div>
+</Card>
