@@ -2,6 +2,6 @@
 /2023/01/14/protect-your-online-identity-with-fastmail/ /posts/protect-your-online-identity-with-fastmail/ 301
 /posts/page/:page /posts?page=:page 301
 /tags/:tag /posts?tag=:tag 301
-/categories/:category /posts/category=:category 301
+/categories/:category /posts?category=:category 301
 /post/:year/:month/:slug/ /posts/:slug/ 301
 /p/:year/:month/:slug/ /posts/:slug/ 301
