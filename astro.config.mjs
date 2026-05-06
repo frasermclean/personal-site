@@ -4,15 +4,19 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import rehypeFigure from 'rehype-figure';
+import { SITE_URL } from './src/constants.ts';
 import { remarkExternalLinks } from './src/lib/remark-external-links.ts';
 import { remarkReadingTime } from './src/lib/remark-reading-time.js';
 import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://frasermclean.com',
-  output: 'static',
+  site: SITE_URL,
+  output: 'server',
   trailingSlash: 'never',
+  build: {
+    assets: '_assets'
+  },
   image: {
     layout: 'constrained',
     objectFit: 'cover',
@@ -45,7 +49,7 @@ export default defineConfig({
       WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' })
     }
   },
-  integrations: [sitemap(), mdx()],
+  integrations: [sitemap({ customSitemaps: [`${SITE_URL}/sitemap-posts.xml`] }), mdx()],
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkUpdatedDate, remarkExternalLinks],
     rehypePlugins: [rehypeFigure],

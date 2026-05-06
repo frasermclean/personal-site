@@ -1,18 +1,14 @@
 ---
 import PostViewLayout from '@/layouts/PostViewLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
-export async function getStaticPaths() {
-  const collection = await getCollection('posts');
+const { slug } = Astro.params;
+const entry = slug ? await getEntry('posts', slug) : undefined;
 
-  return collection.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry }
-  }));
+if (!entry) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { entry } = Astro.props;
-const { slug } = Astro.params;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const { updatedDate, readingTime } = remarkPluginFrontmatter;
 const props = { ...entry.data, slug, headings, updatedDate, readingTime };

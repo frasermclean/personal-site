@@ -1,0 +1,99 @@
+---
+import FeaturedPost from '@/components/FeaturedPost.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import PopularTags from '@/components/PopularTags.astro';
+import PostCard from '@/components/PostCard.astro';
+import PostListPagination from '@/components/PostListPagination.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { POSTS_PAGE_SIZE } from '@/constants';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
+import { getCollection } from 'astro:content';
+
+// read page number from query parameter
+const pageParam = Astro.url.searchParams.get('page');
+const parsedPage = parseInt(pageParam ?? '1', 10);
+const page = isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
+
+// read tag and category from query parameters for filtering
+const tag = Astro.url.searchParams.get('tag');
+const category = Astro.url.searchParams.get('category');
+
+const isSearch = !!tag || !!category;
+
+// get page of posts from content collection
+const allEntries = await getCollection('posts');
+const filteredEntries = allEntries
+  .filter((post) => {
+    if (tag) {
+      return post.data.tags.includes(tag);
+    }
+    if (category) {
+      return post.data.category === category;
+    }
+    return !post.data.isFeatured;
+  })
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const totalPages = Math.ceil(filteredEntries.length / POSTS_PAGE_SIZE);
+const pageEntries = filteredEntries.slice((page - 1) * POSTS_PAGE_SIZE, page * POSTS_PAGE_SIZE);
+
+function getTitle() {
+  if (tag) {
+    return `Tag: ${tag}`;
+  }
+  if (category) {
+    return `Category: ${category}`;
+  }
+  return 'Blog Posts';
+}
+
+function getDescription() {
+  if (tag) {
+    return `A collection of blog posts tagged with "${tag}".`;
+  }
+  if (category) {
+    return `A collection of blog posts in the "${category}" category.`;
+  }
+  return 'A collection of blog posts on various topics including web development, programming, and technology.';
+}
+
+const title = getTitle();
+const description = getDescription();
+
+const listTitle = isSearch ? 'Matching Posts' : 'Recent Posts';
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+
+  {
+    // show featured post and popular tags only on the first page and when not searching
+    page === 1 && !isSearch && (
+      <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <FeaturedPost />
+        </div>
+        <div class="lg:col-span-1">
+          <PopularTags />
+        </div>
+      </div>
+    )
+  }
+
+  <section class="my-8">
+    <SectionHeading Icon={ArticleIcon} text={listTitle} />
+    {
+      pageEntries.length > 0 ? (
+        <nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {pageEntries.map((entry) => (
+            <PostCard slug={entry.id} {...entry.data} />
+          ))}
+        </nav>
+      ) : (
+        <p class="my-8 text-center text-xl">No posts found that match your criteria.</p>
+      )
+    }
+  </section>
+
+  {totalPages > 1 && <PostListPagination {page} {totalPages} {tag} {category} />}
+</BaseLayout>

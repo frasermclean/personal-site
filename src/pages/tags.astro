@@ -1,8 +1,7 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
-import RoundedLink from '@/components/links/RoundedLink.astro';
+import TagLink from '@/components/links/TagLink.astro';
 import { Table, TableBody, TableCell, TableFoot, TableHead, TableHeader, TableRow } from '@/components/starwind/table';
-import { TAGS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
@@ -41,7 +40,7 @@ const tagsWithCounts = Object.entries(tagCounts).sort(([tagA], [tagB]) =>
           tagsWithCounts.map(([tag, count]) => (
             <TableRow>
               <TableCell>
-                <RoundedLink href={`${TAGS_PATH}/${tag}`}>{tag}</RoundedLink>
+                <TagLink {tag}>{tag}</TagLink>
               </TableCell>
               <TableCell class="text-right">{count}</TableCell>
             </TableRow>

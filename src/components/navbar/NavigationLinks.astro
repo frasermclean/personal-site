@@ -1,6 +1,19 @@
 ---
 import Link from '@/components/links/Link.astro';
-import { NAVIGATION_LINKS as links } from '@/constants';
+import { ABOUT_PATH, CONTACT_PATH, HOME_PATH, POSTS_PATH, PROJECTS_PATH } from '@/constants';
+import ArticleIcon from '@tabler/icons/outline/article.svg';
+import ChecklistIcon from '@tabler/icons/outline/checklist.svg';
+import HomeIcon from '@tabler/icons/outline/home.svg';
+import MailIcon from '@tabler/icons/outline/mail.svg';
+import UserIcon from '@tabler/icons/outline/user.svg';
+
+export const links = [
+  { href: HOME_PATH, text: 'Home', Icon: HomeIcon },
+  { href: ABOUT_PATH, text: 'About', Icon: UserIcon },
+  { href: PROJECTS_PATH, text: 'Projects', Icon: ChecklistIcon },
+  { href: POSTS_PATH, text: 'Posts', Icon: ArticleIcon },
+  { href: CONTACT_PATH, text: 'Contact', Icon: MailIcon }
+];
 
 interface Props {
   class: string;
