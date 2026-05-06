@@ -11,7 +11,7 @@ export const processContactForm = defineAction({
     token: z.string().min(1, 'Turnstile token is required')
   }),
   handler: async (input, context) => {
-    await validateToken(input.token, context.clientAddress);
+    await validateToken(input.token, getClientIp(context.request));
     await sendEmail(input.name, input.email, input.message);
   }
 });
@@ -21,17 +21,28 @@ export const processContactForm = defineAction({
  * @param token Turnstile token from client
  * @param remoteIp Client's IP address
  */
-async function validateToken(token: string, remoteIp: string): Promise<void> {
+async function validateToken(token: string, remoteIp?: string): Promise<void> {
   const formData = new FormData();
   formData.append('response', token);
   formData.append('secret', TURNSTILE_SECRET_KEY);
-  formData.append('remoteip', remoteIp);
+
+  if (remoteIp) {
+    formData.append('remoteip', remoteIp);
+  }
 
   // send request to siteverify API endpoint
   const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
     body: formData
   });
+
+  if (!response.ok) {
+    console.error('Error calling Turnstile siteverify API:', response.status, response.statusText);
+    throw new ActionError({
+      code: 'UNAUTHORIZED',
+      message: 'Failed to validate token'
+    });
+  }
 
   const result = (await response.json()) as { success: boolean; 'error-codes': string[] };
 
@@ -84,4 +95,27 @@ async function sendEmail(fromName: string, fromEmail: string, message: string) {
       message: 'Failed to send email'
     });
   }
+}
+
+/**
+ * Attempt to get the client's IP address from the request headers
+ * @param request The incoming request object
+ * @returns The client's IP address if available, otherwise undefined
+ */
+function getClientIp(request: Request): string | undefined {
+  console.log('Request headers:', Object.fromEntries(request.headers.entries()));
+
+  const cfConnectingIp = request.headers.get('cf-connecting-ip');
+
+  if (cfConnectingIp) {
+    return cfConnectingIp;
+  }
+
+  const forwardedFor = request.headers.get('x-forwarded-for');
+
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0]?.trim();
+  }
+
+  return undefined;
 }
