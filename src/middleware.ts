@@ -15,6 +15,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const response = await next();
 
+  // server errors should never be cached
+  if (response.status >= 500) {
+    response.headers.set('Cache-Control', 'no-store');
+    response.headers.delete('CDN-Cache-Control');
+    return response;
+  }
+
   // respect explicit cache headers already set by a route
   if (response.headers.has('Cache-Control') || response.headers.has('CDN-Cache-Control')) {
     return response;
