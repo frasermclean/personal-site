@@ -14,6 +14,9 @@ export default defineConfig({
   site: SITE_URL,
   output: 'server',
   trailingSlash: 'never',
+  build: {
+    assets: '_assets'
+  },
   image: {
     layout: 'constrained',
     objectFit: 'cover',
