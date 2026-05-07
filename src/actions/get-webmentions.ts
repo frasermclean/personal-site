@@ -1,3 +1,4 @@
+import { SourcePlatform, type Comment, type Like } from '@/lib/reaction-types';
 import type { WebMentionResponse } from '@/lib/webmention-types';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
@@ -22,19 +23,34 @@ export const getWebMentions = defineAction({
 
     try {
       const data = (await response.json()) as WebMentionResponse;
-      const entries = data.children
-        .filter((entry) => !authorUrlsToIgnore.includes(entry.author.url))
-        .map((entry) => ({
-          ...entry,
-          author: {
-            ...entry.author,
-            name: entry.author.name.replaceAll('????', '') // unicode / emoji characters seem to appear as ???? so just remove them
-          },
-          content: {
-            text: entry.content?.text ? entry.content.text.replaceAll('????', '') : undefined
-          }
+
+      const likes = data.children
+        .filter((entry) => entry['wm-property'] === 'like-of' && !authorUrlsToIgnore.includes(entry.author.url))
+        .map<Like>((entry) => ({
+          authorName: sanitizeText(entry.author.name),
+          authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
+          avatarUrl: entry.author.photo,
+          publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
+          sourceUrl: entry['wm-source'],
+          sourcePlatform: parseSourcePlatform(entry['wm-source'])
         }));
-      return entries;
+
+      const comments = data.children
+        .filter((entry) => entry['wm-property'] === 'in-reply-to' && !authorUrlsToIgnore.includes(entry.author.url))
+        .map<Comment>((entry) => ({
+          authorName: sanitizeText(entry.author.name),
+          authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
+          avatarUrl: entry.author.photo,
+          commentText: sanitizeText(entry.content?.text),
+          publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
+          sourceUrl: entry['wm-source'],
+          sourcePlatform: parseSourcePlatform(entry['wm-source'])
+        }));
+
+      return {
+        likes,
+        comments
+      };
     } catch (error) {
       console.error('Error parsing web mentions response:', error);
       throw new ActionError({
@@ -44,3 +60,28 @@ export const getWebMentions = defineAction({
     }
   }
 });
+
+function sanitizeText(input?: string): string {
+  return input ? input.replaceAll('????', '') : '';
+}
+
+function parseSourcePlatform(input: string): SourcePlatform | null {
+  if (input.startsWith('https://brid.gy/comment/reddit/')) {
+    return SourcePlatform.Reddit;
+  } else if (input.includes('https://brid.gy/comment/bluesky/')) {
+    return SourcePlatform.Bluesky;
+  } else if (input.startsWith('https://brid.gy/comment/mastodon/')) {
+    return SourcePlatform.Mastodon;
+  }
+
+  return null;
+}
+
+export function convertNameToInitials(name: string): string {
+  const names = name.trim().split(' ');
+  if (names.length === 1) {
+    return names[0].charAt(0).toUpperCase();
+  } else {
+    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+  }
+}

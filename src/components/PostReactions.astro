@@ -1,19 +1,25 @@
 ---
 import { actions } from 'astro:actions';
 import BubblesVoteCount from './BubblesVoteCount.astro';
+import PostComment from './PostComment.astro';
+import PostLike from './PostLike.astro';
 import Badge from './starwind/badge';
-import WebMentionComment from './WebMentionComment.astro';
-import WebMentionLike from './WebMentionLike.astro';
 
 interface Props {
   slug: string;
 }
 
 const { slug } = Astro.props as Props;
-const { data: entries = [], error } = await Astro.callAction(actions.getWebMentions, { slug });
+const { data, error } = await Astro.callAction(actions.getWebMentions, { slug });
 
-const likes = !error ? entries.filter((entry) => entry['wm-property'] === 'like-of') : [];
-const comments = !error ? entries.filter((entry) => entry['wm-property'] === 'in-reply-to') : [];
+const { likes = [], comments = [] } = data || {};
+
+if (error) {
+  throw new Error(`Failed to fetch webmentions: ${error.message}`);
+}
+
+console.log('Likes length:', likes.length);
+console.log('Comments length:', comments.length);
 ---
 
 <section class="my-8 flex flex-col gap-4">
@@ -29,9 +35,9 @@ const comments = !error ? entries.filter((entry) => entry['wm-property'] === 'in
           </Badge>
         </h3>
         <ul class="flex flex-wrap gap-1">
-          {likes.map((entry) => (
+          {likes.map((like) => (
             <li>
-              <WebMentionLike {entry} />
+              <PostLike {...like} />
             </li>
           ))}
         </ul>
@@ -49,9 +55,9 @@ const comments = !error ? entries.filter((entry) => entry['wm-property'] === 'in
           </Badge>
         </h3>
         <ul class="flex flex-col gap-2">
-          {comments.map((entry) => (
+          {comments.map((comment) => (
             <li>
-              <WebMentionComment {entry} />
+              <PostComment {...comment} />
             </li>
           ))}
         </ul>
