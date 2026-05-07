@@ -3,7 +3,8 @@ import type { WebMentionResponse } from '@/lib/webmention-types';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 
-const authorUrlsToIgnore = ['https://reddit.com/user/asimovs-auditor/'];
+const REDDIT_DELETED_STRING = '[deleted]';
+const authorUrlsToIgnore = ['https://reddit.com/user/asimovs-auditor/', 'https://reddit.com/user/AutoModerator/'];
 
 export const getWebMentions = defineAction({
   input: z.object({
@@ -36,7 +37,16 @@ export const getWebMentions = defineAction({
         }));
 
       const comments = data.children
-        .filter((entry) => entry['wm-property'] === 'in-reply-to' && !authorUrlsToIgnore.includes(entry.author.url))
+        .filter(
+          (entry) =>
+            entry['wm-property'] === 'in-reply-to' &&
+            !authorUrlsToIgnore.includes(entry.author.url) &&
+            entry.author.name &&
+            entry.author.photo &&
+            entry.content?.text &&
+            entry.author.name !== REDDIT_DELETED_STRING &&
+            entry.content?.text !== REDDIT_DELETED_STRING
+        )
         .map<Comment>((entry) => ({
           authorName: sanitizeText(entry.author.name),
           authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
@@ -62,7 +72,11 @@ export const getWebMentions = defineAction({
 });
 
 function sanitizeText(input?: string): string {
-  return input ? input.replaceAll('????', '') : '';
+  if (!input) {
+    return '';
+  }
+
+  return input.trim().replaceAll('????', '');
 }
 
 function parseSourcePlatform(input: string): SourcePlatform | null {
