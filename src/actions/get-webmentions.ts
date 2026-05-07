@@ -32,7 +32,7 @@ export const getWebMentions = defineAction({
           authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
           avatarUrl: entry.author.photo,
           publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
-          sourceUrl: entry['wm-source'],
+          sourceUrl: entry.url,
           sourcePlatform: parseSourcePlatform(entry['wm-source'])
         }));
 
@@ -53,7 +53,7 @@ export const getWebMentions = defineAction({
           avatarUrl: entry.author.photo,
           commentText: sanitizeText(entry.content?.text),
           publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
-          sourceUrl: entry['wm-source'],
+          sourceUrl: entry.url,
           sourcePlatform: parseSourcePlatform(entry['wm-source'])
         }));
 
@@ -80,11 +80,11 @@ function sanitizeText(input?: string): string {
 }
 
 function parseSourcePlatform(input: string): SourcePlatform | null {
-  if (input.startsWith('https://brid.gy/comment/reddit/')) {
+  if (/https:\/\/brid\.gy\/(comment|like)\/reddit\//.test(input)) {
     return SourcePlatform.Reddit;
-  } else if (input.includes('https://brid.gy/comment/bluesky/')) {
+  } else if (/https:\/\/brid\.gy\/(comment|like)\/bluesky\//.test(input)) {
     return SourcePlatform.Bluesky;
-  } else if (input.startsWith('https://brid.gy/comment/mastodon/')) {
+  } else if (/https:\/\/brid\.gy\/(comment|like)\/mastodon\//.test(input)) {
     return SourcePlatform.Mastodon;
   }
 
@@ -93,9 +93,10 @@ function parseSourcePlatform(input: string): SourcePlatform | null {
 
 export function convertNameToInitials(name: string): string {
   const names = name.trim().split(' ');
-  if (names.length === 1) {
-    return names[0].charAt(0).toUpperCase();
-  } else {
-    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+
+  if (names.length >= 2) {
+    return (names[0].charAt(0) + names[1].charAt(0)).toUpperCase();
   }
+
+  return names[0].charAt(0).toUpperCase();
 }
