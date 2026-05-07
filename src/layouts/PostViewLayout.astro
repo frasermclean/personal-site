@@ -1,9 +1,8 @@
 ---
-import BubblesVoteCount from '@/components/BubblesVoteCount.astro';
-import Comments from '@/components/Comments.astro';
 import CategoryLink from '@/components/links/CategoryLink.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
+import PostReactions from '@/components/PostReactions.astro';
 import Prose from '@/components/Prose.astro';
 import RelatedPosts from '@/components/RelatedPosts.astro';
 import Article from '@/components/structured-data/Article.astro';
@@ -38,7 +37,7 @@ const {
   category,
   tags,
   syndication,
-  enableComments
+  showReactions
 } = Astro.props as Props;
 
 const relatedPosts = await getRelatedPosts(slug, category, tags);
@@ -74,7 +73,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     <aside class="sticky top-24 hidden grow flex-col gap-6 self-start pl-4 xl:flex">
       <TableOfContents
         headings={headings}
-        includeCommentLink={enableComments}
+        includeReactionsLink={showReactions}
         includeRelatedPostsLink={relatedPosts.length > 0}
       />
       {category && <CategoryLink category={category} />}
@@ -83,9 +82,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
     </aside>
   </div>
 
-  <BubblesVoteCount />
-
-  {enableComments && <Comments />}
-
+  {showReactions && <PostReactions {slug} />}
   {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
 </BaseLayout>

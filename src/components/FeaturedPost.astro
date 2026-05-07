@@ -1,21 +1,17 @@
 ---
 import SectionHeading from '@/components/SectionHeading.astro';
 import StarIcon from '@tabler/icons/outline/star.svg';
-import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import PostCard from './PostCard.astro';
 
-const sortedPosts = (await getCollection('posts')).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-);
+interface Props {
+  entry: CollectionEntry<'posts'>;
+}
 
-const featuredPost = sortedPosts.find((post) => post.data.isFeatured) || sortedPosts[0];
+const { entry } = Astro.props as Props;
 ---
 
-{
-  featuredPost && (
-    <section class="flex h-full flex-col">
-      <SectionHeading Icon={StarIcon} text="Featured" />
-      <PostCard slug={featuredPost.id} {...featuredPost.data} variant="featured" />
-    </section>
-  )
-}
+<section class="flex h-full flex-col">
+  <SectionHeading Icon={StarIcon} text="Featured" />
+  <PostCard slug={entry.id} {...entry.data} variant="featured" />
+</section>

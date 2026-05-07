@@ -7,18 +7,18 @@ import Link from '@/components/links/Link.astro';
 interface Props {
   title?: string;
   headings: MarkdownHeading[];
-  includeCommentLink?: boolean;
+  includeReactionsLink?: boolean;
   includeRelatedPostsLink?: boolean;
 }
-const { title = 'Contents', headings, includeCommentLink = false, includeRelatedPostsLink = false } = Astro.props;
+const { title = 'Contents', headings, includeReactionsLink = false, includeRelatedPostsLink = false } = Astro.props;
 
 const additionalLinks = [];
 
-if (includeCommentLink) {
+if (includeReactionsLink) {
   additionalLinks.push({
     depth: 2,
-    slug: 'comments',
-    text: 'Comments'
+    slug: 'reactions',
+    text: 'Reactions'
   });
 }
 

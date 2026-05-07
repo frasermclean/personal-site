@@ -1,0 +1,22 @@
+---
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/starwind/tooltip';
+import type { Like } from '@/lib/reaction-types';
+import Link from './links/Link.astro';
+
+interface Props extends Like {}
+
+const { authorName, authorInitials, avatarUrl, sourceUrl, sourcePlatform } = Astro.props as Props;
+---
+
+<Tooltip>
+  <TooltipTrigger>
+    <Link href={sourceUrl}>
+      <Avatar class="hover:border-accent">
+        <AvatarImage src={avatarUrl} alt={authorName} />
+        <AvatarFallback>{authorInitials}</AvatarFallback>
+      </Avatar>
+    </Link>
+  </TooltipTrigger>
+  <TooltipContent side="bottom">{authorName} ({sourcePlatform})</TooltipContent>
+</Tooltip>

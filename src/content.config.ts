@@ -15,8 +15,8 @@ const posts = defineCollection({
       }),
       category: z.enum(['guide', 'project', 'review']).optional(),
       tags: z.array(z.string()),
-      enableComments: z.boolean().default(true),
-      isFeatured: z.boolean().optional(),
+      showReactions: z.boolean().default(true),
+      isFeatured: z.boolean().default(false),
       syndication: z
         .object({
           indienews: z.url().optional(),

@@ -1,0 +1,68 @@
+---
+import { actions } from 'astro:actions';
+import BubblesVoteCount from './BubblesVoteCount.astro';
+import PostComment from './PostComment.astro';
+import PostLike from './PostLike.astro';
+import Badge from './starwind/badge';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+const { data, error } = await Astro.callAction(actions.getWebMentions, { slug });
+
+const { likes = [], comments = [] } = data || {};
+
+if (error) {
+  throw new Error(`Failed to fetch webmentions: ${error.message}`);
+}
+
+console.log('Likes length:', likes.length);
+console.log('Comments length:', comments.length);
+---
+
+<section class="my-8 flex flex-col gap-4">
+  <h2 id="reactions" class="font-heading text-2xl font-bold text-primary md:text-4xl">Reactions</h2>
+
+  {
+    likes.length > 0 && (
+      <section class="flex flex-col gap-2">
+        <h3 class="font-heading text-xl font-semibold text-secondary sm:text-2xl">
+          Likes
+          <Badge variant="ghost" size="md" class="h-8 w-8">
+            {likes.length}
+          </Badge>
+        </h3>
+        <ul class="flex flex-wrap gap-1">
+          {likes.map((like) => (
+            <li>
+              <PostLike {...like} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    comments.length > 0 && (
+      <section class="flex flex-col gap-2">
+        <h3 class="flex items-center gap-2 font-heading text-xl font-semibold text-secondary sm:text-2xl">
+          Comments
+          <Badge variant="ghost" size="md" class="h-8 w-8">
+            {comments.length}
+          </Badge>
+        </h3>
+        <ul class="flex flex-col gap-2">
+          {comments.map((comment) => (
+            <li>
+              <PostComment {...comment} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+  <BubblesVoteCount />
+</section>

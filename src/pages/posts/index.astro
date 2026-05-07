@@ -34,6 +34,12 @@ const filteredEntries = allEntries
     return !post.data.isFeatured;
   })
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+// take the most recent featured post for the featured section
+const featuredEntry = allEntries
+  .filter((post) => post.data.isFeatured)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())[0];
+
 const totalPages = Math.ceil(filteredEntries.length / POSTS_PAGE_SIZE);
 const pageEntries = filteredEntries.slice((page - 1) * POSTS_PAGE_SIZE, page * POSTS_PAGE_SIZE);
 
@@ -71,7 +77,7 @@ const listTitle = isSearch ? 'Matching Posts' : 'Recent Posts';
     page === 1 && !isSearch && (
       <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div class="lg:col-span-2">
-          <FeaturedPost />
+          <FeaturedPost entry={featuredEntry} />
         </div>
         <div class="lg:col-span-1">
           <PopularTags />
