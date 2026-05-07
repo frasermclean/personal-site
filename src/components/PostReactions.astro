@@ -22,7 +22,7 @@ const comments = !error ? entries.filter((entry) => entry['wm-property'] === 'in
   {
     likes.length > 0 && (
       <section class="flex flex-col gap-2">
-        <h3 class="font-heading text-lg font-semibold text-secondary">
+        <h3 class="font-heading text-xl font-semibold text-secondary sm:text-2xl">
           Likes
           <Badge variant="ghost" size="md" class="h-8 w-8">
             {likes.length}
@@ -42,7 +42,7 @@ const comments = !error ? entries.filter((entry) => entry['wm-property'] === 'in
   {
     comments.length > 0 && (
       <section class="flex flex-col gap-2">
-        <h3 class="flex items-center gap-2 font-heading text-lg font-semibold text-secondary">
+        <h3 class="flex items-center gap-2 font-heading text-xl font-semibold text-secondary sm:text-2xl">
           Comments
           <Badge variant="ghost" size="md" class="h-8 w-8">
             {comments.length}

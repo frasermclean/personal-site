@@ -11,7 +11,10 @@ export interface WebMentionEntry {
   published: string | null;
   'wm-received': string;
   'wm-id': number;
+  'wm-source': string;
+  'wm-target': string;
   'wm-property': 'in-reply-to' | 'like-of' | 'repost-of' | 'bookmark-of' | 'mention-of' | 'rsvp';
+  'wm-protocol': string;
   content?: {
     text: string;
     html: string;
