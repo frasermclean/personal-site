@@ -28,12 +28,13 @@ console.log('Comments length:', comments.length);
   {
     likes.length > 0 && (
       <section class="flex flex-col gap-2">
-        <h3 class="font-heading text-xl font-semibold text-secondary sm:text-2xl">
-          Likes
-          <Badge variant="ghost" size="md" class="h-8 w-8">
+        <header class="flex items-center gap-2">
+          <h3 class="font-heading text-xl font-semibold text-secondary sm:text-2xl">Likes</h3>
+          <Badge variant="ghost" size="md">
             {likes.length}
           </Badge>
-        </h3>
+        </header>
+
         <ul class="flex flex-wrap gap-1">
           {likes.map((like) => (
             <li>
@@ -48,12 +49,13 @@ console.log('Comments length:', comments.length);
   {
     comments.length > 0 && (
       <section class="flex flex-col gap-2">
-        <h3 class="flex items-center gap-2 font-heading text-xl font-semibold text-secondary sm:text-2xl">
-          Comments
-          <Badge variant="ghost" size="md" class="h-8 w-8">
+        <header class="flex items-center gap-2">
+          <h3 class="font-heading text-xl font-semibold text-secondary sm:text-2xl">Comments</h3>
+          <Badge variant="ghost" size="md">
             {comments.length}
           </Badge>
-        </h3>
+        </header>
+
         <ul class="flex flex-col gap-2">
           {comments.map((comment) => (
             <li>

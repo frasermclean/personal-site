@@ -58,18 +58,6 @@ services:
       REDIS_URL: redis://backend-cache:6379
       APP_SECRET: ${UMAMI_APP_SECRET}
 
-  # Commentario comments system
-  comments:
-    image: registry.gitlab.com/comentario/comentario
-    container_name: backend-comments
-    restart: unless-stopped
-    depends_on:
-      database:
-        condition: service_healthy
-    environment:
-      BASE_URL: http://localhost:8080
-      SECRETS_FILE: /comentario/secrets.yaml
-
 volumes:
   database-data:
     driver: local
