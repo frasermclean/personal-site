@@ -5,9 +5,3 @@ services:
   analytics:
     ports:
       - 8081:3000
-
-  comments:
-    ports:
-      - 8080:80
-    volumes:
-      - ./comentario-secrets.yml:/comentario/secrets.yaml:ro
