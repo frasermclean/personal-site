@@ -1,0 +1,27 @@
+---
+import type { BreadcrumbItem } from '@/components/structured-data/BreadcrumbList.astro';
+import BreadcrumbList from '@/components/structured-data/BreadcrumbList.astro';
+import { POSTS_PATH } from '@/constants';
+import type { ImageMetadata } from 'astro';
+import Article from '../structured-data/Article.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  publishDate: Date;
+  updatedDate?: string;
+}
+
+const { title, description, image, publishDate, updatedDate } = Astro.props as Props;
+
+const breadcrumbItems: BreadcrumbItem[] = [
+  { title: 'Home', url: Astro.site!.origin },
+  { title: 'Posts', url: new URL(`${POSTS_PATH}`, Astro.site) },
+  { title }
+];
+---
+
+<!-- Structured Data -->
+<Article {title} {description} {image} {publishDate} {updatedDate} />
+<BreadcrumbList items={breadcrumbItems} />

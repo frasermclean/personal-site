@@ -86,6 +86,7 @@ const imageUrl = new URL(image.src, Astro.site);
       defer
       src={TRACKING_SCRIPT_SRC}
       data-website-id={TRACKING_WEBSITE_ID}
+      data-domains="frasermclean.com"
       data-tag={WORKERS_CI_COMMIT_SHA || null}
       data-performance="true"></script>
   </head>

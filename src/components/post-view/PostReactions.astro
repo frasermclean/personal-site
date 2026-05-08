@@ -1,9 +1,9 @@
 ---
+import Badge from '@/components/starwind/badge';
 import { actions } from 'astro:actions';
 import BubblesVoteCount from './BubblesVoteCount.astro';
 import PostComment from './PostComment.astro';
 import PostLike from './PostLike.astro';
-import Badge from './starwind/badge';
 
 interface Props {
   slug: string;
@@ -17,9 +17,6 @@ const { likes = [], comments = [] } = data || {};
 if (error) {
   throw new Error(`Failed to fetch webmentions: ${error.message}`);
 }
-
-console.log('Likes length:', likes.length);
-console.log('Comments length:', comments.length);
 ---
 
 <section class="my-8 flex flex-col gap-4">
