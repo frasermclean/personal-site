@@ -16,7 +16,7 @@
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource-variable/geist-mono": "^5.2.7",
     "@fontsource-variable/sora": "^5.2.8",
-    "@tabler/icons": "^3.41.1",
+    "@tabler/icons": "^3.43.0",
     "@tailwindcss/forms": "~0.5.11",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.3.1",
@@ -24,12 +24,12 @@
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "rehype-figure": "^1.0.1",
-    "resend": "^6.12.2",
+    "resend": "^6.12.3",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.2.4",
     "tw-animate-css": "^1.4.0",
-    "wrangler": "^4.87.0"
+    "wrangler": "^4.90.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
