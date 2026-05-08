@@ -1,17 +1,14 @@
 ---
 import CategoryLink from '@/components/links/CategoryLink.astro';
+import PostStructuredData from '@/components/post-view/PostStructuredData.astro';
 import PostBreadcrumbs from '@/components/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/PostMetadata.astro';
 import PostReactions from '@/components/PostReactions.astro';
 import Prose from '@/components/Prose.astro';
 import RelatedPosts from '@/components/RelatedPosts.astro';
-import Article from '@/components/structured-data/Article.astro';
-import type { BreadcrumbItem } from '@/components/structured-data/BreadcrumbList.astro';
-import BreadcrumbList from '@/components/structured-data/BreadcrumbList.astro';
 import SyndicationList from '@/components/SyndicationList.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import TagList from '@/components/TagList.astro';
-import { POSTS_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getRelatedPosts } from '@/lib/related-posts';
 import { Picture } from 'astro:assets';
@@ -31,18 +28,9 @@ const { title, description, heroImage, publishDate, category, tags, syndication,
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const { updatedDate, readingTime } = remarkPluginFrontmatter;
 const relatedPosts = await getRelatedPosts(slug, category, tags);
-
-const breadcrumbItems: BreadcrumbItem[] = [
-  { title: 'Home', url: Astro.site!.origin },
-  { title: 'Posts', url: new URL(`${POSTS_PATH}`, Astro.site) },
-  { title }
-];
 ---
 
 <BaseLayout {title} {description} isArticle={true} {heroImage} mainClass="h-entry">
-  <Article {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
-  <BreadcrumbList items={breadcrumbItems} slot="head" />
-
   <Picture
     src={heroImage.src}
     alt={heroImage.alt}
@@ -53,6 +41,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     quality={85}
   />
 
+  <PostStructuredData {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />
   <PostMetadata {title} {description} {publishDate} {updatedDate} {readingTime} class="my-8 md:my-12" />
   <PostBreadcrumbs {title} class="mb-8 hidden md:block" />
 
