@@ -3,11 +3,13 @@ import HeroSection from '@/components/HeroSection.astro';
 import { Button } from '@/components/starwind/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/starwind/dialog';
-import { Input } from '@/components/starwind/input';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/starwind/input-group';
 import { Label } from '@/components/starwind/label';
 import { Textarea } from '@/components/starwind/textarea';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MailIcon from '@tabler/icons/outline/mail.svg';
+import UserIcon from '@tabler/icons/outline/user.svg';
+import SendIcon from '@tabler/icons/outline/send.svg';
 import { TURNSTILE_SITE_KEY } from 'astro:env/client';
 
 const title = 'Contact Me';
@@ -28,15 +30,27 @@ const description =
       <CardDescription>Fill out the form below to contact me.</CardDescription>
     </CardHeader>
     <CardContent class="my-4 space-y-4 p-0">
-      <div class="space-y-2">
-        <Label for="name">Name</Label>
-        <Input id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
+      <div class="flex flex-col gap-1">
+        <Label for="name">Full Name</Label>
+        <InputGroup>
+          <InputGroupAddon align="inline-start">
+            <UserIcon />
+          </InputGroupAddon>
+          <InputGroupInput id="name" type="text" placeholder="Bob Jones" autocomplete="name" required />
+        </InputGroup>
       </div>
-      <div class="space-y-2">
-        <Label for="email">Email</Label>
-        <Input id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
+
+      <div class="flex flex-col gap-1">
+        <Label for="email">Email Address</Label>
+        <InputGroup>
+          <InputGroupInput id="email" type="email" placeholder="bob.jones@example.com" autocomplete="email" required />
+          <InputGroupAddon align="inline-start">
+            <MailIcon />
+          </InputGroupAddon>
+        </InputGroup>
       </div>
-      <div class="space-y-2">
+
+      <div class="flex flex-col gap-1">
         <Label for="message">Message</Label>
         <Textarea id="message" placeholder="Hi there" rows="6" required />
       </div>
@@ -44,7 +58,7 @@ const description =
     <CardFooter class="flex-col gap-4 p-0">
       <div class="cf-turnstile w-full" data-sitekey={TURNSTILE_SITE_KEY} data-size="flexible"></div>
       <Button class="w-full" variant="primary" type="submit" disabled>
-        <MailIcon class="mr-2" />
+        <SendIcon class="mr-2" />
         Send Message
       </Button>
     </CardFooter>
@@ -72,6 +86,14 @@ const description =
     emailInput?.addEventListener('input', validateForm);
     messageInput?.addEventListener('input', validateForm);
 
+    nameInput?.addEventListener('blur', () => setInvalidState(nameInput));
+    emailInput?.addEventListener('blur', () => setInvalidState(emailInput));
+    messageInput?.addEventListener('blur', () => setInvalidState(messageInput));
+
+    function setInvalidState(input: HTMLInputElement | HTMLTextAreaElement) {
+      input.setAttribute('aria-invalid', input.checkValidity() ? 'false' : 'true');
+    }
+
     function validateForm() {
       const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
@@ -81,6 +103,13 @@ const description =
       }
       const isValid = nameInput.checkValidity() && emailInput.checkValidity() && messageInput.checkValidity();
       submitButton.disabled = !isValid;
+
+      // Update aria-invalid for fields that have already been touched (aria-invalid already set)
+      for (const input of [nameInput, emailInput, messageInput]) {
+        if (input.hasAttribute('aria-invalid')) {
+          setInvalidState(input);
+        }
+      }
     }
 
     function getFormValues() {
