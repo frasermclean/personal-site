@@ -121,7 +121,7 @@
     --error: var(--color-red-800);
     --error-foreground: var(--color-neutral-50);
     --border: --alpha(var(--color-neutral-50) / 10%);
-    --input: --alpha(var(--color-neutral-50) / 15%);
+    --input: --alpha(var(--color-neutral-400) / 15%);
     --outline: var(--color-neutral-500);
   }
 
