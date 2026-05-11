@@ -24,12 +24,13 @@ const description =
 <BaseLayout {title} {description}>
   <HeroSection {title} {subtitle} />
 
-  <Card class="mx-auto max-w-md p-4 md:p-6" as="form">
-    <CardHeader class="mb-4 p-0">
+  <Card class="mx-auto max-w-md" as="form">
+    <CardHeader>
       <CardTitle>Get in Touch</CardTitle>
       <CardDescription>Fill out the form below to contact me.</CardDescription>
     </CardHeader>
-    <CardContent class="my-4 space-y-4 p-0">
+
+    <CardContent class="space-y-4">
       <div class="flex flex-col gap-1">
         <Label for="name">Full Name</Label>
         <InputGroup>
@@ -54,9 +55,10 @@ const description =
         <Label for="message">Message</Label>
         <Textarea id="message" placeholder="Hi there" rows="6" required />
       </div>
-    </CardContent>
-    <CardFooter class="flex-col gap-4 p-0">
+
       <div class="cf-turnstile w-full" data-sitekey={TURNSTILE_SITE_KEY} data-size="flexible"></div>
+    </CardContent>
+    <CardFooter class="flex-col gap-4">
       <Button class="w-full" variant="primary" type="submit" disabled>
         <SendIcon class="mr-2" />
         Send Message
