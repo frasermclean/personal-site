@@ -151,13 +151,12 @@ const description =
     });
 
     function showDialog(title: string, description: string, message: string) {
-      const dialog = document.querySelector<HTMLDialogElement>('#result-dialog dialog');
-      const backdrop = document.querySelector<HTMLElement>('#result-dialog .starwind-dialog-backdrop');
+      const dialogWrapper = document.querySelector<HTMLElement>('#result-dialog');
       const titleElement = document.querySelector<HTMLElement>('#result-dialog [data-slot="dialog-title"]');
       const descriptionElement = document.querySelector<HTMLElement>('#result-dialog [data-slot="dialog-description"]');
       const messageElement = document.querySelector<HTMLElement>('#dialog-message');
 
-      if (!dialog || !backdrop || !titleElement || !descriptionElement || !messageElement) {
+      if (!dialogWrapper || !titleElement || !descriptionElement || !messageElement) {
         console.error('Dialog elements not found');
         return;
       }
@@ -167,12 +166,8 @@ const description =
       descriptionElement.textContent = description;
       messageElement.textContent = message;
 
-      // show the dialog and backdrop
-      document.body.classList.add('overflow-hidden');
-      dialog.showModal();
-      dialog.dataset.state = 'open';
-      backdrop.classList.remove('hidden');
-      backdrop.dataset.state = 'open';
+      // dispatch custom event to open dialog
+      dialogWrapper.dispatchEvent(new CustomEvent('dialog:open'));
     }
   </script>
 </BaseLayout>
