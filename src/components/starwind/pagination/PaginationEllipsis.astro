@@ -1,21 +1,26 @@
 ---
-import Dots from "@tabler/icons/outline/dots.svg";
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import Dots from '@tabler/icons/outline/dots.svg';
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-type Props = HTMLAttributes<"span">;
+type Props = HTMLAttributes<'span'> & VariantProps<typeof paginationEllipsis>;
 
-export const paginationEllipsis = tv({ base: "flex h-9 w-9 items-center justify-center" });
+export const paginationEllipsis = tv({
+  base: 'flex items-center justify-center',
+  variants: {
+    size: {
+      'icon-sm': 'size-9',
+      icon: 'size-11',
+      'icon-lg': 'size-12'
+    }
+  },
+  defaultVariants: { size: 'icon' }
+});
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, size, ...rest } = Astro.props;
 ---
 
-<span
-  aria-hidden
-  class={paginationEllipsis({ class: className })}
-  data-slot="pagination-ellipsis"
-  {...rest}
->
+<span aria-hidden class={paginationEllipsis({ size, class: className })} {...rest} data-slot="pagination-ellipsis">
   <slot name="icon">
     <Dots class="size-4" />
   </slot>

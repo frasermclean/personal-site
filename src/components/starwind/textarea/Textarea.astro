@@ -10,8 +10,8 @@ export const textarea = tv({
     'focus-visible:border-outline focus-visible:ring-outline/50 transition-[color,box-shadow] focus-visible:ring-3',
     'file:text-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'peer placeholder:text-muted-foreground',
-    'user-valid:border-success user-invalid:border-error'
+    'aria-invalid:border-error aria-invalid:focus-visible:ring-error/40',
+    'peer placeholder:text-muted-foreground'
   ],
   variants: {
     size: {
@@ -26,4 +26,4 @@ export const textarea = tv({
 const { size, class: className, ...rest } = Astro.props;
 ---
 
-<textarea class={textarea({ size, class: className })} data-slot="textarea" {...rest}></textarea>
+<textarea class={textarea({ size, class: className })} {...rest} data-slot="textarea"></textarea>

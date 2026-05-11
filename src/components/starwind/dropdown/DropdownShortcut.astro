@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'span'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<span
+  class:list={[
+    'ml-auto text-sm tracking-widest text-muted-foreground transition-colors group-focus/dropdown-item:text-accent-foreground',
+    className
+  ]}
+  {...rest}
+>
+  <slot />
+</span>

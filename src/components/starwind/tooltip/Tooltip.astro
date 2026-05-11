@@ -1,8 +1,8 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import type { HTMLAttributes } from 'astro/types';
+import { tv } from 'tailwind-variants';
 
-type Props = HTMLAttributes<"div"> & {
+type Props = HTMLAttributes<'div'> & {
   /**
    * Time in milliseconds to wait before showing the tooltip
    */
@@ -17,14 +17,9 @@ type Props = HTMLAttributes<"div"> & {
   disableHoverableContent?: boolean;
 };
 
-export const tooltip = tv({ base: "starwind-tooltip relative inline-block" });
+export const tooltip = tv({ base: 'starwind-tooltip relative inline-block' });
 
-const {
-  openDelay = 200,
-  closeDelay = 200,
-  disableHoverableContent = false,
-  class: className,
-} = Astro.props;
+const { openDelay = 200, closeDelay = 200, disableHoverableContent = false, class: className } = Astro.props;
 ---
 
 <div
@@ -32,7 +27,7 @@ const {
   data-state="closed"
   data-open-delay={openDelay}
   data-close-delay={closeDelay}
-  {...!disableHoverableContent && { "data-content-hoverable": "" }}
+  {...!disableHoverableContent && { 'data-content-hoverable': '' }}
   data-slot="tooltip"
 >
   <slot />
@@ -43,8 +38,8 @@ const {
     type FloatingAlign,
     type FloatingSide,
     getTransformOrigin,
-    resolvePlacement,
-  } from "@/lib/utils/starwind/positioning";
+    resolvePlacement
+  } from '@/lib/utils/starwind/positioning';
 
   class TooltipHandler {
     private tooltip: HTMLElement;
@@ -55,8 +50,8 @@ const {
     private hideAnimationTimerRef: number | null = null;
     private contentId: string;
     private animationDuration = 150;
-    private side: FloatingSide = "top";
-    private align: FloatingAlign = "center";
+    private side: FloatingSide = 'top';
+    private align: FloatingAlign = 'center';
     private sideOffset = 8;
     private avoidCollisions = true;
     private isOpen = false;
@@ -68,7 +63,7 @@ const {
       this.contentId = `starwind-tooltip${idx}`;
       this.tooltip = tooltip;
       this.abortController = new AbortController();
-      this.content = tooltip.querySelector(".starwind-tooltip-content");
+      this.content = tooltip.querySelector('.starwind-tooltip-content');
 
       // if tooltip.firstElementChild is this.content, then get the next element
       this.trigger = tooltip.firstElementChild as HTMLElement;
@@ -78,39 +73,34 @@ const {
 
       if (!this.trigger || !this.content) return;
 
-      this.trigger.classList.add("starwind-tooltip-trigger");
+      this.trigger.classList.add('starwind-tooltip-trigger');
 
       // animationDuration is set with inline styles through passed prop to TooltipContent
       const animationDurationString = this.content.style.animationDuration;
-      if (animationDurationString.endsWith("ms")) {
+      if (animationDurationString.endsWith('ms')) {
         this.animationDuration = parseFloat(animationDurationString);
-      } else if (animationDurationString.endsWith("s")) {
+      } else if (animationDurationString.endsWith('s')) {
         // using something like @playform/compress might optimize to use "s" instead of "ms"
         this.animationDuration = parseFloat(animationDurationString) * 1000;
       }
 
-      const contentSide = this.content.getAttribute("data-side");
-      if (
-        contentSide === "top" ||
-        contentSide === "bottom" ||
-        contentSide === "left" ||
-        contentSide === "right"
-      ) {
+      const contentSide = this.content.getAttribute('data-side');
+      if (contentSide === 'top' || contentSide === 'bottom' || contentSide === 'left' || contentSide === 'right') {
         this.side = contentSide;
       }
 
-      const contentAlign = this.content.getAttribute("data-align");
-      if (contentAlign === "start" || contentAlign === "center" || contentAlign === "end") {
+      const contentAlign = this.content.getAttribute('data-align');
+      if (contentAlign === 'start' || contentAlign === 'center' || contentAlign === 'end') {
         this.align = contentAlign;
       }
 
-      const contentSideOffset = parseFloat(this.content.getAttribute("data-side-offset") || "8");
+      const contentSideOffset = parseFloat(this.content.getAttribute('data-side-offset') || '8');
       if (Number.isFinite(contentSideOffset)) {
         this.sideOffset = contentSideOffset;
       }
 
-      this.avoidCollisions = this.content.hasAttribute("data-avoid-collisions");
-      this.isOpen = this.tooltip.getAttribute("data-state") === "open";
+      this.avoidCollisions = this.content.hasAttribute('data-avoid-collisions');
+      this.isOpen = this.tooltip.getAttribute('data-state') === 'open';
 
       this.init();
     }
@@ -123,7 +113,7 @@ const {
 
     private setupAccessibility() {
       if (!this.trigger || !this.content) return;
-      this.trigger.setAttribute("aria-describedby", this.contentId);
+      this.trigger.setAttribute('aria-describedby', this.contentId);
       this.content.id = this.contentId;
     }
 
@@ -131,18 +121,18 @@ const {
       if (!this.content || !this.trigger) return;
 
       if (this.isOpen) {
-        this.tooltip.setAttribute("data-state", "open");
-        this.trigger.setAttribute("data-state", "open");
-        this.content.setAttribute("data-state", "open");
-        this.content.classList.remove("hidden");
+        this.tooltip.setAttribute('data-state', 'open');
+        this.trigger.setAttribute('data-state', 'open');
+        this.content.setAttribute('data-state', 'open');
+        this.content.classList.remove('hidden');
         this.portalContent();
         this.positionTooltip();
         requestAnimationFrame(() => this.positionTooltip());
       } else {
-        this.tooltip.setAttribute("data-state", "closed");
-        this.trigger.setAttribute("data-state", "closed");
-        this.content.setAttribute("data-state", "closed");
-        this.content.classList.add("hidden");
+        this.tooltip.setAttribute('data-state', 'closed');
+        this.trigger.setAttribute('data-state', 'closed');
+        this.content.setAttribute('data-state', 'closed');
+        this.content.classList.add('hidden');
       }
     }
 
@@ -150,52 +140,48 @@ const {
       if (!this.trigger || !this.content) return;
 
       // Trigger events
-      this.trigger.addEventListener("mouseenter", () => this.show(), {
-        signal: this.abortController.signal,
+      this.trigger.addEventListener('mouseenter', () => this.show(), {
+        signal: this.abortController.signal
       });
-      this.trigger.addEventListener("mouseleave", () => this.hide(), {
-        signal: this.abortController.signal,
+      this.trigger.addEventListener('mouseleave', () => this.hide(), {
+        signal: this.abortController.signal
       });
-      this.trigger.addEventListener("focus", () => this.show(true), {
-        signal: this.abortController.signal,
+      this.trigger.addEventListener('focus', () => this.show(true), {
+        signal: this.abortController.signal
       });
-      this.trigger.addEventListener("blur", () => this.hide(true), {
-        signal: this.abortController.signal,
+      this.trigger.addEventListener('blur', () => this.hide(true), {
+        signal: this.abortController.signal
       });
 
       // Content events
-      if (this.tooltip.hasAttribute("data-content-hoverable")) {
-        this.content.addEventListener("mouseenter", () => this.show(), {
-          signal: this.abortController.signal,
+      if (this.tooltip.hasAttribute('data-content-hoverable')) {
+        this.content.addEventListener('mouseenter', () => this.show(), {
+          signal: this.abortController.signal
         });
-        this.content.addEventListener("mouseleave", () => this.hide(), {
-          signal: this.abortController.signal,
+        this.content.addEventListener('mouseleave', () => this.hide(), {
+          signal: this.abortController.signal
         });
       }
 
       // Document events
       document.addEventListener(
-        "keydown",
+        'keydown',
         (e) => {
-          if (e.key === "Escape" && this.isOpen) {
+          if (e.key === 'Escape' && this.isOpen) {
             this.hide(true);
           }
         },
-        { signal: this.abortController.signal },
+        { signal: this.abortController.signal }
       );
 
       document.addEventListener(
-        "pointerdown",
+        'pointerdown',
         (e) => {
-          if (
-            this.isOpen &&
-            !this.tooltip.contains(e.target as Node) &&
-            !this.content?.contains(e.target as Node)
-          ) {
+          if (this.isOpen && !this.tooltip.contains(e.target as Node) && !this.content?.contains(e.target as Node)) {
             this.hide(true);
           }
         },
-        { signal: this.abortController.signal },
+        { signal: this.abortController.signal }
       );
     }
 
@@ -203,17 +189,17 @@ const {
       if (!this.content) return;
       if (this.contentPlaceholder || this.content.parentElement === document.body) return;
 
-      this.contentPlaceholder = document.createComment("tooltip-content-placeholder");
+      this.contentPlaceholder = document.createComment('tooltip-content-placeholder');
       this.content.parentNode?.insertBefore(this.contentPlaceholder, this.content);
 
       document.body.appendChild(this.content);
 
-      this.content.style.position = "fixed";
-      this.content.style.zIndex = "50";
+      this.content.style.position = 'fixed';
+      this.content.style.zIndex = '50';
 
       const updatePosition = () => this.positionTooltip();
-      window.addEventListener("scroll", updatePosition, true);
-      window.addEventListener("resize", updatePosition);
+      window.addEventListener('scroll', updatePosition, true);
+      window.addEventListener('resize', updatePosition);
 
       const resizeObserver = new ResizeObserver(() => this.positionTooltip());
       resizeObserver.observe(this.content);
@@ -222,8 +208,8 @@ const {
       }
 
       this.cleanupAutoUpdate = () => {
-        window.removeEventListener("scroll", updatePosition, true);
-        window.removeEventListener("resize", updatePosition);
+        window.removeEventListener('scroll', updatePosition, true);
+        window.removeEventListener('resize', updatePosition);
         resizeObserver.disconnect();
       };
     }
@@ -240,11 +226,11 @@ const {
         this.contentPlaceholder = null;
       }
 
-      this.content.style.removeProperty("position");
-      this.content.style.removeProperty("z-index");
-      this.content.style.removeProperty("top");
-      this.content.style.removeProperty("left");
-      this.content.style.removeProperty("transform-origin");
+      this.content.style.removeProperty('position');
+      this.content.style.removeProperty('z-index');
+      this.content.style.removeProperty('top');
+      this.content.style.removeProperty('left');
+      this.content.style.removeProperty('transform-origin');
     }
 
     private openNow() {
@@ -253,10 +239,10 @@ const {
 
       this.clearHideAnimationTimer();
       this.isOpen = true;
-      this.tooltip.setAttribute("data-state", "open");
-      this.trigger.setAttribute("data-state", "open");
-      this.content.setAttribute("data-state", "open");
-      this.content.classList.remove("hidden");
+      this.tooltip.setAttribute('data-state', 'open');
+      this.trigger.setAttribute('data-state', 'open');
+      this.content.setAttribute('data-state', 'open');
+      this.content.classList.remove('hidden');
       this.portalContent();
       this.positionTooltip();
       requestAnimationFrame(() => this.positionTooltip());
@@ -275,7 +261,7 @@ const {
         return;
       }
 
-      const delay = parseInt(this.tooltip.getAttribute("data-open-delay") || "200");
+      const delay = parseInt(this.tooltip.getAttribute('data-open-delay') || '200');
       this.openTimerRef = window.setTimeout(() => {
         if (this.abortController.signal.aborted) return;
         this.openNow();
@@ -301,31 +287,28 @@ const {
         viewportWidth: window.innerWidth,
         viewportHeight: window.innerHeight,
         viewportPadding: 8,
-        avoidCollisions: this.avoidCollisions,
+        avoidCollisions: this.avoidCollisions
       });
 
       this.content.style.left = `${Math.round(resolvedPlacement.left)}px`;
       this.content.style.top = `${Math.round(resolvedPlacement.top)}px`;
-      this.content.style.transformOrigin = getTransformOrigin(
-        resolvedPlacement.side,
-        resolvedPlacement.align,
-      );
-      this.content.setAttribute("data-side", resolvedPlacement.side);
-      this.content.setAttribute("data-align", resolvedPlacement.align);
+      this.content.style.transformOrigin = getTransformOrigin(resolvedPlacement.side, resolvedPlacement.align);
+      this.content.setAttribute('data-side', resolvedPlacement.side);
+      this.content.setAttribute('data-align', resolvedPlacement.align);
     }
 
     private closeNow() {
       if (!this.content || !this.trigger) return;
       this.isOpen = false;
-      this.tooltip.setAttribute("data-state", "closed");
-      this.trigger.setAttribute("data-state", "closed");
-      this.content.setAttribute("data-state", "closed");
+      this.tooltip.setAttribute('data-state', 'closed');
+      this.trigger.setAttribute('data-state', 'closed');
+      this.content.setAttribute('data-state', 'closed');
 
       this.clearHideAnimationTimer();
       this.hideAnimationTimerRef = window.setTimeout(() => {
         if (this.abortController.signal.aborted) return;
         if (!this.content) return;
-        this.content.classList.add("hidden");
+        this.content.classList.add('hidden');
         this.unportalContent();
       }, this.animationDuration);
     }
@@ -346,7 +329,7 @@ const {
           this.closeNow();
           this.closeTimerRef = null;
         },
-        parseInt(this.tooltip.getAttribute("data-close-delay") || "200"),
+        parseInt(this.tooltip.getAttribute('data-close-delay') || '200')
       );
     }
 
@@ -406,7 +389,7 @@ const {
   const setupTooltips = () => {
     cleanupStaleTooltips();
 
-    document.querySelectorAll<HTMLElement>(".starwind-tooltip").forEach((tooltip) => {
+    document.querySelectorAll<HTMLElement>('.starwind-tooltip').forEach((tooltip) => {
       if (!tooltipInstances.has(tooltip)) {
         tooltipInstances.set(tooltip, new TooltipHandler(tooltip, tooltipCounter++));
       }
@@ -414,7 +397,7 @@ const {
   };
 
   setupTooltips();
-  document.addEventListener("astro:before-swap", destroyAllTooltips);
-  document.addEventListener("astro:after-swap", setupTooltips);
-  document.addEventListener("starwind:init", setupTooltips);
+  document.addEventListener('astro:before-swap', destroyAllTooltips);
+  document.addEventListener('astro:after-swap', setupTooltips);
+  document.addEventListener('starwind:init', setupTooltips);
 </script>

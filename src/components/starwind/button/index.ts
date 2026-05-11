@@ -1,4 +1,4 @@
-import Button, { button } from "./Button.astro";
+import Button, { button } from './Button.astro';
 
 const ButtonVariants = { button };
 

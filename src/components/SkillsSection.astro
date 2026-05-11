@@ -11,35 +11,35 @@ import { Card, CardContent, CardHeader, CardTitle } from './starwind/card';
 const skills = [
   {
     Icon: CodeIcon,
-    name: 'Full Stack Development',
+    title: 'Full Stack Development',
     description: 'Building enterprise-grade web applications using modern frameworks and technologies.'
   },
   {
     Icon: DatabaseIcon,
-    name: 'Databases & Caching',
+    title: 'Databases & Caching',
     description:
       'Designing and optimizing database schemas, and implementing caching strategies for improved performance.'
   },
   {
     Icon: ProjectorIcon,
-    name: 'Audio Visual Integration',
+    title: 'Audio Visual Integration',
     description:
       'Building custom AV solutions using Crestron, Extron, and AMX systems for seamless control and automation.'
   },
   {
     Icon: UxIcon,
-    name: 'User Experience Design',
+    title: 'User Experience Design',
     description: 'Designing intuitive and engaging user experiences through research, prototyping, and testing.'
   },
   {
     Icon: AutomationIcon,
-    name: 'Testing and DevOps',
+    title: 'Testing and DevOps',
     description:
       'Implementing CI/CD pipelines with GitHub Actions and Azure DevOps to ensure code quality and streamline deployments.'
   },
   {
     Icon: CloudIcon,
-    name: 'Cloud Infrastructure',
+    title: 'Cloud Infrastructure',
     description:
       'Infrastructure as Code (IaC) using Bicep and Terraform to deploy and manage cloud resources efficiently.'
   }
@@ -50,14 +50,16 @@ const skills = [
   <SectionHeading text="Skills" />
   <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     {
-      skills.map(({ Icon, name, description }) => (
-        <Card class="text-center" as="li">
-          <CardHeader class="p-4">
-            {Icon && <Icon class="mx-auto text-secondary" width={32} height={32} stroke-width={1.5} />}
-            <CardTitle>{name}</CardTitle>
+      skills.map(({ title, description, Icon }) => (
+        <Card class="h-full gap-4 text-center" as="li">
+          <CardHeader>
+            <CardTitle>
+              <h3 class="mb-2">{title}</h3>
+              {Icon && <Icon class="mx-auto text-secondary" width={48} height={48} stroke-width={1.5} />}
+            </CardTitle>
           </CardHeader>
-          <CardContent class="p-4">
-            <p class="text-md text-muted-foreground">{description}</p>
+          <CardContent>
+            <p class="text-muted-foreground">{description}</p>
           </CardContent>
         </Card>
       ))

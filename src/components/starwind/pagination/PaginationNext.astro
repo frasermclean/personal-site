@@ -1,23 +1,27 @@
 ---
-import ChevronRight from "@tabler/icons/outline/chevron-right.svg";
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import ChevronRight from '@tabler/icons/outline/chevron-right.svg';
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-import PaginationLink from "./PaginationLink.astro";
+import { ButtonVariants } from '@/components/starwind/button';
 
-type Props = HTMLAttributes<"a"> & { size?: "sm" | "md" | "lg" | "icon" };
+import PaginationLink from './PaginationLink.astro';
 
-export const paginationNext = tv({ base: "group gap-1" });
+type Props = HTMLAttributes<'a'> & {
+  size?: VariantProps<typeof ButtonVariants.button>['size'];
+};
 
-const { class: className, size = "md", ...rest } = Astro.props;
+export const paginationNext = tv({ base: 'group gap-1' });
+
+const { class: className, size = 'md', ...rest } = Astro.props;
 ---
 
 <PaginationLink
   aria-label="Go to next page"
   size={size}
   class={paginationNext({ class: className })}
-  data-slot="pagination-next"
   {...rest}
+  data-slot="pagination-next"
 >
   <slot />
   <slot name="icon">

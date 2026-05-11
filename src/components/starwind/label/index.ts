@@ -1,4 +1,4 @@
-import Label, { label } from "./Label.astro";
+import Label, { label } from './Label.astro';
 
 const LabelVariants = { label };
 
