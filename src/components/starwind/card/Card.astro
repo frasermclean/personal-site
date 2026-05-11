@@ -1,14 +1,29 @@
 ---
 import type { HTMLTag, Polymorphic } from 'astro/types';
-import { tv } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }>;
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & VariantProps<typeof card>;
 
-export const card = tv({ base: 'bg-card text-card-foreground rounded-2xl border shadow-sm' });
+export const card = tv({
+  base: [
+    'bg-card text-card-foreground group/card ring-border flex flex-col rounded-xl ring-1',
+    'has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0',
+    '*:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl'
+  ],
+  variants: {
+    size: {
+      default: 'gap-6 py-6',
+      sm: 'gap-4 py-4 text-sm'
+    }
+  },
+  defaultVariants: {
+    size: 'default'
+  }
+});
 
-const { as: Tag = 'div', class: className, ...rest } = Astro.props;
+const { as: Tag = 'section', class: className, size, ...rest } = Astro.props;
 ---
 
-<Tag class={card({ class: className })} data-slot="card" {...rest}>
+<Tag class={card({ size, class: className })} data-size={size ?? 'default'} {...rest} data-slot="card">
   <slot />
 </Tag>
