@@ -1,6 +1,5 @@
 import { handleGithubCallback } from '@/actions/handle-github-callback';
-import { AuthMessage } from '@/constants';
-import { getAndClearReturnToCookie } from '@/lib/auth';
+import { AuthMessage, getAndClearReturnToCookie } from '@/lib/auth';
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async (context) => {

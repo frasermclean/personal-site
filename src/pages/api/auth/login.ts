@@ -1,6 +1,5 @@
 import { initiateGithubLogin } from '@/actions/initiate-github-login';
-import { AuthMessage } from '@/constants';
-import { setReturnToCookie } from '@/lib/auth';
+import { AuthMessage, setReturnToCookie } from '@/lib/auth';
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async (context) => {

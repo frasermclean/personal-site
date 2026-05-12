@@ -12,6 +12,15 @@ export interface UserSession {
   expiresAt: number;
 }
 
+// auth messages
+export enum AuthMessage {
+  LoginSuccess = 'login-success',
+  LogoutSuccess = 'logout-success',
+  GitHubLoginError = 'github-login-error',
+  GitHubParamsError = 'github-params-error',
+  GitHubCallbackError = 'github-callback-error'
+}
+
 const SESSION_COOKIE_NAME = 'session_id';
 const OAUTH_STATE_COOKIE_NAME = 'github_oauth_state';
 const RETURN_TO_COOKIE_NAME = 'return_to';

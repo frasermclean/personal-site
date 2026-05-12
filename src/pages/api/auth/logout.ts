@@ -1,5 +1,4 @@
-import { AuthMessage } from '@/constants';
-import { clearSessionCookie, deleteUserSession, getSessionId } from '@/lib/auth';
+import { AuthMessage, clearSessionCookie, deleteUserSession, getSessionId } from '@/lib/auth';
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async (context) => {
