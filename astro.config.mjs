@@ -45,7 +45,10 @@ export default defineConfig({
         access: 'secret',
         default: '1x0000000000000000000000000000000AA'
       }),
-      WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' })
+      WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', default: '' }),
+      GITHUB_CLIENT_ID: envField.string({ context: 'server', access: 'public', default: '' }),
+      GITHUB_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret', default: '' }),
+      GITHUB_REDIRECT_URI: envField.string({ context: 'server', access: 'public', default: '' })
     }
   },
   integrations: [sitemap({ customSitemaps: [`${SITE_URL}/sitemap-posts.xml`] }), mdx()],
