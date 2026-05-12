@@ -94,6 +94,36 @@ export function clearOauthStateCookie(cookies: AstroCookies, url: URL): void {
   });
 }
 
+export const RETURN_TO_COOKIE_NAME = 'return_to';
+const RETURN_TO_MAX_AGE_SECONDS = 10 * 60; // 10 minutes
+
+export function setReturnToCookie(cookies: AstroCookies, returnTo: string, url: URL): void {
+  cookies.set(RETURN_TO_COOKIE_NAME, returnTo, {
+    httpOnly: true,
+    secure: isSecureCookieRequest(url),
+    sameSite: 'lax',
+    maxAge: RETURN_TO_MAX_AGE_SECONDS,
+    path: '/'
+  });
+}
+
+export function getAndClearReturnTo(cookies: AstroCookies, url: URL): string {
+  const returnTo = cookies.get(RETURN_TO_COOKIE_NAME)?.value;
+  cookies.delete(RETURN_TO_COOKIE_NAME, {
+    httpOnly: true,
+    secure: isSecureCookieRequest(url),
+    sameSite: 'lax',
+    path: '/'
+  });
+
+  // Only allow relative paths to prevent open redirect
+  if (returnTo && returnTo.startsWith('/') && !returnTo.startsWith('//')) {
+    return returnTo;
+  }
+
+  return '/';
+}
+
 function isSecureCookieRequest(url: URL): boolean {
   return url.protocol === 'https:';
 }

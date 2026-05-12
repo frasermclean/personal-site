@@ -17,6 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avata
 
 const currentUser = Astro.locals.currentUser;
 const displayName = currentUser?.name ?? currentUser?.github_username ?? '';
+const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathname)}`;
 ---
 
 <Dropdown>
@@ -64,7 +65,7 @@ const displayName = currentUser?.name ?? currentUser?.github_username ?? '';
           Logout
         </DropdownItem>
       ) : (
-        <DropdownItem as="a" href="/api/auth/login">
+        <DropdownItem as="a" href={loginHref}>
           <LoginIcon width={28} stroke-width={1.25} />
           Login
         </DropdownItem>
