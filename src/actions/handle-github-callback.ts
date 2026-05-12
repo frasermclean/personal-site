@@ -1,5 +1,6 @@
 import { exchangeCodeForToken, fetchGithubUser, type UserSession } from '@/lib/github-oauth';
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
+import { env } from 'cloudflare:workers';
 
 /**
  * Handle GitHub OAuth callback
@@ -49,8 +50,7 @@ export async function handleGithubCallback(code: string, state: string, context?
     };
 
     // Store session in KV (SESSION binding)
-    // This will be available via context.locals or Cloudflare runtime
-    const SESSION = context.locals?.runtime?.env?.SESSION;
+    const SESSION = env.SESSION;
     if (SESSION) {
       await SESSION.put(sessionId, JSON.stringify(session), {
         expirationTtl: 30 * 24 * 60 * 60 // 30 days

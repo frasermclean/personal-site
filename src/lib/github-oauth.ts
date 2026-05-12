@@ -61,11 +61,22 @@ export async function exchangeCodeForToken(
     })
   });
 
-  if (!response.ok) {
-    throw new Error(`Failed to exchange code for token: ${response.statusText}`);
+  const payload = (await response.json()) as {
+    access_token?: string;
+    token_type?: string;
+    error?: string;
+    error_description?: string;
+  };
+
+  if (!response.ok || !payload.access_token) {
+    const details = payload.error_description || payload.error || response.statusText;
+    throw new Error(`Failed to exchange code for token: ${details}`);
   }
 
-  return response.json();
+  return {
+    access_token: payload.access_token,
+    token_type: payload.token_type ?? 'bearer'
+  };
 }
 
 /**
@@ -74,7 +85,9 @@ export async function exchangeCodeForToken(
 export async function fetchGithubUser(accessToken: string): Promise<GithubUser> {
   const response = await fetch('https://api.github.com/user', {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Accept: 'application/vnd.github+json',
+      Authorization: `token ${accessToken}`,
+      'User-Agent': 'frasermclean-site-oauth',
       'X-GitHub-Api-Version': '2022-11-28'
     }
   });
