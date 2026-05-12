@@ -69,6 +69,10 @@
       "version": "1.3.2"
     },
     {
+      "name": "toast",
+      "version": "1.0.1"
+    },
+    {
       "name": "tooltip",
       "version": "1.5.0"
     }
