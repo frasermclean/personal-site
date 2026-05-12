@@ -1,5 +1,5 @@
 ---
-import { AuthMessage } from '@/constants';
+import { AuthMessage } from '@/lib/auth/auth-types';
 
 const authParam = Astro.url.searchParams.get('auth') as AuthMessage | null;
 
