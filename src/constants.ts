@@ -11,3 +11,12 @@ export const PROJECTS_PATH = '/projects';
 export const POSTS_PATH = '/posts';
 export const CONTACT_PATH = '/contact';
 export const TAGS_PATH = '/tags';
+
+// auth messages
+export enum AuthMessage {
+  LoginSuccess = 'login-success',
+  LogoutSuccess = 'logout-success',
+  GitHubLoginError = 'github-login-error',
+  GitHubParamsError = 'github-params-error',
+  GitHubCallbackError = 'github-callback-error'
+}

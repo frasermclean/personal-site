@@ -1,0 +1,54 @@
+---
+import { AuthMessage } from '@/constants';
+
+const authParam = Astro.url.searchParams.get('auth') as AuthMessage | null;
+
+const messages: Record<AuthMessage, { status: 'error' | 'success'; text: string }> = {
+  [AuthMessage.LoginSuccess]: {
+    text: 'Logged in successfully',
+    status: 'success'
+  },
+  [AuthMessage.LogoutSuccess]: {
+    text: 'Logged out successfully',
+    status: 'success'
+  },
+  [AuthMessage.GitHubLoginError]: {
+    text: 'GitHub login failure.',
+    status: 'error'
+  },
+  [AuthMessage.GitHubParamsError]: {
+    text: 'GitHub login parameters missing.',
+    status: 'error'
+  },
+  [AuthMessage.GitHubCallbackError]: {
+    text: 'GitHub callback failure.',
+    status: 'error'
+  }
+};
+
+const message = authParam ? messages[authParam] : null;
+---
+
+{message && <div id="auth-notifications" data-text={message.text} data-status={message.status} />}
+
+<script>
+  import { toast } from './starwind/toast';
+
+  const element = document.getElementById('auth-notifications');
+
+  const text = element?.dataset.text;
+  const status = element?.dataset.status;
+
+  if (text) {
+    if (status === 'success') {
+      toast.success(text);
+    } else {
+      toast.error(text);
+    }
+  }
+
+  // clear the auth param from the URL so the toast doesn't show on page refresh
+  const url = new URL(window.location.href);
+  url.searchParams.delete('auth');
+  window.history.replaceState({}, '', url);
+</script>

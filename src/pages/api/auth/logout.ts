@@ -1,3 +1,4 @@
+import { AuthMessage } from '@/constants';
 import { clearSessionCookie, deleteUserSession, getSessionId } from '@/lib/auth';
 import type { APIRoute } from 'astro';
 
@@ -9,5 +10,5 @@ export const GET: APIRoute = async (context) => {
   }
 
   clearSessionCookie(context.cookies, context.url);
-  return context.redirect('/');
+  return context.redirect(`/?auth=${AuthMessage.LogoutSuccess}`);
 };
