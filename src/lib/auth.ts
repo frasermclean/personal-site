@@ -1,6 +1,16 @@
-import type { UserSession } from '@/lib/github-oauth';
 import type { AstroCookies } from 'astro';
 import { env } from 'cloudflare:workers';
+
+export interface UserSession {
+  id: string;
+  github_id: number;
+  github_username: string;
+  name: string | null;
+  avatar_url: string;
+  email: string | null;
+  created_at: number;
+  expires_at: number;
+}
 
 export type CurrentUser = UserSession;
 

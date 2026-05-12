@@ -1,3 +1,6 @@
+import type { components } from '@octokit/openapi-types';
+import { generateState, GitHub } from 'arctic';
+
 /**
  * OAuth utilities for GitHub authentication
  */
@@ -5,17 +8,8 @@
 /**
  * Generate a cryptographically random string for OAuth state parameter
  */
-export function generateRandomState(length = 32): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const randomValues = new Uint8Array(length);
-  crypto.getRandomValues(randomValues);
-
-  for (let i = 0; i < length; i++) {
-    result += chars[randomValues[i] % chars.length];
-  }
-
-  return result;
+export function generateRandomState(): string {
+  return generateState();
 }
 
 /**
@@ -23,19 +17,15 @@ export function generateRandomState(length = 32): string {
  */
 export function buildGithubAuthUrl(
   clientId: string,
+  clientSecret: string,
   redirectUri: string,
   state: string,
   scopes = ['user:email']
 ): string {
-  const params = new URLSearchParams({
-    client_id: clientId,
-    redirect_uri: redirectUri,
-    state,
-    scope: scopes.join(' '),
-    allow_signup: 'true'
-  });
-
-  return `https://github.com/login/oauth/authorize?${params.toString()}`;
+  const github = new GitHub(clientId, clientSecret, redirectUri);
+  const authUrl = github.createAuthorizationURL(state, scopes);
+  authUrl.searchParams.set('allow_signup', 'true');
+  return authUrl.toString();
 }
 
 /**
@@ -47,42 +37,19 @@ export async function exchangeCodeForToken(
   code: string,
   redirectUri: string
 ): Promise<{ access_token: string; token_type: string }> {
-  const response = await fetch('https://github.com/login/oauth/access_token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code,
-      redirect_uri: redirectUri
-    })
-  });
-
-  const payload = (await response.json()) as {
-    access_token?: string;
-    token_type?: string;
-    error?: string;
-    error_description?: string;
-  };
-
-  if (!response.ok || !payload.access_token) {
-    const details = payload.error_description || payload.error || response.statusText;
-    throw new Error(`Failed to exchange code for token: ${details}`);
-  }
+  const github = new GitHub(clientId, clientSecret, redirectUri);
+  const tokens = await github.validateAuthorizationCode(code);
 
   return {
-    access_token: payload.access_token,
-    token_type: payload.token_type ?? 'bearer'
+    access_token: tokens.accessToken(),
+    token_type: tokens.tokenType() || 'bearer'
   };
 }
 
 /**
  * Fetch GitHub user profile
  */
-export async function fetchGithubUser(accessToken: string): Promise<GithubUser> {
+export async function fetchGithubUser(accessToken: string): Promise<GitHubUser> {
   const response = await fetch('https://api.github.com/user', {
     headers: {
       Accept: 'application/vnd.github+json',
@@ -99,24 +66,4 @@ export async function fetchGithubUser(accessToken: string): Promise<GithubUser> 
   return response.json();
 }
 
-export interface GithubUser {
-  id: number;
-  login: string;
-  name: string | null;
-  avatar_url: string;
-  bio: string | null;
-  company: string | null;
-  blog: string | null;
-  email: string | null;
-}
-
-export interface UserSession {
-  id: string;
-  github_id: number;
-  github_username: string;
-  name: string | null;
-  avatar_url: string;
-  email: string | null;
-  created_at: number;
-  expires_at: number;
-}
+export type GitHubUser = components['schemas']['private-user'];

@@ -1,5 +1,11 @@
-import { clearOauthStateCookie, OAUTH_STATE_COOKIE_NAME, setSessionCookie, storeUserSession } from '@/lib/auth';
-import { exchangeCodeForToken, fetchGithubUser, type UserSession } from '@/lib/github-oauth';
+import {
+  clearOauthStateCookie,
+  OAUTH_STATE_COOKIE_NAME,
+  setSessionCookie,
+  storeUserSession,
+  type UserSession
+} from '@/lib/auth';
+import { exchangeCodeForToken, fetchGithubUser } from '@/lib/github-oauth';
 import type { APIContext } from 'astro';
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
 
