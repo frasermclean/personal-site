@@ -14,9 +14,9 @@ const THIRTY_MINUTES_IN_SECONDS = 60 * 30;
 export const onRequest = defineMiddleware(async (context, next) => {
   const { request, url } = context;
 
-  context.locals.currentUser = await getCurrentUser(context.cookies);
+  context.locals.user = await getCurrentUser(context.cookies);
 
-  if (getSessionId(context.cookies) && !context.locals.currentUser) {
+  if (getSessionId(context.cookies) && !context.locals.user) {
     clearSessionCookie(context.cookies, url);
   }
 
@@ -38,7 +38,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = url.pathname;
 
   // if user is logged in, cache only on the browser with private caching
-  if (context.locals.currentUser) {
+  if (context.locals.user) {
     response.headers.set('Cache-Control', 'private, no-store');
     response.headers.delete('CDN-Cache-Control');
     return response;

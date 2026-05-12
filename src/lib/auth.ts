@@ -3,47 +3,47 @@ import { env } from 'cloudflare:workers';
 
 export interface UserSession {
   id: string;
-  github_id: number;
-  github_username: string;
+  githubId: number;
+  githubUsername: string;
   name: string | null;
-  avatar_url: string;
+  avatarUrl: string;
   email: string | null;
-  created_at: number;
-  expires_at: number;
+  createdAt: number;
+  expiresAt: number;
 }
 
-export type CurrentUser = UserSession;
-
-export const SESSION_COOKIE_NAME = 'session_id';
-export const OAUTH_STATE_COOKIE_NAME = 'github_oauth_state';
-export const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
-export const OAUTH_STATE_MAX_AGE_SECONDS = 10 * 60;
+const SESSION_COOKIE_NAME = 'session_id';
+const OAUTH_STATE_COOKIE_NAME = 'github_oauth_state';
+const RETURN_TO_COOKIE_NAME = 'return_to';
+const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
+const OAUTH_STATE_MAX_AGE_SECONDS = 10 * 60;
+const RETURN_TO_MAX_AGE_SECONDS = OAUTH_STATE_MAX_AGE_SECONDS;
 
 export function getSessionId(cookies: Pick<AstroCookies, 'get'>): string | undefined {
   return cookies.get(SESSION_COOKIE_NAME)?.value;
 }
 
 export async function storeUserSession(session: UserSession): Promise<void> {
-  await env.SESSION.put(session.id, JSON.stringify(session), {
+  await getSessionStore().put(session.id, JSON.stringify(session), {
     expirationTtl: SESSION_MAX_AGE_SECONDS
   });
 }
 
 export async function deleteUserSession(sessionId: string): Promise<void> {
-  await env.SESSION.delete(sessionId);
+  await getSessionStore().delete(sessionId);
 }
 
-export async function getUserSession(sessionId: string): Promise<CurrentUser | null> {
-  const rawSession = await env.SESSION.get(sessionId);
+export async function getUserSession(sessionId: string): Promise<UserSession | null> {
+  const sessionJson = await getSessionStore().get(sessionId);
 
-  if (!rawSession) {
+  if (!sessionJson) {
     return null;
   }
 
   try {
-    const session = JSON.parse(rawSession) as UserSession;
+    const session = JSON.parse(sessionJson) as UserSession;
 
-    if (session.expires_at <= Date.now()) {
+    if (session.expiresAt <= Date.now()) {
       await deleteUserSession(sessionId);
       return null;
     }
@@ -56,7 +56,7 @@ export async function getUserSession(sessionId: string): Promise<CurrentUser | n
   }
 }
 
-export async function getCurrentUser(cookies: Pick<AstroCookies, 'get'>): Promise<CurrentUser | null> {
+export async function getCurrentUser(cookies: Pick<AstroCookies, 'get'>): Promise<UserSession | null> {
   const sessionId = getSessionId(cookies);
 
   if (!sessionId) {
@@ -67,64 +67,32 @@ export async function getCurrentUser(cookies: Pick<AstroCookies, 'get'>): Promis
 }
 
 export function setSessionCookie(cookies: AstroCookies, sessionId: string, url: URL): void {
-  cookies.set(SESSION_COOKIE_NAME, sessionId, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    maxAge: SESSION_MAX_AGE_SECONDS,
-    path: '/'
-  });
+  setCookie(cookies, SESSION_COOKIE_NAME, sessionId, url, SESSION_MAX_AGE_SECONDS);
 }
 
 export function clearSessionCookie(cookies: AstroCookies, url: URL): void {
-  cookies.delete(SESSION_COOKIE_NAME, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    path: '/'
-  });
+  clearCookie(cookies, SESSION_COOKIE_NAME, url);
 }
 
 export function setOauthStateCookie(cookies: AstroCookies, state: string, url: URL): void {
-  cookies.set(OAUTH_STATE_COOKIE_NAME, state, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    maxAge: OAUTH_STATE_MAX_AGE_SECONDS,
-    path: '/'
-  });
+  setCookie(cookies, OAUTH_STATE_COOKIE_NAME, state, url, OAUTH_STATE_MAX_AGE_SECONDS);
+}
+
+export function getOauthStateCookie(cookies: AstroCookies): string | undefined {
+  return cookies.get(OAUTH_STATE_COOKIE_NAME)?.value;
 }
 
 export function clearOauthStateCookie(cookies: AstroCookies, url: URL): void {
-  cookies.delete(OAUTH_STATE_COOKIE_NAME, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    path: '/'
-  });
+  clearCookie(cookies, OAUTH_STATE_COOKIE_NAME, url);
 }
-
-export const RETURN_TO_COOKIE_NAME = 'return_to';
-const RETURN_TO_MAX_AGE_SECONDS = 10 * 60; // 10 minutes
 
 export function setReturnToCookie(cookies: AstroCookies, returnTo: string, url: URL): void {
-  cookies.set(RETURN_TO_COOKIE_NAME, returnTo, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    maxAge: RETURN_TO_MAX_AGE_SECONDS,
-    path: '/'
-  });
+  setCookie(cookies, RETURN_TO_COOKIE_NAME, returnTo, url, RETURN_TO_MAX_AGE_SECONDS);
 }
 
-export function getAndClearReturnTo(cookies: AstroCookies, url: URL): string {
+export function getAndClearReturnToCookie(cookies: AstroCookies, url: URL): string {
   const returnTo = cookies.get(RETURN_TO_COOKIE_NAME)?.value;
-  cookies.delete(RETURN_TO_COOKIE_NAME, {
-    httpOnly: true,
-    secure: isSecureCookieRequest(url),
-    sameSite: 'lax',
-    path: '/'
-  });
+  clearCookie(cookies, RETURN_TO_COOKIE_NAME, url);
 
   // Only allow relative paths to prevent open redirect
   if (returnTo && returnTo.startsWith('/') && !returnTo.startsWith('//')) {
@@ -134,6 +102,24 @@ export function getAndClearReturnTo(cookies: AstroCookies, url: URL): string {
   return '/';
 }
 
-function isSecureCookieRequest(url: URL): boolean {
-  return url.protocol === 'https:';
+function getSessionStore(): KVNamespace {
+  return env.SESSION;
+}
+
+function setCookie(cookies: AstroCookies, name: string, value: string, url: URL, maxAge: number): void {
+  cookies.set(name, value, getCookieOptions(url, maxAge));
+}
+
+function clearCookie(cookies: AstroCookies, name: string, url: URL): void {
+  cookies.delete(name, getCookieOptions(url));
+}
+
+function getCookieOptions(url: URL, maxAge?: number) {
+  return {
+    httpOnly: true,
+    secure: url.protocol === 'https:',
+    sameSite: 'lax' as const,
+    path: '/',
+    ...(maxAge ? { maxAge } : {})
+  };
 }

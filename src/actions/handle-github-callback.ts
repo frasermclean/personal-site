@@ -1,6 +1,6 @@
 import {
   clearOauthStateCookie,
-  OAUTH_STATE_COOKIE_NAME,
+  getOauthStateCookie,
   setSessionCookie,
   storeUserSession,
   type UserSession
@@ -19,7 +19,7 @@ export async function handleGithubCallback(code: string, state: string, context:
   }
 
   // Validate state parameter
-  const storedState = context.cookies.get(OAUTH_STATE_COOKIE_NAME)?.value;
+  const storedState = getOauthStateCookie(context.cookies);
   if (!storedState || storedState !== state) {
     throw new Error('State parameter mismatch');
   }
@@ -43,13 +43,13 @@ export async function handleGithubCallback(code: string, state: string, context:
     const sessionId = crypto.randomUUID();
     const session: UserSession = {
       id: sessionId,
-      github_id: user.id,
-      github_username: user.login,
+      githubId: user.id,
+      githubUsername: user.login,
       name: user.name,
-      avatar_url: user.avatar_url,
+      avatarUrl: user.avatar_url,
       email: user.email,
-      created_at: now,
-      expires_at: now + 30 * 24 * 60 * 60 * 1000 // 30 days
+      createdAt: now,
+      expiresAt: now + 30 * 24 * 60 * 60 * 1000 // 30 days
     };
 
     await storeUserSession(session);
@@ -61,7 +61,7 @@ export async function handleGithubCallback(code: string, state: string, context:
         id: user.id,
         username: user.login,
         name: user.name,
-        avatar_url: user.avatar_url,
+        avatarUrl: user.avatar_url,
         email: user.email
       }
     };

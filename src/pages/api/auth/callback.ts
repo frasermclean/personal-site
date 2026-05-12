@@ -1,6 +1,6 @@
 import { handleGithubCallback } from '@/actions/handle-github-callback';
 import { AuthMessage } from '@/constants';
-import { getAndClearReturnTo } from '@/lib/auth';
+import { getAndClearReturnToCookie } from '@/lib/auth';
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async (context) => {
@@ -13,7 +13,7 @@ export const GET: APIRoute = async (context) => {
 
   try {
     await handleGithubCallback(code, state, context);
-    const returnTo = getAndClearReturnTo(context.cookies, context.url);
+    const returnTo = getAndClearReturnToCookie(context.cookies, context.url);
     const redirectUrl = new URL(returnTo, context.url.origin);
     redirectUrl.searchParams.set('auth', AuthMessage.LoginSuccess);
     return context.redirect(redirectUrl.toString());

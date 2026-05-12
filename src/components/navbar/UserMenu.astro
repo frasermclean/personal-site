@@ -15,8 +15,8 @@ import LoginIcon from '@tabler/icons/outline/login.svg';
 import LogoutIcon from '@tabler/icons/outline/logout.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
 
-const currentUser = Astro.locals.currentUser;
-const displayName = currentUser?.name ?? currentUser?.github_username ?? '';
+const user = Astro.locals.user;
+const displayName = user?.name ?? user?.githubUsername ?? '';
 const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathname)}`;
 ---
 
@@ -24,9 +24,9 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
   <DropdownTrigger asChild>
     <Button size="icon" class="rounded-full" aria-label="User menu">
       {
-        currentUser ? (
+        user ? (
           <Avatar size="sm">
-            <AvatarImage src={currentUser.avatar_url} alt={displayName} />
+            <AvatarImage src={user.avatarUrl} alt={displayName} />
             <AvatarFallback>{displayName?.[0]}</AvatarFallback>
           </Avatar>
         ) : (
@@ -59,7 +59,7 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
     </DropdownItem>
 
     {
-      currentUser ? (
+      user ? (
         <DropdownItem as="a" href="/api/auth/logout">
           <LogoutIcon width={28} stroke-width={1.25} />
           Logout

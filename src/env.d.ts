@@ -3,6 +3,6 @@
 
 declare namespace App {
   interface Locals {
-    currentUser: import('./lib/auth').CurrentUser | null;
+    user: import('./lib/auth').UserSession | null;
   }
 }
