@@ -16,8 +16,7 @@ const SESSION_COOKIE_NAME = 'session_id';
 const OAUTH_STATE_COOKIE_NAME = 'github_oauth_state';
 const RETURN_TO_COOKIE_NAME = 'return_to';
 const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
-const OAUTH_STATE_MAX_AGE_SECONDS = 10 * 60;
-const RETURN_TO_MAX_AGE_SECONDS = OAUTH_STATE_MAX_AGE_SECONDS;
+const TEN_MINUTES_IN_SECONDS = 10 * 60;
 
 export function getSessionId(cookies: Pick<AstroCookies, 'get'>): string | undefined {
   return cookies.get(SESSION_COOKIE_NAME)?.value;
@@ -75,7 +74,7 @@ export function clearSessionCookie(cookies: AstroCookies, url: URL): void {
 }
 
 export function setOauthStateCookie(cookies: AstroCookies, state: string, url: URL): void {
-  setCookie(cookies, OAUTH_STATE_COOKIE_NAME, state, url, OAUTH_STATE_MAX_AGE_SECONDS);
+  setCookie(cookies, OAUTH_STATE_COOKIE_NAME, state, url, TEN_MINUTES_IN_SECONDS);
 }
 
 export function getOauthStateCookie(cookies: AstroCookies): string | undefined {
@@ -87,7 +86,7 @@ export function clearOauthStateCookie(cookies: AstroCookies, url: URL): void {
 }
 
 export function setReturnToCookie(cookies: AstroCookies, returnTo: string, url: URL): void {
-  setCookie(cookies, RETURN_TO_COOKIE_NAME, returnTo, url, RETURN_TO_MAX_AGE_SECONDS);
+  setCookie(cookies, RETURN_TO_COOKIE_NAME, returnTo, url, TEN_MINUTES_IN_SECONDS);
 }
 
 export function getAndClearReturnToCookie(cookies: AstroCookies, url: URL): string {
