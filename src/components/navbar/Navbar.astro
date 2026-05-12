@@ -1,9 +1,8 @@
 ---
-import MobileMenu from './MobileMenu.astro';
 import NavigationLinks from './NavigationLinks.astro';
 import SiteLogo from './SiteLogo.astro';
 import SocialLinks from './SocialLinks.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import UserMenu from './UserMenu.astro';
 ---
 
 <header
@@ -13,8 +12,7 @@ import ThemeToggle from './ThemeToggle.astro';
     <SiteLogo />
     <NavigationLinks class="hidden md:flex" />
     <div class="grow"></div>
-    <SocialLinks class="hidden items-center gap-2 md:flex" />
-    <ThemeToggle />
-    <MobileMenu />
+    <SocialLinks class="flex items-center gap-2" />
+    <UserMenu />
   </div>
 </header>

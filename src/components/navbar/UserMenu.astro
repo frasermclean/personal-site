@@ -1,0 +1,83 @@
+---
+import { Button } from '@/components/starwind/button';
+import {
+  Dropdown,
+  DropdownContent,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownTrigger
+} from '@/components/starwind/dropdown';
+import MenuIcon from '@tabler/icons/outline/menu-2.svg';
+import MoonIcon from '@tabler/icons/outline/moon.svg';
+import SunIcon from '@tabler/icons/outline/sun.svg';
+import { links } from './NavigationLinks.astro';
+import LoginIcon from '@tabler/icons/outline/login.svg';
+---
+
+<Dropdown>
+  <DropdownTrigger asChild>
+    <Button size="sm" aria-label="Mobile menu">
+      <MenuIcon />
+      <span class="hidden sm:block">Menu</span>
+    </Button>
+  </DropdownTrigger>
+  <DropdownContent align="end">
+    <nav class="sm:hidden">
+      <ul>
+        {
+          links.map(({ href, text, Icon }) => (
+            <li>
+              <DropdownItem as="a" href={href}>
+                {Icon && <Icon width={28} stroke-width={1.25} />}
+                {text}
+              </DropdownItem>
+            </li>
+          ))
+        }
+      </ul>
+
+      <DropdownSeparator />
+    </nav>
+    <DropdownItem as="button" id="theme-button" class="w-full">
+      <MoonIcon class="hidden dark:block" />
+      <SunIcon class="block dark:hidden" />
+      Theme
+    </DropdownItem>
+    <DropdownItem as="a" href="/login">
+      <LoginIcon width={28} stroke-width={1.25} />
+      Login
+    </DropdownItem>
+  </DropdownContent>
+</Dropdown>
+
+<script>
+  updateDom(getPreferrredTheme()); // set initial theme based on user preference
+
+  // add click event listener to the button
+  const button = document.getElementById('theme-button');
+  button?.addEventListener('click', () => {
+    const theme = getPreferrredTheme() === 'dark' ? 'light' : 'dark'; // toggle theme
+    localStorage.setItem('theme', theme);
+    updateDom(theme);
+    umami.track('theme-change', { theme }); // track theme change event
+  });
+
+  function getPreferrredTheme(): 'light' | 'dark' {
+    // check localStorage first
+    const storedTheme = localStorage?.getItem('theme');
+    if (storedTheme) {
+      return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'light';
+    }
+
+    // read the user's system preference (and default to light if no match)
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function updateDom(theme: 'light' | 'dark') {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+</script>
