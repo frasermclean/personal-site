@@ -1,15 +1,12 @@
 import { env } from 'cloudflare:workers';
+import { daysToSeconds } from '../time-seconds';
 import type { UserSession } from './auth-types';
 
-const SESSION_COOKIE_NAME = 'session_id';
-const OAUTH_STATE_COOKIE_NAME = 'github_oauth_state';
-const RETURN_TO_COOKIE_NAME = 'return_to';
-const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
-const TEN_MINUTES_IN_SECONDS = 10 * 60;
+const SESSION_MAX_AGE = daysToSeconds(30);
 
 export async function storeUserSession(session: UserSession): Promise<void> {
   await env.SESSION.put(session.id, JSON.stringify(session), {
-    expirationTtl: SESSION_MAX_AGE_SECONDS
+    expirationTtl: SESSION_MAX_AGE
   });
 }
 
