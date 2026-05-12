@@ -1,4 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
+import { getSessionId } from './lib/auth/auth-cookies';
+import { getUserSession } from './lib/auth/auth-session';
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const FIFTEEN_MINUTES_IN_SECONDS = 60 * 15;
@@ -12,6 +14,9 @@ const THIRTY_MINUTES_IN_SECONDS = 60 * 30;
  */
 export const onRequest = defineMiddleware(async (context, next) => {
   const { request, url } = context;
+
+  const sessionId = getSessionId(context.cookies);
+  context.locals.user = sessionId ? await getUserSession(sessionId) : null;
 
   const response = await next();
 
@@ -30,15 +35,23 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const method = request.method.toUpperCase();
   const pathname = url.pathname;
 
+  // if user is logged in, cache only on the browser with private caching
+  if (context.locals.user) {
+    response.headers.set('Cache-Control', 'private, no-store');
+    response.headers.delete('CDN-Cache-Control');
+    return response;
+  }
+
   // mutating requests should never be cached
   if (method !== 'GET' && method !== 'HEAD') {
     response.headers.set('Cache-Control', 'no-store');
     return response;
   }
 
-  // astro actions should never be cached
-  if (pathname.startsWith('/_actions')) {
+  // astro actions and API routes should never be cached
+  if (pathname.startsWith('/_actions') || pathname.startsWith('/api/')) {
     response.headers.set('Cache-Control', 'no-store');
+    response.headers.delete('CDN-Cache-Control');
     return response;
   }
 
