@@ -32,28 +32,28 @@ export function buildGithubAuthUrl(
  * Exchange OAuth code for access token
  */
 export async function exchangeCodeForToken(
+  code: string,
   clientId: string,
   clientSecret: string,
-  code: string,
   redirectUri: string
-): Promise<{ access_token: string; token_type: string }> {
+): Promise<{ accessToken: string; tokenType: string }> {
   const github = new GitHub(clientId, clientSecret, redirectUri);
   const tokens = await github.validateAuthorizationCode(code);
 
   return {
-    access_token: tokens.accessToken(),
-    token_type: tokens.tokenType() || 'bearer'
+    accessToken: tokens.accessToken(),
+    tokenType: tokens.tokenType()
   };
 }
 
 /**
  * Fetch GitHub user profile
  */
-export async function fetchGithubUser(accessToken: string): Promise<GitHubUser> {
+export async function fetchGithubUser(accessToken: string, tokenType: string): Promise<GitHubUser> {
   const response = await fetch('https://api.github.com/user', {
     headers: {
       Accept: 'application/vnd.github+json',
-      Authorization: `token ${accessToken}`,
+      Authorization: `${tokenType} ${accessToken}`,
       'User-Agent': 'frasermclean-site-oauth',
       'X-GitHub-Api-Version': '2022-11-28'
     }

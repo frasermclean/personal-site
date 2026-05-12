@@ -23,12 +23,10 @@ export function setOauthStateCookie(cookies: AstroCookies, state: string, url: U
   setCookie(cookies, OAUTH_STATE_COOKIE_NAME, state, url, STATE_MAX_AGE);
 }
 
-export function getOauthStateCookie(cookies: AstroCookies): string | undefined {
-  return cookies.get(OAUTH_STATE_COOKIE_NAME)?.value;
-}
-
-export function clearOauthStateCookie(cookies: AstroCookies, url: URL): void {
+export function getAndClearOauthStateCookie(cookies: AstroCookies, url: URL): string | undefined {
+  const state = cookies.get(OAUTH_STATE_COOKIE_NAME)?.value;
   clearCookie(cookies, OAUTH_STATE_COOKIE_NAME, url);
+  return state;
 }
 
 export function setReturnToCookie(cookies: AstroCookies, returnTo: string, url: URL): void {
