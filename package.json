@@ -3,7 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "predev": "npm run cf:types",
     "dev": "astro dev",
+    "prebuild": "npm run cf:types",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
