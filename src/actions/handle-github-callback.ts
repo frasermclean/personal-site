@@ -1,28 +1,25 @@
+import { clearOauthStateCookie, OAUTH_STATE_COOKIE_NAME, setSessionCookie, storeUserSession } from '@/lib/auth';
 import { exchangeCodeForToken, fetchGithubUser, type UserSession } from '@/lib/github-oauth';
+import type { APIContext } from 'astro';
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
-import { env } from 'cloudflare:workers';
 
 /**
  * Handle GitHub OAuth callback
  * Exchanges authorization code for access token and creates user session
  */
-export async function handleGithubCallback(code: string, state: string, context?: any) {
+export async function handleGithubCallback(code: string, state: string, context: Pick<APIContext, 'cookies' | 'url'>) {
   if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET || !GITHUB_REDIRECT_URI) {
     throw new Error('GitHub OAuth credentials not configured');
   }
 
   // Validate state parameter
-  if (!context?.cookies) {
-    throw new Error('No cookies available');
-  }
-
-  const storedState = context.cookies.get('github_oauth_state')?.value;
+  const storedState = context.cookies.get(OAUTH_STATE_COOKIE_NAME)?.value;
   if (!storedState || storedState !== state) {
     throw new Error('State parameter mismatch');
   }
 
   // Clear the state cookie
-  context.cookies.delete('github_oauth_state');
+  clearOauthStateCookie(context.cookies, context.url);
 
   try {
     // Exchange code for access token
@@ -49,22 +46,8 @@ export async function handleGithubCallback(code: string, state: string, context?
       expires_at: now + 30 * 24 * 60 * 60 * 1000 // 30 days
     };
 
-    // Store session in KV (SESSION binding)
-    const SESSION = env.SESSION;
-    if (SESSION) {
-      await SESSION.put(sessionId, JSON.stringify(session), {
-        expirationTtl: 30 * 24 * 60 * 60 // 30 days
-      });
-    }
-
-    // Set session cookie
-    context.cookies.set('session_id', sessionId, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      maxAge: 30 * 24 * 60 * 60, // 30 days
-      path: '/'
-    });
+    await storeUserSession(session);
+    setSessionCookie(context.cookies, sessionId, context.url);
 
     return {
       success: true,

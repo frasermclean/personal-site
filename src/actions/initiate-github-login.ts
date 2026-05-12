@@ -1,11 +1,13 @@
+import { setOauthStateCookie } from '@/lib/auth';
 import { buildGithubAuthUrl, generateRandomState } from '@/lib/github-oauth';
+import type { APIContext } from 'astro';
 import { GITHUB_CLIENT_ID, GITHUB_REDIRECT_URI } from 'astro:env/server';
 
 /**
  * Initiate GitHub OAuth login flow
  * Generates state token and returns authorization URL
  */
-export async function initiateGithubLogin(context?: any) {
+export async function initiateGithubLogin(context: Pick<APIContext, 'cookies' | 'url'>) {
   if (!GITHUB_CLIENT_ID || !GITHUB_REDIRECT_URI) {
     throw new Error('GitHub OAuth credentials not configured');
   }
@@ -15,15 +17,7 @@ export async function initiateGithubLogin(context?: any) {
 
   // Store state in a cookie (browser will send it back with callback request)
   // We'll validate it during callback
-  if (context?.cookies) {
-    context.cookies.set('github_oauth_state', state, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      maxAge: 600, // 10 minutes
-      path: '/'
-    });
-  }
+  setOauthStateCookie(context.cookies, state, context.url);
 
   // Build authorization URL
   const authUrl = buildGithubAuthUrl(GITHUB_CLIENT_ID, GITHUB_REDIRECT_URI, state);

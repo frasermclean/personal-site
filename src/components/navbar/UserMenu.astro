@@ -12,13 +12,26 @@ import MoonIcon from '@tabler/icons/outline/moon.svg';
 import SunIcon from '@tabler/icons/outline/sun.svg';
 import { links } from './NavigationLinks.astro';
 import LoginIcon from '@tabler/icons/outline/login.svg';
+import LogoutIcon from '@tabler/icons/outline/logout.svg';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
+
+const currentUser = Astro.locals.currentUser;
+const displayName = currentUser?.name ?? currentUser?.github_username ?? '';
 ---
 
 <Dropdown>
   <DropdownTrigger asChild>
-    <Button size="sm" aria-label="Mobile menu">
-      <MenuIcon />
-      <span class="hidden sm:block">Menu</span>
+    <Button size="icon" class="rounded-full" aria-label="User menu">
+      {
+        currentUser ? (
+          <Avatar size="sm">
+            <AvatarImage src={currentUser.avatar_url} alt={displayName} />
+            <AvatarFallback>{displayName?.[0]}</AvatarFallback>
+          </Avatar>
+        ) : (
+          <MenuIcon />
+        )
+      }
     </Button>
   </DropdownTrigger>
   <DropdownContent align="end">
@@ -43,10 +56,20 @@ import LoginIcon from '@tabler/icons/outline/login.svg';
       <SunIcon class="block dark:hidden" />
       Theme
     </DropdownItem>
-    <DropdownItem as="a" href="/api/auth/login">
-      <LoginIcon width={28} stroke-width={1.25} />
-      Login
-    </DropdownItem>
+
+    {
+      currentUser ? (
+        <DropdownItem as="a" href="/api/auth/logout">
+          <LogoutIcon width={28} stroke-width={1.25} />
+          Logout
+        </DropdownItem>
+      ) : (
+        <DropdownItem as="a" href="/api/auth/login">
+          <LoginIcon width={28} stroke-width={1.25} />
+          Login
+        </DropdownItem>
+      )
+    }
   </DropdownContent>
 </Dropdown>
 
