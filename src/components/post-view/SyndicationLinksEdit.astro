@@ -4,11 +4,14 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/components/starwind/dialog';
+import Textarea from '@/components/starwind/textarea';
+import SaveIcon from '@tabler/icons/outline/device-floppy.svg';
 import EditIcon from '@tabler/icons/outline/edit.svg';
 ---
 
@@ -22,8 +25,17 @@ import EditIcon from '@tabler/icons/outline/edit.svg';
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Edit Syndication Links</DialogTitle>
+      <DialogDescription>Modify the links where this post is syndicated.</DialogDescription>
     </DialogHeader>
+    <div class="py-4">
+      <Textarea placeholder="Enter one URL per line" />
+    </div>
+
     <DialogFooter>
+      <Button variant="primary">
+        <SaveIcon width={16} height={16} class="mr-1" stroke-width={1.25} />
+        Save
+      </Button>
       <DialogClose asChild>
         <Button variant="outline">Cancel</Button>
       </DialogClose>
