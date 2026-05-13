@@ -1,0 +1,29 @@
+[
+  {
+    "id": "photography",
+    "category": "Photography",
+    "items": [
+      {
+        "name": "Unsplash",
+        "url": "https://unsplash.com",
+        "description": "Tons of high quality photos and illustrations that are freely available for use."
+      },
+      {
+        "name": "Pexels",
+        "url": "https://www.pexels.com",
+        "description": "Another great source for free stock photos and videos with a wide variety of content."
+      }
+    ]
+  },
+  {
+    "id": "icons",
+    "category": "Icons",
+    "items": [
+      {
+        "name": "Tabler Icons",
+        "url": "https://tabler.io/icons",
+        "description": "An awesome collection of open source SVG icons that I use throughout my projects for their clean and consistent design."
+      }
+    ]
+  }
+]

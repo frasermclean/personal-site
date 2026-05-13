@@ -36,4 +36,18 @@ const projects = defineCollection({
   })
 });
 
-export const collections = { posts, projects };
+const bookmarks = defineCollection({
+  loader: file('src/data/bookmarks.json'),
+  schema: z.object({
+    category: z.string(),
+    items: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string().optional(),
+        url: z.url()
+      })
+    )
+  })
+});
+
+export const collections = { posts, projects, bookmarks };
