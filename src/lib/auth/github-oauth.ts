@@ -17,11 +17,9 @@ export function generateRandomState(): string {
 
 /**
  * Validate that GitHub OAuth credentials are provided
- * @param clientId GitHub Client ID
- * @param clientSecret GitHub Client Secret
- * @param redirectUri GitHub Redirect URI
+ * @param config GitHub OAuth configuration
  */
-export function validateConfig(config: OAuthConfig): void {
+function validateConfig(config: OAuthConfig): void {
   const { clientId, clientSecret, redirectUri } = config;
   const errors: string[] = [];
 
@@ -49,8 +47,11 @@ export function validateConfig(config: OAuthConfig): void {
  * @param scopes OAuth scopes
  */
 export function buildGithubAuthUrl(config: OAuthConfig, state: string, scopes = ['user:email']): string {
+  validateConfig(config);
   const { clientId, clientSecret, redirectUri } = config;
+
   const github = new GitHub(clientId, clientSecret, redirectUri);
+
   const authUrl = github.createAuthorizationURL(state, scopes);
   authUrl.searchParams.set('allow_signup', 'true');
   return authUrl.toString();
@@ -60,8 +61,11 @@ export function buildGithubAuthUrl(config: OAuthConfig, state: string, scopes = 
  * Exchange OAuth code for access token
  */
 export async function exchangeCodeForToken(code: string, config: OAuthConfig): Promise<TokenResponse> {
+  validateConfig(config);
   const { clientId, clientSecret, redirectUri } = config;
+
   const github = new GitHub(clientId, clientSecret, redirectUri);
+
   try {
     const tokens = await github.validateAuthorizationCode(code);
     return {
