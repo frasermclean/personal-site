@@ -8,9 +8,9 @@ heroImage:
 category: guide
 tags: ['docker', 'docker-compose', 'devops', 'deployment']
 syndication:
-  bubbles: https://bubbles.town/entry/158652
-  mastodon: https://mastodon.social/@frasermclean/116521749848732290
-  bluesky: https://bsky.app/profile/frasermclean.com/post/3ml43sp4mas2c
+  - https://bubbles.town/entry/158652
+  - https://mastodon.social/@frasermclean/116521749848732290
+  - https://bsky.app/profile/frasermclean.com/post/3ml43sp4mas2c
 ---
 
 ## Background

@@ -2,7 +2,10 @@
 import type { HTMLAttributes } from 'astro/types';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-type Props = HTMLAttributes<'textarea'> & VariantProps<typeof textarea>;
+type Props = HTMLAttributes<'textarea'> &
+  VariantProps<typeof textarea> & {
+    defaultValue?: string;
+  };
 
 export const textarea = tv({
   base: [
@@ -23,7 +26,9 @@ export const textarea = tv({
   defaultVariants: { size: 'md' }
 });
 
-const { size, class: className, ...rest } = Astro.props;
+const { size, class: className, defaultValue, ...rest } = Astro.props as Props;
+const slotContent = Astro.slots.has('default') ? await Astro.slots.render('default') : '';
+const initialValue = defaultValue ?? slotContent;
 ---
 
-<textarea class={textarea({ size, class: className })} {...rest} data-slot="textarea"></textarea>
+<textarea class={textarea({ size, class: className })} {...rest} data-slot="textarea">{initialValue}</textarea>

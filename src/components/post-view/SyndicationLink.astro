@@ -1,0 +1,46 @@
+---
+import Link from '@/components/links/Link.astro';
+import BlueskyIcon from '@tabler/icons/outline/brand-bluesky.svg';
+import MastodonIcon from '@tabler/icons/outline/brand-mastodon.svg';
+import RedditIcon from '@tabler/icons/outline/brand-reddit.svg';
+import ExternalLinkIcon from '@tabler/icons/outline/external-link.svg';
+import type { SvgComponent } from 'astro/types';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props as Props;
+
+function getTextAndIcon(url: string): { text: string; Icon?: SvgComponent & ImageMetadata } {
+  if (url.startsWith('https://news.indieweb.org/')) {
+    return { text: 'IndieNews' };
+  }
+
+  if (url.startsWith('https://bubbles.town/')) {
+    return { text: 'Bubbles' };
+  }
+
+  if (url.startsWith('https://bsky.app')) {
+    return { text: 'Bluesky', Icon: BlueskyIcon };
+  }
+
+  if (url.includes('mastodon')) {
+    return { text: 'Mastodon', Icon: MastodonIcon };
+  }
+
+  if (url.includes('reddit')) {
+    return { text: 'Reddit', Icon: RedditIcon };
+  }
+
+  return { text: 'Other' };
+}
+
+const { text, Icon } = getTextAndIcon(href);
+---
+
+<Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
+  {Icon ? <Icon width={16} height={16} /> : <span class="w-4" />}
+  {text}
+  <ExternalLinkIcon width={16} height={16} />
+</Link>
