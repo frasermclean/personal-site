@@ -8,13 +8,8 @@ import Separator from '@/components/starwind/separator';
 import { Toaster } from '@/components/starwind/toast';
 import { SITE_TITLE } from '@/constants.ts';
 import '@/styles/starwind.css';
-import '@fontsource-variable/geist';
-import '@fontsource-variable/geist-mono';
-import geistFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2';
-import '@fontsource-variable/sora';
-import soraFont from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2';
 import type { ImageMetadata } from 'astro';
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 
 export interface Props {
   title: string;
@@ -56,8 +51,9 @@ const imageUrl = new URL(image.src, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Font preloads -->
-    <link rel="preload" as="font" type="font/woff2" href={soraFont} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={geistFont} crossorigin />
+    <Font cssVariable="--font-sora" preload />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
 
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
