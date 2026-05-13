@@ -11,3 +11,4 @@ export const PROJECTS_PATH = '/projects';
 export const POSTS_PATH = '/posts';
 export const CONTACT_PATH = '/contact';
 export const TAGS_PATH = '/tags';
+export const BOOKMARKS_PATH = '/bookmarks';
