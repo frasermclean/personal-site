@@ -33,6 +33,8 @@ export default defineConfig({
     schema: {
       ANALYTICS_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
       ANALYTICS_SCRIPT_SRC: envField.string({ context: 'client', access: 'public' }),
+      ANALYTICS_DOMAIN: envField.string({ context: 'client', access: 'public', optional: true }),
+      ANALYTICS_PERFORMANCE: envField.boolean({ context: 'client', access: 'public', default: false }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
