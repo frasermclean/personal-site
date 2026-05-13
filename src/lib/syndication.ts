@@ -22,7 +22,7 @@ export async function getLinks(slug: string): Promise<string[] | null> {
   }
 }
 
-export async function saveLinks(slug: string, links: string[]): Promise<string[]> {
+export async function saveLinks(slug: string, links: string[]): Promise<string> {
   const existing = await env.POST_SYNDICATION.get(slug);
   let previousRevision = 0;
 
@@ -43,7 +43,7 @@ export async function saveLinks(slug: string, links: string[]): Promise<string[]
   };
 
   await env.POST_SYNDICATION.put(slug, JSON.stringify(record));
-  return sanitizedLinks;
+  return record.updatedAt;
 }
 
 export function sanitizeLinks(links: string[]): string[] {
