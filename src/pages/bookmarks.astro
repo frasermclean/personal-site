@@ -1,0 +1,13 @@
+---
+import HeroSection from '@/components/HeroSection.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Bookmarks';
+const description = 'Links to interesting articles, tools, and resources that I have found useful or inspiring.';
+const collection = await getCollection('bookmarks');
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+</BaseLayout>
