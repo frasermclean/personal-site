@@ -13,9 +13,17 @@ import {
 import Textarea from '@/components/starwind/textarea';
 import SaveIcon from '@tabler/icons/outline/device-floppy.svg';
 import EditIcon from '@tabler/icons/outline/edit.svg';
+
+interface Props {
+  slug: string;
+  links: string[];
+}
+
+const { slug, links } = Astro.props as Props;
+const textareaValue = links.join('\n');
 ---
 
-<Dialog>
+<Dialog id="links-dialog">
   <DialogTrigger asChild>
     <Button variant="outline" class="w-40">
       <EditIcon width={16} height={16} class="mr-1" />
@@ -28,11 +36,11 @@ import EditIcon from '@tabler/icons/outline/edit.svg';
       <DialogDescription>Modify the links where this post is syndicated.</DialogDescription>
     </DialogHeader>
     <div class="py-4">
-      <Textarea placeholder="Enter one URL per line" />
+      <Textarea id="links-textarea" rows="6" placeholder="Enter one URL per line" defaultValue={textareaValue} />
     </div>
 
     <DialogFooter>
-      <Button variant="primary">
+      <Button id="links-save" variant="primary" data-slug={slug}>
         <SaveIcon width={16} height={16} class="mr-1" stroke-width={1.25} />
         Save
       </Button>
@@ -42,3 +50,53 @@ import EditIcon from '@tabler/icons/outline/edit.svg';
     </DialogFooter>
   </DialogContent>
 </Dialog>
+
+<script>
+  import { toast } from '@/components/starwind/toast';
+  import { actions } from 'astro:actions';
+
+  const saveButton = document.querySelector<HTMLButtonElement>('#links-save');
+  saveButton?.addEventListener('click', handleSave);
+
+  async function handleSave() {
+    if (!saveButton) return;
+
+    saveButton.disabled = true;
+
+    const slug = saveButton.dataset.slug;
+    const textarea = document.querySelector<HTMLTextAreaElement>('#links-textarea');
+    const dialogWrapper = saveButton.closest('#links-dialog');
+
+    if (!slug || !textarea) {
+      console.error('Missing slug or textarea');
+      return;
+    }
+
+    const links = textarea.value
+      .split(/\r?\n/u)
+      .map((line: string) => line.trim())
+      .filter((line: string) => line.length > 0);
+
+    try {
+      const result = await actions.updatePostSyndication({ slug, links });
+
+      if (result.error) {
+        toast.error(`Failed to save: ${result.error.message}`);
+        return;
+      }
+
+      toast.success('Syndication links updated.');
+
+      // reload page after short delay to allow user to see the toast
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
+    } catch (error) {
+      console.error('Save error:', error);
+      toast.error('An unexpected error occurred');
+    } finally {
+      dialogWrapper?.dispatchEvent(new CustomEvent('dialog:close'));
+      saveButton.disabled = false;
+    }
+  }
+</script>
