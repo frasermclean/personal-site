@@ -1,0 +1,14 @@
+---
+import { TRACKING_SCRIPT_SRC, TRACKING_WEBSITE_ID, WORKERS_CI_COMMIT_SHA } from 'astro:env/client';
+---
+
+<!-- Analytics -->
+<script
+  is:inline
+  defer
+  src={TRACKING_SCRIPT_SRC}
+  data-website-id={TRACKING_WEBSITE_ID}
+  data-domains="frasermclean.com"
+  data-tag={WORKERS_CI_COMMIT_SHA || null}
+  data-performance="true"
+></script>
