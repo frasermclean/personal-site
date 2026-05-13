@@ -1,0 +1,19 @@
+---
+import {
+  ANALYTICS_DOMAIN,
+  ANALYTICS_PERFORMANCE,
+  ANALYTICS_SCRIPT_SRC,
+  ANALYTICS_WEBSITE_ID,
+  WORKERS_CI_COMMIT_SHA
+} from 'astro:env/client';
+---
+
+<!-- Analytics -->
+<script
+  is:inline
+  defer
+  src={ANALYTICS_SCRIPT_SRC}
+  data-website-id={ANALYTICS_WEBSITE_ID}
+  data-domains={ANALYTICS_DOMAIN || null}
+  data-tag={WORKERS_CI_COMMIT_SHA || null}
+  data-performance={ANALYTICS_PERFORMANCE || null}></script>

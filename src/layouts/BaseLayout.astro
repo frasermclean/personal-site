@@ -1,7 +1,8 @@
 ---
 import defaultOgImage from '@/assets/default-og-image.png';
-import AuthToasts from '@/components/AuthToasts.astro';
+import AuthNotifier from '@/components/AuthNotifier.astro';
 import Footer from '@/components/footer/Footer.astro';
+import Analytics from '@/components/head/Analytics.astro';
 import Navbar from '@/components/navbar/Navbar.astro';
 import Separator from '@/components/starwind/separator';
 import { Toaster } from '@/components/starwind/toast';
@@ -14,7 +15,6 @@ import '@fontsource-variable/sora';
 import soraFont from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2';
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import { TRACKING_SCRIPT_SRC, TRACKING_WEBSITE_ID, WORKERS_CI_COMMIT_SHA } from 'astro:env/client';
 
 export interface Props {
   title: string;
@@ -82,15 +82,7 @@ const imageUrl = new URL(image.src, Astro.site);
 
     <slot name="head" />
 
-    <!-- Analytics -->
-    <script
-      is:inline
-      defer
-      src={TRACKING_SCRIPT_SRC}
-      data-website-id={TRACKING_WEBSITE_ID}
-      data-domains="frasermclean.com"
-      data-tag={WORKERS_CI_COMMIT_SHA || null}
-      data-performance="true"></script>
+    <Analytics />
   </head>
   <body class="flex min-h-screen flex-col">
     <Navbar />
@@ -100,6 +92,6 @@ const imageUrl = new URL(image.src, Astro.site);
     <Separator class="mt-8" />
     <Footer />
     <Toaster position="bottom-center" duration={3000} />
-    <AuthToasts />
+    <AuthNotifier />
   </body>
 </html>

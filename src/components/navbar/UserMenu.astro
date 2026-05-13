@@ -74,6 +74,8 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
   </DropdownContent>
 </Dropdown>
 
+{user && <div id="user-identifier" class="hidden" data-email={user.email} />}
+
 <script>
   updateDom(getPreferrredTheme()); // set initial theme based on user preference
 
@@ -102,6 +104,15 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // identify the user by their email for analytics purposes (if available)
+  const userIdentifier = document.getElementById('user-identifier');
+  if (userIdentifier) {
+    const email = userIdentifier.dataset.email;
+    if (email) {
+      umami.identify(email);
     }
   }
 </script>

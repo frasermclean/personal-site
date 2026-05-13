@@ -15,11 +15,21 @@ blog posts, and contact information. The website is built using Astro and hosted
 
 The project relies on a few environment variables for local development. You can set these in a `.env` file at the root of the project:
 
-```env
+```ini
+# Email
 CONTACT_EMAIL="contact@example.com"
 RESEND_API_KEY="xxx"
-TRACKING_WEBSITE_ID="xxx"
-TRACKING_SCRIPT_SRC="http://localhost:8081/script.js"
-TURNSTILE_SITE_KEY="xxx"
-TURNSTILE_SECRET_KEY="xxx"
+
+# Analytics
+ANALYTICS_WEBSITE_ID="xxx"
+ANALYTICS_SCRIPT_SRC="http://localhost:8081/script.js"
+
+# Cloudflare Turnstile
+TURNSTILE_SITE_KEY="1x00000000000000000000AA" # Test key - always passes
+TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA" # Test key - always passes
+
+# GitHub OAuth credentials
+GITHUB_CLIENT_ID="xxx"
+GITHUB_CLIENT_SECRET="xxx"
+GITHUB_REDIRECT_URI="http://localhost:4321/api/auth/callback"
 ```
