@@ -31,6 +31,4 @@ const slotContent = Astro.slots.has('default') ? await Astro.slots.render('defau
 const initialValue = defaultValue ?? slotContent;
 ---
 
-<textarea class={textarea({ size, class: className })} {...rest} data-slot="textarea">
-  {initialValue}
-</textarea>
+<textarea class={textarea({ size, class: className })} {...rest} data-slot="textarea">{initialValue}</textarea>
