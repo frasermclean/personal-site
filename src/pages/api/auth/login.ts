@@ -2,18 +2,18 @@ import { setOauthStateCookie, setReturnToCookie } from '@/lib/auth/auth-cookies'
 import { AuthMessage } from '@/lib/auth/auth-types';
 import { buildGithubAuthUrl, generateRandomState, validateConfig } from '@/lib/auth/github-oauth';
 import type { APIRoute } from 'astro';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
+import { env } from 'cloudflare:workers';
 
 const oauthConfig = {
-  clientId: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
-  redirectUri: GITHUB_REDIRECT_URI
+  clientId: env.GITHUB_CLIENT_ID,
+  clientSecret: env.GITHUB_CLIENT_SECRET,
+  redirectUri: env.GITHUB_REDIRECT_URI
 };
 
 export const GET: APIRoute = async (context) => {
-  validateConfig(oauthConfig);
-
   try {
+    validateConfig(oauthConfig);
+
     // generate random state for CSRF protection
     const state = generateRandomState();
 

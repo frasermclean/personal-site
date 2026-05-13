@@ -4,17 +4,15 @@ import type { UserSession } from '@/lib/auth/auth-types';
 import { AuthMessage } from '@/lib/auth/auth-types';
 import { exchangeCodeForToken, fetchGithubUser, validateConfig, type GitHubUser } from '@/lib/auth/github-oauth';
 import type { APIContext, APIRoute } from 'astro';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
+import { env } from 'cloudflare:workers';
 
 const oauthConfig = {
-  clientId: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
-  redirectUri: GITHUB_REDIRECT_URI
+  clientId: env.GITHUB_CLIENT_ID,
+  clientSecret: env.GITHUB_CLIENT_SECRET,
+  redirectUri: env.GITHUB_REDIRECT_URI
 };
 
 export const GET: APIRoute = async (context) => {
-  validateConfig(oauthConfig);
-
   // get returnTo URL from cookie (if present) to redirect user back after login
   const returnTo = getAndClearReturnToCookie(context.cookies, context.url);
   const redirectUrl = new URL(returnTo, context.url.origin);
@@ -28,6 +26,8 @@ export const GET: APIRoute = async (context) => {
   }
 
   try {
+    validateConfig(oauthConfig);
+
     validateState(state, context);
 
     // fetch github user profile
