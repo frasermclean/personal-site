@@ -27,4 +27,3 @@ SQL
 echo "Initializing databases..."
 
 init_database "$UMAMI_DB_USER" "$UMAMI_DB_PASSWORD" "$UMAMI_DB_NAME"
-init_database "$COMENTARIO_DB_USER" "$COMENTARIO_DB_PASSWORD" "$COMENTARIO_DB_NAME"
