@@ -13,15 +13,35 @@ export function generateRandomState(): string {
 }
 
 /**
- * Build GitHub OAuth authorization URL
+ * Validate that GitHub OAuth credentials are provided
+ * @param clientId GitHub Client ID
+ * @param clientSecret GitHub Client Secret
+ * @param redirectUri GitHub Redirect URI
  */
-export function buildGithubAuthUrl(
-  clientId: string,
-  clientSecret: string,
-  redirectUri: string,
-  state: string,
-  scopes = ['user:email']
-): string {
+export function validateConfig(config: OAuthConfig): void {
+  const { clientId, clientSecret, redirectUri } = config;
+
+  if (!clientId) {
+    throw new Error('GitHub Client ID is required');
+  }
+
+  if (!clientSecret) {
+    throw new Error('GitHub Client Secret is required');
+  }
+
+  if (!redirectUri) {
+    throw new Error('GitHub Redirect URI is required');
+  }
+}
+
+/**
+ * Build GitHub OAuth authorization URL
+ * @param config GitHub OAuth configuration
+ * @param state OAuth state parameter
+ * @param scopes OAuth scopes
+ */
+export function buildGithubAuthUrl(config: OAuthConfig, state: string, scopes = ['user:email']): string {
+  const { clientId, clientSecret, redirectUri } = config;
   const github = new GitHub(clientId, clientSecret, redirectUri);
   const authUrl = github.createAuthorizationURL(state, scopes);
   authUrl.searchParams.set('allow_signup', 'true');
@@ -31,12 +51,8 @@ export function buildGithubAuthUrl(
 /**
  * Exchange OAuth code for access token
  */
-export async function exchangeCodeForToken(
-  code: string,
-  clientId: string,
-  clientSecret: string,
-  redirectUri: string
-): Promise<{ accessToken: string; tokenType: string }> {
+export async function exchangeCodeForToken(code: string, config: OAuthConfig): Promise<TokenResponse> {
+  const { clientId, clientSecret, redirectUri } = config;
   const github = new GitHub(clientId, clientSecret, redirectUri);
   const tokens = await github.validateAuthorizationCode(code);
 
@@ -67,3 +83,14 @@ export async function fetchGithubUser(accessToken: string, tokenType: string): P
 }
 
 export type GitHubUser = components['schemas']['private-user'];
+
+export interface OAuthConfig {
+  clientId: string;
+  clientSecret: string;
+  redirectUri: string;
+}
+
+export interface TokenResponse {
+  accessToken: string;
+  tokenType: string;
+}

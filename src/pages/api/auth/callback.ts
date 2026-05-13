@@ -2,14 +2,18 @@ import { getAndClearOauthStateCookie, getAndClearReturnToCookie, setSessionCooki
 import { storeUserSession } from '@/lib/auth/auth-session';
 import type { UserSession } from '@/lib/auth/auth-types';
 import { AuthMessage } from '@/lib/auth/auth-types';
-import { exchangeCodeForToken, fetchGithubUser, type GitHubUser } from '@/lib/auth/github-oauth';
+import { exchangeCodeForToken, fetchGithubUser, validateConfig, type GitHubUser } from '@/lib/auth/github-oauth';
 import type { APIContext, APIRoute } from 'astro';
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
 
+const oauthConfig = {
+  clientId: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  redirectUri: GITHUB_REDIRECT_URI
+};
+
 export const GET: APIRoute = async (context) => {
-  if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET || !GITHUB_REDIRECT_URI) {
-    throw new Error('GitHub OAuth credentials not configured');
-  }
+  validateConfig(oauthConfig);
 
   // get returnTo URL from cookie (if present) to redirect user back after login
   const returnTo = getAndClearReturnToCookie(context.cookies, context.url);
@@ -55,7 +59,7 @@ function validateState(state: string, context: APIContext): void {
 
 async function getAccessToken(code: string): Promise<{ accessToken: string; tokenType: string }> {
   // exchange code for access token
-  const data = await exchangeCodeForToken(code, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI);
+  const data = await exchangeCodeForToken(code, oauthConfig);
 
   if (!data) {
     throw new Error('No access token received from GitHub');

@@ -1,13 +1,17 @@
 import { setOauthStateCookie, setReturnToCookie } from '@/lib/auth/auth-cookies';
 import { AuthMessage } from '@/lib/auth/auth-types';
-import { buildGithubAuthUrl, generateRandomState } from '@/lib/auth/github-oauth';
+import { buildGithubAuthUrl, generateRandomState, validateConfig } from '@/lib/auth/github-oauth';
 import type { APIRoute } from 'astro';
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
 
+const oauthConfig = {
+  clientId: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  redirectUri: GITHUB_REDIRECT_URI
+};
+
 export const GET: APIRoute = async (context) => {
-  if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET || !GITHUB_REDIRECT_URI) {
-    throw new Error('GitHub OAuth credentials not configured');
-  }
+  validateConfig(oauthConfig);
 
   try {
     // generate random state for CSRF protection
@@ -23,7 +27,7 @@ export const GET: APIRoute = async (context) => {
     }
 
     // build authorization URL
-    const authUrl = buildGithubAuthUrl(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI, state);
+    const authUrl = buildGithubAuthUrl(oauthConfig, state);
 
     // redirect user to GitHub authorization page
     return context.redirect(authUrl);
