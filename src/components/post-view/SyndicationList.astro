@@ -1,11 +1,10 @@
 ---
-import { Button } from '@/components/starwind/button';
 import { isOwner } from '@/lib/auth/owner-check';
 import { getLinks } from '@/lib/syndication';
-import EditIcon from '@tabler/icons/outline/edit.svg';
 import ShareIcon from '@tabler/icons/outline/share-3.svg';
 import { getEntry } from 'astro:content';
 import SyndicationLink from './SyndicationLink.astro';
+import SyndicationLinksEdit from './SyndicationLinksEdit.astro';
 
 interface Props {
   slug: string;
@@ -41,12 +40,7 @@ const canEdit = isOwner(Astro.locals.user);
         ))}
       </ul>
 
-      {canEdit && (
-        <Button size="sm" variant="outline" class="w-40">
-          <EditIcon width={16} height={16} class="mr-1" />
-          Edit Links
-        </Button>
-      )}
+      {canEdit && <SyndicationLinksEdit slug={slug} />}
     </section>
   )
 }
