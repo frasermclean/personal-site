@@ -1,0 +1,45 @@
+---
+import Link from '@/components/links/Link.astro';
+import ExternalLinkIcon from '@tabler/icons/outline/external-link.svg';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props as Props;
+
+function getLabelFromUrl(url: string): string {
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, '');
+
+    if (hostname.includes('indienews')) {
+      return 'IndieNews';
+    }
+
+    if (hostname.includes('bsky.app')) {
+      return 'Bluesky';
+    }
+
+    if (hostname.includes('mastodon')) {
+      return 'Mastodon';
+    }
+
+    if (hostname.includes('reddit')) {
+      return 'Reddit';
+    }
+
+    if (hostname.includes('bubbles')) {
+      return 'Bubbles';
+    }
+
+    return hostname;
+  } catch {
+    return 'Syndication Link';
+  }
+}
+---
+
+<Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
+  {getLabelFromUrl(href)}
+  <ExternalLinkIcon width={16} height={16} />
+</Link>

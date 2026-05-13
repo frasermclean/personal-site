@@ -1,43 +1,52 @@
 ---
-import Link from '@/components/links/Link.astro';
-import ExternalLinkIcon from '@tabler/icons/outline/external-link.svg';
+import { Button } from '@/components/starwind/button';
+import { isOwner } from '@/lib/auth/owner-check';
+import { getLinks } from '@/lib/syndication';
+import EditIcon from '@tabler/icons/outline/edit.svg';
 import ShareIcon from '@tabler/icons/outline/share-3.svg';
+import { getEntry } from 'astro:content';
+import SyndicationLink from './SyndicationLink.astro';
 
 interface Props {
-  indienews?: string;
-  bubbles?: string;
-  mastodon?: string;
-  bluesky?: string;
-  reddit?: string;
+  slug: string;
 }
 
-const { indienews, bubbles, mastodon, bluesky, reddit } = Astro.props as Props;
+const { slug } = Astro.props as Props;
 
-const links = [
-  { href: indienews, text: 'IndieNews' },
-  { href: bubbles, text: 'Bubbles' },
-  { href: mastodon, text: 'Mastodon' },
-  { href: bluesky, text: 'Bluesky' },
-  { href: reddit, text: 'Reddit' }
-].filter((link) => link.href);
+const entry = await getEntry('posts', slug);
+if (!entry) {
+  throw new Error(`Post with slug "${slug}" not found.`);
+}
+
+// read links from frontmatter and stored overrides, then merge them with overrides taking precedence
+const { syndication: frontmatterLinks } = entry.data;
+const overriddenLinks = await getLinks(slug);
+const effectiveLinks = overriddenLinks !== null ? overriddenLinks : frontmatterLinks;
+
+const canEdit = isOwner(Astro.locals.user);
 ---
 
 {
-  links.length > 0 && (
-    <section>
-      <div class="mb-2 flex items-center gap-2 text-secondary">
+  effectiveLinks.length > 0 && (
+    <section class="flex flex-col gap-2">
+      <div class="flex items-center gap-2 text-secondary">
         <ShareIcon width={20} height={20} />
         <h2 class="font-heading text-xl font-bold">Syndication</h2>
       </div>
-      <ul class="ml-3">
-        {links.map(({ href, text }) => (
+      <ul class="ml-3" data-syndication-list>
+        {effectiveLinks.map((href) => (
           <li>
-            <Link href={href} class="u-syndication flex items-center gap-2 hover:text-accent">
-              {text} <ExternalLinkIcon width={16} height={16} />
-            </Link>
+            <SyndicationLink {href} />
           </li>
         ))}
       </ul>
+
+      {canEdit && (
+        <Button size="sm" variant="outline" class="w-40">
+          <EditIcon width={16} height={16} class="mr-1" />
+          Edit Links
+        </Button>
+      )}
     </section>
   )
 }
