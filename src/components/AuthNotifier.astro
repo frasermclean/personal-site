@@ -29,22 +29,32 @@ const messages: Record<AuthMessage, { status: 'error' | 'success'; text: string 
 const message = authParam ? messages[authParam] : null;
 ---
 
-{message && <div id="auth-notifications" data-text={message.text} data-status={message.status} />}
+{message && <div id="auth-notifications" data-code={authParam} data-text={message.text} data-status={message.status} />}
 
 <script>
+  import { AuthMessage } from '@/lib/auth/auth-types';
   import { toast } from './starwind/toast';
 
   const element = document.getElementById('auth-notifications');
 
+  const code = element?.dataset.code as AuthMessage | undefined;
   const text = element?.dataset.text;
   const status = element?.dataset.status;
 
+  // send a toast notification based on the auth message code
   if (text) {
     if (status === 'success') {
       toast.success(text);
     } else {
       toast.error(text);
     }
+  }
+
+  // track login/logout events with Umami
+  if (code === AuthMessage.LoginSuccess) {
+    umami.track('user-login');
+  } else if (code === AuthMessage.LogoutSuccess) {
+    umami.track('user-logout');
   }
 
   // clear the auth param from the URL so the toast doesn't show on page refresh
