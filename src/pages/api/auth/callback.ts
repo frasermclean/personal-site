@@ -2,14 +2,14 @@ import { getAndClearOauthStateCookie, getAndClearReturnToCookie, setSessionCooki
 import { storeUserSession } from '@/lib/auth/auth-session';
 import type { UserSession } from '@/lib/auth/auth-types';
 import { AuthMessage } from '@/lib/auth/auth-types';
-import { exchangeCodeForToken, fetchGithubUser, validateConfig, type GitHubUser } from '@/lib/auth/github-oauth';
-import type { APIContext, APIRoute } from 'astro';
-import { env } from 'cloudflare:workers';
+import { exchangeCodeForToken, fetchGithubUser, type GitHubUser } from '@/lib/auth/github-oauth';
+import type { APIRoute } from 'astro';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
 
 const oauthConfig = {
-  clientId: env.GITHUB_CLIENT_ID,
-  clientSecret: env.GITHUB_CLIENT_SECRET,
-  redirectUri: env.GITHUB_REDIRECT_URI
+  clientId: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  redirectUri: GITHUB_REDIRECT_URI
 };
 
 export const GET: APIRoute = async (context) => {
@@ -26,12 +26,14 @@ export const GET: APIRoute = async (context) => {
   }
 
   try {
-    validateConfig(oauthConfig);
-
-    validateState(state, context);
+    // retrieve stored state from cookie and compare to prevent CSRF attacks
+    const storedState = getAndClearOauthStateCookie(context.cookies, context.url);
+    if (state !== storedState) {
+      throw new Error('State parameter mismatch');
+    }
 
     // fetch github user profile
-    const { accessToken, tokenType } = await getAccessToken(code);
+    const { accessToken, tokenType } = await exchangeCodeForToken(code, oauthConfig);
     const githubUser = await fetchGithubUser(accessToken, tokenType);
     const session = mapUserSession(githubUser);
 
@@ -48,25 +50,6 @@ export const GET: APIRoute = async (context) => {
     return context.redirect(redirectUrl.toString());
   }
 };
-
-function validateState(state: string, context: APIContext): void {
-  // retrieve stored state from cookie and compare to prevent CSRF attacks
-  const storedState = getAndClearOauthStateCookie(context.cookies, context.url);
-  if (state !== storedState) {
-    throw new Error('State parameter mismatch');
-  }
-}
-
-async function getAccessToken(code: string): Promise<{ accessToken: string; tokenType: string }> {
-  // exchange code for access token
-  const data = await exchangeCodeForToken(code, oauthConfig);
-
-  if (!data) {
-    throw new Error('No access token received from GitHub');
-  }
-
-  return data;
-}
 
 function mapUserSession(user: GitHubUser): UserSession {
   const now = Date.now();
