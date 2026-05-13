@@ -42,8 +42,8 @@ const bookmarks = defineCollection({
     category: z.string(),
     items: z.array(
       z.object({
-        name: z.string(),
-        description: z.string().optional(),
+        title: z.string(),
+        description: z.string(),
         url: z.url()
       })
     )
