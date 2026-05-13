@@ -17,15 +17,7 @@ const posts = defineCollection({
       tags: z.array(z.string()),
       showReactions: z.boolean().default(true),
       isFeatured: z.boolean().default(false),
-      syndication: z
-        .object({
-          indienews: z.url().optional(),
-          bubbles: z.url().optional(),
-          mastodon: z.url().optional(),
-          bluesky: z.url().optional(),
-          reddit: z.url().optional()
-        })
-        .optional()
+      syndication: z.array(z.url()).default([])
     })
 });
 
