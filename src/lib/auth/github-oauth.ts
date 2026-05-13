@@ -20,17 +20,22 @@ export function generateRandomState(): string {
  */
 export function validateConfig(config: OAuthConfig): void {
   const { clientId, clientSecret, redirectUri } = config;
+  const errors: string[] = [];
 
   if (!clientId) {
-    throw new Error('GitHub Client ID is required');
+    errors.push('GitHub Client ID is required');
   }
 
   if (!clientSecret) {
-    throw new Error('GitHub Client Secret is required');
+    errors.push('GitHub Client Secret is required');
   }
 
   if (!redirectUri) {
-    throw new Error('GitHub Redirect URI is required');
+    errors.push('GitHub Redirect URI is required');
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`Invalid GitHub OAuth configuration: ${errors.join(', ')}`);
   }
 }
 
