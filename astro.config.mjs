@@ -2,7 +2,7 @@ import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import rehypeFigure from 'rehype-figure';
 import { SITE_URL } from './src/constants.ts';
 import { remarkExternalLinks } from './src/lib/remark-external-links.ts';
@@ -23,6 +23,24 @@ export default defineConfig({
     objectPosition: 'center',
     responsiveStyles: true
   },
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist',
+      cssVariable: '--font-geist'
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist Mono',
+      cssVariable: '--font-geist-mono'
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Sora',
+      cssVariable: '--font-sora',
+      weights: ['100 800']
+    }
+  ],
   adapter: cloudflare({
     imageService: {
       build: 'compile',
