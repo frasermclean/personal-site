@@ -1,5 +1,8 @@
 import type { components } from '@octokit/openapi-types';
-import { generateState, GitHub } from 'arctic';
+import { ArcticFetchError, generateState, GitHub, OAuth2RequestError } from 'arctic';
+
+const API_VERSION = '2026-03-10';
+const USER_AGENT = 'FM-Site-OAuth';
 
 /**
  * OAuth utilities for GitHub authentication
@@ -59,12 +62,26 @@ export function buildGithubAuthUrl(config: OAuthConfig, state: string, scopes = 
 export async function exchangeCodeForToken(code: string, config: OAuthConfig): Promise<TokenResponse> {
   const { clientId, clientSecret, redirectUri } = config;
   const github = new GitHub(clientId, clientSecret, redirectUri);
-  const tokens = await github.validateAuthorizationCode(code);
+  try {
+    const tokens = await github.validateAuthorizationCode(code);
+    return {
+      accessToken: tokens.accessToken(),
+      tokenType: tokens.tokenType()
+    };
+  } catch (error) {
+    if (error instanceof OAuth2RequestError) {
+      console.error('Invalid code, credentials, or redirect URI', error);
+      throw error;
+    }
 
-  return {
-    accessToken: tokens.accessToken(),
-    tokenType: tokens.tokenType()
-  };
+    if (error instanceof ArcticFetchError) {
+      console.error('Failed to fetch data from GitHub', error);
+      throw error;
+    }
+
+    console.log('Unexpected error during code for token exchange', error);
+    throw error;
+  }
 }
 
 /**
@@ -75,8 +92,8 @@ export async function fetchGithubUser(accessToken: string, tokenType: string): P
     headers: {
       Accept: 'application/vnd.github+json',
       Authorization: `${tokenType} ${accessToken}`,
-      'User-Agent': 'frasermclean-site-oauth',
-      'X-GitHub-Api-Version': '2022-11-28'
+      'User-Agent': USER_AGENT,
+      'X-GitHub-Api-Version': API_VERSION
     }
   });
 
