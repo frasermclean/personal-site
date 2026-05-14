@@ -23,17 +23,25 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   loader: file('src/data/projects.json'),
-  schema: z.object({
-    name: z.string(),
-    description: z.array(z.string()),
-    imageFile: z.string().optional(),
-    links: z.object({
-      website: z.url().optional(),
-      source: z.url()
-    }),
-    features: z.array(z.string()).default([]),
-    technologies: z.array(z.string())
-  })
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      description: z.array(z.string()),
+      images: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string()
+          })
+        )
+        .default([]),
+      links: z.object({
+        website: z.url().optional(),
+        source: z.url()
+      }),
+      features: z.array(z.string()).default([]),
+      technologies: z.array(z.string())
+    })
 });
 
 const bookmarks = defineCollection({

@@ -26,13 +26,6 @@ async function getProjectImage(imageFile?: string) {
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
   <ul class="mx-auto flex max-w-4xl flex-col gap-4">
-    {
-      await Promise.all(
-        collection.map(async (project) => {
-          const image = await getProjectImage(project.data.imageFile);
-          return <ProjectCard id={project.id} {image} />;
-        })
-      )
-    }
+    {collection.map(async (entry) => <ProjectCard {entry} />)}
   </ul>
 </BaseLayout>
