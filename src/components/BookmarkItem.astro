@@ -1,5 +1,6 @@
 ---
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/starwind/card';
+import Link from '@/components/links/Link.astro';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/starwind/card';
 
 interface Props {
   title: string;
@@ -10,9 +11,13 @@ interface Props {
 const { title, description, url } = Astro.props;
 ---
 
-<Card as="a" href={url} target="_blank" rel="noopener noreferrer" class="hover:bg-accent/80">
-  <CardHeader>
-    <CardTitle>{title}</CardTitle>
-    <CardDescription>{description}</CardDescription>
-  </CardHeader>
-</Card>
+<Link href={url}>
+  <Card class="gap-4 transition-colors hover:bg-accent/80">
+    <CardHeader>
+      <CardTitle>{title}</CardTitle>
+    </CardHeader>
+    <CardContent class="text-muted-foreground">
+      {description}
+    </CardContent>
+  </Card>
+</Link>
