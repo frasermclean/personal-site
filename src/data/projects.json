@@ -21,7 +21,8 @@
       "source": "https://github.com/frasermclean/personal-site"
     },
     "features": [
-      "Static site generation with Astro for fast load times and SEO benefits",
+      "Server side rendering with Astro for fast load times and SEO benefits",
+      "GitHub OAuth authentication flow for admin content management",
       "Contact form with serverless submission handling via Cloudflare Workers",
       "Responsive design using Tailwind CSS",
       "TypeScript for type safety and improved developer experience",
