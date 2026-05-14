@@ -1,0 +1,35 @@
+---
+import BookmarkItem from '@/components/BookmarkItem.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Bookmarks';
+const description = 'Links to tools and resources that I have found useful or inspiring.';
+const collection = await getCollection('bookmarks');
+console.log(collection);
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+
+  <ul class="mx-auto max-w-4xl space-y-8">
+    {
+      collection.map((bookmark) => {
+        const { category, items } = bookmark.data;
+        return (
+          <li class="space-y-4">
+            <h2 class="font-heading text-2xl font-semibold text-secondary">{category}</h2>
+            <ul class="flex flex-col gap-4">
+              {items.map(({ title, description, url }) => (
+                <li>
+                  <BookmarkItem {title} {description} {url} />
+                </li>
+              ))}
+            </ul>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>

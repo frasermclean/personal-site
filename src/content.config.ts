@@ -23,17 +23,39 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   loader: file('src/data/projects.json'),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      description: z.array(z.string()),
+      images: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string()
+          })
+        )
+        .default([]),
+      links: z.object({
+        website: z.url().optional(),
+        source: z.url()
+      }),
+      features: z.array(z.string()).default([]),
+      technologies: z.array(z.string())
+    })
+});
+
+const bookmarks = defineCollection({
+  loader: file('src/data/bookmarks.json'),
   schema: z.object({
-    name: z.string(),
-    description: z.array(z.string()),
-    imageFile: z.string().optional(),
-    links: z.object({
-      website: z.url().optional(),
-      source: z.url()
-    }),
-    features: z.array(z.string()).default([]),
-    technologies: z.array(z.string())
+    category: z.string(),
+    items: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        url: z.url()
+      })
+    )
   })
 });
 
-export const collections = { posts, projects };
+export const collections = { posts, projects, bookmarks };

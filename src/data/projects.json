@@ -6,13 +6,23 @@
       "The website you are currently visiting, which contains my portfolio and blog.",
       "It's a full rewrite of my previous Hugo site utilizing Astro for static site generation and Cloudflare Workers for serverless deployment."
     ],
-    "imageFile": "fmsite-home.png",
+    "images": [
+      {
+        "src": "/src/assets/projects/fmsite-home.png",
+        "alt": "Screenshot of the homepage"
+      },
+      {
+        "src": "/src/assets/projects/fmsite-posts.png",
+        "alt": "Screenshot of the blog posts page"
+      }
+    ],
     "links": {
       "website": "https://frasermclean.com",
       "source": "https://github.com/frasermclean/personal-site"
     },
     "features": [
-      "Static site generation with Astro for fast load times and SEO benefits",
+      "Server side rendering with Astro for fast load times and SEO benefits",
+      "GitHub OAuth authentication flow for admin content management",
       "Contact form with serverless submission handling via Cloudflare Workers",
       "Responsive design using Tailwind CSS",
       "TypeScript for type safety and improved developer experience",
@@ -28,7 +38,16 @@
       "I built this primarily to enhance and practice my skills with Angular and ASP.NET Core, while also exploring modern cloud deployment techniques using Azure Container Apps and Infrastructure as Code with Bicep.",
       "Aspire orchestration was added to spin up and manage the various services that make up the application."
     ],
-    "imageFile": "ratemypet-posts.png",
+    "images": [
+      {
+        "src": "/src/assets/projects/ratemypet-posts.jpg",
+        "alt": "Screenshot of the Rate My Pet posts page"
+      },
+      {
+        "src": "/src/assets/projects/ratemypet-upload.jpg",
+        "alt": "Screenshot of the upload page on Rate My Pet"
+      }
+    ],
     "links": {
       "website": "https://ratemy.pet",
       "source": "https://github.com/frasermclean/ratemypet"

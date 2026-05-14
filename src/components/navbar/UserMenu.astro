@@ -13,7 +13,9 @@ import SunIcon from '@tabler/icons/outline/sun.svg';
 import { links } from './NavigationLinks.astro';
 import LoginIcon from '@tabler/icons/outline/login.svg';
 import LogoutIcon from '@tabler/icons/outline/logout.svg';
+import BookmarkIcon from '@tabler/icons/outline/bookmark.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
+import { BOOKMARKS_PATH } from '@/constants';
 
 const user = Astro.locals.user;
 const displayName = user?.name ?? user?.githubUsername ?? '';
@@ -52,6 +54,13 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
 
       <DropdownSeparator />
     </nav>
+
+    <DropdownItem as="a" href={BOOKMARKS_PATH}>
+      <BookmarkIcon width={28} stroke-width={1.25} />
+      Bookmarks
+    </DropdownItem>
+    <DropdownSeparator />
+
     <DropdownItem as="button" id="theme-button" class="w-full">
       <MoonIcon class="hidden dark:block" />
       <SunIcon class="block dark:hidden" />
