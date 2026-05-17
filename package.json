@@ -2,10 +2,11 @@
   "name": "frasermclean-site",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@11.1.2",
   "scripts": {
-    "predev": "npm run cf:types",
+    "predev": "pnpm run cf:types",
     "dev": "astro dev",
-    "prebuild": "npm run cf:types",
+    "prebuild": "pnpm run cf:types",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
