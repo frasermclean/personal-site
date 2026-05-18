@@ -7,10 +7,6 @@ heroImage:
   alt: Post hero image showing logos of TailScale, Cloudflare and Pangolin
 comments: true
 tags: [ self-hosted, docker, homelab, networking, vpn, cloudflare, pangolin, tailscale, dns ]
-syndication:
-  - https://news.indieweb.org/en/frasermclean.com/posts/remotely-accessing-self-hosted-applications
-  - https://bubbles.town/entry/120443
-  - https://mastodon.social/@frasermclean/115805685819692066
 ---
 
 ## Introduction

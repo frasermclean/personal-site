@@ -1,49 +1,37 @@
 import { env } from 'cloudflare:workers';
 
-interface SyndicationLinksRecord {
-  slug: string;
-  links: string[];
-  updatedAt: string;
-  revision: number;
+interface SyndicationLinkRow {
+  url: string;
 }
 
-export async function getLinks(slug: string): Promise<string[] | null> {
-  const value = await env.POST_SYNDICATION.get(slug);
-  if (!value) {
-    return null;
-  }
+export async function getLinks(slug: string): Promise<string[]> {
+  const result = await env.DB.prepare('SELECT url FROM post_syndication_links WHERE slug = ?1 ORDER BY position ASC')
+    .bind(slug)
+    .all<SyndicationLinkRow>();
 
-  try {
-    const record = JSON.parse(value) as SyndicationLinksRecord;
-    return sanitizeLinks(record.links);
-  } catch (error) {
-    console.error(`Failed to parse syndication links for slug "${slug}"`, error);
-    return null;
-  }
+  return sanitizeLinks(result.results.map((row) => row.url));
 }
 
 export async function saveLinks(slug: string, links: string[]): Promise<string> {
-  const existing = await env.POST_SYNDICATION.get(slug);
-  let previousRevision = 0;
-
-  if (existing) {
-    try {
-      previousRevision = (JSON.parse(existing) as SyndicationLinksRecord).revision ?? 0;
-    } catch {
-      previousRevision = 0;
-    }
-  }
-
   const sanitizedLinks = sanitizeLinks(links);
-  const record: SyndicationLinksRecord = {
-    slug,
-    links: sanitizedLinks,
-    updatedAt: new Date().toISOString(),
-    revision: previousRevision + 1
-  };
+  const updatedAt = new Date().toISOString();
 
-  await env.POST_SYNDICATION.put(slug, JSON.stringify(record));
-  return record.updatedAt;
+  const statements: D1PreparedStatement[] = [
+    env.DB.prepare('DELETE FROM post_syndication_links WHERE slug = ?1').bind(slug)
+  ];
+
+  statements.push(
+    ...sanitizedLinks.map((url, position) =>
+      env.DB.prepare('INSERT INTO post_syndication_links (slug, url, position) VALUES (?1, ?2, ?3)').bind(
+        slug,
+        url,
+        position
+      )
+    )
+  );
+
+  await env.DB.batch(statements);
+  return updatedAt;
 }
 
 export function sanitizeLinks(links: string[]): string[] {

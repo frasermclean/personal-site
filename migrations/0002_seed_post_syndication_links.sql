@@ -1,0 +1,63 @@
+DELETE FROM post_syndication_links
+WHERE slug IN (
+  'bubbles-post-discovery',
+  'docker-compose-environment-overrides',
+  'remotely-accessing-self-hosted-applications'
+);
+
+INSERT INTO post_syndication_links (slug, url, position) VALUES
+  (
+    'bubbles-post-discovery',
+    'https://news.indieweb.org/en/frasermclean.com/posts/bubbles-post-discovery',
+    0
+  ),
+  (
+    'bubbles-post-discovery',
+    'https://bubbles.town/entry/138991',
+    1
+  ),
+  (
+    'bubbles-post-discovery',
+    'https://mastodon.social/@frasermclean/116518288725933342',
+    2
+  ),
+  (
+    'bubbles-post-discovery',
+    'https://bsky.app/profile/frasermclean.com/post/3mkkf5b5ruk2o',
+    3
+  ),
+  (
+    'bubbles-post-discovery',
+    'https://www.reddit.com/r/indieweb/comments/1sxx6oq/awesome_post_discovery_with_bubbles/',
+    4
+  ),
+  (
+    'docker-compose-environment-overrides',
+    'https://bubbles.town/entry/158652',
+    0
+  ),
+  (
+    'docker-compose-environment-overrides',
+    'https://mastodon.social/@frasermclean/116521749848732290',
+    1
+  ),
+  (
+    'docker-compose-environment-overrides',
+    'https://bsky.app/profile/frasermclean.com/post/3ml43sp4mas2c',
+    2
+  ),
+  (
+    'remotely-accessing-self-hosted-applications',
+    'https://news.indieweb.org/en/frasermclean.com/posts/remotely-accessing-self-hosted-applications',
+    0
+  ),
+  (
+    'remotely-accessing-self-hosted-applications',
+    'https://bubbles.town/entry/120443',
+    1
+  ),
+  (
+    'remotely-accessing-self-hosted-applications',
+    'https://mastodon.social/@frasermclean/115805685819692066',
+    2
+  );
