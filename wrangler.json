@@ -37,10 +37,13 @@
     {
       "binding": "SESSION",
       "id": "a839b04fba2a4abc81addab7cc996649"
-    },
+    }
+  ],
+  "d1_databases": [
     {
-      "binding": "POST_SYNDICATION",
-      "id": "8499c80d9af343f49db5fab0c1a51a06"
+      "binding": "DB",
+      "database_name": "personal-site",
+      "database_id": "66c9ef15-467e-4c24-aa29-23fb1ff921f1"
     }
   ]
 }
