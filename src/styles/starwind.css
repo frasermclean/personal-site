@@ -58,6 +58,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-outline: var(--outline);
+  --color-navbar: var(--navbar);
+  --color-navbar-foreground: var(--navbar-foreground);
 
   --radius-xs: calc(var(--radius) - 0.375rem);
   --radius-sm: calc(var(--radius) - 0.25rem);
@@ -96,6 +98,8 @@
     --border: var(--color-neutral-200);
     --input: var(--color-neutral-100);
     --outline: var(--color-neutral-400);
+    --navbar: color-mix(in oklab, var(--color-neutral-600) 90%, transparent);
+    --navbar-foreground: var(--color-neutral-50);
     --radius: 0.625rem;
   }
 
@@ -126,6 +130,8 @@
     --border: --alpha(var(--color-neutral-50) / 10%);
     --input: --alpha(var(--color-neutral-400) / 15%);
     --outline: var(--color-neutral-500);
+    --navbar: color-mix(in oklab, var(--color-neutral-800) 90%, transparent);
+    --navbar-foreground: var(--color-neutral-100);
   }
 
   * {
