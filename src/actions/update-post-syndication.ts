@@ -32,12 +32,11 @@ export const updatePostSyndication = defineAction({
       });
     }
 
-    const updatedAt = await saveLinks(slug, links);
+    await saveLinks(slug, links);
 
     return {
       slug,
-      links,
-      updatedAt
+      links
     };
   }
 });
