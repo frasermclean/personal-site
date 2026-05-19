@@ -35,7 +35,7 @@ export async function saveLinks(slug: string, links: string[]): Promise<string> 
   return updatedAt;
 }
 
-export function sanitizeLinks(links: string[]): string[] {
+function sanitizeLinks(links: string[]): string[] {
   const deduplicated = new Set<string>();
 
   for (const value of links) {
@@ -53,8 +53,8 @@ export function sanitizeLinks(links: string[]): string[] {
       if (url.protocol === 'http:' || url.protocol === 'https:') {
         deduplicated.add(trimmed);
       }
-    } catch {
-      // ignore invalid URL values
+    } catch (error) {
+      console.warn(`Invalid URL: ${trimmed}`, error);
     }
   }
 
