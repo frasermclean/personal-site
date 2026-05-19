@@ -5,7 +5,8 @@ interface SyndicationLinkRow {
 }
 
 export async function getLinks(slug: string): Promise<string[]> {
-  const result = await env.DB.prepare('SELECT url FROM post_syndication_links WHERE slug = ?1 ORDER BY position ASC')
+  const result = await env.DB.withSession()
+    .prepare('SELECT url FROM post_syndication_links WHERE slug = ?1 ORDER BY position ASC')
     .bind(slug)
     .all<SyndicationLinkRow>();
 
@@ -30,7 +31,7 @@ export async function saveLinks(slug: string, links: string[]): Promise<string> 
     )
   );
 
-  await env.DB.batch(statements);
+  await env.DB.withSession('first-primary').batch(statements);
   return updatedAt;
 }
 
