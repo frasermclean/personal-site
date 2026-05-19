@@ -1,0 +1,19 @@
+name: reverse-proxy
+
+services:
+  traefik:
+    image: traefik:v3.7 # v3.7 is the latest version at the time of writing, but you can check for newer versions on Docker Hub
+    command:
+      - --api.insecure=true # Enable Traefik's dashboard (insecure mode for demonstration purposes, consider securing it in production)
+      - --providers.docker=true # Enable Docker provider to automatically discover services
+      - --providers.docker.exposedbydefault=false # Only expose services that are explicitly labeled
+      - --entrypoints.web.address=:80 # Listen on port 80 for HTTP traffic
+      - --entrypoints.websecure.address=:443 # Listen on port 443 for HTTPS traffic
+      - --certificatesresolvers.cloudflare.acme.dnschallenge=true # Enable DNS-01 challenge for certificate issuance
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare # Use Cloudflare as the DNS provider
+    ports:
+      - 80:80 # Map port 80 on the host to port 80 in the container
+      - 443:443 # Map port 443 on the host to port 443 in the container
+      - 8080:8080 # Optional: Map port 8080 for Traefik's dashboard (if enabled)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Mount Docker socket to allow Traefik to communicate with the Docker daemon

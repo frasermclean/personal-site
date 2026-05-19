@@ -2,16 +2,28 @@
 title: Traefik Reverse Proxy with Automatic Certificates
 description: A guide on how to set up Traefik as a reverse proxy with automatic certificate management using Docker Compose.
 publishDate: 2026-05-19
-heroImage: 
+heroImage:
   src: traefik-reverse-proxy-automatic-certs.png
-  alt: Image showing a busy intersection with traffic flowing in different directions, representing the concept of a reverse proxy managing traffic.
+  alt: Traefik Proxy logo over a background of a busy intersection with light trails from cars
 category: guide
-tags: ['docker', 'docker-compose', 'traefik', 'reverse-proxy', 'certificates', 'ssl', 'https', 'self-hosted']
+tags:
+  [
+    'docker',
+    'docker-compose',
+    'traefik',
+    'reverse-proxy',
+    'certificates',
+    'ssl',
+    'https',
+    'self-hosted',
+    'cloudflare',
+    'dns'
+  ]
 ---
 
 ## Introduction
 
-In this guide, we will explore how to set up [Traefik as a reverse proxy](https://traefik.io/traefik) with automatic certificate management using Docker Compose. Traefik is a modern, dynamic reverse proxy that can automatically discover services and manage SSL certificates using [Let's Encrypt](https://letsencrypt.org/). This setup is ideal for self-hosted applications, allowing you to securely expose your services to the internet without the hassle of manual certificate management.
+In this guide, we will explore how to set up [Traefik as a reverse proxy](https://traefik.io/traefik) with automatic certificate management using Docker Compose. Traefik is a modern, dynamic reverse proxy that can automatically discover services and manage SSL certificates using [Let's Encrypt](https://letsencrypt.org/). We will use Cloudflare as our DNS provider to handle the DNS-01 challenge for certificate issuance. This setup is ideal for self-hosted applications, allowing you to securely expose your services to the internet without the hassle of manual certificate management.
 
 ### What is a Reverse Proxy?
 
@@ -28,3 +40,14 @@ In order to follow this guide, you will need the following:
 - A server or local machine with Docker and Docker Compose installed. You're probably going to want to use an up-to-date Linux distribution for this. My personal recommendation is [Debian](https://www.debian.org/), but you can use any distribution that supports Docker.
 - Exposed ports 80 and 443 on your server for HTTP and HTTPS traffic. If you're not too sure what this means, check out my other post's [section on port forwarding](/posts/remotely-accessing-self-hosted-applications#port-forwarding) for more details.
 - A domain name that you own and can point to your server's public IP address. I will use `example.com` in this guide, but you should replace it with your actual domain name.
+- A Cloudflare account with your domain added and DNS management access. You will need to create an API token in Cloudflare with zone edit permissions to manage DNS records for your domain. This token will be used by Traefik to perform the DNS-01 challenge for certificate issuance.
+
+## Installation Process
+
+Now that we have everything we need, we can get started with the installation process. We will break it down into several steps:
+
+### Step 1: Create a Docker Compose File
+
+Here is a basic `compose.yaml` file to get started. Save this file into an empty directory on your server, and we will go through it step by step.
+
+<CodeFile path="/src/content/posts/traefik-reverse-proxy-automatic-certs/compose.yaml" lang="yaml" />
