@@ -5,16 +5,16 @@ interface SyndicationLinkRow {
 }
 
 export async function getLinks(slug: string): Promise<string[]> {
-  const result = await env.DB.prepare('SELECT url FROM post_syndication_links WHERE slug = ?1 ORDER BY position ASC')
+  const result = await env.DB.withSession()
+    .prepare('SELECT url FROM post_syndication_links WHERE slug = ?1 ORDER BY position ASC')
     .bind(slug)
     .all<SyndicationLinkRow>();
 
   return sanitizeLinks(result.results.map((row) => row.url));
 }
 
-export async function saveLinks(slug: string, links: string[]): Promise<string> {
+export async function saveLinks(slug: string, links: string[]): Promise<void> {
   const sanitizedLinks = sanitizeLinks(links);
-  const updatedAt = new Date().toISOString();
 
   const statements: D1PreparedStatement[] = [
     env.DB.prepare('DELETE FROM post_syndication_links WHERE slug = ?1').bind(slug)
@@ -30,11 +30,10 @@ export async function saveLinks(slug: string, links: string[]): Promise<string> 
     )
   );
 
-  await env.DB.batch(statements);
-  return updatedAt;
+  await env.DB.withSession('first-primary').batch(statements);
 }
 
-export function sanitizeLinks(links: string[]): string[] {
+function sanitizeLinks(links: string[]): string[] {
   const deduplicated = new Set<string>();
 
   for (const value of links) {
@@ -52,8 +51,8 @@ export function sanitizeLinks(links: string[]): string[] {
       if (url.protocol === 'http:' || url.protocol === 'https:') {
         deduplicated.add(trimmed);
       }
-    } catch {
-      // ignore invalid URL values
+    } catch (error) {
+      console.warn(`Invalid URL: ${trimmed}`, error);
     }
   }
 

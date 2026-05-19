@@ -1,5 +1,5 @@
 import { hasOwnerConfiguration, isOwner } from '@/lib/auth/owner-check';
-import { saveLinks } from '@/lib/syndication';
+import { saveLinks } from '@/lib/db/syndication-links';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { getEntry } from 'astro:content';
@@ -32,12 +32,11 @@ export const updatePostSyndication = defineAction({
       });
     }
 
-    const updatedAt = await saveLinks(slug, links);
+    await saveLinks(slug, links);
 
     return {
       slug,
-      links,
-      updatedAt
+      links
     };
   }
 });
