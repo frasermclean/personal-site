@@ -1,4 +1,5 @@
 ---
+import CodeFile from '@/components/CodeFile.astro';
 import CategoryLink from '@/components/links/CategoryLink.astro';
 import PostBreadcrumbs from '@/components/post-view/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/post-view/PostMetadata.astro';
@@ -24,7 +25,7 @@ if (!entry) {
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { title, description, heroImage, publishDate, category, tags, syndication, showReactions } = entry.data;
+const { title, description, heroImage, publishDate, category, tags, showReactions } = entry.data;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const { updatedDate, readingTime } = remarkPluginFrontmatter;
 const relatedPosts = await getRelatedPosts(slug, category, tags);
@@ -47,7 +48,7 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
 
   <div class="flex w-full">
     <Prose class="e-content w-full max-w-none xl:max-w-prose">
-      <Content />
+      <Content components={{ CodeFile }} />
     </Prose>
     <aside class="sticky top-24 hidden grow flex-col gap-6 self-start pl-4 xl:flex">
       <TableOfContents
