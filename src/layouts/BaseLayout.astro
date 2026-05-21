@@ -23,7 +23,8 @@ export interface Props {
 }
 
 const { title, description, isArticle = false, heroImage, mainClass = '' } = Astro.props;
-const canonicalUrl = Astro.url.pathname === '/' ? Astro.site!.origin : new URL(Astro.url.pathname, Astro.site).href;
+const canonicalUrl =
+  Astro.url.pathname === '/' ? Astro.site!.origin : new URL(`${Astro.url.pathname}${Astro.url.search}`, Astro.site);
 
 const fullTitle = title.length < 30 ? `${title} | ${SITE_TITLE}` : title;
 
