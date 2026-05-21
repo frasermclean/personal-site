@@ -3,13 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "predev": "npm run cf:types",
-    "dev": "astro dev",
-    "prebuild": "npm run cf:types",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "cf:types": "wrangler types"
+    "dev": "wrangler types && astro dev",
+    "build": "wrangler types && astro build",
+    "preview": "wrangler types && astro preview",
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
