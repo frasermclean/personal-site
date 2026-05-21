@@ -1,5 +1,4 @@
 ---
-import { isOwner } from '@/lib/auth/owner-check';
 import { getLinks as getSyndicationLinks } from '@/lib/db/syndication-links';
 import ShareIcon from '@tabler/icons/outline/share-3.svg';
 import { getEntry } from 'astro:content';
@@ -18,7 +17,7 @@ if (!entry) {
 }
 
 const links = await getSyndicationLinks(slug);
-const canEdit = isOwner(Astro.locals.user);
+const canEdit = Astro.locals.user?.isOwner || false;
 ---
 
 {

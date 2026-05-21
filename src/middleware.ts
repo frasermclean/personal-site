@@ -1,6 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { getSessionId } from './lib/auth/auth-cookies';
-import { getUserSession } from './lib/auth/auth-session';
+import type { AppUser } from './lib/auth/auth-types';
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const FIFTEEN_MINUTES_IN_SECONDS = 60 * 15;
@@ -15,8 +14,8 @@ const THIRTY_MINUTES_IN_SECONDS = 60 * 30;
 export const onRequest = defineMiddleware(async (context, next) => {
   const { request, url } = context;
 
-  const sessionId = getSessionId(context.cookies);
-  context.locals.user = sessionId ? await getUserSession(sessionId) : null;
+  const user = await context.session?.get<AppUser>('user');
+  context.locals.user = user ?? null;
 
   const response = await next();
 

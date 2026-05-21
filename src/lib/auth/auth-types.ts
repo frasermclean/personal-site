@@ -1,12 +1,10 @@
-export interface UserSession {
-  id: string;
+export interface AppUser {
+  name: string | null;
+  email: string | null;
+  avatarUrl: string;
   githubId: number;
   githubUsername: string;
-  name: string | null;
-  avatarUrl: string;
-  email: string | null;
-  createdAt: number;
-  expiresAt: number;
+  isOwner: boolean;
 }
 
 // auth messages
