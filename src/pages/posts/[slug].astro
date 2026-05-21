@@ -24,7 +24,7 @@ if (!entry) {
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { title, description, heroImage, publishDate, category, tags, syndication, showReactions } = entry.data;
+const { title, description, heroImage, publishDate, category, tags, showReactions } = entry.data;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const { updatedDate, readingTime } = remarkPluginFrontmatter;
 const relatedPosts = await getRelatedPosts(slug, category, tags);
