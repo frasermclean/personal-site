@@ -1,4 +1,3 @@
-import { setOauthStateCookie, setReturnToCookie } from '@/lib/auth/auth-cookies';
 import { AuthMessage } from '@/lib/auth/auth-types';
 import { buildGithubAuthUrl, generateRandomState } from '@/lib/auth/github-oauth';
 import type { APIRoute } from 'astro';
@@ -14,14 +13,12 @@ export const GET: APIRoute = async (context) => {
   try {
     // generate random state for CSRF protection
     const state = generateRandomState();
-
-    // store state in a cookie - we'll validate it during callback
-    setOauthStateCookie(context.cookies, state, context.url);
+    context.session?.set('oauthState', state);
 
     // get optional returnTo parameter to redirect user back after login
     const returnTo = context.url.searchParams.get('returnTo');
     if (returnTo) {
-      setReturnToCookie(context.cookies, returnTo, context.url);
+      context.session?.set('returnTo', returnTo);
     }
 
     // build authorization URL

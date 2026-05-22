@@ -6,9 +6,10 @@ interface Props {
   headingText: string;
   caption: string;
   class?: string;
+  loading?: 'eager' | 'lazy';
 }
 
-const { image, headingText, caption, class: className } = Astro.props;
+const { image, headingText, caption, class: className, loading } = Astro.props;
 ---
 
 <section class={className}>
@@ -19,6 +20,6 @@ const { image, headingText, caption, class: className } = Astro.props;
     <p class="w-full max-w-xl text-justify">
       <slot />
     </p>
-    <CaptionedImage {image} {caption} width={256} class="w-64" />
+    <CaptionedImage {image} {caption} width={256} class="w-64" {loading} />
   </div>
 </section>

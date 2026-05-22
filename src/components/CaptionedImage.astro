@@ -8,12 +8,13 @@ interface Props {
   class?: string;
   width?: number;
   height?: number;
+  loading?: 'eager' | 'lazy';
 }
 
-const { image, caption, class: className, width, height } = Astro.props;
+const { image, caption, class: className, width, height, loading } = Astro.props;
 ---
 
 <figure class={className}>
-  <Image src={image} alt={caption} {width} {height} class="rounded" />
+  <Image src={image} alt={caption} {width} {height} class="rounded" {loading} />
   <figcaption class="mt-2 text-center text-sm text-neutral-500">{caption}</figcaption>
 </figure>

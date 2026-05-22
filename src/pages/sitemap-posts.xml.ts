@@ -1,6 +1,8 @@
 import { SITE_URL } from '@/constants';
 import { getCollection } from 'astro:content';
 
+export const prerender = true;
+
 export async function GET() {
   const posts = await getCollection('posts');
   const urlEntries = posts

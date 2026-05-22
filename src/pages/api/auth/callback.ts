@@ -1,10 +1,8 @@
-import { getAndClearOauthStateCookie, getAndClearReturnToCookie, setSessionCookie } from '@/lib/auth/auth-cookies';
-import { storeUserSession } from '@/lib/auth/auth-session';
-import type { UserSession } from '@/lib/auth/auth-types';
+import type { AppUser } from '@/lib/auth/auth-types';
 import { AuthMessage } from '@/lib/auth/auth-types';
 import { exchangeCodeForToken, fetchGithubUser, type GitHubUser } from '@/lib/auth/github-oauth';
 import type { APIRoute } from 'astro';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI, OWNER_GITHUB_ID } from 'astro:env/server';
 
 const oauthConfig = {
   clientId: GITHUB_CLIENT_ID,
@@ -13,9 +11,9 @@ const oauthConfig = {
 };
 
 export const GET: APIRoute = async (context) => {
-  // get returnTo URL from cookie (if present) to redirect user back after login
-  const returnTo = getAndClearReturnToCookie(context.cookies, context.url);
-  const redirectUrl = new URL(returnTo, context.url.origin);
+  // get returnTo URL from session (if present) to redirect user back after login
+  const returnTo = await context.session?.get<string>('returnTo');
+  const redirectUrl = new URL(returnTo ?? '/', context.url.origin);
 
   // ensure code and state parameters are present
   const code = context.url.searchParams.get('code');
@@ -26,8 +24,8 @@ export const GET: APIRoute = async (context) => {
   }
 
   try {
-    // retrieve stored state from cookie and compare to prevent CSRF attacks
-    const storedState = getAndClearOauthStateCookie(context.cookies, context.url);
+    // retrieve stored state from session and compare to prevent CSRF attacks
+    const storedState = await context.session?.get<string>('oauthState');
     if (state !== storedState) {
       throw new Error('State parameter mismatch');
     }
@@ -35,11 +33,10 @@ export const GET: APIRoute = async (context) => {
     // fetch github user profile
     const { accessToken, tokenType } = await exchangeCodeForToken(code, oauthConfig);
     const githubUser = await fetchGithubUser(accessToken, tokenType);
-    const session = mapUserSession(githubUser);
+    const user = mapUserSession(githubUser);
 
     // store session and set cookie
-    await storeUserSession(session);
-    setSessionCookie(context.cookies, session.id, context.url);
+    context.session?.set('user', user);
 
     // redirect user back to original page with success message
     redirectUrl.searchParams.set('auth', AuthMessage.LoginSuccess);
@@ -48,20 +45,21 @@ export const GET: APIRoute = async (context) => {
     console.error('GitHub callback failed:', error);
     redirectUrl.searchParams.set('auth', AuthMessage.GitHubCallbackError);
     return context.redirect(redirectUrl.toString());
+  } finally {
+    // clean up session data used during login flow
+    context.session?.delete('oauthState');
+    context.session?.delete('returnTo');
   }
 };
 
-function mapUserSession(user: GitHubUser): UserSession {
-  const now = Date.now();
-  const sessionId = crypto.randomUUID();
-  return {
-    id: sessionId,
-    githubId: user.id,
-    githubUsername: user.login,
-    name: user.name,
-    avatarUrl: user.avatar_url,
-    email: user.email,
-    createdAt: now,
-    expiresAt: now + 30 * 24 * 60 * 60 * 1000 // 30 days
-  };
-}
+const mapUserSession = (user: GitHubUser): AppUser => ({
+  name: user.name,
+  email: user.email,
+  avatarUrl: user.avatar_url,
+  githubId: user.id,
+  githubUsername: user.login,
+  isOwner: isOwner(user.id)
+});
+
+const isOwner = (githubId: number): boolean =>
+  OWNER_GITHUB_ID ? Number.parseInt(OWNER_GITHUB_ID, 10) === githubId : false;
