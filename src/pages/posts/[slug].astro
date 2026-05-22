@@ -39,6 +39,7 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
     formats={['avif', 'webp']}
     class="mt-4 mb-8 rounded-4xl shadow-xl md:my-12"
     quality={85}
+    loading="eager"
   />
 
   <PostStructuredData {title} {description} image={heroImage.src} {publishDate} {updatedDate} slot="head" />

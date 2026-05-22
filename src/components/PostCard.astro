@@ -46,6 +46,7 @@ const { readingTime } = remarkPluginFrontmatter;
         height={330}
         formats={['avif', 'webp']}
         quality={75}
+        loading={isFeatured ? 'eager' : 'lazy'}
         class:list={[
           'w-full transition-transform duration-300 ease-out group-hover:scale-105',
           { 'h-full object-cover': isDefault }

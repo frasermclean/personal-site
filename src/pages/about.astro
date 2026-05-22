@@ -27,7 +27,14 @@ const description =
         </p>
       </div>
 
-      <Image src={headshotImage} width={256} height={256} alt="Fraser McLean Headshot" class="rounded-full border-4" />
+      <Image
+        src={headshotImage}
+        width={256}
+        height={256}
+        alt="Fraser McLean Headshot"
+        class="rounded-full border-4"
+        loading="eager"
+      />
     </section>
 
     <section class="flex flex-col gap-4">
@@ -37,6 +44,7 @@ const description =
         headingText="Growing Up in Africa"
         image={trs80Image}
         caption="Writing BASIC programs on a single line display"
+        loading="eager"
       >
         I was born in Zimbabwe, but grew up in South Africa where I developed an early interest in technology. I
         remember being fascinated by programming BASIC on handheld computers at my first school. From then on, I knew
