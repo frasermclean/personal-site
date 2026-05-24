@@ -1,6 +1,9 @@
 import { env } from 'cloudflare:workers';
 
 export async function upsertPostLike(sessionId: string, postSlug: string, name?: string, email?: string) {
+  const normalizedName = name?.trim();
+  const normalizedEmail = email?.trim().toLowerCase();
+
   try {
     await env.DB.withSession('first-primary')
       .prepare(
@@ -11,7 +14,7 @@ export async function upsertPostLike(sessionId: string, postSlug: string, name?:
              name = COALESCE(excluded.name, post_likes.name),
              email = COALESCE(excluded.email, post_likes.email)`
       )
-      .bind(sessionId, postSlug, name ?? null, email ?? null)
+      .bind(sessionId, postSlug, normalizedName ?? null, normalizedEmail ?? null)
       .run();
   } catch (error) {
     throw new PostLikePersistenceError(
