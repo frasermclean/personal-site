@@ -1,0 +1,37 @@
+import { env } from 'cloudflare:workers';
+
+export async function upsertPostLike(sessionId: string, postSlug: string, name?: string, email?: string) {
+  try {
+    await env.DB.withSession('first-primary')
+      .prepare(
+        `INSERT INTO post_likes (session_id, post_slug, liked_at, name, email)
+           VALUES (?1, ?2, CURRENT_TIMESTAMP, ?3, ?4)
+           ON CONFLICT(session_id, post_slug) DO UPDATE SET
+             liked_at = excluded.liked_at,
+             name = COALESCE(excluded.name, post_likes.name),
+             email = COALESCE(excluded.email, post_likes.email)`
+      )
+      .bind(sessionId, postSlug, name ?? null, email ?? null)
+      .run();
+  } catch (error) {
+    throw new PostLikePersistenceError(
+      'Failed to upsert post like',
+      {
+        sessionId,
+        postSlug
+      },
+      { cause: error }
+    );
+  }
+}
+
+export class PostLikePersistenceError extends Error {
+  constructor(
+    message: string,
+    public readonly context: { sessionId: string; postSlug: string },
+    options?: ErrorOptions
+  ) {
+    super(message, options);
+    this.name = 'PostLikePersistenceError';
+  }
+}
