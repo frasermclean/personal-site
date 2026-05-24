@@ -1,0 +1,39 @@
+---
+import Button from '@/components/starwind/button/Button.astro';
+import ThumbUpIcon from '@tabler/icons/outline/thumb-up.svg';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+---
+
+<Button size="lg" variant="secondary" class="w-32" id="like-post-button" data-slug={slug}>
+  <span>Like</span>
+  <ThumbUpIcon />
+</Button>
+
+<script>
+  import { toast } from '@/components/starwind/toast';
+  import { actions, isActionError } from 'astro:actions';
+  const button = document.querySelector<HTMLButtonElement>('#like-post-button');
+
+  button?.addEventListener('click', async () => {
+    button.disabled = true;
+    const slug = button.dataset.slug;
+    if (!slug) throw new Error('Post slug is missing');
+
+    const { error } = await actions.addPostLike({ slug });
+
+    if (isActionError(error)) {
+      toast.error('An error occurred while liking the post.');
+      throw error;
+    }
+
+    toast.success('Thanks for liking the post ❤️');
+
+    const span = button.querySelector<HTMLSpanElement>('span');
+    if (span) span.textContent = 'Liked';
+  });
+</script>

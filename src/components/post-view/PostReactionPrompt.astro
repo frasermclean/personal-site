@@ -1,0 +1,18 @@
+---
+import AddLikeButton from './AddLikeButton.astro';
+
+interface Props {
+  slug: string;
+  class?: string;
+}
+
+const { slug, class: className } = Astro.props as Props;
+---
+
+<section class:list={['w-full space-y-2', className]}>
+  <div class="flex w-full justify-center gap-2">
+    <AddLikeButton {slug} />
+  </div>
+
+  <p class="text-center text-sm text-muted-foreground">No sign up is required to like or comment.</p>
+</section>
