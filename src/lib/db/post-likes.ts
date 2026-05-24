@@ -1,5 +1,21 @@
 import { env } from 'cloudflare:workers';
 
+export async function hasLikedPost(postSlug: string, sessionId?: string): Promise<boolean> {
+  if (!sessionId) return false;
+
+  try {
+    const result = await env.DB.withSession()
+      .prepare(`SELECT 1 FROM post_likes WHERE session_id = ?1 AND post_slug = ?2`)
+      .bind(sessionId, postSlug)
+      .first();
+
+    return !!result;
+  } catch (error) {
+    console.error('Error checking if post is liked', { sessionId, postSlug, error });
+    return false;
+  }
+}
+
 export async function upsertPostLike(sessionId: string, postSlug: string, name?: string, email?: string) {
   const normalizedName = name?.trim();
   const normalizedEmail = email?.trim().toLowerCase();

@@ -1,5 +1,6 @@
 ---
 import Button from '@/components/starwind/button/Button.astro';
+import { hasLikedPost } from '@/lib/db/post-likes';
 import ThumbUpIcon from '@tabler/icons/outline/thumb-up.svg';
 
 interface Props {
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const { slug } = Astro.props as Props;
+const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 ---
 
-<Button size="lg" variant="secondary" class="w-32" id="like-post-button" data-slug={slug}>
-  <span>Like</span>
+<Button size="lg" variant="secondary" class="w-32" id="like-post-button" data-slug={slug} disabled={hasLiked}>
+  <span>{hasLiked ? 'Liked' : 'Like'}</span>
   <ThumbUpIcon />
 </Button>
 
