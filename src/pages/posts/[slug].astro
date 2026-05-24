@@ -1,4 +1,5 @@
 ---
+import CodeFile from '@/components/CodeFile.astro';
 import CategoryLink from '@/components/links/CategoryLink.astro';
 import PostBreadcrumbs from '@/components/post-view/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/post-view/PostMetadata.astro';
@@ -48,7 +49,7 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
 
   <div class="flex w-full">
     <Prose class="e-content w-full max-w-none xl:max-w-prose">
-      <Content />
+      <Content components={{ CodeFile }} />
     </Prose>
     <aside class="sticky top-24 hidden grow flex-col gap-6 self-start pl-4 xl:flex">
       <TableOfContents

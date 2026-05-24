@@ -1,0 +1,36 @@
+---
+import { SHIKI_THEMES } from '@/lib/shiki-themes';
+import type { CodeLanguage } from 'astro';
+import { Code } from 'astro:components';
+
+interface Props {
+  path: string;
+  lang: CodeLanguage;
+}
+
+const { path, lang } = Astro.props;
+
+const globFiles = import.meta.glob(
+  ['/src/**/*.{astro,md,mdx,ts,tsx,js,jsx,mjs,cjs,json,css,scss,html,xml,yaml,yml,sh,sql,txt}'],
+  { eager: true, query: '?raw', import: 'default' }
+) as Record<string, string>;
+
+function normalizePath(value: string) {
+  const normalized = value.replaceAll('\\', '/').replace(/^\.\//, '').replace(/^\//, '');
+  return `/${normalized}`;
+}
+
+const filePath = normalizePath(path);
+
+if (!filePath.startsWith('/src/')) {
+  throw new Error(`CodeFile path must start with "/src/". Received: "${path}"`);
+}
+
+const fileContents = globFiles[filePath];
+
+if (!fileContents) {
+  throw new Error(`CodeFile could not find "${filePath}" in the preloaded src file set.`);
+}
+---
+
+<Code code={fileContents} lang={lang} themes={SHIKI_THEMES} />

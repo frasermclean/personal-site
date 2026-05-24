@@ -8,6 +8,7 @@ import { SITE_URL } from './src/constants.ts';
 import { remarkExternalLinks } from './src/lib/remark-external-links.ts';
 import { remarkReadingTime } from './src/lib/remark-reading-time.js';
 import { remarkUpdatedDate } from './src/lib/remark-updated-date.js';
+import { SHIKI_THEMES } from './src/lib/shiki-themes.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -70,10 +71,7 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime, remarkUpdatedDate, remarkExternalLinks],
     rehypePlugins: [rehypeFigure],
     shikiConfig: {
-      themes: {
-        light: 'light-plus',
-        dark: 'dark-plus'
-      }
+      themes: SHIKI_THEMES
     }
   },
   vite: {
