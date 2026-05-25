@@ -1,13 +1,13 @@
-import { SourcePlatform, type PostComment, type PostLike } from '@/lib/reaction-types';
+import { SourcePlatform, type Comment, type Like } from '@/lib/reaction-types';
 import type { WebMentionResponse } from './webmentions-api';
 
 const IGNORED_AUTHOR_URLS = ['https://reddit.com/user/asimovs-auditor/', 'https://reddit.com/user/AutoModerator/'];
 const REDDIT_DELETED_STRING = '[deleted]';
 
-export function mapLikes(response: WebMentionResponse): PostLike[] {
+export function mapWebMentionLikes(response: WebMentionResponse): Like[] {
   const likes = response.children
     .filter((entry) => entry['wm-property'] === 'like-of' && !IGNORED_AUTHOR_URLS.includes(entry.author.url))
-    .map<PostLike>((entry) => ({
+    .map<Like>((entry) => ({
       authorName: sanitizeText(entry.author.name),
       authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
       avatarUrl: entry.author.photo,
@@ -15,10 +15,11 @@ export function mapLikes(response: WebMentionResponse): PostLike[] {
       sourceUrl: entry.url,
       sourcePlatform: parseSourcePlatform(entry['wm-source'])
     }));
+
   return likes;
 }
 
-export function mapComments(response: WebMentionResponse): PostComment[] {
+export function mapWebMentionComments(response: WebMentionResponse): Comment[] {
   const comments = response.children
     .filter(
       (entry) =>
@@ -30,7 +31,7 @@ export function mapComments(response: WebMentionResponse): PostComment[] {
         entry.author.name !== REDDIT_DELETED_STRING &&
         entry.content?.text !== REDDIT_DELETED_STRING
     )
-    .map<PostComment>((entry) => ({
+    .map<Comment>((entry) => ({
       authorName: sanitizeText(entry.author.name),
       authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
       avatarUrl: entry.author.photo,
@@ -39,6 +40,7 @@ export function mapComments(response: WebMentionResponse): PostComment[] {
       sourceUrl: entry.url,
       sourcePlatform: parseSourcePlatform(entry['wm-source'])
     }));
+
   return comments;
 }
 

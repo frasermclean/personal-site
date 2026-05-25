@@ -1,5 +1,24 @@
 import { env } from 'cloudflare:workers';
 
+interface PostLikeRecord {
+  name: string | null;
+  email: string | null;
+  liked_at: string;
+}
+
+export async function getPostLikes(postSlug: string): Promise<PostLikeRecord[]> {
+  try {
+    const result = await env.DB.withSession()
+      .prepare(`SELECT name, email, liked_at FROM post_likes WHERE post_slug = ?1`)
+      .bind(postSlug)
+      .all<PostLikeRecord>();
+
+    return result.results;
+  } catch (error) {
+    console.error('Error fetching post likes', { postSlug, error });
+    return [];
+  }
+}
 export async function hasLikedPost(postSlug: string, sessionId?: string): Promise<boolean> {
   if (!sessionId) return false;
 
@@ -17,8 +36,8 @@ export async function hasLikedPost(postSlug: string, sessionId?: string): Promis
 }
 
 export async function upsertPostLike(sessionId: string, postSlug: string, name?: string, email?: string) {
-  const normalizedName = name?.trim();
-  const normalizedEmail = email?.trim().toLowerCase();
+  const normalizedName = name?.trim() ?? null;
+  const normalizedEmail = email?.trim().toLowerCase() ?? null;
 
   try {
     await env.DB.withSession('first-primary')
@@ -30,7 +49,7 @@ export async function upsertPostLike(sessionId: string, postSlug: string, name?:
              name = COALESCE(excluded.name, post_likes.name),
              email = COALESCE(excluded.email, post_likes.email)`
       )
-      .bind(sessionId, postSlug, normalizedName ?? null, normalizedEmail ?? null)
+      .bind(sessionId, postSlug, normalizedName, normalizedEmail)
       .run();
   } catch (error) {
     throw new PostLikePersistenceError(
