@@ -1,0 +1,87 @@
+---
+import Button from '@/components/starwind/button/Button.astro';
+import { hasLikedPost } from '@/lib/db/post-likes';
+import ThumbUpIcon from '@tabler/icons/outline/thumb-up.svg';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/starwind/dialog';
+import { Label } from '@/components/starwind/label';
+import Input from '@/components/starwind/input/Input.astro';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
+---
+
+<Dialog id="like-post-dialog">
+  <DialogTrigger asChild>
+    <Button size="lg" variant="secondary" class="w-32">
+      <span>{hasLiked ? 'Liked' : 'Like'}</span>
+      <ThumbUpIcon />
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <form id="like-post-form" method="dialog" class="flex w-full flex-col">
+      <DialogHeader>
+        <DialogTitle>Thanks for the like!</DialogTitle>
+        <DialogDescription>Please add your details so I know who it's from.</DialogDescription>
+      </DialogHeader>
+      <input type="hidden" name="slug" value={slug} />
+      <div class="my-8 flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <Label for="name">Full Name</Label>
+          <Input id="name" type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="100" />
+          <p class="text-sm text-muted-foreground">Will be shown publicly.</p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <Label for="email">Email</Label>
+          <Input id="email" type="email" name="email" placeholder="Your Email" autocomplete="email" />
+          <p class="text-sm text-muted-foreground">Used for avatar and will not be displayed publicly.</p>
+        </div>
+      </div>
+      <DialogFooter>
+        <Button type="submit" variant="primary">Submit</Button>
+      </DialogFooter>
+    </form>
+  </DialogContent>
+</Dialog>
+
+<script>
+  import { toast } from '@/components/starwind/toast';
+  import { actions, isActionError } from 'astro:actions';
+
+  const form = document.querySelector<HTMLFormElement>('#like-post-form');
+
+  form?.addEventListener('submit', async () => {
+    // read form data values
+    const formData = new FormData(form);
+    const slug = formData.get('slug')?.toString() || '';
+    const name = formData.get('name')?.toString().trim();
+    const email = formData.get('email')?.toString().trim();
+
+    const { error } = await actions.addPostLike({ slug, name, email });
+
+    // check for error
+    if (isActionError(error)) {
+      toast.error(error.message);
+      console.error('Error adding post like:', error);
+      return;
+    }
+
+    // send toast message
+    const toastMessage = name ? `Thanks for the like, ${name.split(' ')[0]}! ❤️` : 'Thanks for liking the post! ❤️';
+    toast.success(toastMessage);
+
+    // track in analytics
+    umami.track('post-like', { slug });
+  });
+</script>

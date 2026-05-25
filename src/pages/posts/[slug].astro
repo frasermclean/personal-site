@@ -2,6 +2,7 @@
 import CategoryLink from '@/components/links/CategoryLink.astro';
 import PostBreadcrumbs from '@/components/post-view/PostBreadcrumbs.astro';
 import PostMetadata from '@/components/post-view/PostMetadata.astro';
+import PostReactionPrompt from '@/components/post-view/PostReactionPrompt.astro';
 import PostReactions from '@/components/post-view/PostReactions.astro';
 import PostStructuredData from '@/components/post-view/PostStructuredData.astro';
 import Prose from '@/components/post-view/Prose.astro';
@@ -47,9 +48,13 @@ const relatedPosts = await getRelatedPosts(slug, category, tags);
   <PostBreadcrumbs {title} class="mb-8 hidden md:block" />
 
   <div class="flex w-full">
-    <Prose class="e-content w-full max-w-none xl:max-w-prose">
-      <Content />
-    </Prose>
+    <div>
+      <Prose class="e-content w-full max-w-none xl:max-w-prose">
+        <Content />
+      </Prose>
+      <PostReactionPrompt slug={slug} class="mt-4" />
+    </div>
+
     <aside class="sticky top-24 hidden grow flex-col gap-6 self-start pl-4 xl:flex">
       <TableOfContents
         headings={headings}

@@ -11,9 +11,9 @@ export interface Comment {
 export interface Like {
   authorName: string;
   authorInitials: string;
-  avatarUrl: string;
+  avatarUrl: string | null;
   publishDate: Date;
-  sourceUrl: string;
+  sourceUrl: string | null;
   sourcePlatform: SourcePlatform | null;
 }
 

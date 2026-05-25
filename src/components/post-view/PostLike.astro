@@ -7,16 +7,17 @@ import type { Like } from '@/lib/reaction-types';
 interface Props extends Like {}
 
 const { authorName, authorInitials, avatarUrl, sourceUrl, sourcePlatform } = Astro.props as Props;
+const tooltipContent = sourcePlatform ? `${authorName} (${sourcePlatform})` : authorName;
 ---
 
 <Tooltip>
   <TooltipTrigger>
     <Link href={sourceUrl}>
       <Avatar class="hover:border-accent">
-        <AvatarImage src={avatarUrl} alt={authorName} />
+        {avatarUrl && <AvatarImage src={avatarUrl} alt={authorName} />}
         <AvatarFallback>{authorInitials}</AvatarFallback>
       </Avatar>
     </Link>
   </TooltipTrigger>
-  <TooltipContent side="bottom">{authorName} ({sourcePlatform})</TooltipContent>
+  <TooltipContent side="bottom">{tooltipContent}</TooltipContent>
 </Tooltip>

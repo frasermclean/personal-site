@@ -1,5 +1,4 @@
 import { defineMiddleware } from 'astro:middleware';
-import type { AppUser } from './lib/auth/auth-types';
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const FIFTEEN_MINUTES_IN_SECONDS = 60 * 15;
@@ -13,7 +12,7 @@ const THIRTY_MINUTES_IN_SECONDS = 60 * 30;
  */
 export const onRequest = defineMiddleware(async (context, next) => {
   // make user session available on Astro object
-  context.locals.user = await context.session?.get<AppUser>('user');
+  context.locals.user = await context.session?.get('user');
 
   const response = await next();
 

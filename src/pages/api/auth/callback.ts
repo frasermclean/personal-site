@@ -12,7 +12,7 @@ const oauthConfig = {
 
 export const GET: APIRoute = async (context) => {
   // get returnTo URL from session (if present) to redirect user back after login
-  const returnTo = await context.session?.get<string>('returnTo');
+  const returnTo = await context.session?.get('returnTo');
   const redirectUrl = new URL(returnTo ?? '/', context.url.origin);
 
   // ensure code and state parameters are present
@@ -25,7 +25,7 @@ export const GET: APIRoute = async (context) => {
 
   try {
     // retrieve stored state from session and compare to prevent CSRF attacks
-    const storedState = await context.session?.get<string>('oauthState');
+    const storedState = await context.session?.get('oauthState');
     if (state !== storedState) {
       throw new Error('State parameter mismatch');
     }
