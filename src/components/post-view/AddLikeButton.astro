@@ -80,5 +80,8 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
     // send toast message
     const toastMessage = name ? `Thanks for the like, ${name.split(' ')[0]}! ❤️` : 'Thanks for liking the post! ❤️';
     toast.success(toastMessage);
+
+    // track in analytics
+    umami.track('post-like', { slug });
   });
 </script>
