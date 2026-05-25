@@ -1,10 +1,10 @@
-import { SourcePlatform, type Comment, type Like } from '@/lib/reaction-types';
-import type { WebMentionResponse } from '@/lib/webmention-types';
+import { SourcePlatform, type PostComment, type PostLike } from '@/lib/reaction-types';
+import { fetchWebMentions, type WebMentionResponse } from '@/lib/webmentions';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 
+const IGNORED_AUTHOR_URLS = ['https://reddit.com/user/asimovs-auditor/', 'https://reddit.com/user/AutoModerator/'];
 const REDDIT_DELETED_STRING = '[deleted]';
-const authorUrlsToIgnore = ['https://reddit.com/user/asimovs-auditor/', 'https://reddit.com/user/AutoModerator/'];
 
 export const getWebMentions = defineAction({
   input: z.object({
@@ -12,64 +12,59 @@ export const getWebMentions = defineAction({
   }),
   handler: async ({ slug }) => {
     const target = `https://frasermclean.com/posts/${slug}`;
-    const response = await fetch(`https://webmention.io/api/mentions.jf2?target=${target}`);
-
-    if (!response.ok) {
-      console.error('Error fetching web mentions:', response.statusText);
+    try {
+      const response = await fetchWebMentions(target);
+      return {
+        likes: mapLikes(response),
+        comments: mapComments(response)
+      };
+    } catch (error) {
+      console.error('Error fetching web mentions:', error);
       throw new ActionError({
         code: 'INTERNAL_SERVER_ERROR',
         message: 'Failed to fetch web mentions'
       });
     }
-
-    try {
-      const data = (await response.json()) as WebMentionResponse;
-
-      const likes = data.children
-        .filter((entry) => entry['wm-property'] === 'like-of' && !authorUrlsToIgnore.includes(entry.author.url))
-        .map<Like>((entry) => ({
-          authorName: sanitizeText(entry.author.name),
-          authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
-          avatarUrl: entry.author.photo,
-          publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
-          sourceUrl: entry.url,
-          sourcePlatform: parseSourcePlatform(entry['wm-source'])
-        }));
-
-      const comments = data.children
-        .filter(
-          (entry) =>
-            entry['wm-property'] === 'in-reply-to' &&
-            !authorUrlsToIgnore.includes(entry.author.url) &&
-            entry.author.name &&
-            entry.author.photo &&
-            entry.content?.text &&
-            entry.author.name !== REDDIT_DELETED_STRING &&
-            entry.content?.text !== REDDIT_DELETED_STRING
-        )
-        .map<Comment>((entry) => ({
-          authorName: sanitizeText(entry.author.name),
-          authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
-          avatarUrl: entry.author.photo,
-          commentText: sanitizeText(entry.content?.text),
-          publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
-          sourceUrl: entry.url,
-          sourcePlatform: parseSourcePlatform(entry['wm-source'])
-        }));
-
-      return {
-        likes,
-        comments
-      };
-    } catch (error) {
-      console.error('Error parsing web mentions response:', error);
-      throw new ActionError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'Failed to parse web mentions response'
-      });
-    }
   }
 });
+
+function mapLikes(response: WebMentionResponse): PostLike[] {
+  const likes = response.children
+    .filter((entry) => entry['wm-property'] === 'like-of' && !IGNORED_AUTHOR_URLS.includes(entry.author.url))
+    .map<PostLike>((entry) => ({
+      authorName: sanitizeText(entry.author.name),
+      authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
+      avatarUrl: entry.author.photo,
+      publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
+      sourceUrl: entry.url,
+      sourcePlatform: parseSourcePlatform(entry['wm-source'])
+    }));
+  return likes;
+}
+
+function mapComments(response: WebMentionResponse): PostComment[] {
+  const comments = response.children
+    .filter(
+      (entry) =>
+        entry['wm-property'] === 'in-reply-to' &&
+        !IGNORED_AUTHOR_URLS.includes(entry.author.url) &&
+        entry.author.name &&
+        entry.author.photo &&
+        entry.content?.text &&
+        entry.author.name !== REDDIT_DELETED_STRING &&
+        entry.content?.text !== REDDIT_DELETED_STRING
+    )
+    .map<PostComment>((entry) => ({
+      authorName: sanitizeText(entry.author.name),
+      authorInitials: convertNameToInitials(sanitizeText(entry.author.name)),
+      avatarUrl: entry.author.photo,
+      commentText: sanitizeText(entry.content?.text),
+      publishDate: entry.published ? new Date(entry.published) : new Date(entry['wm-received']),
+      sourceUrl: entry.url,
+      sourcePlatform: parseSourcePlatform(entry['wm-source'])
+    }));
+  return comments;
+}
 
 function sanitizeText(input?: string): string {
   if (!input) {
@@ -91,7 +86,7 @@ function parseSourcePlatform(input: string): SourcePlatform | null {
   return null;
 }
 
-export function convertNameToInitials(name: string): string {
+function convertNameToInitials(name: string): string {
   const names = name.trim().split(' ');
 
   if (names.length >= 2) {

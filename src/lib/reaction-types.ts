@@ -1,4 +1,4 @@
-export interface Comment {
+export interface PostComment {
   authorName: string;
   authorInitials: string;
   avatarUrl: string;
@@ -8,7 +8,7 @@ export interface Comment {
   sourcePlatform: SourcePlatform | null;
 }
 
-export interface Like {
+export interface PostLike {
   authorName: string;
   authorInitials: string;
   avatarUrl: string;

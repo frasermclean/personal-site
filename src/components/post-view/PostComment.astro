@@ -3,13 +3,13 @@ import FormattedDate from '@/components/FormattedDate.astro';
 import Link from '@/components/links/Link.astro';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
 import { Card } from '@/components/starwind/card';
-import type { Comment } from '@/lib/reaction-types';
+import type { PostComment } from '@/lib/reaction-types';
 import BlueskyIcon from '@tabler/icons/outline/brand-bluesky.svg';
 import MastodonIcon from '@tabler/icons/outline/brand-mastodon.svg';
 import RedditIcon from '@tabler/icons/outline/brand-reddit.svg';
 import CalendarIcon from '@tabler/icons/outline/calendar-event.svg';
 
-interface Props extends Comment {}
+interface Props extends PostComment {}
 
 const { authorName, authorInitials, avatarUrl, commentText, publishDate, sourceUrl, sourcePlatform } =
   Astro.props as Props;

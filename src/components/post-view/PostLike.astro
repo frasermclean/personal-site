@@ -2,9 +2,9 @@
 import Link from '@/components/links/Link.astro';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/starwind/tooltip';
-import type { Like } from '@/lib/reaction-types';
+import type { PostLike } from '@/lib/reaction-types';
 
-interface Props extends Like {}
+interface Props extends PostLike {}
 
 const { authorName, authorInitials, avatarUrl, sourceUrl, sourcePlatform } = Astro.props as Props;
 ---
