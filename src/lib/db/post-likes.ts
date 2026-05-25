@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 
-interface PostLikeRecord {
+export interface PostLikeRecord {
   name: string | null;
   email: string | null;
   liked_at: string;

@@ -2,10 +2,14 @@ const API_BASE_URL = 'https://webmention.io/api/';
 
 export async function fetchWebMentions(
   target: string,
-  properties: WebMentionProperty[] = ['like-of', 'in-reply-to']
+  properties: WebMentionProperty[] = []
 ): Promise<WebMentionResponse> {
-  const propertyFilter = properties.map((prop) => `wm-property[]=${encodeURIComponent(prop)}`).join('&');
-  const url = new URL(`mentions.jf2?target=${encodeURIComponent(target)}&${propertyFilter}`, API_BASE_URL);
+  const url = new URL(`mentions.jf2?target=${encodeURIComponent(target)}`, API_BASE_URL);
+
+  if (properties.length > 0) {
+    properties.forEach((prop) => url.searchParams.append('wm-property[]', encodeURIComponent(prop)));
+  }
+
   const response = await fetch(url);
 
   if (!response.ok) {

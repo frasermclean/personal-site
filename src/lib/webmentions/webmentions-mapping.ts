@@ -4,7 +4,7 @@ import type { WebMentionResponse } from './webmentions-api';
 const IGNORED_AUTHOR_URLS = ['https://reddit.com/user/asimovs-auditor/', 'https://reddit.com/user/AutoModerator/'];
 const REDDIT_DELETED_STRING = '[deleted]';
 
-export function mapWebMentionLikes(response: WebMentionResponse): Like[] {
+export function mapLikes(response: WebMentionResponse): Like[] {
   const likes = response.children
     .filter((entry) => entry['wm-property'] === 'like-of' && !IGNORED_AUTHOR_URLS.includes(entry.author.url))
     .map<Like>((entry) => ({
@@ -19,7 +19,7 @@ export function mapWebMentionLikes(response: WebMentionResponse): Like[] {
   return likes;
 }
 
-export function mapWebMentionComments(response: WebMentionResponse): Comment[] {
+export function mapComments(response: WebMentionResponse): Comment[] {
   const comments = response.children
     .filter(
       (entry) =>

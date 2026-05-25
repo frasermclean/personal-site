@@ -1,6 +1,5 @@
 ---
 import Badge from '@/components/starwind/badge';
-import type { Comment } from '@/lib/reaction-types';
 import { actions } from 'astro:actions';
 import BubblesVoteCount from './BubblesVoteCount.astro';
 import PostComment from './PostComment.astro';
@@ -11,10 +10,9 @@ interface Props {
 }
 
 const { slug } = Astro.props as Props;
-const { data, error } = await Astro.callAction(actions.getPostLikes, { slug });
+const { data, error } = await Astro.callAction(actions.getPostReactions, { slug });
 
-const { likes = [] } = data || {};
-const comments: Comment[] = [];
+const { likes = [], comments = [] } = data || {};
 
 if (error) {
   throw new Error(`Failed to fetch webmentions: ${error.message}`);
