@@ -16,33 +16,32 @@ const { authorName, authorInitials, avatarUrl, commentText, publishDate, sourceU
 ---
 
 <Link href={sourceUrl} rel="ugc">
-  <Card class="flex gap-2 p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl sm:gap-3 sm:p-3">
-    <Avatar size="md" class="min-w-10">
-      <AvatarImage src={avatarUrl} alt={authorName} />
-      <AvatarFallback>{authorInitials}</AvatarFallback>
-    </Avatar>
-    <section class="flex w-full flex-col gap-2">
-      <header class="text-md md:text-lg">
-        <h4>{authorName}</h4>
-      </header>
-      <p class="text-sm text-muted-foreground md:text-base">{commentText}</p>
-      <footer class="flex items-center justify-between text-xs font-light text-muted-foreground/80 md:text-sm">
-        <div class="flex items-center gap-1">
-          <CalendarIcon width={16} height={16} stroke-width={1} />
-          <FormattedDate date={publishDate} />
-        </div>
+  <Card class="flex flex-col gap-2 p-2 transition-shadow hover:bg-accent/80 hover:shadow-xl sm:gap-3 sm:p-3">
+    <header class="flex items-center gap-1">
+      <Avatar size="sm">
+        <AvatarImage src={avatarUrl} alt={authorName} />
+        <AvatarFallback>{authorInitials}</AvatarFallback>
+      </Avatar>
+      <h4 class="line-clamp-1 font-heading md:text-lg">{authorName}</h4>
+    </header>
 
-        {
-          sourcePlatform && (
-            <div class="flex items-center gap-1">
-              {sourcePlatform}
-              {sourcePlatform === 'Reddit' && <RedditIcon width={16} height={16} stroke-width={1} />}
-              {sourcePlatform === 'Bluesky' && <BlueskyIcon width={16} height={16} stroke-width={1} />}
-              {sourcePlatform === 'Mastodon' && <MastodonIcon width={16} height={16} stroke-width={1} />}
-            </div>
-          )
-        }
-      </footer>
-    </section>
+    <p class="text-sm text-muted-foreground md:text-base">{commentText}</p>
+    <footer class="flex items-center justify-between text-xs font-light text-muted-foreground/80 md:text-sm">
+      <div class="flex items-center gap-1">
+        <CalendarIcon width={16} height={16} stroke-width={1} />
+        <FormattedDate date={publishDate} />
+      </div>
+
+      {
+        sourcePlatform && (
+          <div class="flex items-center gap-1">
+            {sourcePlatform}
+            {sourcePlatform === 'Reddit' && <RedditIcon width={16} height={16} stroke-width={1} />}
+            {sourcePlatform === 'Bluesky' && <BlueskyIcon width={16} height={16} stroke-width={1} />}
+            {sourcePlatform === 'Mastodon' && <MastodonIcon width={16} height={16} stroke-width={1} />}
+          </div>
+        )
+      }
+    </footer>
   </Card>
 </Link>
