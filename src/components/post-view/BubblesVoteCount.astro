@@ -1,5 +1,5 @@
 ---
-import BubblesIcon from '@/assets/icons/bubbles.png';
+import BubblesLogo from '@/assets/icons/bubbles.png';
 import ButtonLink from '@/components/links/ButtonLink.astro';
 import { getVoteCount } from '@/lib/bubbles-api';
 import TriangleIcon from '@tabler/icons/filled/triangle.svg';
@@ -20,7 +20,7 @@ console.log('Bubbles vote count:', { id, count });
     <div class="w-full">
       <ButtonLink
         href={`https://bubbles.town/entry/${id}`}
-        class="mx-auto flex w-50 justify-between gap-2 text-sm text-muted-foreground"
+        class="mx-auto flex w-60 justify-between gap-2 text-sm text-muted-foreground"
         variant="ghost"
       >
         <div class="flex items-center gap-1 text-accent">
@@ -28,7 +28,7 @@ console.log('Bubbles vote count:', { id, count });
         </div>
         <div>
           on Bubbles
-          <Image src={BubblesIcon} alt="Bubbles logo" width={24} height={24} class="ml-1 inline-block" />
+          <Image src={BubblesLogo} alt="Bubbles logo" width={24} height={24} class="ml-1 inline-block" />
         </div>
       </ButtonLink>
     </div>
