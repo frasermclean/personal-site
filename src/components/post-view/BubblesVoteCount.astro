@@ -10,9 +10,7 @@ interface Props {
 }
 
 const { slug } = Astro.props;
-
 const { id, count } = await getVoteCount(slug);
-console.log('Bubbles vote count:', { id, count });
 ---
 
 {
