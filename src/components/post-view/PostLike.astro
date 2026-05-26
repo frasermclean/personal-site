@@ -12,12 +12,21 @@ const tooltipContent = sourcePlatform ? `${authorName} (${sourcePlatform})` : au
 
 <Tooltip>
   <TooltipTrigger>
-    <Link href={sourceUrl}>
-      <Avatar class="hover:border-accent">
-        {avatarUrl && <AvatarImage src={avatarUrl} alt={authorName} />}
-        <AvatarFallback>{authorInitials}</AvatarFallback>
-      </Avatar>
-    </Link>
+    {
+      sourceUrl ? (
+        <Link href={sourceUrl}>
+          <Avatar class="hover:border-accent">
+            {avatarUrl && <AvatarImage src={avatarUrl} alt={authorName} />}
+            <AvatarFallback>{authorInitials}</AvatarFallback>
+          </Avatar>
+        </Link>
+      ) : (
+        <Avatar class="hover:border-accent">
+          {avatarUrl && <AvatarImage src={avatarUrl} alt={authorName} />}
+          <AvatarFallback>{authorInitials}</AvatarFallback>
+        </Avatar>
+      )
+    }
   </TooltipTrigger>
   <TooltipContent side="bottom">{tooltipContent}</TooltipContent>
 </Tooltip>

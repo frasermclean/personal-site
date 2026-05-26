@@ -95,7 +95,7 @@
     --warning-foreground: var(--color-amber-950);
     --error: var(--color-red-700);
     --error-foreground: var(--color-neutral-50);
-    --border: var(--color-neutral-200);
+    --border: oklch(89.9% 0 0);
     --input: var(--color-neutral-100);
     --outline: var(--color-neutral-400);
     --navbar: color-mix(in oklab, var(--color-neutral-600) 90%, transparent);
