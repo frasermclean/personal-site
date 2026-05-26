@@ -1,9 +1,36 @@
-<div class="bubbles-vote text-sm"></div>
-<script is:inline src="https://bubbles.town/vote.js" defer></script>
+---
+import BubblesIcon from '@/assets/icons/bubbles.png';
+import ButtonLink from '@/components/links/ButtonLink.astro';
+import { getVoteCount } from '@/lib/bubbles-api';
+import TriangleIcon from '@tabler/icons/filled/triangle.svg';
+import { Image } from 'astro:assets';
 
-<style is:global>
-  .bubbles-vote a.bubbles-vote-btn {
-    --bt-fg: var(--color-muted-foreground); /* icon color */
-    --bt-accent: var(--color-accent); /* count + triangle color */
-  }
-</style>
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+const { id, count } = await getVoteCount(slug);
+console.log('Bubbles vote count:', { id, count });
+---
+
+{
+  id && (
+    <div class="w-full">
+      <ButtonLink
+        href={`https://bubbles.town/entry/${id}`}
+        class="mx-auto flex w-50 justify-between gap-2 text-sm text-muted-foreground"
+        variant="ghost"
+      >
+        <div class="flex items-center gap-1 text-accent">
+          {count} votes <TriangleIcon width={16} height={16} />
+        </div>
+        <div>
+          on Bubbles
+          <Image src={BubblesIcon} alt="Bubbles logo" width={24} height={24} class="ml-1 inline-block" />
+        </div>
+      </ButtonLink>
+    </div>
+  )
+}
