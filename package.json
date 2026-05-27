@@ -1,7 +1,15 @@
 {
-  "name": "frasermclean-site",
+  "name": "personal-site",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "author": {
+    "name": "Fraser McLean",
+    "url": "https://frasermclean.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frasermclean/personal-site"
+  },
   "engines": {
     "node": ">=22 <23"
   },
