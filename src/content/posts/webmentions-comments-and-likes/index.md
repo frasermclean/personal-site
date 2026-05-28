@@ -11,7 +11,7 @@ tags: ['webmentions', 'indieweb', 'social', 'astro']
 
 ## Introduction
 
-When I am writing a blog post, I often share it to communities on Reddit, Mastodon and Bluesky. I love engaging with people in those communities, and I often get comments and likes on my posts. However, those interactions are happening on other platforms, and they aren't visible on my personal site. I wanted to find a way to bring those interactions back to my site so that visitors can see the conversations happening around my content.
+When I am writing a blog post, I often share it to communities on Reddit, Mastodon and Bluesky. In the IndieWeb community, this is called [POSSE](https://indieweb.org/POSSE). I love engaging with people in those communities, and I often get comments and likes on my posts. However, those interactions are happening on other platforms, and they aren't visible on my personal site. I wanted to find a way to bring those interactions back to my site so that visitors can see the conversations happening around my content.
 
 I like social features, they make a site feel more alive and interactive. I was looking for a way to add some social features to my personal site, and I came across [Webmentions](https://indieweb.org/Webmention). It took me a little while to get my head around how Webmentions work, but once I understood the basics, it was pretty straightforward to implement. In this post, I'll walk you through how I added Webmention support to my [Astro](https://astro.build/) site to display comments and likes from other websites.
 
@@ -108,4 +108,4 @@ In my case, I am using Astro's server-side rendering capabilities to fetch the W
 
 There you have it! That's how I added Webmention support to my Astro site to display comments and likes from other websites. It was a fun project to work on, and it has been great to see the interactions happening around my content in one place on my site.
 
-I am also adding additional features such as local likes and comments that are stored in a database, so that visitors can interact with my content directly on my site as well. I will likely write another post about how I implemented those features once they are ready.
+I am also adding additional features such as local likes and comments that are stored in a database, so that visitors can interact with my content directly on my site as well. I will likely write another post about how I implemented those features once they are ready. I'm still learning about Webmentions and the IndieWeb in general, so if you have any tips or suggestions, feel free to reach out to me!
