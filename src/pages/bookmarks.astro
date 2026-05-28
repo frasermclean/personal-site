@@ -7,7 +7,6 @@ import { getCollection } from 'astro:content';
 const title = 'Bookmarks';
 const description = 'Links to tools and resources that I have found useful or inspiring.';
 const collection = await getCollection('bookmarks');
-console.log(collection);
 ---
 
 <BaseLayout {title} {description}>
