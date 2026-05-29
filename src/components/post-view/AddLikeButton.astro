@@ -65,8 +65,8 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
     // read form data values
     const formData = new FormData(form);
     const slug = formData.get('slug')?.toString() || '';
-    const name = formData.get('name')?.toString().trim();
-    const email = formData.get('email')?.toString().trim();
+    const name = formData.get('name')?.toString().trim() || undefined;
+    const email = formData.get('email')?.toString().trim() || undefined;
 
     const { error } = await actions.addPostLike({ slug, name, email });
 
