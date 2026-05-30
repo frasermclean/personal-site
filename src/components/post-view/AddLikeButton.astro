@@ -1,6 +1,5 @@
 ---
 import Button from '@/components/starwind/button/Button.astro';
-import { hasLikedPost } from '@/lib/db/post-likes';
 import ThumbUpIcon from '@tabler/icons/outline/thumb-up.svg';
 import {
   Dialog,
@@ -8,8 +7,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/starwind/dialog';
 import { Label } from '@/components/starwind/label';
 import Input from '@/components/starwind/input/Input.astro';
@@ -19,34 +17,29 @@ interface Props {
 }
 
 const { slug } = Astro.props as Props;
-const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 ---
 
-<Dialog id="like-post-dialog">
-  <DialogTrigger asChild>
-    <Button size="lg" variant="secondary" class="w-32">
-      <span>{hasLiked ? 'Liked' : 'Like'}</span>
-      <ThumbUpIcon />
-    </Button>
-  </DialogTrigger>
+<Button size="lg" variant="secondary" class="w-32" id="like-post-button">
+  <span>Like</span>
+  <ThumbUpIcon />
+</Button>
+
+<Dialog id="like-post-dialog" data-slug={slug}>
   <DialogContent>
-    <form id="like-post-form" method="dialog" class="flex w-full flex-col">
+    <form id="like-post-form" method="dialog" class="flex w-full flex-col gap-4">
       <DialogHeader>
         <DialogTitle>Thanks for the like!</DialogTitle>
         <DialogDescription>Please add your details so I know who it's from.</DialogDescription>
       </DialogHeader>
-      <input type="hidden" name="slug" value={slug} />
-      <div class="my-8 flex flex-col gap-4">
-        <div class="flex flex-col gap-1">
-          <Label for="name">Full Name</Label>
-          <Input id="name" type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="100" />
-          <p class="text-sm text-muted-foreground">Will be shown publicly.</p>
-        </div>
-        <div class="flex flex-col gap-1">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" name="email" placeholder="Your Email" autocomplete="email" />
-          <p class="text-sm text-muted-foreground">Used for avatar and will not be displayed publicly.</p>
-        </div>
+      <div class="flex flex-col gap-1">
+        <Label for="name">Full Name</Label>
+        <Input id="name" type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="100" />
+        <p class="text-sm text-muted-foreground">Will be shown publicly.</p>
+      </div>
+      <div class="flex flex-col gap-1">
+        <Label for="email">Email Address</Label>
+        <Input id="email" type="email" name="email" placeholder="Your Email" autocomplete="email" />
+        <p class="text-sm text-muted-foreground">Used for avatar and will not be displayed publicly.</p>
       </div>
       <DialogFooter>
         <Button type="submit" variant="primary">Submit</Button>
@@ -57,22 +50,47 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 
 <script>
   import { toast } from '@/components/starwind/toast';
-  import { actions, isActionError } from 'astro:actions';
+  import { addLikedPost, getOrCreateVisitorId, hasLikedPost } from '@/lib/local-storage';
+  import { actions } from 'astro:actions';
 
+  const dialogWrapper = document.querySelector<HTMLDivElement>('#like-post-dialog');
+  const button = document.querySelector<HTMLButtonElement>('#like-post-button');
   const form = document.querySelector<HTMLFormElement>('#like-post-form');
+  const slug = dialogWrapper?.dataset.slug;
+  const visitorId = getOrCreateVisitorId();
 
-  form?.addEventListener('submit', async () => {
-    // read form data values
-    const formData = new FormData(form);
-    const slug = formData.get('slug')?.toString() || '';
-    const name = formData.get('name')?.toString().trim();
-    const email = formData.get('email')?.toString().trim();
+  if (!button || !form || !slug) {
+    throw new Error('Like post dialog: Missing required elements');
+  }
 
-    const { error } = await actions.addPostLike({ slug, name, email });
+  if (hasLikedPost(slug)) {
+    button.querySelector('span')!.textContent = 'Liked';
+  }
+
+  button.addEventListener('click', async () => {
+    const { error } = await actions.addPostLike({ visitorId, slug });
 
     // check for error
-    if (isActionError(error)) {
-      toast.error(error.message);
+    if (error) {
+      toast.error('An error occurred while adding your like.');
+      console.error('Error adding post like:', error);
+      return;
+    }
+
+    dialogWrapper.dispatchEvent(new CustomEvent('dialog:open'));
+  });
+
+  form.addEventListener('submit', async () => {
+    // read form data values
+    const formData = new FormData(form);
+    const name = formData.get('name')?.toString().trim() || undefined;
+    const email = formData.get('email')?.toString().trim() || undefined;
+
+    const { error } = await actions.addPostLike({ visitorId, slug, name, email });
+
+    // check for error
+    if (error) {
+      toast.error('An error occurred while adding your details.');
       console.error('Error adding post like:', error);
       return;
     }
@@ -83,5 +101,10 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 
     // track in analytics
     umami.track('post-like', { slug });
+
+    addLikedPost(slug);
+
+    // dispatch custom event to update likes
+    window.dispatchEvent(new CustomEvent('post-like:added', { detail: { slug } }));
   });
 </script>
