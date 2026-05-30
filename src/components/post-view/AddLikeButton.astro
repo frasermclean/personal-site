@@ -22,31 +22,27 @@ const { slug } = Astro.props as Props;
 const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 ---
 
-<Dialog id="like-post-dialog">
-  <DialogTrigger asChild>
-    <Button size="lg" variant="secondary" class="w-32">
-      <span>{hasLiked ? 'Liked' : 'Like'}</span>
-      <ThumbUpIcon />
-    </Button>
-  </DialogTrigger>
+<Button size="lg" variant="secondary" class="w-32" id="like-post-button">
+  <span>{hasLiked ? 'Liked' : 'Like'}</span>
+  <ThumbUpIcon />
+</Button>
+
+<Dialog id="like-post-dialog" data-slug={slug}>
   <DialogContent>
-    <form id="like-post-form" method="dialog" class="flex w-full flex-col">
+    <form id="like-post-form" method="dialog" class="flex w-full flex-col gap-4">
       <DialogHeader>
         <DialogTitle>Thanks for the like!</DialogTitle>
         <DialogDescription>Please add your details so I know who it's from.</DialogDescription>
       </DialogHeader>
-      <input type="hidden" name="slug" value={slug} />
-      <div class="my-8 flex flex-col gap-4">
-        <div class="flex flex-col gap-1">
-          <Label for="name">Full Name</Label>
-          <Input id="name" type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="100" />
-          <p class="text-sm text-muted-foreground">Will be shown publicly.</p>
-        </div>
-        <div class="flex flex-col gap-1">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" name="email" placeholder="Your Email" autocomplete="email" />
-          <p class="text-sm text-muted-foreground">Used for avatar and will not be displayed publicly.</p>
-        </div>
+      <div class="flex flex-col gap-1">
+        <Label for="name">Full Name</Label>
+        <Input id="name" type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="100" />
+        <p class="text-sm text-muted-foreground">Will be shown publicly.</p>
+      </div>
+      <div class="flex flex-col gap-1">
+        <Label for="email">Email Address</Label>
+        <Input id="email" type="email" name="email" placeholder="Your Email" autocomplete="email" />
+        <p class="text-sm text-muted-foreground">Used for avatar and will not be displayed publicly.</p>
       </div>
       <DialogFooter>
         <Button type="submit" variant="primary">Submit</Button>
@@ -59,12 +55,31 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
   import { toast } from '@/components/starwind/toast';
   import { actions, isActionError } from 'astro:actions';
 
+  const dialogWrapper = document.querySelector<HTMLDivElement>('#like-post-dialog');
+  const button = document.querySelector<HTMLButtonElement>('#like-post-button');
   const form = document.querySelector<HTMLFormElement>('#like-post-form');
+  const slug = dialogWrapper?.dataset.slug;
 
-  form?.addEventListener('submit', async () => {
+  if (!button || !form || !slug) {
+    throw new Error('Like post dialog: Missing required elements');
+  }
+
+  button.addEventListener('click', async () => {
+    const { error } = await actions.addPostLike({ slug });
+
+    // check for error
+    if (isActionError(error)) {
+      toast.error(error.message);
+      console.error('Error adding post like:', error);
+      return;
+    }
+
+    dialogWrapper.dispatchEvent(new CustomEvent('dialog:open'));
+  });
+
+  form.addEventListener('submit', async () => {
     // read form data values
     const formData = new FormData(form);
-    const slug = formData.get('slug')?.toString() || '';
     const name = formData.get('name')?.toString().trim() || undefined;
     const email = formData.get('email')?.toString().trim() || undefined;
 
