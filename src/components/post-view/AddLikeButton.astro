@@ -98,5 +98,15 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 
     // track in analytics
     umami.track('post-like', { slug });
+
+    // update liked posts in local storage
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    if (!likedPosts.includes(slug)) {
+      likedPosts.push(slug);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+
+    // dispatch custom event to update likes
+    window.dispatchEvent(new CustomEvent('post-like:added', { detail: { slug } }));
   });
 </script>
