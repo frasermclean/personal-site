@@ -86,22 +86,24 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
 {user && <div id="user-identifier" class="hidden" data-email={user.email} />}
 
 <script>
+  import { getTheme, setTheme } from '@/lib/local-storage';
+
   updateDom(getPreferrredTheme()); // set initial theme based on user preference
 
   // add click event listener to the button
   const button = document.getElementById('theme-button');
   button?.addEventListener('click', () => {
     const theme = getPreferrredTheme() === 'dark' ? 'light' : 'dark'; // toggle theme
-    localStorage.setItem('theme', theme);
+    setTheme(theme);
     updateDom(theme);
     umami.track('theme-change', { theme }); // track theme change event
   });
 
   function getPreferrredTheme(): 'light' | 'dark' {
     // check localStorage first
-    const storedTheme = localStorage?.getItem('theme');
+    const storedTheme = getTheme();
     if (storedTheme) {
-      return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'light';
+      return storedTheme;
     }
 
     // read the user's system preference (and default to light if no match)

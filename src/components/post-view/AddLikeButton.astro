@@ -53,6 +53,7 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 
 <script>
   import { toast } from '@/components/starwind/toast';
+  import { addLikedPost } from '@/lib/local-storage';
   import { actions, isActionError } from 'astro:actions';
 
   const dialogWrapper = document.querySelector<HTMLDivElement>('#like-post-dialog');
@@ -99,12 +100,7 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
     // track in analytics
     umami.track('post-like', { slug });
 
-    // update liked posts in local storage
-    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
-    if (!likedPosts.includes(slug)) {
-      likedPosts.push(slug);
-      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-    }
+    addLikedPost(slug);
 
     // dispatch custom event to update likes
     window.dispatchEvent(new CustomEvent('post-like:added', { detail: { slug } }));
