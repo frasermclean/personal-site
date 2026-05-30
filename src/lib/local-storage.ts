@@ -23,6 +23,11 @@ export function addLikedPost(slug: string): void {
   }
 }
 
+export function hasLikedPost(slug: string): boolean {
+  const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+  return likedPosts.includes(slug);
+}
+
 /**
  * Get the current theme from local storage.
  * @returns The current theme ('light', 'dark', or null if not set).

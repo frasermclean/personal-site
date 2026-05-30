@@ -1,6 +1,5 @@
 ---
 import Button from '@/components/starwind/button/Button.astro';
-import { hasLikedPost } from '@/lib/db/post-likes';
 import ThumbUpIcon from '@tabler/icons/outline/thumb-up.svg';
 import {
   Dialog,
@@ -8,8 +7,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/starwind/dialog';
 import { Label } from '@/components/starwind/label';
 import Input from '@/components/starwind/input/Input.astro';
@@ -19,11 +17,10 @@ interface Props {
 }
 
 const { slug } = Astro.props as Props;
-const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 ---
 
 <Button size="lg" variant="secondary" class="w-32" id="like-post-button">
-  <span>{hasLiked ? 'Liked' : 'Like'}</span>
+  <span>Like</span>
   <ThumbUpIcon />
 </Button>
 
@@ -53,24 +50,29 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
 
 <script>
   import { toast } from '@/components/starwind/toast';
-  import { addLikedPost } from '@/lib/local-storage';
-  import { actions, isActionError } from 'astro:actions';
+  import { addLikedPost, getOrCreateVisitorId, hasLikedPost } from '@/lib/local-storage';
+  import { actions } from 'astro:actions';
 
   const dialogWrapper = document.querySelector<HTMLDivElement>('#like-post-dialog');
   const button = document.querySelector<HTMLButtonElement>('#like-post-button');
   const form = document.querySelector<HTMLFormElement>('#like-post-form');
   const slug = dialogWrapper?.dataset.slug;
+  const visitorId = getOrCreateVisitorId();
 
   if (!button || !form || !slug) {
     throw new Error('Like post dialog: Missing required elements');
   }
 
+  if (hasLikedPost(slug)) {
+    button.querySelector('span')!.textContent = 'Liked';
+  }
+
   button.addEventListener('click', async () => {
-    const { error } = await actions.addPostLike({ slug });
+    const { error } = await actions.addPostLike({ visitorId, slug });
 
     // check for error
-    if (isActionError(error)) {
-      toast.error(error.message);
+    if (error) {
+      toast.error('An error occurred while adding your like.');
       console.error('Error adding post like:', error);
       return;
     }
@@ -84,11 +86,11 @@ const hasLiked = await hasLikedPost(slug, Astro.session?.sessionID);
     const name = formData.get('name')?.toString().trim() || undefined;
     const email = formData.get('email')?.toString().trim() || undefined;
 
-    const { error } = await actions.addPostLike({ slug, name, email });
+    const { error } = await actions.addPostLike({ visitorId, slug, name, email });
 
     // check for error
-    if (isActionError(error)) {
-      toast.error(error.message);
+    if (error) {
+      toast.error('An error occurred while adding your details.');
       console.error('Error adding post like:', error);
       return;
     }
