@@ -11,15 +11,14 @@ import MenuIcon from '@tabler/icons/outline/menu-2.svg';
 import MoonIcon from '@tabler/icons/outline/moon.svg';
 import SunIcon from '@tabler/icons/outline/sun.svg';
 import { links } from './NavigationLinks.astro';
-import LoginIcon from '@tabler/icons/outline/login.svg';
-import LogoutIcon from '@tabler/icons/outline/logout.svg';
 import BookmarkIcon from '@tabler/icons/outline/bookmark.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
 import { BOOKMARKS_PATH } from '@/constants';
+import SignOut from '@/components/navbar/SignOut.astro';
+import SignIn from '@/components/navbar/SignIn.astro';
 
 const user = Astro.locals.user;
 const displayName = user?.name ?? user?.githubUsername ?? '';
-const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathname)}`;
 ---
 
 <Dropdown>
@@ -67,19 +66,7 @@ const loginHref = `/api/auth/login?returnTo=${encodeURIComponent(Astro.url.pathn
       Theme
     </DropdownItem>
 
-    {
-      user ? (
-        <DropdownItem as="a" href="/api/auth/logout">
-          <LogoutIcon width={28} stroke-width={1.25} />
-          Logout
-        </DropdownItem>
-      ) : (
-        <DropdownItem as="a" href={loginHref}>
-          <LoginIcon width={28} stroke-width={1.25} />
-          Login
-        </DropdownItem>
-      )
-    }
+    {user ? <SignOut /> : <SignIn />}
   </DropdownContent>
 </Dropdown>
 

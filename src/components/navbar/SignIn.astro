@@ -1,0 +1,32 @@
+---
+import { DropdownItem } from '@/components/starwind/dropdown';
+import LoginIcon from '@tabler/icons/outline/login.svg';
+---
+
+<DropdownItem as="button" id="sign-in-button" class="w-full">
+  <LoginIcon width={28} stroke-width={1.25} />
+  Sign In
+</DropdownItem>
+
+<script>
+  import { toast } from '@/components/starwind/toast';
+  import { AuthMessage } from '@/lib/auth/auth-types';
+  import { getReturnToUrl } from '@/lib/auth/return-to-url';
+  import { actions } from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
+
+  const button = document.querySelector<HTMLButtonElement>('#sign-in-button');
+  button?.addEventListener('click', async () => {
+    const returnTo = getReturnToUrl(window.location.href, AuthMessage.LoginSuccess);
+    const { data, error } = await actions.signInUser({ returnTo });
+
+    if (error) {
+      toast.error('An error occurred while signing in.');
+      console.error('Error signing in:', error);
+      return;
+    }
+
+    const { authUrl } = data;
+    await navigate(authUrl);
+  });
+</script>

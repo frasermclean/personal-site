@@ -1,0 +1,31 @@
+---
+import { DropdownItem } from '@/components/starwind/dropdown';
+import LogoutIcon from '@tabler/icons/outline/logout.svg';
+---
+
+<DropdownItem as="button" id="sign-out-button" class="w-full">
+  <LogoutIcon width={28} stroke-width={1.25} />
+  Sign Out
+</DropdownItem>
+
+<script>
+  import { toast } from '@/components/starwind/toast';
+  import { AuthMessage } from '@/lib/auth/auth-types';
+  import { getReturnToUrl } from '@/lib/auth/return-to-url';
+  import { actions } from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
+
+  const button = document.querySelector<HTMLButtonElement>('#sign-out-button');
+  button?.addEventListener('click', async () => {
+    const returnTo = getReturnToUrl(window.location.href, AuthMessage.LogoutSuccess);
+    const { error } = await actions.signOutUser();
+
+    if (error) {
+      toast.error('An error occurred while signing out.');
+      console.error('Error signing out:', error);
+      return;
+    }
+
+    await navigate(returnTo);
+  });
+</script>
