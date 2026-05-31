@@ -10,14 +10,13 @@ import LoginIcon from '@tabler/icons/outline/login.svg';
 
 <script>
   import { toast } from '@/components/starwind/toast';
-  import { AuthMessage } from '@/lib/auth/auth-types';
   import { getReturnToUrl } from '@/lib/auth/return-to-url';
   import { actions } from 'astro:actions';
   import { navigate } from 'astro:transitions/client';
 
   const button = document.querySelector<HTMLButtonElement>('#sign-in-button');
   button?.addEventListener('click', async () => {
-    const returnTo = getReturnToUrl(window.location.href, AuthMessage.LoginSuccess);
+    const returnTo = getReturnToUrl(window.location.href);
     const { data, error } = await actions.signInUser({ returnTo });
 
     if (error) {
