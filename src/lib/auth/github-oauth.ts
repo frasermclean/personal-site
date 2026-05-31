@@ -15,6 +15,24 @@ export function generateRandomState(): string {
   return generateState();
 }
 
+export function createOAuthConfig(clientId: string, clientSecret: string, origin: string): OAuthConfig {
+  if (!clientId) {
+    throw new Error('GitHub Client ID is required');
+  }
+  if (!clientSecret) {
+    throw new Error('GitHub Client Secret is required');
+  }
+  if (!origin) {
+    throw new Error('Origin is required to construct redirect URI');
+  }
+
+  return {
+    clientId,
+    clientSecret,
+    redirectUri: `${origin}/api/auth/callback`
+  };
+}
+
 /**
  * Validate that GitHub OAuth credentials are provided
  * @param config GitHub OAuth configuration

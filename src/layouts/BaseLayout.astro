@@ -1,6 +1,5 @@
 ---
 import defaultOgImage from '@/assets/default-og-image.png';
-import AuthNotifier from '@/components/AuthNotifier.astro';
 import Footer from '@/components/footer/Footer.astro';
 import Analytics from '@/components/head/Analytics.astro';
 import Navbar from '@/components/navbar/Navbar.astro';
@@ -89,6 +88,6 @@ const imageUrl = new URL(image.src, Astro.site);
     <Separator class="mt-8" />
     <Footer />
     <Toaster position="bottom-center" duration={3000} />
-    <AuthNotifier />
+    <script src="../lib/auth/auth-notifier.ts"></script>
   </body>
 </html>

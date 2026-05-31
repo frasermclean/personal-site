@@ -31,5 +31,4 @@ TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA" # Test key - always p
 # GitHub OAuth credentials
 GITHUB_CLIENT_ID="xxx"
 GITHUB_CLIENT_SECRET="xxx"
-GITHUB_REDIRECT_URI="http://localhost:4321/api/auth/callback"
 ```
