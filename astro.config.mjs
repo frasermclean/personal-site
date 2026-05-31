@@ -59,7 +59,6 @@ export default defineConfig({
       WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', optional: true }),
       GITHUB_CLIENT_ID: envField.string({ context: 'server', access: 'public' }),
       GITHUB_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret' }),
-      GITHUB_REDIRECT_URI: envField.string({ context: 'server', access: 'public' }),
       OWNER_GITHUB_ID: envField.string({ context: 'server', access: 'secret', optional: true })
     }
   },

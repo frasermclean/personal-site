@@ -1,14 +1,8 @@
 import type { AppUser } from '@/lib/auth/auth-types';
 import { AuthMessage } from '@/lib/auth/auth-types';
-import { exchangeCodeForToken, fetchGithubUser, type GitHubUser } from '@/lib/auth/github-oauth';
+import { createOAuthConfig, exchangeCodeForToken, fetchGithubUser, type GitHubUser } from '@/lib/auth/github-oauth';
 import type { APIRoute } from 'astro';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI, OWNER_GITHUB_ID } from 'astro:env/server';
-
-const oauthConfig = {
-  clientId: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
-  redirectUri: GITHUB_REDIRECT_URI
-};
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, OWNER_GITHUB_ID } from 'astro:env/server';
 
 export const GET: APIRoute = async (context) => {
   // get returnTo URL from session (if present) to redirect user back after login
@@ -30,6 +24,7 @@ export const GET: APIRoute = async (context) => {
     }
 
     // fetch github user profile
+    const oauthConfig = createOAuthConfig(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, context.url.origin);
     const { accessToken, tokenType } = await exchangeCodeForToken(code, oauthConfig);
     const githubUser = await fetchGithubUser(accessToken, tokenType);
     const user = mapUserSession(githubUser);

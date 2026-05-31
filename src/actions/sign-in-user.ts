@@ -1,13 +1,7 @@
-import { buildGithubAuthUrl, generateRandomState } from '@/lib/auth/github-oauth';
+import { buildGithubAuthUrl, createOAuthConfig, generateRandomState } from '@/lib/auth/github-oauth';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from 'astro:env/server';
-
-const oauthConfig = {
-  clientId: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
-  redirectUri: GITHUB_REDIRECT_URI
-};
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from 'astro:env/server';
 
 export const signInUser = defineAction({
   input: z.object({
@@ -25,6 +19,7 @@ export const signInUser = defineAction({
     context.session.set('oauthState', state);
     context.session.set('returnTo', returnTo);
 
+    const oauthConfig = createOAuthConfig(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, context.url.origin);
     const authUrl = buildGithubAuthUrl(oauthConfig, state);
 
     return {
