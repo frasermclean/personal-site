@@ -17,7 +17,7 @@ import LogoutIcon from '@tabler/icons/outline/logout.svg';
 
   const button = document.querySelector<HTMLButtonElement>('#sign-out-button');
   button?.addEventListener('click', async () => {
-    const returnTo = getReturnToUrl(window.location.href, AuthMessage.LogoutSuccess);
+    const returnTo = getReturnToUrl(window.location.href, AuthMessage.SignOutSuccess);
     const { error } = await actions.signOutUser();
 
     if (error) {
