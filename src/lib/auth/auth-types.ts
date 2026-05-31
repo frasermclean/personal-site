@@ -9,9 +9,7 @@ export interface AppUser {
 
 // auth messages
 export enum AuthMessage {
-  LoginSuccess = 'login-success',
-  LogoutSuccess = 'logout-success',
-  GitHubLoginError = 'github-login-error',
-  GitHubParamsError = 'github-params-error',
+  SignInSuccess = 'login-success',
+  SignOutSuccess = 'logout-success',
   GitHubCallbackError = 'github-callback-error'
 }

@@ -19,8 +19,7 @@ export const GET: APIRoute = async (context) => {
   const code = context.url.searchParams.get('code');
   const state = context.url.searchParams.get('state');
   if (!code || !state) {
-    redirectUrl.searchParams.set('auth', AuthMessage.GitHubParamsError);
-    return context.redirect(redirectUrl.toString());
+    return new Response('Missing code or state parameter', { status: 400 });
   }
 
   try {
@@ -39,7 +38,7 @@ export const GET: APIRoute = async (context) => {
     context.session?.set('user', user);
 
     // redirect user back to original page with success message
-    redirectUrl.searchParams.set('auth', AuthMessage.LoginSuccess);
+    redirectUrl.searchParams.set('auth', AuthMessage.SignInSuccess);
     return context.redirect(redirectUrl.toString());
   } catch (error) {
     console.error('GitHub callback failed:', error);
