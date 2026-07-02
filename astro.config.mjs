@@ -1,4 +1,5 @@
 import cloudflare from '@astrojs/cloudflare';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -64,8 +65,10 @@ export default defineConfig({
   },
   integrations: [sitemap({ customSitemaps: [`${SITE_URL}/sitemap-posts.xml`] }), mdx()],
   markdown: {
-    remarkPlugins: [readingTime, gitUpdatedDate, externalLinks],
-    rehypePlugins: [rehypeFigure],
+    processor: unified({
+      remarkPlugins: [readingTime, gitUpdatedDate, externalLinks],
+      rehypePlugins: [rehypeFigure]
+    }),
     shikiConfig: {
       themes: {
         light: 'light-plus',
