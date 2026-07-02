@@ -1,0 +1,17 @@
+---
+import HeroSection from '@/components/HeroSection.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+if (!user?.isOwner) {
+  return Astro.rewrite('/404');
+}
+
+const title = 'Site Settings';
+const description = `Welcome, ${user.name ?? user.githubUsername}.`;
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+</BaseLayout>

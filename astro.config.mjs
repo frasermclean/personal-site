@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField, fontProviders } from 'astro/config';
 import rehypeFigure from 'rehype-figure';
-import { SITE_URL } from './src/constants.ts';
+import { SETTINGS_PATH, SITE_URL } from './src/constants.ts';
 import { externalLinks, gitUpdatedDate, readingTime } from './src/lib/remark-plugins.ts';
 
 // https://astro.build/config
@@ -63,7 +63,13 @@ export default defineConfig({
       OWNER_GITHUB_ID: envField.string({ context: 'server', access: 'secret', optional: true })
     }
   },
-  integrations: [sitemap({ customSitemaps: [`${SITE_URL}/sitemap-posts.xml`] }), mdx()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes(SETTINGS_PATH),
+      customSitemaps: [`${SITE_URL}/sitemap-posts.xml`]
+    })
+  ],
   markdown: {
     processor: unified({
       remarkPlugins: [readingTime, gitUpdatedDate, externalLinks],
