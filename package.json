@@ -11,11 +11,11 @@
     "url": "https://github.com/frasermclean/personal-site"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=22"
   },
   "packageManager": "pnpm@11.9.0",
   "volta": {
-    "node": "24.18.0"
+    "node": "22.23.1"
   },
   "scripts": {
     "dev": "wrangler types && astro dev",
