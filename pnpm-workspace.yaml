@@ -8,3 +8,4 @@ minimumReleaseAgeExclude:
   - astro@6.3.8
   - miniflare@4.20260526.0
   - wrangler@4.95.0
+  - '@astrojs/mdx@7.0.1'
