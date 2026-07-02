@@ -1,11 +1,8 @@
 ---
-import {
-  ANALYTICS_DOMAIN,
-  ANALYTICS_PERFORMANCE,
-  ANALYTICS_SCRIPT_SRC,
-  ANALYTICS_WEBSITE_ID,
-  WORKERS_CI_COMMIT_SHA
-} from 'astro:env/client';
+import { getSiteSettings } from '@/lib/db/site-settings';
+import { ANALYTICS_DOMAIN, ANALYTICS_SCRIPT_SRC, ANALYTICS_WEBSITE_ID, WORKERS_CI_COMMIT_SHA } from 'astro:env/client';
+
+const { analyticsPerformance } = await getSiteSettings();
 ---
 
 <!-- Analytics -->
@@ -16,4 +13,4 @@ import {
   data-website-id={ANALYTICS_WEBSITE_ID}
   data-domains={ANALYTICS_DOMAIN || null}
   data-tag={WORKERS_CI_COMMIT_SHA || null}
-  data-performance={ANALYTICS_PERFORMANCE || null}></script>
+  data-performance={analyticsPerformance || null}></script>

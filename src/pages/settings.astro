@@ -1,6 +1,10 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
+import { Button } from '@/components/starwind/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/starwind/card';
+import { Switch } from '@/components/starwind/switch';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSiteSettings } from '@/lib/db/site-settings';
 
 const user = Astro.locals.user;
 
@@ -10,8 +14,67 @@ if (!user?.isOwner) {
 
 const title = 'Site Settings';
 const description = `Welcome, ${user.name ?? user.githubUsername}.`;
+
+const settings = await getSiteSettings();
 ---
 
 <BaseLayout {title} {description}>
   <HeroSection {title} subtitle={description} />
+
+  <Card class="mx-auto mt-4 max-w-2xl">
+    <CardHeader>
+      <CardTitle>Analytics</CardTitle>
+      <CardDescription>Control how visitor analytics are collected on the site.</CardDescription>
+    </CardHeader>
+    <CardContent class="flex flex-col gap-6">
+      <Switch
+        id="analytics-performance"
+        label="Enable performance tracking"
+        checked={settings.analyticsPerformance}
+        variant="primary"
+      />
+    </CardContent>
+    <CardFooter>
+      <Button id="settings-save" variant="primary" class="w-fit">Save</Button>
+    </CardFooter>
+  </Card>
 </BaseLayout>
+
+<script>
+  import type { SwitchChangeEvent } from '@/components/starwind/switch';
+  import { toast } from '@/components/starwind/toast';
+  import { actions } from 'astro:actions';
+
+  const analyticsPerformanceSwitch = document.querySelector<HTMLButtonElement>('#analytics-performance');
+  const saveButton = document.querySelector<HTMLButtonElement>('#settings-save');
+
+  let analyticsPerformance = analyticsPerformanceSwitch?.getAttribute('aria-checked') === 'true';
+
+  analyticsPerformanceSwitch?.addEventListener('starwind-switch:change', (event) => {
+    analyticsPerformance = (event as SwitchChangeEvent).detail.checked;
+  });
+
+  saveButton?.addEventListener('click', handleSave);
+
+  async function handleSave() {
+    if (!saveButton) return;
+
+    saveButton.disabled = true;
+
+    try {
+      const result = await actions.updateSiteSettings({ analyticsPerformance });
+
+      if (result.error) {
+        toast.error(`Failed to save: ${result.error.message}`);
+        return;
+      }
+
+      toast.success('Settings updated.');
+    } catch (error) {
+      console.error('Save error:', error);
+      toast.error('An unexpected error occurred');
+    } finally {
+      saveButton.disabled = false;
+    }
+  }
+</script>
