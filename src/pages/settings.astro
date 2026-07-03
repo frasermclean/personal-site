@@ -29,15 +29,15 @@ const settings = await getSiteSettings();
     <CardContent class="flex flex-col gap-6">
       <Switch
         id="analytics-performance"
-        label="Enable performance tracking"
+        label="Performance (Core Web Vitals)"
         checked={settings.analyticsPerformance}
-        variant="primary"
+        variant="secondary"
       />
       <Switch
         id="analytics-replays"
-        label="Enable session replay recording"
+        label="Session Replay Recording"
         checked={settings.analyticsReplays}
-        variant="primary"
+        variant="secondary"
       />
     </CardContent>
     <CardFooter>
