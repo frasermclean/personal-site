@@ -5,22 +5,18 @@ import { ANALYTICS_BASE_URL, ANALYTICS_DOMAIN, ANALYTICS_WEBSITE_ID, WORKERS_CI_
 const { analyticsPerformance, analyticsReplays } = await getSiteSettings();
 ---
 
-{
-  ANALYTICS_WEBSITE_ID && ANALYTICS_BASE_URL && (
-    <script
-      is:inline
-      defer
-      src={`${ANALYTICS_BASE_URL}/script.js`}
-      data-website-id={ANALYTICS_WEBSITE_ID}
-      data-domains={ANALYTICS_DOMAIN || null}
-      data-performance={analyticsPerformance || null}
-      data-tag={WORKERS_CI_BRANCH || null}
-    />
-  )
-}
+<!-- Analytics -->
+<script
+  is:inline
+  defer
+  src={`${ANALYTICS_BASE_URL}/script.js`}
+  data-website-id={ANALYTICS_WEBSITE_ID}
+  data-domains={ANALYTICS_DOMAIN || null}
+  data-performance={analyticsPerformance || null}
+  data-tag={WORKERS_CI_BRANCH || null}></script>
 
 {
-  ANALYTICS_BASE_URL && ANALYTICS_WEBSITE_ID && analyticsReplays && (
+  analyticsReplays && (
     <script is:inline defer src={`${ANALYTICS_BASE_URL}/recorder.js`} data-website-id={ANALYTICS_WEBSITE_ID} />
   )
 }
