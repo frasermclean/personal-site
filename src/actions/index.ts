@@ -4,6 +4,7 @@ import { getPostReactions } from './get-post-reactions';
 import { signInUser } from './sign-in-user';
 import { signOutUser } from './sign-out-user';
 import { updatePostSyndication } from './update-post-syndication';
+import { updateSiteSettings } from './update-site-settings';
 
 export const server = {
   addPostLike,
@@ -11,5 +12,6 @@ export const server = {
   getPostReactions,
   signInUser,
   signOutUser,
-  updatePostSyndication
+  updatePostSyndication,
+  updateSiteSettings
 };

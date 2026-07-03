@@ -10,10 +10,11 @@ import {
 import MenuIcon from '@tabler/icons/outline/menu-2.svg';
 import MoonIcon from '@tabler/icons/outline/moon.svg';
 import SunIcon from '@tabler/icons/outline/sun.svg';
+import SettingsIcon from '@tabler/icons/outline/settings.svg';
 import { links } from './NavigationLinks.astro';
 import BookmarkIcon from '@tabler/icons/outline/bookmark.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avatar';
-import { BOOKMARKS_PATH } from '@/constants';
+import { BOOKMARKS_PATH, SETTINGS_PATH } from '@/constants';
 import SignOut from '@/components/navbar/SignOut.astro';
 import SignIn from '@/components/navbar/SignIn.astro';
 
@@ -58,6 +59,16 @@ const displayName = user?.name ?? user?.githubUsername ?? '';
       <BookmarkIcon width={28} stroke-width={1.25} />
       Bookmarks
     </DropdownItem>
+
+    {
+      user?.isOwner && (
+        <DropdownItem as="a" href={SETTINGS_PATH}>
+          <SettingsIcon width={28} stroke-width={1.25} />
+          Site Settings
+        </DropdownItem>
+      )
+    }
+
     <DropdownSeparator />
 
     <DropdownItem as="button" id="theme-button" class="w-full">
