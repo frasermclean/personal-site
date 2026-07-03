@@ -21,7 +21,9 @@
     "dev": "wrangler types && astro dev",
     "build": "wrangler types && astro build",
     "preview": "wrangler types && astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "db:migrate": "wrangler d1 migrations apply personal-site --local",
+    "db:migrate:remote": "wrangler d1 migrations apply personal-site --remote"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.0.2",

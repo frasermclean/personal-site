@@ -4,7 +4,8 @@ import { ActionError, defineAction } from 'astro:actions';
 
 export const updateSiteSettings = defineAction({
   input: z.object({
-    analyticsPerformance: z.boolean()
+    analyticsPerformance: z.boolean(),
+    analyticsReplays: z.boolean()
   }),
   handler: async (input, context) => {
     if (!context.locals.user?.isOwner) {

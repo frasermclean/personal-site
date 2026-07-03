@@ -13,7 +13,7 @@
   },
   "vars": {
     "ANALYTICS_DOMAIN": "frasermclean.com",
-    "ANALYTICS_SCRIPT_SRC": "https://analytics.frasermclean.com/script.js",
+    "ANALYTICS_BASE_URL": "https://analytics.frasermclean.com",
     "ANALYTICS_WEBSITE_ID": "a366d3c3-624c-4f34-9071-7d155090ac6a",
     "TURNSTILE_SITE_KEY": "0x4AAAAAAAhX2PdPqj0Cojk1",
     "GITHUB_CLIENT_ID": "f93d1abe0a16cca1040d"

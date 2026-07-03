@@ -49,14 +49,14 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      ANALYTICS_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
-      ANALYTICS_SCRIPT_SRC: envField.string({ context: 'client', access: 'public' }),
+      ANALYTICS_WEBSITE_ID: envField.string({ context: 'client', access: 'public', optional: true }),
+      ANALYTICS_BASE_URL: envField.string({ context: 'client', access: 'public', optional: true }),
       ANALYTICS_DOMAIN: envField.string({ context: 'client', access: 'public', optional: true }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
       TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
-      WORKERS_CI_COMMIT_SHA: envField.string({ context: 'client', access: 'public', optional: true }),
+      WORKERS_CI_BRANCH: envField.string({ context: 'client', access: 'public', optional: true }),
       GITHUB_CLIENT_ID: envField.string({ context: 'server', access: 'public' }),
       GITHUB_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret' }),
       OWNER_GITHUB_ID: envField.string({ context: 'server', access: 'secret', optional: true })

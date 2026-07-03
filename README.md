@@ -19,10 +19,11 @@ The project relies on a few environment variables for local development. You can
 # Email
 CONTACT_EMAIL="contact@example.com"
 RESEND_API_KEY="xxx"
+OWNER_GITHUB_ID="123" # Unique identifier of the GitHub user who owns the site
 
-# Analytics
-ANALYTICS_WEBSITE_ID="xxx"
-ANALYTICS_SCRIPT_SRC="http://localhost:8081/script.js"
+# Umami Analytics
+ANALYTICS_BASE_URL="http://localhost:8081" # Base URL for the analytics system
+ANALYTICS_WEBSITE_ID="xxx" # Unique identifier of the site
 
 # Cloudflare Turnstile
 TURNSTILE_SITE_KEY="1x00000000000000000000AA" # Test key - always passes
@@ -32,3 +33,15 @@ TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA" # Test key - always p
 GITHUB_CLIENT_ID="xxx"
 GITHUB_CLIENT_SECRET="xxx"
 ```
+
+### Database Setup
+
+The site uses a Cloudflare D1 database. On a new development machine, apply the migrations to create the local
+database and its schema:
+
+```sh
+pnpm db:migrate
+```
+
+This creates the local D1 database under `.wrangler/state/v3/d1` and applies all migrations from the `migrations/`
+directory. Re-run this command whenever a new migration is added.

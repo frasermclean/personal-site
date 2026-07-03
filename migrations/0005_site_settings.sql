@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS site_settings (
 );
 
 INSERT INTO site_settings (key, value) VALUES ('analytics_performance', 'true');
+INSERT INTO site_settings (key, value) VALUES ('analytics_replays', 'false');

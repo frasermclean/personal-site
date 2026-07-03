@@ -2,10 +2,12 @@ import { env } from 'cloudflare:workers';
 
 export interface SiteSettings {
   analyticsPerformance: boolean;
+  analyticsReplays: boolean;
 }
 
 const DEFAULTS: SiteSettings = {
-  analyticsPerformance: true
+  analyticsPerformance: true,
+  analyticsReplays: false
 };
 
 interface SiteSettingRow {
@@ -21,6 +23,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   for (const row of result.results) {
     if (row.key === 'analytics_performance') {
       settings.analyticsPerformance = row.value === 'true';
+    } else if (row.key === 'analytics_replays') {
+      settings.analyticsReplays = row.value === 'true';
     }
   }
 
@@ -36,6 +40,15 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
         `INSERT INTO site_settings (key, value) VALUES ('analytics_performance', ?1)
          ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP`
       ).bind(settings.analyticsPerformance ? 'true' : 'false')
+    );
+  }
+
+  if (settings.analyticsReplays !== undefined) {
+    statements.push(
+      env.DB.prepare(
+        `INSERT INTO site_settings (key, value) VALUES ('analytics_replays', ?1)
+         ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP`
+      ).bind(settings.analyticsReplays ? 'true' : 'false')
     );
   }
 

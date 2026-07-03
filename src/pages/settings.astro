@@ -33,6 +33,12 @@ const settings = await getSiteSettings();
         checked={settings.analyticsPerformance}
         variant="primary"
       />
+      <Switch
+        id="analytics-replays"
+        label="Enable session replay recording"
+        checked={settings.analyticsReplays}
+        variant="primary"
+      />
     </CardContent>
     <CardFooter>
       <Button id="settings-save" variant="primary" class="w-fit">Save</Button>
@@ -46,12 +52,18 @@ const settings = await getSiteSettings();
   import { actions } from 'astro:actions';
 
   const analyticsPerformanceSwitch = document.querySelector<HTMLButtonElement>('#analytics-performance');
+  const analyticsReplaysSwitch = document.querySelector<HTMLButtonElement>('#analytics-replays');
   const saveButton = document.querySelector<HTMLButtonElement>('#settings-save');
 
   let analyticsPerformance = analyticsPerformanceSwitch?.getAttribute('aria-checked') === 'true';
+  let analyticsReplays = analyticsReplaysSwitch?.getAttribute('aria-checked') === 'true';
 
   analyticsPerformanceSwitch?.addEventListener('starwind-switch:change', (event) => {
     analyticsPerformance = (event as SwitchChangeEvent).detail.checked;
+  });
+
+  analyticsReplaysSwitch?.addEventListener('starwind-switch:change', (event) => {
+    analyticsReplays = (event as SwitchChangeEvent).detail.checked;
   });
 
   saveButton?.addEventListener('click', handleSave);
@@ -62,7 +74,7 @@ const settings = await getSiteSettings();
     saveButton.disabled = true;
 
     try {
-      const result = await actions.updateSiteSettings({ analyticsPerformance });
+      const result = await actions.updateSiteSettings({ analyticsPerformance, analyticsReplays });
 
       if (result.error) {
         toast.error(`Failed to save: ${result.error.message}`);
