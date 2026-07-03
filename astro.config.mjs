@@ -49,8 +49,8 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      ANALYTICS_WEBSITE_ID: envField.string({ context: 'client', access: 'public', optional: true }),
-      ANALYTICS_BASE_URL: envField.string({ context: 'client', access: 'public', optional: true }),
+      ANALYTICS_WEBSITE_ID: envField.string({ context: 'client', access: 'public' }),
+      ANALYTICS_BASE_URL: envField.string({ context: 'client', access: 'public' }),
       ANALYTICS_DOMAIN: envField.string({ context: 'client', access: 'public', optional: true }),
       CONTACT_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
