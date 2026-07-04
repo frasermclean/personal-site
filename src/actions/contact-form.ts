@@ -9,9 +9,13 @@ const emailSender = new EmailSender(RESEND_API_KEY, CONTACT_EMAIL);
 
 export const processContactForm = defineAction({
   input: z.object({
-    name: z.string().min(1, 'Name is required'),
-    email: z.email('Invalid email address'),
-    message: z.string().min(1, 'Message is required'),
+    name: z
+      .string()
+      .min(1, 'Name is required')
+      .max(100, 'Name must be 100 characters or less')
+      .regex(/^[^\r\n]*$/, 'Name cannot contain line breaks'),
+    email: z.email('Invalid email address').max(254, 'Email must be 254 characters or less'),
+    message: z.string().min(1, 'Message is required').max(5000, 'Message must be 5000 characters or less'),
     token: z.string().min(1, 'Turnstile token is required')
   }),
   handler: async (input, context) => {
