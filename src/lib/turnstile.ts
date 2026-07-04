@@ -40,8 +40,8 @@ export class TurnstileValidator {
         throw new TurnstileError('Turnstile validation failed', { response, errorCodes: result['error-codes'] });
       }
     } catch (error) {
-      if (error instanceof TurnstileError) {
-        console.error(error.message, error.context);
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        throw new TurnstileError('Turnstile validation request timed out', { errorCodes: ['timeout'] });
       }
       throw error;
     } finally {
