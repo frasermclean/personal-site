@@ -2,6 +2,9 @@ import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { CONTACT_EMAIL, RESEND_API_KEY, TURNSTILE_SECRET_KEY } from 'astro:env/server';
 import { Resend } from 'resend';
+import { TurnstileError, TurnstileValidator } from '../lib/turnstile';
+
+const turnstileValidator = new TurnstileValidator(TURNSTILE_SECRET_KEY);
 
 export const processContactForm = defineAction({
   input: z.object({
@@ -11,49 +14,22 @@ export const processContactForm = defineAction({
     token: z.string().min(1, 'Turnstile token is required')
   }),
   handler: async (input, context) => {
-    await validateToken(input.token, getClientIp(context.request));
+    try {
+      await turnstileValidator.validateToken(input.token, getClientIp(context.request));
+    } catch (error) {
+      if (error instanceof TurnstileError) {
+        console.error(error.message, error.context);
+      }
+
+      throw new ActionError({
+        code: 'UNAUTHORIZED',
+        message: 'Failed to validate token'
+      });
+    }
+
     await sendEmail(input.name, input.email, input.message);
   }
 });
-
-/**
- * Validate Turnstile token
- * @param token Turnstile token from client
- * @param remoteIp Client's IP address
- */
-async function validateToken(token: string, remoteIp?: string): Promise<void> {
-  const formData = new FormData();
-  formData.append('response', token);
-  formData.append('secret', TURNSTILE_SECRET_KEY);
-
-  if (remoteIp) {
-    formData.append('remoteip', remoteIp);
-  }
-
-  // send request to siteverify API endpoint
-  const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST',
-    body: formData
-  });
-
-  if (!response.ok) {
-    console.error('Error calling Turnstile siteverify API:', response.status, response.statusText);
-    throw new ActionError({
-      code: 'UNAUTHORIZED',
-      message: 'Failed to validate token'
-    });
-  }
-
-  const result = (await response.json()) as { success: boolean; 'error-codes': string[] };
-
-  if (!result.success) {
-    console.error('Turnstile validation failed:', result['error-codes']);
-    throw new ActionError({
-      code: 'UNAUTHORIZED',
-      message: 'Failed to validate token'
-    });
-  }
-}
 
 /**
  * Send an email using the Resend API
