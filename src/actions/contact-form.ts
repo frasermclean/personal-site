@@ -39,6 +39,7 @@ export const processContactForm = defineAction({
         });
       }
 
+      console.error('Unexpected error while processing contact form', error);
       throw new ActionError({
         code: 'INTERNAL_SERVER_ERROR',
         message: 'An unexpected error occurred'
