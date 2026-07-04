@@ -1,10 +1,11 @@
+import { EmailSender, EmailSendError } from '@/lib/email-sending';
+import { TurnstileError, TurnstileValidator } from '@/lib/turnstile';
 import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { CONTACT_EMAIL, RESEND_API_KEY, TURNSTILE_SECRET_KEY } from 'astro:env/server';
-import { Resend } from 'resend';
-import { TurnstileError, TurnstileValidator } from '../lib/turnstile';
 
 const turnstileValidator = new TurnstileValidator(TURNSTILE_SECRET_KEY);
+const emailSender = new EmailSender(RESEND_API_KEY, CONTACT_EMAIL);
 
 export const processContactForm = defineAction({
   input: z.object({
@@ -16,62 +17,31 @@ export const processContactForm = defineAction({
   handler: async (input, context) => {
     try {
       await turnstileValidator.validateToken(input.token, getClientIp(context.request));
+      await emailSender.send(input.name, input.email, input.message);
     } catch (error) {
       if (error instanceof TurnstileError) {
         console.error(error.message, error.context);
+        throw new ActionError({
+          code: 'UNAUTHORIZED',
+          message: 'Failed to validate token'
+        });
+      }
+
+      if (error instanceof EmailSendError) {
+        console.error(error.message, error.context);
+        throw new ActionError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to send email'
+        });
       }
 
       throw new ActionError({
-        code: 'UNAUTHORIZED',
-        message: 'Failed to validate token'
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'An unexpected error occurred'
       });
     }
-
-    await sendEmail(input.name, input.email, input.message);
   }
 });
-
-/**
- * Send an email using the Resend API
- * @param apiKey The Resend API key
- * @param fromEmail Sender email address
- * @param fromName Sender name
- * @param message Message content
- * @returns True if the email was sent successfully
- */
-async function sendEmail(fromName: string, fromEmail: string, message: string) {
-  if (!CONTACT_EMAIL) {
-    throw new ActionError({
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Missing CONTACT_EMAIL server secret configuration'
-    });
-  }
-
-  if (!RESEND_API_KEY) {
-    throw new ActionError({
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Missing RESEND_API_KEY server secret configuration'
-    });
-  }
-
-  const resend = new Resend(RESEND_API_KEY);
-
-  const response = await resend.emails.send({
-    from: 'Contact Form <contact-form@updates.frasermclean.com>',
-    to: CONTACT_EMAIL,
-    replyTo: fromEmail,
-    subject: `Message from ${fromName}`,
-    text: message
-  });
-
-  if (response.error) {
-    console.error('Error sending email', response.error);
-    throw new ActionError({
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Failed to send email'
-    });
-  }
-}
 
 /**
  * Attempt to get the client's IP address from the request headers
