@@ -4,6 +4,8 @@ import { z } from 'astro/zod';
 import { ActionError, defineAction } from 'astro:actions';
 import { CONTACT_EMAIL, RESEND_API_KEY, TURNSTILE_SECRET_KEY } from 'astro:env/server';
 
+export const TURNSTILE_ACTION_CONTACT = 'contact-form';
+
 const turnstileValidator = new TurnstileValidator(TURNSTILE_SECRET_KEY);
 const emailSender = new EmailSender(RESEND_API_KEY, CONTACT_EMAIL);
 
@@ -19,9 +21,12 @@ export const processContactForm = defineAction({
     token: z.string().min(1, 'Turnstile token is required')
   }),
   handler: async (input, context) => {
+    // validate the Turnstile token
     try {
-      await turnstileValidator.validateToken(input.token, getClientIp(context.request));
-      await emailSender.send(input.name, input.email, input.message);
+      await turnstileValidator.validateToken(input.token, {
+        remoteIp: getClientIp(context.request),
+        expectedAction: TURNSTILE_ACTION_CONTACT
+      });
     } catch (error) {
       if (error instanceof TurnstileError) {
         console.error(error.message, error.context);
@@ -31,18 +36,26 @@ export const processContactForm = defineAction({
         });
       }
 
-      if (error instanceof EmailSendError) {
-        console.error(error.message, error.context);
-        throw new ActionError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to send email'
-        });
-      }
-
-      console.error('Unexpected error while processing contact form', error);
+      console.error('Unexpected error while validating token', error);
       throw new ActionError({
         code: 'INTERNAL_SERVER_ERROR',
         message: 'An unexpected error occurred'
+      });
+    }
+
+    // send the email
+    try {
+      await emailSender.send(input.name, input.email, input.message);
+    } catch (error) {
+      if (error instanceof EmailSendError) {
+        console.error(error.message, error.context);
+      } else {
+        console.error('Unexpected error while sending email', error);
+      }
+
+      throw new ActionError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to send email'
       });
     }
   }
