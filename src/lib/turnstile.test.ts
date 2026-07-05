@@ -107,6 +107,21 @@ describe('TurnstileValidator', () => {
     );
   });
 
+  it('logs a warning when the token is older than 4 minutes', async () => {
+    const oldChallengeTs = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], challenge_ts: oldChallengeTs }))
+    );
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const validator = new TurnstileValidator('secret-key');
+    await validator.validateToken('token');
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('minutes old'));
+
+    warnSpy.mockRestore();
+  });
+
   it('throws a TurnstileError with the reported error codes when validation fails', async () => {
     fetchMock.mockResolvedValue(
       new Response(JSON.stringify({ success: false, 'error-codes': ['invalid-input-response'] }))

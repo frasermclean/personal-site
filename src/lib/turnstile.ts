@@ -47,6 +47,13 @@ export class TurnstileValidator {
       if (options.expectedHostname && result.hostname !== options.expectedHostname) {
         throw new TurnstileError('Expected hostname does not match Turnstile response', { response });
       }
+
+      const challengeTime = new Date(result.challenge_ts);
+      const now = new Date();
+      const ageMinutes = (now.getTime() - challengeTime.getTime()) / (1000 * 60);
+      if (ageMinutes > 4) {
+        console.warn(`Token is ${ageMinutes.toFixed(1)} minutes old`);
+      }
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') {
         throw new TurnstileError('Turnstile validation request timed out', { errorCodes: ['timeout'] });
@@ -70,6 +77,7 @@ interface ValidateTokenOptions {
  */
 interface SiteVerifyResponse {
   success: boolean;
+  challenge_ts: string;
   'error-codes': string[];
   hostname?: string;
   action?: string;
