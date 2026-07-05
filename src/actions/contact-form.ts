@@ -25,7 +25,8 @@ export const processContactForm = defineAction({
     try {
       await turnstileValidator.validateToken(input.token, {
         remoteIp: getClientIp(context.request),
-        expectedAction: TURNSTILE_ACTION_CONTACT
+        expectedAction: TURNSTILE_ACTION_CONTACT,
+        expectedHostname: context.url.hostname
       });
     } catch (error) {
       if (error instanceof TurnstileError) {
