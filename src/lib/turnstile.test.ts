@@ -27,7 +27,7 @@ describe('TurnstileValidator', () => {
     fetchMock.mockResolvedValue(new Response(JSON.stringify({ success: true, 'error-codes': [] })));
 
     const validator = new TurnstileValidator('secret-key');
-    await validator.validateToken('token', '203.0.113.1');
+    await validator.validateToken('token', { remoteIp: '203.0.113.1' });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0];
@@ -57,6 +57,69 @@ describe('TurnstileValidator', () => {
     const validator = new TurnstileValidator('secret-key');
 
     await expect(validator.validateToken('token')).rejects.toThrow(TurnstileError);
+  });
+
+  it('resolves when the returned action matches the expected action', async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], action: 'contact-form' }))
+    );
+
+    const validator = new TurnstileValidator('secret-key');
+
+    await expect(
+      validator.validateToken('token', { expectedAction: 'contact-form' })
+    ).resolves.toBeUndefined();
+  });
+
+  it('throws a TurnstileError when the returned action does not match the expected action', async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], action: 'other-action' }))
+    );
+
+    const validator = new TurnstileValidator('secret-key');
+
+    await expect(validator.validateToken('token', { expectedAction: 'contact-form' })).rejects.toThrow(
+      TurnstileError
+    );
+  });
+
+  it('resolves when the returned hostname matches the expected hostname', async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], hostname: 'example.com' }))
+    );
+
+    const validator = new TurnstileValidator('secret-key');
+
+    await expect(
+      validator.validateToken('token', { expectedHostname: 'example.com' })
+    ).resolves.toBeUndefined();
+  });
+
+  it('throws a TurnstileError when the returned hostname does not match the expected hostname', async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], hostname: 'other.example.com' }))
+    );
+
+    const validator = new TurnstileValidator('secret-key');
+
+    await expect(validator.validateToken('token', { expectedHostname: 'example.com' })).rejects.toThrow(
+      TurnstileError
+    );
+  });
+
+  it('logs a warning when the token is older than 4 minutes', async () => {
+    const oldChallengeTs = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ success: true, 'error-codes': [], challenge_ts: oldChallengeTs }))
+    );
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const validator = new TurnstileValidator('secret-key');
+    await validator.validateToken('token');
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('minutes old'));
+
+    warnSpy.mockRestore();
   });
 
   it('throws a TurnstileError with the reported error codes when validation fails', async () => {
