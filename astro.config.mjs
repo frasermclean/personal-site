@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField, fontProviders } from 'astro/config';
 import rehypeFigure from 'rehype-figure';
-import { SETTINGS_PATH, SITE_URL } from './src/constants.ts';
+import { NOW_EDIT_PATH, SETTINGS_PATH, SITE_URL } from './src/constants.ts';
 import { externalLinks, gitUpdatedDate, readingTime } from './src/lib/remark-plugins.ts';
 
 // https://astro.build/config
@@ -67,7 +67,7 @@ export default defineConfig({
     mdx(),
     preact({ compat: true }),
     sitemap({
-      filter: (page) => !page.includes(SETTINGS_PATH),
+      filter: (page) => !page.includes(SETTINGS_PATH) && !page.includes(NOW_EDIT_PATH),
       customSitemaps: [`${SITE_URL}/sitemap-posts.xml`]
     })
   ],
