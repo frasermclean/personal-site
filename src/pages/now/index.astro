@@ -14,6 +14,12 @@ const subtitle = description;
 
 const current = await getCurrentRevision();
 const currentHtml = current ? await renderNowPageMarkdown(current.content) : null;
+
+const lastUpdated = (current?.updatedAt ?? current?.createdAt)?.toLocaleDateString(undefined, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
 <BaseLayout {title} {description}>
@@ -27,12 +33,13 @@ const currentHtml = current ? await renderNowPageMarkdown(current.content) : nul
     <section>
       {
         currentHtml ? (
-          <Prose class="w-full max-w-none">
-            <Fragment set:html={currentHtml} />
-          </Prose>
-          <p class="text-muted-foreground text-sm mt-4">
-            Last updated: {current?.updatedAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
+          <>
+            <Prose class="w-full max-w-none">
+              <Fragment set:html={currentHtml} />
+            </Prose>
+
+            {lastUpdated && <p class="mt-4 text-sm text-muted-foreground">Last updated: {lastUpdated}</p>}
+          </>
         ) : (
           <p class="text-lg text-muted-foreground">Nothing posted yet.</p>
         )
