@@ -1,0 +1,25 @@
+---
+import HeroSection from '@/components/HeroSection.astro';
+import NowPageEditor from '@/components/NowPageEditor';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCurrentRevision } from '@/lib/db/now-page';
+
+const user = Astro.locals.user;
+
+if (!user?.isOwner) {
+  return Astro.rewrite('/404');
+}
+
+const title = 'Edit Now Page';
+const description = `Welcome, ${user.name ?? user.githubUsername}.`;
+
+const current = await getCurrentRevision();
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection {title} subtitle={description} />
+
+  <div class="mx-auto flex max-w-4xl flex-col gap-8">
+    <NowPageEditor client:load initialContent={current?.content ?? ''} />
+  </div>
+</BaseLayout>

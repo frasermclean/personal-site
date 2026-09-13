@@ -3,6 +3,7 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
+    "jsxImportSource": "preact",
     "paths": {
       "@/*": ["./src/*"]
     }

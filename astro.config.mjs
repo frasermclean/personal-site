@@ -1,6 +1,7 @@
 import cloudflare from '@astrojs/cloudflare';
 import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField, fontProviders } from 'astro/config';
@@ -64,6 +65,7 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
+    preact({ compat: true }),
     sitemap({
       filter: (page) => !page.includes(SETTINGS_PATH),
       customSitemaps: [`${SITE_URL}/sitemap-posts.xml`]
@@ -82,6 +84,14 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['preact', 'preact/hooks', 'preact/compat', 'preact/compat/client', '@uiw/react-md-editor']
+    },
+    ssr: {
+      optimizeDeps: {
+        include: ['@astrojs/preact/server.js', 'preact', 'preact/hooks', 'preact/compat', 'preact/compat/client']
+      }
+    }
   }
 });
