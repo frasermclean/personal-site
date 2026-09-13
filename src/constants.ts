@@ -14,3 +14,4 @@ export const TAGS_PATH = '/tags';
 export const BOOKMARKS_PATH = '/bookmarks';
 export const SETTINGS_PATH = '/settings';
 export const NOW_PATH = '/now';
+export const NOW_EDIT_PATH = '/now/edit';

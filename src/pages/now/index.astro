@@ -1,7 +1,7 @@
 ---
 import HeroSection from '@/components/HeroSection.astro';
 import Prose from '@/components/post-view/Prose.astro';
-import { NOW_PATH } from '@/constants';
+import { NOW_EDIT_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCurrentRevision } from '@/lib/db/now-page';
 import { renderNowPageMarkdown } from '@/lib/now-page';
@@ -26,7 +26,7 @@ const lastUpdated = (current?.updatedAt ?? current?.createdAt)?.toLocaleDateStri
   <HeroSection
     {title}
     {subtitle}
-    primaryCta={user?.isOwner ? { label: 'Edit', href: `${NOW_PATH}/edit` } : undefined}
+    primaryCta={user?.isOwner ? { label: 'Edit', href: NOW_EDIT_PATH } : undefined}
   />
 
   <div class="mx-auto flex max-w-4xl flex-col gap-8">
