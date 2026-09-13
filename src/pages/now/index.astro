@@ -4,7 +4,7 @@ import Prose from '@/components/post-view/Prose.astro';
 import { NOW_PATH } from '@/constants';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCurrentRevision } from '@/lib/db/now-page';
-import { renderNowPageMarkdown } from '@/lib/render-now-page-markdown';
+import { renderNowPageMarkdown } from '@/lib/now-page';
 
 const user = Astro.locals.user;
 
