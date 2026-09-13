@@ -7,6 +7,7 @@ import {
   DropdownSeparator,
   DropdownTrigger
 } from '@/components/starwind/dropdown';
+import { NOW_PATH } from '@/constants';
 import MenuIcon from '@tabler/icons/outline/menu-2.svg';
 import MoonIcon from '@tabler/icons/outline/moon.svg';
 import SunIcon from '@tabler/icons/outline/sun.svg';
@@ -17,9 +18,23 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/starwind/avata
 import { BOOKMARKS_PATH, SETTINGS_PATH } from '@/constants';
 import SignOut from '@/components/navbar/SignOut.astro';
 import SignIn from '@/components/navbar/SignIn.astro';
+import TriangleInvertedIcon from '@tabler/icons/outline/triangle-inverted.svg';
 
 const user = Astro.locals.user;
 const displayName = user?.name ?? user?.githubUsername ?? '';
+
+const otherLinks = [
+  {
+    href: NOW_PATH,
+    text: 'Now',
+    Icon: TriangleInvertedIcon
+  },
+  {
+    href: BOOKMARKS_PATH,
+    text: 'Bookmarks',
+    Icon: BookmarkIcon
+  }
+];
 ---
 
 <Dropdown>
@@ -55,10 +70,14 @@ const displayName = user?.name ?? user?.githubUsername ?? '';
       <DropdownSeparator />
     </nav>
 
-    <DropdownItem as="a" href={BOOKMARKS_PATH}>
-      <BookmarkIcon width={28} stroke-width={1.25} />
-      Bookmarks
-    </DropdownItem>
+    {
+      otherLinks.map(({ href, text, Icon }) => (
+        <DropdownItem as="a" href={href}>
+          {Icon && <Icon width={28} stroke-width={1.25} />}
+          {text}
+        </DropdownItem>
+      ))
+    }
 
     {
       user?.isOwner && (
