@@ -1,0 +1,39 @@
+---
+import HeroSection from '@/components/HeroSection.astro';
+import Prose from '@/components/post-view/Prose.astro';
+import { NOW_PATH } from '@/constants';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCurrentRevision } from '@/lib/db/now-page';
+import { renderNowPageMarkdown } from '@/lib/render-now-page-markdown';
+
+const user = Astro.locals.user;
+
+const title = 'Now';
+const description = "What I'm focused on right now.";
+const subtitle = description;
+
+const current = await getCurrentRevision();
+const currentHtml = current ? await renderNowPageMarkdown(current.content) : null;
+---
+
+<BaseLayout {title} {description}>
+  <HeroSection
+    {title}
+    {subtitle}
+    primaryCta={user?.isOwner ? { label: 'Edit', href: `${NOW_PATH}/edit` } : undefined}
+  />
+
+  <div class="mx-auto flex max-w-4xl flex-col gap-8">
+    <section>
+      {
+        currentHtml ? (
+          <Prose class="w-full max-w-none">
+            <Fragment set:html={currentHtml} />
+          </Prose>
+        ) : (
+          <p class="text-lg text-muted-foreground">Nothing posted yet.</p>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>
