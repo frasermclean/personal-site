@@ -3,8 +3,8 @@ import { env } from 'cloudflare:workers';
 export interface NowPageRevision {
   id: number;
   content: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface NowPageRevisionRow {
@@ -86,9 +86,14 @@ function mapRow(row: NowPageRevisionRow): NowPageRevision {
   return {
     id: row.id,
     content: row.content,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at
+    createdAt: parseSqliteTimestamp(row.created_at),
+    updatedAt: parseSqliteTimestamp(row.updated_at)
   };
+}
+
+/** D1's CURRENT_TIMESTAMP is UTC formatted as "YYYY-MM-DD HH:MM:SS", which Date can't parse directly. */
+function parseSqliteTimestamp(value: string): Date {
+  return new Date(`${value.replace(' ', 'T')}Z`);
 }
 
 export class NowPagePersistenceError extends Error {
