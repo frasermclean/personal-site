@@ -1,18 +1,29 @@
 import type { components } from '@octokit/openapi-types';
-import { ArcticFetchError, generateState, GitHub, OAuth2RequestError } from 'arctic';
 
 const API_VERSION = '2026-03-10';
 const USER_AGENT = 'FM-Site-OAuth';
+
+const AUTHORIZATION_ENDPOINT = 'https://github.com/login/oauth/authorize';
+const TOKEN_ENDPOINT = 'https://github.com/login/oauth/access_token';
 
 /**
  * OAuth utilities for GitHub authentication
  */
 
+export class GitHubOAuthError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = 'GitHubOAuthError';
+  }
+}
+
 /**
  * Generate a cryptographically random string for OAuth state parameter
  */
 export function generateRandomState(): string {
-  return generateState();
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return base64UrlEncode(bytes);
 }
 
 export function createOAuthConfig(clientId: string, clientSecret: string, origin: string): OAuthConfig {
@@ -66,11 +77,13 @@ function validateConfig(config: OAuthConfig): void {
  */
 export function buildGithubAuthUrl(config: OAuthConfig, state: string, scopes = ['user:email']): string {
   validateConfig(config);
-  const { clientId, clientSecret, redirectUri } = config;
+  const { clientId, redirectUri } = config;
 
-  const github = new GitHub(clientId, clientSecret, redirectUri);
-
-  const authUrl = github.createAuthorizationURL(state, scopes);
+  const authUrl = new URL(AUTHORIZATION_ENDPOINT);
+  authUrl.searchParams.set('client_id', clientId);
+  authUrl.searchParams.set('redirect_uri', redirectUri);
+  authUrl.searchParams.set('scope', scopes.join(' '));
+  authUrl.searchParams.set('state', state);
   authUrl.searchParams.set('allow_signup', 'true');
   return authUrl.toString();
 }
@@ -82,28 +95,39 @@ export async function exchangeCodeForToken(code: string, config: OAuthConfig): P
   validateConfig(config);
   const { clientId, clientSecret, redirectUri } = config;
 
-  const github = new GitHub(clientId, clientSecret, redirectUri);
-
+  let response: Response;
   try {
-    const tokens = await github.validateAuthorizationCode(code);
-    return {
-      accessToken: tokens.accessToken(),
-      tokenType: tokens.tokenType()
-    };
+    response = await fetch(TOKEN_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': USER_AGENT
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+        redirect_uri: redirectUri
+      }).toString()
+    });
   } catch (error) {
-    if (error instanceof OAuth2RequestError) {
-      console.error('Invalid code, credentials, or redirect URI', error);
-      throw error;
-    }
-
-    if (error instanceof ArcticFetchError) {
-      console.error('Failed to fetch data from GitHub', error);
-      throw error;
-    }
-
-    console.log('Unexpected error during code for token exchange', error);
-    throw error;
+    throw new GitHubOAuthError('Failed to reach GitHub token endpoint', { cause: error });
   }
+
+  if (!response.ok) {
+    throw new GitHubOAuthError(`GitHub token endpoint returned ${response.status}: ${response.statusText}`);
+  }
+
+  const body = (await response.json()) as GitHubTokenResponseBody;
+  if ('error' in body) {
+    throw new GitHubOAuthError(`GitHub rejected the authorization code: ${body.error_description ?? body.error}`);
+  }
+
+  return {
+    accessToken: body.access_token,
+    tokenType: body.token_type
+  };
 }
 
 /**
@@ -120,10 +144,18 @@ export async function fetchGithubUser(accessToken: string, tokenType: string): P
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch GitHub user: ${response.statusText}`);
+    throw new GitHubOAuthError(`Failed to fetch GitHub user: ${response.statusText}`);
   }
 
   return response.json();
+}
+
+function base64UrlEncode(bytes: Uint8Array): string {
+  let binary = '';
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
 export type GitHubUser = components['schemas']['private-user'];
@@ -138,3 +170,7 @@ export interface TokenResponse {
   accessToken: string;
   tokenType: string;
 }
+
+type GitHubTokenResponseBody =
+  | { access_token: string; token_type: string; scope: string }
+  | { error: string; error_description?: string; error_uri?: string };
