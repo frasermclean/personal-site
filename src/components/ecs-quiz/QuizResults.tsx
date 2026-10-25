@@ -1,7 +1,15 @@
 import { ButtonVariants } from '@/components/starwind/button';
 import { ECS_TOPICS, EXAM_PASS_MARK, scoreQuiz } from '@/lib/ecs-quiz';
 import type { QuizSession } from './EcsQuiz';
-import { correctTextClass, formatDuration, incorrectTextClass, OPTION_LETTERS, panelClass } from './shared';
+import {
+  correctTextClass,
+  formatDuration,
+  incorrectTextClass,
+  OPTION_LETTERS,
+  panelClass,
+  panelFooterClass,
+  secondaryActionClass
+} from './shared';
 
 interface QuizResultsProps {
   session: QuizSession;
@@ -55,7 +63,14 @@ export default function QuizResults({ session, onReviewIds, onRestart }: QuizRes
             {passed ? 'Pass' : `Not a pass yet. You need ${EXAM_PASS_MARK} correct.`}
           </p>
         )}
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className={`${panelFooterClass} self-stretch`}>
+          <button
+            type="button"
+            className={ButtonVariants.button({ variant: 'outline', class: secondaryActionClass })}
+            onClick={onRestart}
+          >
+            Back to start
+          </button>
           {incorrect.length > 0 && (
             <button
               type="button"
@@ -65,9 +80,6 @@ export default function QuizResults({ session, onReviewIds, onRestart }: QuizRes
               Practise the {incorrect.length} you missed
             </button>
           )}
-          <button type="button" className={ButtonVariants.button({ variant: 'outline' })} onClick={onRestart}>
-            Back to start
-          </button>
         </div>
       </section>
 

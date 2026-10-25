@@ -1,7 +1,14 @@
 import { ButtonVariants } from '@/components/starwind/button';
 import { useEffect, useState } from 'preact/hooks';
 import type { QuizSession } from './EcsQuiz';
-import { formatDuration, incorrectTextClass, OPTION_LETTERS, panelClass } from './shared';
+import {
+  formatDuration,
+  incorrectTextClass,
+  OPTION_LETTERS,
+  panelClass,
+  panelFooterClass,
+  secondaryActionClass
+} from './shared';
 
 interface QuizQuestionProps {
   session: QuizSession;
@@ -67,8 +74,28 @@ export default function QuizQuestion({ session, onSelect, onNavigate, onFinish, 
                 {formatDuration(remaining)}
               </span>
             )}
-            <button type="button" className={ButtonVariants.button({ variant: 'ghost', size: 'sm' })} onClick={onQuit}>
-              Quit
+            <button
+              type="button"
+              aria-label="Quit quiz"
+              title="Quit quiz"
+              className={ButtonVariants.button({ variant: 'ghost', size: 'icon-sm' })}
+              onClick={onQuit}
+            >
+              {/* Tabler "x" icon, inlined because the Astro SVG imports can't be used in Preact */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="size-5"
+                aria-hidden="true"
+              >
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+              </svg>
             </button>
           </span>
         </div>
@@ -125,10 +152,10 @@ export default function QuizQuestion({ session, onSelect, onNavigate, onFinish, 
           )}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className={panelFooterClass}>
           {isExam ? (
             <>
-              <span className="flex gap-2">
+              <span className={`flex flex-wrap gap-2 ${secondaryActionClass}`}>
                 <button
                   type="button"
                   className={ButtonVariants.button({ variant: 'outline' })}
@@ -138,26 +165,27 @@ export default function QuizQuestion({ session, onSelect, onNavigate, onFinish, 
                   Previous
                 </button>
                 {!isLast && (
-                  <button
-                    type="button"
-                    className={ButtonVariants.button({ variant: 'primary' })}
-                    onClick={() => onNavigate(index + 1)}
-                  >
-                    Next
+                  <button type="button" className={ButtonVariants.button({ variant: 'outline' })} onClick={onFinish}>
+                    Finish exam
                   </button>
                 )}
               </span>
+              {/* Finishing becomes the primary action once there are no more questions */}
               <button
                 type="button"
-                className={ButtonVariants.button({ variant: isLast ? 'primary' : 'outline' })}
-                onClick={onFinish}
+                className={ButtonVariants.button({ variant: 'primary' })}
+                onClick={() => (isLast ? onFinish() : onNavigate(index + 1))}
               >
-                Finish exam
+                {isLast ? 'Finish exam' : 'Next'}
               </button>
             </>
           ) : (
             <>
-              <button type="button" className={ButtonVariants.button({ variant: 'outline' })} onClick={onFinish}>
+              <button
+                type="button"
+                className={ButtonVariants.button({ variant: 'outline', class: secondaryActionClass })}
+                onClick={onFinish}
+              >
                 Finish early
               </button>
               <button

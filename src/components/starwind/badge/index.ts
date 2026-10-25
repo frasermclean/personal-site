@@ -1,4 +1,5 @@
-import Badge, { badge } from './Badge.astro';
+import Badge from './Badge.astro';
+import { badge } from './variants';
 
 const BadgeVariants = { badge };
 

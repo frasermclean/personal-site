@@ -7,7 +7,8 @@ import {
   type QuizItem
 } from '@/lib/ecs-quiz';
 import { getMissedEcsQuestions, setMissedEcsQuestions } from '@/lib/local-storage';
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
+import QuizModal from './QuizModal';
 import QuizQuestion from './QuizQuestion';
 import QuizResults from './QuizResults';
 import QuizSetup, { type PracticeOptions } from './QuizSetup';
@@ -26,6 +27,12 @@ export interface QuizSession {
   finishedAt: number | null;
 }
 
+const modalLabels: Record<QuizMode, string> = {
+  practice: 'Practice quiz',
+  exam: 'Mock exam',
+  review: 'Missed questions quiz'
+};
+
 interface EcsQuizProps {
   questions: EcsQuestion[];
 }
@@ -33,19 +40,9 @@ interface EcsQuizProps {
 export default function EcsQuiz({ questions }: EcsQuizProps) {
   const [session, setSession] = useState<QuizSession | null>(null);
   const [missedIds, setMissedIds] = useState<string[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Missed questions live in local storage, so load them after hydration
   useEffect(() => setMissedIds(getMissedEcsQuestions()), []);
-
-  // Keep the top of the quiz in view when moving between screens and questions
-  useEffect(() => {
-    const container = containerRef.current;
-    // Allow for the sticky navbar, which the scroll margin already accounts for
-    if (container && container.getBoundingClientRect().top < parseFloat(getComputedStyle(container).scrollMarginTop)) {
-      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [session?.index, session?.finishedAt, session === null]);
 
   function updateMissed(results: { id: string; correct: boolean }[]) {
     const next = new Set(missedIds);
@@ -121,27 +118,36 @@ export default function EcsQuiz({ questions }: EcsQuizProps) {
   const knownMissedIds = missedIds.filter((id) => questions.some((question) => question.id === id));
 
   return (
-    <div ref={containerRef} className="scroll-mt-24">
-      {session === null ? (
-        <QuizSetup
-          questions={questions}
-          missedCount={knownMissedIds.length}
-          onStartExam={() => start('exam', buildMockExam(questions))}
-          onStartPractice={startPractice}
-          onStartReview={() => startReview(knownMissedIds)}
-          onClearMissed={clearMissed}
-        />
-      ) : session.finishedAt === null ? (
-        <QuizQuestion
-          session={session}
-          onSelect={selectAnswer}
-          onNavigate={goTo}
-          onFinish={finish}
-          onQuit={() => setSession(null)}
-        />
-      ) : (
-        <QuizResults session={session} onReviewIds={startReview} onRestart={() => setSession(null)} />
+    <>
+      <QuizSetup
+        questions={questions}
+        missedCount={knownMissedIds.length}
+        onStartExam={() => start('exam', buildMockExam(questions))}
+        onStartPractice={startPractice}
+        onStartReview={() => startReview(knownMissedIds)}
+        onClearMissed={clearMissed}
+      />
+
+      {session !== null && (
+        <QuizModal
+          label={modalLabels[session.mode]}
+          scrollKey={`${session.startedAt}-${session.index}-${session.finishedAt}`}
+          preventEscape={session.mode === 'exam' && session.finishedAt === null}
+          onClose={() => setSession(null)}
+        >
+          {session.finishedAt === null ? (
+            <QuizQuestion
+              session={session}
+              onSelect={selectAnswer}
+              onNavigate={goTo}
+              onFinish={finish}
+              onQuit={() => setSession(null)}
+            />
+          ) : (
+            <QuizResults session={session} onReviewIds={startReview} onRestart={() => setSession(null)} />
+          )}
+        </QuizModal>
       )}
-    </div>
+    </>
   );
 }
