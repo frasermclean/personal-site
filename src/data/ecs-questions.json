@@ -1,0 +1,3748 @@
+[
+  {
+    "id": "1.1",
+    "topic": "General Health and Safety at Work",
+    "question": "What do the letters CDM stand for?",
+    "options": [
+      "Control of Demolition and Management Regulations",
+      "Control of Dangerous Materials Regulations",
+      "Construction (Demolition Management) Regulations",
+      "Construction (Design and Management) Regulations"
+    ],
+    "answerIndex": 3,
+    "explanation": "The CDM Regulations impose duties to manage construction projects, ensure physical safeguards are provided to prevent danger during such projects and that adequate welfare facilities are provided."
+  },
+  {
+    "id": "1.2",
+    "topic": "General Health and Safety at Work",
+    "question": "Identify one method of enforcing regulations that are available to the Health and Safety Executive:",
+    "options": ["Health Notice", "Improvement Notice", "Obstruction Notice", "Increasing insurance premiums"],
+    "answerIndex": 1,
+    "explanation": "Improvement notices require action to achieve standards which meet health and safety law."
+  },
+  {
+    "id": "1.3",
+    "topic": "General Health and Safety at Work",
+    "question": "What happens if a Prohibition Notice is issued by an Inspector of the local authority or the HSE?",
+    "options": [
+      "The work in hand can be completed, but no new work started",
+      "The work can continue if adequate safety precautions are put in place",
+      "The work that is subject to the notice must cease",
+      "The work can continue, provided a risk assessment is carried out"
+    ],
+    "answerIndex": 2,
+    "explanation": "The work activity covered by a prohibition notice must cease, until the identified danger is removed."
+  },
+  {
+    "id": "1.4",
+    "topic": "General Health and Safety at Work",
+    "question": "Health and Safety Executive Inspector can?",
+    "options": [
+      "Only visit if they have made an appointment",
+      "Visit at any time",
+      "Only visit if accompanied by the principal contractor",
+      "Only visit to interview the site manager"
+    ],
+    "answerIndex": 1,
+    "explanation": "Inspectors have a range of powers, including the right to visit premises at any time."
+  },
+  {
+    "id": "1.5",
+    "topic": "General Health and Safety at Work",
+    "question": "Prohibition Notice means:",
+    "options": [
+      "When you finish the work you must not start again",
+      "The work must stop immediately",
+      "Work is to stop for that day only",
+      "Work may continue until the end of the day"
+    ],
+    "answerIndex": 1,
+    "explanation": "The work activity covered by the prohibition notice must cease, until the identified danger is removed."
+  },
+  {
+    "id": "1.6",
+    "topic": "General Health and Safety at Work",
+    "question": "In what circumstances can an HSE Improvement Notice be issued?",
+    "options": [
+      "If there is a breach of legal requirements",
+      "By warrant through the police",
+      "Only between Monday and Friday on site",
+      "Through the prosecution office"
+    ],
+    "answerIndex": 0,
+    "explanation": "Improvement notices require action to achieve standards which meet health and safety law."
+  },
+  {
+    "id": "1.7",
+    "topic": "General Health and Safety at Work",
+    "question": "What is an Improvement Notice?",
+    "options": [
+      "A notice issued by the site principal contractor to tidy up the site",
+      "A notice from the client to the principal contractor to speed up the work",
+      "A notice issued by a Building Control Officer to deepen foundations",
+      "A notice issued by an HSE/local authority Inspector to enforce compliance with health and safety legislation"
+    ],
+    "answerIndex": 3,
+    "explanation": "Improvement notices require action to achieve standards which meet health and safety law."
+  },
+  {
+    "id": "1.8",
+    "topic": "General Health and Safety at Work",
+    "question": "If a Health and Safety Executive Inspector issues a Prohibition Notice, this means that:",
+    "options": [
+      "The Site Manager can choose whether or not to ignore the notice",
+      "Specific work activities, highlighted on the notice, must stop",
+      "The HSE must supervise the work covered by the notice",
+      "The HSE must supervise all work from then on"
+    ],
+    "answerIndex": 1,
+    "explanation": "Prohibition notices are intended to stop activities which can cause serious injury."
+  },
+  {
+    "id": "1.9",
+    "topic": "General Health and Safety at Work",
+    "question": "Employers are required to provide information to their employees on their health and safety rights and responsibilities and how to get advice by:",
+    "options": [
+      "Telling them verbally when they start work for them",
+      "Displaying a poster or giving them leaflets approved by the HSE",
+      "Making them read the company health and safety policy",
+      "E-mailing the information to them"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is a requirement of the Health and Safety Information for Employees Regulations (as amended)."
+  },
+  {
+    "id": "1.10",
+    "topic": "General Health and Safety at Work",
+    "question": "Who is responsible for signing a Company Safety Policy?",
+    "options": ["Site Manager", "Company Safety Officer", "Company Secretary", "Managing Director"],
+    "answerIndex": 3,
+    "explanation": "The Health and Safety at Work Act requires the most senior member of management to sign the health and safety policy statement."
+  },
+  {
+    "id": "1.11",
+    "topic": "General Health and Safety at Work",
+    "question": "Which one of the following must be in a company's written Health and Safety Policy?",
+    "options": [
+      "Aims and objectives of the company",
+      "Organisation and arrangements in force for carrying out the health and safety policy",
+      "Name of the Health and Safety Adviser",
+      "Company Director's home address"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is a specific requirement of the Health and Safety at Work Act."
+  },
+  {
+    "id": "1.12",
+    "topic": "General Health and Safety at Work",
+    "question": "Employers have to produce a written Health and Safety Policy statement when:",
+    "options": [
+      "A contract commences",
+      "They employ five people or more",
+      "The safety representative requests it",
+      "The HSE notifies them"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is a specific requirement of the Health and Safety at Work Act."
+  },
+  {
+    "id": "1.13",
+    "topic": "General Health and Safety at Work",
+    "question": "Companies employing five or more people must have a written Health and Safety Policy because:",
+    "options": [
+      "The principal contractor gives them work on site",
+      "The HSAWA 1974 requires it",
+      "The Social Security Act requires it",
+      "The trade unions require it"
+    ],
+    "answerIndex": 1,
+    "explanation": null
+  },
+  {
+    "id": "1.14",
+    "topic": "General Health and Safety at Work",
+    "question": "What do the letters HSE stand for?",
+    "options": [
+      "Highly Safe Electrician",
+      "Health and Safety Exercise",
+      "Health and Safety Examiner",
+      "Health and Safety Executive"
+    ],
+    "answerIndex": 3,
+    "explanation": "The Health and Safety Executive was established under the Health and Safety at Work Act 1974."
+  },
+  {
+    "id": "1.15",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety Executive is:",
+    "options": [
+      "Part of the National Health Service",
+      "The regulatory body for the promotion of health and safety at work",
+      "The jury in health and safety court cases",
+      "Part of the police force"
+    ],
+    "answerIndex": 1,
+    "explanation": "The Health and Safety Executive is part of the Department for Work and Pensions."
+  },
+  {
+    "id": "1.16",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety at Work Act requires employers to provide what for their employees?",
+    "options": ["Adequate rest periods", "Payment for work done", "A safe place of work", "Suitable transport to work"],
+    "answerIndex": 2,
+    "explanation": "This is a specific requirement of Section 2 of the Health and Safety at Work Act."
+  },
+  {
+    "id": "1.17",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety at Work Act 1974 and any regulations made under the Act are:",
+    "options": [
+      "Not compulsory, but should be complied with if convenient",
+      "Advisory to companies and individuals",
+      "Practical advice for the employer to follow",
+      "Legally binding"
+    ],
+    "answerIndex": 3,
+    "explanation": "The requirements of health and safety law are mandatory and failure to follow them can lead to prosecution."
+  },
+  {
+    "id": "1.18",
+    "topic": "General Health and Safety at Work",
+    "question": "Under the Health and Safety at Work Act 1974, which of the following have a duty to work safely?",
+    "options": ["Employees only", "The general public", "Employers only", "All people at work"],
+    "answerIndex": 3,
+    "explanation": "Employers, employees and the self-employed all have duties to work safely under the Act."
+  },
+  {
+    "id": "1.19",
+    "topic": "General Health and Safety at Work",
+    "question": "What is the MAXIMUM penalty that a Higher Court, can currently impose for a breach of the Health and Safety at Work Act?",
+    "options": [
+      "£20,000 fine and two years' imprisonment",
+      "£15,000 fine and three years' imprisonment",
+      "£1,000 fine and six months imprisonment",
+      "Unlimited fine and two years' imprisonment"
+    ],
+    "answerIndex": 3,
+    "explanation": "A Lower Court can impose a fine of up to £20,000 and/or up to six months imprisonment for certain offences. The potential fine in a Higher Court, however, is unlimited and the term of imprisonment can be up to 2 years."
+  },
+  {
+    "id": "1.20",
+    "topic": "General Health and Safety at Work",
+    "question": "What do the letters ACOP stand for?",
+    "options": [
+      "Accepted Code of Provisions",
+      "Approved Condition of Practice",
+      "Approved Code of Practice",
+      "Accepted Code of Practice"
+    ],
+    "answerIndex": 2,
+    "explanation": "An ACOP is a code of practice approved by the Health and Safety Executive (or the Health and Safety Commission prior to April 2008)."
+  },
+  {
+    "id": "1.21",
+    "topic": "General Health and Safety at Work",
+    "question": "Where should you look for official advice on health and safety matters?",
+    "options": [
+      "A set of health and safety guidelines provided by suppliers",
+      "The health and safety rules as laid down by the employer",
+      "Guidance issued by the Health and Safety Executive",
+      "A professionally approved guide book on regulations"
+    ],
+    "answerIndex": 2,
+    "explanation": "The HSE is the UK enforcing body and its guidance can be regarded as 'official'."
+  },
+  {
+    "id": "1.22",
+    "topic": "General Health and Safety at Work",
+    "question": "Regulations that govern health and safety on construction sites:",
+    "options": [
+      "Apply only to inexperienced workers",
+      "Do not apply during 'out of hours' working",
+      "Apply only to large companies",
+      "Are mandatory (that is, compulsory)"
+    ],
+    "answerIndex": 3,
+    "explanation": "The requirements of health and safety law are mandatory, and failure to follow them can lead to prosecutions."
+  },
+  {
+    "id": "1.23",
+    "topic": "General Health and Safety at Work",
+    "question": "Which of the following statements is correct?",
+    "options": [
+      "The duty for health and safety falls only on the employer",
+      "All employees must take reasonable care, not only to protect themselves but also their colleagues",
+      "Employees have no responsibility for Health and Safety on site",
+      "Only the client is responsible for safety on site"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is a legal requirement under Section 7 of the Health & Safety at Work Act."
+  },
+  {
+    "id": "1.24",
+    "topic": "General Health and Safety at Work",
+    "question": "Who of the following would you expect to be responsible for managing health and safety on site?",
+    "options": ["Foreman", "Your employer", "Main sub-contractor", "HSE Inspector"],
+    "answerIndex": 1,
+    "explanation": "The responsibility for management of health and safety at work rests with the employer."
+  },
+  {
+    "id": "1.25",
+    "topic": "General Health and Safety at Work",
+    "question": "Which of the following is correct for risk assessment?",
+    "options": [
+      "It is a good idea but not essential",
+      "Only required to be done for hazardous work",
+      "Must always be done",
+      "Only required on major jobs"
+    ],
+    "answerIndex": 2,
+    "explanation": "There is a legal requirement for all work to be suitably risk assessed."
+  },
+  {
+    "id": "1.26",
+    "topic": "General Health and Safety at Work",
+    "question": "In the context of a risk assessment, what do you understand by the term risk?",
+    "options": [
+      "An unsafe act or condition",
+      "Something with the potential to cause injury",
+      "Any work activity that can be described as dangerous",
+      "The likelihood that harm from a particular hazard will occur"
+    ],
+    "answerIndex": 3,
+    "explanation": "Hazard and risk are not the same. Risk reflects the chance of being harmed by a hazard."
+  },
+  {
+    "id": "1.27",
+    "topic": "General Health and Safety at Work",
+    "question": "Who would you expect to carry out a risk assessment on your working site?",
+    "options": [
+      "The CDM Co-ordinator",
+      "A visiting HSE Inspector",
+      "The construction project designer",
+      "A competent person"
+    ],
+    "answerIndex": 3,
+    "explanation": "A risk assessment must be conducted by a 'competent person'."
+  },
+  {
+    "id": "1.28",
+    "topic": "General Health and Safety at Work",
+    "question": "What is a HAZARD?",
+    "options": [
+      "Where an accident is likely to happen",
+      "An accident waiting to happen",
+      "Something with the potential to cause harm",
+      "The likelihood of something going wrong"
+    ],
+    "answerIndex": 2,
+    "explanation": "Examples of hazards include: a drum of acid, breeze blocks on an elevated plank; cables running across a floor."
+  },
+  {
+    "id": "1.29",
+    "topic": "General Health and Safety at Work",
+    "question": "What must be done before any work begins?",
+    "options": ["Emergency plan", "Assessment of risk", "Soil assessment", "Geological survey"],
+    "answerIndex": 1,
+    "explanation": "This is a legal requirement of the Management of Health and Safety at Work Regulations."
+  },
+  {
+    "id": "1.30",
+    "topic": "General Health and Safety at Work",
+    "question": "Complete the following sentence: A risk assessment:",
+    "options": [
+      "Is a piece of paper required by law",
+      "Prevents accidents",
+      "Is a means of analysing what might go wrong",
+      "Isn't particularly useful"
+    ],
+    "answerIndex": 2,
+    "explanation": "Risk assessment involves a careful review of what can cause harm and the practical measures to be taken to reduce the risk of harm."
+  },
+  {
+    "id": "1.31",
+    "topic": "General Health and Safety at Work",
+    "question": "Why would your supervisor ask you to read the method statement and risk assessment before you start your next job?",
+    "options": [
+      "They think you have got nothing better to do",
+      "The documents contain information on how to carry out the job in a safe manner",
+      "They wouldn't as they think they are a waste of time",
+      "As someone has taken the time and trouble to write them, you might as well read them"
+    ],
+    "answerIndex": 1,
+    "explanation": "The supervisor must, by law, keep workers advised of significant risks, and control measures."
+  },
+  {
+    "id": "1.32",
+    "topic": "General Health and Safety at Work",
+    "question": "What do the blue and white health and safety signs tell you?",
+    "options": [
+      "Things you must do",
+      "Where the nearest fire exit is",
+      "The hazards in the area",
+      "Things you must not do"
+    ],
+    "answerIndex": 0,
+    "explanation": "Blue and white signs show a 'mandatory' requirement."
+  },
+  {
+    "id": "1.33",
+    "topic": "General Health and Safety at Work",
+    "question": "What colours are emergency exit signs?",
+    "options": ["Green and white", "Red and yellow", "Red and white", "Blue and white"],
+    "answerIndex": 0,
+    "explanation": "The colours are prescribed in the Health and Safety (Safety Signs and Signals) Regulations."
+  },
+  {
+    "id": "1.34",
+    "topic": "General Health and Safety at Work",
+    "question": "What is the main colour on a safety sign stating that you must NOT do something?",
+    "options": ["Blue", "Green", "Red", "Yellow"],
+    "answerIndex": 2,
+    "explanation": "Prohibitory signs are round and feature a black pictogram on a white background with red edging and diagonal line."
+  },
+  {
+    "id": "1.35",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety (Safety Signs and Signals) Regulations require the colour coding of signs. What colours are used on a sign indicating a warning, for example 'Fork-lift trucks operating'?",
+    "options": ["Blue and white", "Green and white", "Yellow and black", "Red and white"],
+    "answerIndex": 2,
+    "explanation": "Warning signs are triangular and feature a black pictogram on a yellow background with black edging."
+  },
+  {
+    "id": "1.36",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety (Safety Signs and Signals) Regulations require the colour coding of safety signs. What colours are used on a sign indicating a prohibited activity, for example 'No access for pedestrians'?",
+    "options": ["Green and white", "Red, black and white", "Blue and white", "Yellow and black"],
+    "answerIndex": 1,
+    "explanation": "Prohibitory signs are round and feature a black pictogram on a white background with red edging and diagonal line."
+  },
+  {
+    "id": "1.37",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety (Safety Signs and Signals) Regulations require the colour coding of safety signs. What colours are used on a sign indicating a mandatory activity, for example 'Safety helmets must be worn'?",
+    "options": ["Green and white", "Red, black and white", "Blue and white", "Yellow and black"],
+    "answerIndex": 2,
+    "explanation": "Mandatory signs are round and feature a white pictogram on a blue background."
+  },
+  {
+    "id": "1.38",
+    "topic": "General Health and Safety at Work",
+    "question": "The Health and Safety (Safety Signs and Signals) Regulations require the colour coding of safety signs. What colours are used on a sign indicating a safe condition, for example First Aid kit?",
+    "options": ["Red, black and white", "Blue and white", "Yellow and black", "Green and white"],
+    "answerIndex": 3,
+    "explanation": "Emergency escape and first-aid signs are rectangular or square and feature a white pictogram on a green background."
+  },
+  {
+    "id": "1.39",
+    "topic": "General Health and Safety at Work",
+    "question": "Why should regular inspections of the workplace take place?",
+    "options": [
+      "To check whether the working environment is safe",
+      "To check that all employees are present",
+      "To check that everyone is doing their job",
+      "To prepare for a visit from an HSE Inspector"
+    ],
+    "answerIndex": 0,
+    "explanation": "The Management of Health and Safety at Work Regulations require that routine inspections of workplaces are carried out to ensure that preventative and protective measures are in place and effective."
+  },
+  {
+    "id": "1.40",
+    "topic": "General Health and Safety at Work",
+    "question": "How can you help to prevent accidents?",
+    "options": [
+      "Don't report them",
+      "Know how to get help quickly",
+      "Report any unsafe conditions",
+      "Know where the first-aid kit is kept"
+    ],
+    "answerIndex": 2,
+    "explanation": "Action to improve safety can only be taken if the risk is known about. Employees have a duty of care to other employees."
+  },
+  {
+    "id": "2.1",
+    "topic": "Manual Handling Operations",
+    "question": "If there is a risk of injury from lifting loads what should you think about first?",
+    "options": [
+      "Whether the load needs to be lifted at all",
+      "What the weight of the load is",
+      "Where to hold the load when lifting",
+      "How to lift the load"
+    ],
+    "answerIndex": 0,
+    "explanation": "If possible, it is best to avoid the risks from lifting altogether. This is the preferred requirement laid down in the Manual Handling Operations Regulations 1992."
+  },
+  {
+    "id": "2.2",
+    "topic": "Manual Handling Operations",
+    "question": "Before performing manual lifting what is the first thing you should do?",
+    "options": ["Check the headroom", "Weigh the article", "Assess the whole task", "Kick it to see if it is stable"],
+    "answerIndex": 2,
+    "explanation": "If you assess the whole task first, you will have a clear idea of possible hazards and how to overcome them, before lifting."
+  },
+  {
+    "id": "2.3",
+    "topic": "Manual Handling Operations",
+    "question": "Which is the part of your body MOST LIKELY to be injured during a manual handling activity which involves moving a heavy load?",
+    "options": ["Knees", "Forearms", "Chest", "Back"],
+    "answerIndex": 3,
+    "explanation": "HSE statistics show that most manual handling injuries are to the back."
+  },
+  {
+    "id": "2.4",
+    "topic": "Manual Handling Operations",
+    "question": "What should you do if your supervisor asks you to move something that you find is too heavy to lift?",
+    "options": [
+      "Give it a try using correct lifting methods",
+      "Ask your mates to assist in the lift",
+      "Inform your supervisor that it is too heavy",
+      "Get a forklift truck or lifting tackle"
+    ],
+    "answerIndex": 2,
+    "explanation": "The HSE advises employees to inform the employer if they identify hazardous handling activities."
+  },
+  {
+    "id": "2.5",
+    "topic": "Manual Handling Operations",
+    "question": "What would you NOT consider in making a judgement of the risks from a load?",
+    "options": ["Its size and condition", "Its colour", "Its weight", "Its centre of gravity"],
+    "answerIndex": 1,
+    "explanation": "Its size and condition, its weight and its centre of gravity can all affect the difficulty of lifting an object."
+  },
+  {
+    "id": "2.6",
+    "topic": "Manual Handling Operations",
+    "question": "When moving a load fitted with wheels which of the following is generally true?",
+    "options": [
+      "Pushing and pulling are equally risky",
+      "Pulling is preferable to pushing",
+      "Pushing is preferable to pulling",
+      "It is safer to pick it up and carry it"
+    ],
+    "answerIndex": 2,
+    "explanation": "The operator should try to push rather than pull when moving a load, provided they can see over it and control steering and stopping."
+  },
+  {
+    "id": "2.7",
+    "topic": "Manual Handling Operations",
+    "question": "A manual handling operation is defined as which one of the following?",
+    "options": ["Automated effort", "Human effort", "Mechanised and human effort", "Mechanised effort"],
+    "answerIndex": 1,
+    "explanation": "Manual handling covers human effort only."
+  },
+  {
+    "id": "2.8",
+    "topic": "Manual Handling Operations",
+    "question": "What is the MAXIMUM weight that an individual may lift?",
+    "options": [
+      "The weight they can lift comfortably",
+      "Whatever the supervisor instructs",
+      "35kg provided that it has no sharp edges",
+      "15kg provided that it is a compact load"
+    ],
+    "answerIndex": 0,
+    "explanation": "There are no strict weight limits – the priority is to avoid injury."
+  },
+  {
+    "id": "2.9",
+    "topic": "Manual Handling Operations",
+    "question": "What is the most common type of injury resulting from lifting loads from the floor?",
+    "options": ["Vibration white finger", "Grazes to the knees", "Head injuries", "Back injuries"],
+    "answerIndex": 3,
+    "explanation": "As shown by HSE statistics."
+  },
+  {
+    "id": "2.10",
+    "topic": "Manual Handling Operations",
+    "question": "Where a load has to be lifted manually, what is the employer required to do by law?",
+    "options": [
+      "Calculate the cost of the exercise",
+      "Determine the number of people required",
+      "Assess the risk of the task",
+      "Assess the time the job will take"
+    ],
+    "answerIndex": 2,
+    "explanation": "This is a specific requirement of the Manual Handling Operations regulations 1992."
+  },
+  {
+    "id": "2.11",
+    "topic": "Manual Handling Operations",
+    "question": "Which of the following is advisable when lifting a load manually?",
+    "options": [
+      "Keep legs straight, bend back, use power of legs",
+      "Bend the knees, keep the back straight, use power of back",
+      "Bend the knees, keep the back as straight as possible, use power of legs",
+      "Keep legs and back straight, use power of legs"
+    ],
+    "answerIndex": 2,
+    "explanation": "Stooping can increase the stress on the lower back. However, stooping slightly may be preferable to adopting a squatting posture, which can place excessive loads on knees and hips."
+  },
+  {
+    "id": "2.12",
+    "topic": "Manual Handling Operations",
+    "question": "In manual handling, which of the following general statements is true?",
+    "options": [
+      "You should keep your back bent when lifting",
+      "Anyone can carry any load as long as they are strong enough",
+      "Large loads should be broken down into smaller loads where possible",
+      "Loads should be held at arm's length while carrying"
+    ],
+    "answerIndex": 2,
+    "explanation": "This is a recommendation (INDG143)."
+  },
+  {
+    "id": "2.13",
+    "topic": "Manual Handling Operations",
+    "question": "What is the recommended limit for a compact load, that can be safely carried by a fit, male worker?",
+    "options": ["50kg", "40kg", "20kg", "25kg"],
+    "answerIndex": 3,
+    "explanation": "This figure is in HSE guidance, and relates to lifting and lowering at elbow height."
+  },
+  {
+    "id": "2.14",
+    "topic": "Manual Handling Operations",
+    "question": "Where there has been a major change in a manual handling operation, what should the employer do?",
+    "options": [
+      "Monitor the operation being undertaken",
+      "Review the number of people involved",
+      "Review the original risk assessment",
+      "Monitor the cost of change"
+    ],
+    "answerIndex": 2,
+    "explanation": "This is a specific requirement of the Manual Handling Operations regulations 1992."
+  },
+  {
+    "id": "2.15",
+    "topic": "Manual Handling Operations",
+    "question": "What should be the first consideration when you are about to lift a load on your own?",
+    "options": [
+      "Assess whether it is safe to lift it on your own",
+      "Ensure you wear appropriate PPE",
+      "Wear gloves and grip properly",
+      "Ensure you lift with a bent back"
+    ],
+    "answerIndex": 0,
+    "explanation": "Employees should assess whether there is a risk of injury before lifting. If they are not sure they should seek advice from their supervisor."
+  },
+  {
+    "id": "2.16",
+    "topic": "Manual Handling Operations",
+    "question": "Which of the following would NOT make a load easier to handle manually?",
+    "options": [
+      "Painting it a bright colour",
+      "Securing the load so that it does not shift unexpectedly",
+      "Reducing its weight",
+      "Providing suitable handles or hand grips"
+    ],
+    "answerIndex": 0,
+    "explanation": null
+  },
+  {
+    "id": "2.17",
+    "topic": "Manual Handling Operations",
+    "question": "If there is a risk of injury from moving loads what should you think about?",
+    "options": [
+      "Advising your supervisor",
+      "Carrying it anyway",
+      "Dragging it all the way",
+      "Getting someone to assist you over the distance"
+    ],
+    "answerIndex": 0,
+    "explanation": "This is a requirement of the Manual Handling Operations regulations 1992."
+  },
+  {
+    "id": "2.18",
+    "topic": "Manual Handling Operations",
+    "question": "As an approximate guide the manual handling capacity of a two person team is:",
+    "options": [
+      "The sum of their individual capacities",
+      "The capacity of the strongest individual",
+      "The capacity of the weakest individual",
+      "Two thirds the sum of their individual capacities"
+    ],
+    "answerIndex": 3,
+    "explanation": "This is contained in HSE guidance on the Manual Handling Operations Regulations 1992."
+  },
+  {
+    "id": "2.19",
+    "topic": "Manual Handling Operations",
+    "question": "What does 'Kinetic lifting' mean?",
+    "options": [
+      "Using a crane or some other mechanical means",
+      "Using a forklift truck or pallet truck",
+      "Lifting in the most safe and effective way",
+      "Getting a friend to help you with the load"
+    ],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "2.20",
+    "topic": "Manual Handling Operations",
+    "question": "What should you do first before lifting or moving a load?",
+    "options": ["Put on gloves", "Assess the weight", "Keep a straight back", "Bend your knees"],
+    "answerIndex": 1,
+    "explanation": "You or your employer must assess the risk of injury before lifting."
+  },
+  {
+    "id": "2.21",
+    "topic": "Manual Handling Operations",
+    "question": "Before picking up a load, you should:",
+    "options": ["Bend your knees", "Choose a pair of gloves", "Ask a work mate to help you", "Assess the risks"],
+    "answerIndex": 3,
+    "explanation": "You or your employer must assess the risk of injury before lifting."
+  },
+  {
+    "id": "2.22",
+    "topic": "Manual Handling Operations",
+    "question": "When picking up an object, you should:",
+    "options": ["Bend your arms", "Bend your back", "Wear a back brace", "Bend your knees"],
+    "answerIndex": 3,
+    "explanation": "Generally, the legs should do most of the work when lifting a load."
+  },
+  {
+    "id": "2.23",
+    "topic": "Manual Handling Operations",
+    "question": "When judging 'individual capability' for manual handling, you should assume:",
+    "options": [
+      "All women are equally capable",
+      "Young men are weak",
+      "All people are different",
+      "All men are equally capable"
+    ],
+    "answerIndex": 2,
+    "explanation": "Assessing ability for manual handling must be done on an individual basis."
+  },
+  {
+    "id": "2.24",
+    "topic": "Manual Handling Operations",
+    "question": "When an article has to be moved for a long distance, you should:",
+    "options": [
+      "Use a barrow or trolley",
+      "Get someone else to do it for you",
+      "Drag it all the way",
+      "Carry it all the way"
+    ],
+    "answerIndex": 0,
+    "explanation": "The use of handling aids can reduce the risk of injury."
+  },
+  {
+    "id": "2.25",
+    "topic": "Manual Handling Operations",
+    "question": "Which is the correct way to lift a load?",
+    "options": [
+      "Squat near load, bend back and use leg muscles",
+      "Squat near to the load, keeping the back as straight as possible and using leg muscles",
+      "Keep feet apart and bend back",
+      "Keep feet together and bend back"
+    ],
+    "answerIndex": 1,
+    "explanation": "Handling techniques which allow the use of relatively strong leg muscles rather than those of the back are preferable."
+  },
+  {
+    "id": "2.26",
+    "topic": "Manual Handling Operations",
+    "question": "Which would you consider to be generally correct when lifting a load?",
+    "options": [
+      "Larger loads should be split into smaller loads if possible",
+      "Keep the load away from the body",
+      "When lifting you should bend your back",
+      "The feet should be together and the load lifted at arm's length"
+    ],
+    "answerIndex": 0,
+    "explanation": "This is a recommendation in HSE guidance (INDG143)."
+  },
+  {
+    "id": "2.27",
+    "topic": "Manual Handling Operations",
+    "question": "If a load has an uneven centre of gravity, how should you lift it?",
+    "options": [
+      "Keep the heaviest side of the load away from you",
+      "Keep the heaviest side of the load on the strongest arm",
+      "Keep the heaviest side of the load towards you",
+      "Keep the heaviest side of the load on the weakest arm"
+    ],
+    "answerIndex": 2,
+    "explanation": "There is less risk of injury if a weight' s centre of gravity is near the torso."
+  },
+  {
+    "id": "3.1",
+    "topic": "Reporting Accidents",
+    "question": "What should you ensure if you suffer an injury through a manual handling operation?",
+    "options": [
+      "You get paid for the job",
+      "The injury is recorded",
+      "You get help and carry on working",
+      "You take time off work"
+    ],
+    "answerIndex": 1,
+    "explanation": "All injuries must be recorded in the company accident book (BI 510)."
+  },
+  {
+    "id": "3.2",
+    "topic": "Reporting Accidents",
+    "question": "Why should a serious accident be reported to the enfourcing authority?",
+    "options": [
+      "It helps the site find out what caused it",
+      "It is legal requirement",
+      "So that the site manager can see who is to blame",
+      "So that the company will be held responsible"
+    ],
+    "answerIndex": 1,
+    "explanation": "Serious accidents (specified injuries or those resulting in an absence of over 7 days) must be reported to the enforcing authority under the Reporting of Injuries, Diseases and Dangerous Occurrencs Regulations (RIDDOR)."
+  },
+  {
+    "id": "3.3",
+    "topic": "Reporting Accidents",
+    "question": "What immediate action should you take if you suffer an injury through carrying a load?",
+    "options": [
+      "Advise your doctor of your injury",
+      "Tell your supervisor or employer",
+      "Tell your working companion",
+      "Carry on working as best you can"
+    ],
+    "answerIndex": 1,
+    "explanation": "All injuries must be recorded in the company accident book (BI 510)."
+  },
+  {
+    "id": "3.4",
+    "topic": "Reporting Accidents",
+    "question": "Under RIDDOR, which one of the following must be reported to the enforcing authority?",
+    "options": [
+      "Accidents where the injured person wishes to make a claim",
+      "Fracture other than to fingers, thumbs or toes",
+      "All 'near misses' even if no one is hurt",
+      "All accidents casing injury"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is one of a number of reportable 'specified injuries' and must be reported to the enforcing authority under Reporting of injuries. Diseases and Dangerous Occurances Regulations (RIDDDOR)."
+  },
+  {
+    "id": "3.5",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following has the power to examine an accident record?",
+    "options": ["An HSE inspector", "An Insurance company", "A doctor", "A workmate"],
+    "answerIndex": 0,
+    "explanation": "HSE inspectors have a range of powers, including this one."
+  },
+  {
+    "id": "3.6",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following should be recorded in the accident book following an accident?",
+    "options": [
+      "The date and time the accident occurred",
+      "Your date of birth",
+      "The weather conditions",
+      "Your National Insurance Number"
+    ],
+    "answerIndex": 0,
+    "explanation": "The information to be entered in an accident book (BI 510) includes when and where the accident happened, the name and address and occupation of the person who had the accident and details of how the accident happened and the injuries suffered. The weather conditions would only be included if they contributed to the accident."
+  },
+  {
+    "id": "3.7",
+    "topic": "Reporting Accidents",
+    "question": "Which one of the following accounts for most accidents each year on construction sites?",
+    "options": ["Strikes by moving vehicles", "Electrocution", "Trench collapses", "Slips, trips and falls"],
+    "answerIndex": 3,
+    "explanation": "HSE Statistics show clearly that there are more slips, trips and falls than any other types of accident on site."
+  },
+  {
+    "id": "3.8",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following is NOT classified as a specified injury to a worker under RIDDOR?",
+    "options": ["A fractured finger", "A fractured arm", "Amputation of a finger", "A broken wrist"],
+    "answerIndex": 0,
+    "explanation": "Amputation of an arm, hand, finger, thumb, leg, foot or toe are classified as specified injuries, as are bone fractures other than to fingers, thumbs or toes."
+  },
+  {
+    "id": "3.9",
+    "topic": "Reporting Accidents",
+    "question": "Which one of the following should you do if you witness a serious accident on site?",
+    "options": [
+      "Pretend you saw nothing",
+      "Say nothing in case you get in trouble",
+      "Discuss what to do with your workmates",
+      "Tell your supervisor what you saw happening"
+    ],
+    "answerIndex": 3,
+    "explanation": "If the supervisor is aware of an accident he can take steps to prevent a recurrence. The employer also has legal duties to report certain incidents to the enforcing authority."
+  },
+  {
+    "id": "3.10",
+    "topic": "Reporting Accidents",
+    "question": "A workmate tells you that he witnessed an accident the previous day and the victim was taken to hospital. He asks you for advice on what he should do. Do you tell them to:",
+    "options": [
+      "Speak to the site nurse about what he saw",
+      "Tell their supervisor that they saw what happened",
+      "Telephone the hospital to find out how the injured person is",
+      "Say nothing to anyone in case they get someone in trouble"
+    ],
+    "answerIndex": 1,
+    "explanation": "If the supervisor is aware of an accident he can take steps to prevent a recurrence. The employer also has legal duties to report certain incidents to the enforcing authority."
+  },
+  {
+    "id": "3.11",
+    "topic": "Reporting Accidents",
+    "question": "If a person at work suffers an injury (other than a specified injury) due to an accident at work, it is reportable under RIDDOR if they are incapacitated for work for:",
+    "options": ["Over 1 day", "Over 7 days", "Over half a day", "Over 2 days"],
+    "answerIndex": 1,
+    "explanation": "An over-seven-day injury is one which is not a specified injury but results in the injured person being away from work or unable to do the full range of their normal duties for more than seven days (including any days they wouldn't normally be expected to work such as weekends, rest days or holidays) not counting the day of the injury itself."
+  },
+  {
+    "id": "3.12",
+    "topic": "Reporting Accidents",
+    "question": "What must an employer do with their accident records following completion of a construction project?",
+    "options": [
+      "They are sent to the Health and Safety Executive",
+      "They are destroyed on site with other non-essential documents",
+      "They are kept safe by the employer",
+      "They are sent to the employer's insurance company"
+    ],
+    "answerIndex": 2,
+    "explanation": "Accident records must be kept by an employer for at least three years."
+  },
+  {
+    "id": "3.13",
+    "topic": "Reporting Accidents",
+    "question": "At work who would you report a dangerous occurrence to?",
+    "options": [
+      "The emergency services",
+      "Your supervisor or employer",
+      "Another employee",
+      "The client for the project"
+    ],
+    "answerIndex": 1,
+    "explanation": "Under RIDDOR. an employer has a legal duty to report certain work-related accidents, but to do this they will need to know that an accident has occurred."
+  },
+  {
+    "id": "3.14",
+    "topic": "Reporting Accidents",
+    "question": "Following a reportable dangerous occurrence when must the enforcing authority be informed?",
+    "options": ["Within 5 days", "Within 48 hours", "Without delay", "Within 24 hours"],
+    "answerIndex": 2,
+    "explanation": "The enforcing authority must be notified by the quickest practicable means."
+  },
+  {
+    "id": "3.15",
+    "topic": "Reporting Accidents",
+    "question": "Accidents causing any injury should always be recorded in:",
+    "options": [
+      "The site engineer's day book",
+      "Your employer's accident recording system",
+      "Your personal diary",
+      "The main contractor's diary"
+    ],
+    "answerIndex": 1,
+    "explanation": "All accidents should be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.16",
+    "topic": "Reporting Accidents",
+    "question": "Which one of the following is classified as a reportable occupational disease under RIODOR?",
+    "options": ["Mental disorder", "Occupational asthma", "Amputation", "Influenza"],
+    "answerIndex": 1,
+    "explanation": "Certain occupational diseases likely to have been caused or made worse by work are reportable under RIODOR. This would include occupational asthma where the person' s work includes significant or regular exposure to a known respiratory sensitizer."
+  },
+  {
+    "id": "3.17",
+    "topic": "Reporting Accidents",
+    "question": "When a person is injured at work, who should enter the details in the accident book?",
+    "options": [
+      "The injured person's supervisor",
+      "The injured person or anyone acting for them",
+      "The site manager or engineer",
+      "The site safety manager"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is the procedure for recording accidents internally in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.18",
+    "topic": "Reporting Accidents",
+    "question": "If you are involved in a minor accident at work, whose duty is it to report it to site management?",
+    "options": [
+      "Any witness to the accident",
+      "The police, fire or ambulance who attend",
+      "It is your own responsibility",
+      "The site foreman should report it"
+    ],
+    "answerIndex": 2,
+    "explanation": "Employers rely on employees to advise them of occurrences at work."
+  },
+  {
+    "id": "3.19",
+    "topic": "Reporting Accidents",
+    "question": "You have suffered an accident at work which has made you incapable of your normal work for over 7 days. Which of the following actions MUST be taken by your employer?",
+    "options": [
+      "The emergency services are asked to attend the site",
+      "The local hospital is informed",
+      "The relevant enforcing authority is informed",
+      "A deduction is made from your wages for days lost"
+    ],
+    "answerIndex": 2,
+    "explanation": "An over-seven-day injury is one which is not a specified injury but results in the injured person being away from work or unable to do the full range of their normal duties for more than seven days (including any days they wouldn' t normally be expected to work such as weekends, rest days or holidays) not counting the day of the injury itself."
+  },
+  {
+    "id": "3.20",
+    "topic": "Reporting Accidents",
+    "question": "The collapse of scaffolding is only notifiable to the enforcing authority as a reportable dangerous occurrence when the scaffolding is which one of the following?",
+    "options": ["Over 15 metres in height", "Any height", "Over 10 metres in height", "Over 5 metres in height"],
+    "answerIndex": 3,
+    "explanation": "This is one of the requirements of RIDDOR."
+  },
+  {
+    "id": "3.21",
+    "topic": "Reporting Accidents",
+    "question": "If there is a fatal accident on site, when must the Health and Safety Executive be informed?",
+    "options": ["Without delay", "Within 10 days", "Within 7 days", "Within 5 days"],
+    "answerIndex": 0,
+    "explanation": "The enforcing authority must be notified by the quickest practicable means."
+  },
+  {
+    "id": "3.22",
+    "topic": "Reporting Accidents",
+    "question": "Under which of the following circumstances should an accident be recorded in the site's accident book?",
+    "options": [
+      "When an accident causes damage to plant or equipment",
+      "Only when a person is injured and will be off work for more than seven days",
+      "When the injury is serious enough for first aid to be needed",
+      "When an accident causes injury to an employee while at work"
+    ],
+    "answerIndex": 3,
+    "explanation": "An accident causing an injury to an employee at work should be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.23",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following have to be entered into the accident book?",
+    "options": [
+      "All accidents causing any damage",
+      "All accidents causing an injury",
+      "Only accidents causing serious injury",
+      "Only accidents causing time off work"
+    ],
+    "answerIndex": 1,
+    "explanation": "An accident causing an injury to an employee at work should be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.24",
+    "topic": "Reporting Accidents",
+    "question": "Under which of the following circumstances must injury accidents be recorded in the accident book?",
+    "options": [
+      "Only if you break a bone",
+      "Only if you have time off work",
+      "Any time they occur",
+      "Only if you need to go to hospital"
+    ],
+    "answerIndex": 2,
+    "explanation": "An accident causing an injury to an employee at work should be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.25",
+    "topic": "Reporting Accidents",
+    "question": "An entry must be made in the accident book when:",
+    "options": [
+      "The person has been off sick for over seven days",
+      "Management thinks it is appropriate",
+      "An accident causes personal injury to an employee",
+      "The severity of the accident may result in a compensation claim"
+    ],
+    "answerIndex": 2,
+    "explanation": "An accident causing an injury to an employee at work should be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "3.26",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following MUST be recorded in an accident book after you have had an accident?",
+    "options": ["Your National Insurance number", "Your date of birth", "Your occupation", "Your phone number"],
+    "answerIndex": 2,
+    "explanation": "The information to be entered in an accident book (Bl 510) includes when and where the accident happened, the name, address and occupation of the person who had the accident and details of how the accident happened and the injuries suffered."
+  },
+  {
+    "id": "3.27",
+    "topic": "Reporting Accidents",
+    "question": "Which of the following can you learn from an accident?",
+    "options": [
+      "A combination of human error and mechanical failure always causes injury",
+      "Ideas on how you would prevent it happening again",
+      "That mechanical failures are most dangerous",
+      "How human error is always a cause"
+    ],
+    "answerIndex": 1,
+    "explanation": "An accident investigation should not only assess the cause, but also how similar accidents can be prevented in the future."
+  },
+  {
+    "id": "3.28",
+    "topic": "Reporting Accidents",
+    "question": "Could making an entry in the accident book help you if you later make a claim for compensation?",
+    "options": ["Only if it is a serious injury", "No", "Only in the event of a fatality", "Yes"],
+    "answerIndex": 3,
+    "explanation": "This is laid down in Social Security Legislation."
+  },
+  {
+    "id": "3.29",
+    "topic": "Reporting Accidents",
+    "question": "Why is it important to report 'near miss' accidents to your employer?",
+    "options": [
+      "It's the law",
+      "To make the figures look good",
+      "So lessons can be learned, preventing an accident next time",
+      "So that someone can be disciplined"
+    ],
+    "answerIndex": 2,
+    "explanation": "HSE advises that 'near misses' should be investigated to prevent their recurrence."
+  },
+  {
+    "id": "3.30",
+    "topic": "Reporting Accidents",
+    "question": "Who should you report serious accidents to?",
+    "options": ["Your workmate", "Your employer or supervisor", "The police", "The ambulance service"],
+    "answerIndex": 1,
+    "explanation": "If the supervisor is aware of an accident he can take steps to prevent a recurrence. The employer also has legal duties to report certain incidents to the enforcing authority."
+  },
+  {
+    "id": "3.31",
+    "topic": "Reporting Accidents",
+    "question": "What is the aim of carrying out an accident investigation?",
+    "options": [
+      "To determine the cause(s) and prevent similar accidents",
+      "To establish what injuries were sustained",
+      "To find out who is at fault",
+      "To establish the cost of any damage incurred"
+    ],
+    "answerIndex": 0,
+    "explanation": "An accident investigation should not only assess the cause, but also how similar accidents can be prevented in the future."
+  },
+  {
+    "id": "3.32",
+    "topic": "Reporting Accidents",
+    "question": "You have witnessed a serious accident on your site and are interviewed by an HSE inspector. You should:",
+    "options": [
+      "Tell the inspector what your mates said you should say",
+      "Ask your supervisor what you should say to the inspector",
+      "Co-operate fully with the inspector and tell them exactly what you saw",
+      "Don't tell them anything"
+    ],
+    "answerIndex": 2,
+    "explanation": "This is good practice, but it can also be an offence to withhold important information from an inspector."
+  },
+  {
+    "id": "4.1",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When working in dusty conditions, what of the following would give the LEAST level of protection?",
+    "options": [
+      "Compressed airline breathing helmet",
+      "Positive pressure powered respirator",
+      "Self-contained breathing apparatus",
+      "Half mask dust respirator"
+    ],
+    "answerIndex": 3,
+    "explanation": "Protection factors are given in HSE publication HSG53 'Respiratory protective equipment at work – A practical guide'."
+  },
+  {
+    "id": "4.2",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "In hot weather which one of the following is correct with regard to safety helmets?",
+    "options": [
+      "You can take off your helmet while working inside the building",
+      "You must continue to wear your helmet",
+      "You can drill holes in your safety hat for ventilation",
+      "You do not need to wear your helmet"
+    ],
+    "answerIndex": 1,
+    "explanation": "On construction sites, despite controls being put in place, there will always be situations where a risk of head injury remains. Taking off your helmet would put you at a much greater risk of a head injury and any unauthorised modification would be in breach of legal requirements and could render the helmet next to useless."
+  },
+  {
+    "id": "4.3",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Which one of the following should you do if your personal protective equipment (PPE) is damaged?",
+    "options": [
+      "Obtain new equipment when available",
+      "Report to your Supervisor without delay",
+      "Reduce the amount of time you sue it",
+      "Carry on working"
+    ],
+    "answerIndex": 1,
+    "explanation": "Employees are required to report any defective PPE to their employer (PPE at Work Regulations 1992, Regulation 7)."
+  },
+  {
+    "id": "4.4",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "If personal protective equipment (PPE) is defective, what should you do?",
+    "options": [
+      "Complain to the Health and Safety Inspector",
+      "Get your workmate to mend it if possible",
+      "Report it to your supervisor",
+      "Repair if possible and continue to use it"
+    ],
+    "answerIndex": 2,
+    "explanation": "Employees are required to report any defective PPE to their employer (PPE at Work Regulations 1992, Regulation 7)."
+  },
+  {
+    "id": "4.5",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "In normal use, what item of PPE is NOT essential for the operator of a cartridge-operated tool, such as a nail gun?",
+    "options": ["Safety eyewear", "Hearing protection", "Wellington boots", "Safety helmet"],
+    "answerIndex": 2,
+    "explanation": "Wellingtons do not offer protection against the specific risks associated with the use of a cartridge-operated tool, although safety footwear must always be work when there is a risk of a foot injury."
+  },
+  {
+    "id": "4.6",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Can you opt out of wearing personal protective equipment (PPE)?",
+    "options": [
+      "Yes, by informing the site supervisor",
+      "Yes, by writing officially to your employer",
+      "No, you cannot opt out",
+      "Yes, if it is uncomfortable"
+    ],
+    "answerIndex": 2,
+    "explanation": "You cannot legally 'opt out' of being protected from significant risks at work. This includes wearing the necessary PPE."
+  },
+  {
+    "id": "4.7",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "What is the most important item of personal protective equipment (PPE) when working on or near a highway?",
+    "options": ["Safety footwear", "Waterproof clothing", "Hard hat", "High visibility vest"],
+    "answerIndex": 3,
+    "explanation": "A high visibility vest is the most important of PPE however, the other items of PPE may also be required."
+  },
+  {
+    "id": "4.8",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "If you are drilling into concrete with a masonry drill, in which one of the following circumstances will you need to wear eye protection?",
+    "options": [
+      "Always",
+      "Only when drilling overhead",
+      "Only if the drill is bigger than 10mm",
+      "Not if drilling into the floor"
+    ],
+    "answerIndex": 0,
+    "explanation": "Suitable eye protection must always be worn when working with power-driven tools where chippings are likely to fly or abrasive materials could be propelled."
+  },
+  {
+    "id": "4.9",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When must you wear all personal protective equipment (PPE) provided by your employer?",
+    "options": ["As instructed by your employer", "Only if it fits", "When you want to", "Only when you need to"],
+    "answerIndex": 0,
+    "explanation": "Under the PPE at Work Regulations 1992, employees must wear PPE as instructed."
+  },
+  {
+    "id": "4.10",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When MUST an employer provide their employees with personal protective equipment (PPE)?",
+    "options": [
+      "When they may be exposed to a risk to their health and safety which cannot be controlled another way",
+      "Twice a year",
+      "If the client or main contractor specifies it in the contract",
+      "Every 5 years"
+    ],
+    "answerIndex": 0,
+    "explanation": "As required by regulation 4 of the PPE Regulations."
+  },
+  {
+    "id": "4.11",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "What type of eye protection would you wear when using a cartridge-operated tool, such as a nail gun?",
+    "options": ["Impact goggles", "Sun glasses", "Safety spectacles", "Chemical protection glasses"],
+    "answerIndex": 0,
+    "explanation": "When using a cartridge-operated tool, such as a nail gun, shatter proof goggles should be worn."
+  },
+  {
+    "id": "4.12",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Which of the following must your safety helmet comply with to meet with the requirements of the Personal Protective Equipment at Work Regulations?",
+    "options": [
+      "It can be adjusted to suit your head size",
+      "It is a good visible colour",
+      "It has a label with your name on it",
+      "It is less than 1 year old"
+    ],
+    "answerIndex": 0,
+    "explanation": "An assessment of the suitability of head protection would include consideration of whether it can be adjusted to suit the individual who is to wear it, that it is compatible with the work to be done and that it is comfortable to wear."
+  },
+  {
+    "id": "4.13",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "In which of the following ways should you wear your safety helmet?",
+    "options": [
+      "With the peak raised to deflect falling material",
+      "With the helmet back to front",
+      "With the peak raised to give good vision",
+      "Square on your head, properly adjusted"
+    ],
+    "answerIndex": 3,
+    "explanation": "Any item of personal protective equipment must be used in accordance with the manufacturer's instructions, which will include how to correctly fit and wear it and what its limitations are."
+  },
+  {
+    "id": "4.14",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When an employee has been issued with eye protection, what are their duties under the Personal Protective Equipment at Work Regulations?",
+    "options": [
+      "To ensure that they are the right type of protector",
+      "Not to loan the equipment to other operatives",
+      "To use the protection in accordance with training and instruction",
+      "To pay for replacement of lost eye protection"
+    ],
+    "answerIndex": 2,
+    "explanation": "Regulation 10(2) requires that every employee shall use any PPE in accordance with the training and instruction received."
+  },
+  {
+    "id": "4.15",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When should you wear safety footwear on site?",
+    "options": [
+      "Only when working on scaffolds",
+      "When there is a risk of a foot injury",
+      "Only when working outdoors",
+      "Only if the site conditions are wet"
+    ],
+    "answerIndex": 1,
+    "explanation": "Suitable safety footwear should be worn if there is a risk of injury from objects falling onto the foot or sharp objects, such as nails, penetrating the sole."
+  },
+  {
+    "id": "4.16",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "With regard to the use of personal protective equipment (PPE), which one of the following statements is true?",
+    "options": [
+      "If you do not use the personal protective equipment (PPE) provided you will probably not come to any harm",
+      "Personal protective equipment (PPE) protects only the user from the dangers present",
+      "Personal protective equipment (PPE) need only be provided if it is not too expensive",
+      "Personal protective equipment (PPE) need only be used if it is available"
+    ],
+    "answerIndex": 1,
+    "explanation": "PPE is there to protect the individual. Wearing PPE does not protect other people nearby."
+  },
+  {
+    "id": "4.17",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Which of the following statements is TRUE when an employer issues personal protective equipment (PPE)?",
+    "options": [
+      "The employer can charge you for the full cost of it",
+      "The employer cannot charge you for it",
+      "The employer can charge you for up to half the cost of it",
+      "The employer can only charge you for it if you lose or damage it"
+    ],
+    "answerIndex": 1,
+    "explanation": "Employers cannot charge for PPE such as hard hats, gloves, required by law (and the bulk of PPE is required by law)."
+  },
+  {
+    "id": "4.18",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Which one of the following must apply to any hard hat provided?",
+    "options": [
+      "It is CE or UKCA marked",
+      "It is less than 5 years old",
+      "It is less than 1 year old",
+      "It is less than 2 years old"
+    ],
+    "answerIndex": 0,
+    "explanation": "All PPE should be CE – marked, indicating that it meets the basic health and safety requirements."
+  },
+  {
+    "id": "4.19",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When using personal protective equipment (PPE) legally you must do which of the following?",
+    "options": [
+      "Not interfere with it or misuse it",
+      "Replace it at your own expense if it is damaged",
+      "Return it to the manufacturer when damaged",
+      "Clean it properly once a week"
+    ],
+    "answerIndex": 0,
+    "explanation": "Interfering with or misusing items provided in the interests of health, safety or welfare is an offence under the HSW Act 1974 (Section 8)."
+  },
+  {
+    "id": "4.20",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "If it is necessary for an employee to use personal protective equipment, who has a duty to provide it?",
+    "options": ["The trade union", "The employee", "The employer", "The principal contractor"],
+    "answerIndex": 2,
+    "explanation": "This is a requirement of the PPE at Work Regulations 1992 (Regulation 4)."
+  },
+  {
+    "id": "4.21",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When should a safety helmet be worn on site?",
+    "options": [
+      "At all times unless there is no foreseeable risk of injury to the head other than by falling",
+      "When you are out in the open air",
+      "When walking to and from a place of work",
+      "Only when something may fall"
+    ],
+    "answerIndex": 0,
+    "explanation": "The circumstances when there is no foreseeable risk of head injury from falling or swinging objects or striking the head against something will be very limited in most construction work."
+  },
+  {
+    "id": "4.22",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "A colleague has drilled holes in the top of their safety helmet because the weather is hot. Is this:",
+    "options": ["Acceptable if the holes are small", "Their choice", "Acceptable", "In breach of legal requirements"],
+    "answerIndex": 3,
+    "explanation": "Interfering with or misusing items provided in the interests of health, safety or welfare is an offence under the HSW Act 1974 (section 8)."
+  },
+  {
+    "id": "4.23",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Who has a duty to provide PPE (Personal Protective Equipment) for use by an employee?",
+    "options": ["The employer", "The principal contractor", "The employee", "The client"],
+    "answerIndex": 0,
+    "explanation": "This is a requirement of the PPE at Work Regulations 1992 (Regulation 4)."
+  },
+  {
+    "id": "4.24",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When would it be appropriate to wear a bump-cap instead of a safety helmet?",
+    "options": [
+      "When there is no foreseeable risk of injury from falling or swinging objects",
+      "In warm weather",
+      "When working in excavations",
+      "When working on a ladder"
+    ],
+    "answerIndex": 0,
+    "explanation": "Industrial scalp protectors (bump caps) can protect against striking fixed obstacles, scalping or entanglements. They do not provide suitable protection against falling or swinging objects."
+  },
+  {
+    "id": "4.25",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "How can you protect your eyesight while working on site?",
+    "options": [
+      "By squinting",
+      "By not looking directly at what you are doing",
+      "By wearing the correct type of eye protection",
+      "By wearing sunglasses"
+    ],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "4.26",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When is head protection required to be worn on a construction site to comply with the Personal Protective Equipment at Work Regulations?",
+    "options": [
+      "At all times except by those who are self employed",
+      "Only when you feel like it",
+      "At all times unless you are working on scaffold",
+      "At all times unless there is no foreseeable risk of injury to the head other than by falling"
+    ],
+    "answerIndex": 3,
+    "explanation": "If there is no risk of injury to the head, then hard hats are not required by law. However, on construction sites, despite controls being in place, there will almost always be situations where a risk of head injury remains and require head protection to be worn. Site rules will also require the wearing of head protection other than in any designated safe areas."
+  },
+  {
+    "id": "4.27",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "Why should a high visibility vest be worn when working on roads?",
+    "options": [
+      "So road users and plant operators can see you",
+      "Because you were told to do so",
+      "Because it will keep you warm",
+      "So that your mates can see you"
+    ],
+    "answerIndex": 0,
+    "explanation": "Many workers are struck and injured, often seriously, by moving vehicles."
+  },
+  {
+    "id": "4.28",
+    "topic": "Personal Protective Equipment at Work",
+    "question": "When considering what measures to take to protect people's health and safety, PPE should always be regarded as:",
+    "options": [
+      "The last resort",
+      "The first line of defence",
+      "The best way to tackle the job",
+      "The only practical measure"
+    ],
+    "answerIndex": 0,
+    "explanation": "Engineering controls and safe systems of work should always be considered first."
+  },
+  {
+    "id": "5.1",
+    "topic": "Health and Hygiene",
+    "question": "Exposure to asbestos fibres may cause which one of the following?",
+    "options": ["Dermatitis", "Asthma", "Glandular fever", "Asbestosis"],
+    "answerIndex": 3,
+    "explanation": "Breathing in asbestos fibres can also lead to a number of other diseases, including lung cancer and mesothelioma."
+  },
+  {
+    "id": "5.2",
+    "topic": "Health and Hygiene",
+    "question": "Asbestos is suspected in the workplace, during renovation do you:",
+    "options": ["Remove it", "Paint it", "Ignore it", "Seek guidance immediately"],
+    "answerIndex": 3,
+    "explanation": "Competent advice must be sought, to prevent exposure to the worker or others, either at the time, or subsequently."
+  },
+  {
+    "id": "5.3",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following statements about asbestos is TRUE?",
+    "options": [
+      "Asbestos is not really a hazard to health",
+      "White asbestos is safe to use",
+      "All asbestos can be a hazard to health",
+      "Only brown and blue asbestos are a hazard to health"
+    ],
+    "answerIndex": 2,
+    "explanation": "All forms of asbestos can cause fatal diseases."
+  },
+  {
+    "id": "5.4",
+    "topic": "Health and Hygiene",
+    "question": "While working you discover material you think could be asbestos. What should you do?",
+    "options": [
+      "Clear any dust and fragments, put them in a bin then carry on working",
+      "Inform the site nurse",
+      "Stop working immediately and report your suspicions to your supervisor",
+      "Dampen the material to prevent further dust being created, then carry on working"
+    ],
+    "answerIndex": 2,
+    "explanation": "It is essential to stop work if asbestos is found or suspected, and await competent advice on what to do next."
+  },
+  {
+    "id": "5.5",
+    "topic": "Health and Hygiene",
+    "question": "Can you tell by the smell of a product whether it is likely to cause harm?",
+    "options": ["No", "Only within an enclosed space", "Yes", "Only if you have been trained"],
+    "answerIndex": 0,
+    "explanation": "Many harmful substances have no smell."
+  },
+  {
+    "id": "5.6",
+    "topic": "Health and Hygiene",
+    "question": "How would you recognise a hazardous substance?",
+    "options": [
+      "By a symbol on the container",
+      "By its smell",
+      "The colour of the label on the container",
+      "It will be in a suitable container"
+    ],
+    "answerIndex": 0,
+    "explanation": "A supplier of a packaged hazardous substance must include a label on the packaging incorporating one or more hazard symbols alerting users to the dangers posed by the chemical."
+  },
+  {
+    "id": "5.7",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following does NOT cause skin problems?",
+    "options": ["Bitumens", "Solvents", "Asbestos", "Epoxy resins"],
+    "answerIndex": 2,
+    "explanation": "Asbestos is potentially very harmful if inhaled, but does not affect the skin significantly."
+  },
+  {
+    "id": "5.8",
+    "topic": "Health and Hygiene",
+    "question": "When an assessment of hazardous substances has been carried out under the COSHH Regulations, the risks and control measures should be explained to:",
+    "options": [
+      "The operatives using the substance",
+      "All employees on site",
+      "The accounts department",
+      "The person in charge of the stores"
+    ],
+    "answerIndex": 0,
+    "explanation": "All those working with the hazardous substances in question need to know about any risks."
+  },
+  {
+    "id": "5.9",
+    "topic": "Health and Hygiene",
+    "question": "If your hands are very dirty, what should you use to get them clean?",
+    "options": ["White Spirit", "Paraffin", "Soap and water", "Thinners"],
+    "answerIndex": 2,
+    "explanation": "The other substances can remove natural oils from the skin."
+  },
+  {
+    "id": "5.10",
+    "topic": "Health and Hygiene",
+    "question": "T he presence of rats on site creates a risk of catching Weil' s disease. What is the EASIEST PRACTICAL MEASURE that you can take to discourage the presence of rats?",
+    "options": [
+      "Avoid leaving scraps of food lying about",
+      "Lay traps containing rat poison",
+      "Contact the local Environmental Health Officer",
+      "Bring a large cat on site"
+    ],
+    "answerIndex": 0,
+    "explanation": "The easiest solution is to avoid leaving food around, since this is what attracts vermin."
+  },
+  {
+    "id": "5.11",
+    "topic": "Health and Hygiene",
+    "question": "Why is personal hygiene so important?",
+    "options": [
+      "So you don't smell",
+      "Because the COSHH regulations require it",
+      "To protect your own and others' health",
+      "To stop you catching something nasty"
+    ],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "5.12",
+    "topic": "Health and Hygiene",
+    "question": "If you have been handling lead, how is it most likely to get into your blood stream?",
+    "options": [
+      "By not wearing safety goggles",
+      "By not reporting the matter to the HSE",
+      "By not using the correct safety footwear",
+      "By not washing your hands before eating"
+    ],
+    "answerIndex": 3,
+    "explanation": "The route into the body is ingestion, normally from lead contamination on the hands."
+  },
+  {
+    "id": "5.13",
+    "topic": "Health and Hygiene",
+    "question": "The number of toilets provided on site depends on:",
+    "options": [
+      "The type of work being completed",
+      "The ratio of male and female workers on site",
+      "The duration of the work on site",
+      "The number of personnel on site"
+    ],
+    "answerIndex": 3,
+    "explanation": "Guidance on the provision of welfare facilities is given in HSE publication 'Health and Safety in Construction'."
+  },
+  {
+    "id": "5.14",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following is not required to be provided under the Construction (Design and Management) Regulations?",
+    "options": ["Toilet facilities", "Washing facilities", "Hot food", "Drinking water"],
+    "answerIndex": 2,
+    "explanation": "Guidance on the provision of welfare facilities as required by COM is given in HSE publication 'Health and Safety in Construction'."
+  },
+  {
+    "id": "5.15",
+    "topic": "Health and Hygiene",
+    "question": "The extended use of powered hand-held tools and equipment may lead to which medical condition?",
+    "options": ["Vibration white finger", "Weil's disease", "Asbestosis", "Dermatitis"],
+    "answerIndex": 0,
+    "explanation": "Hand-arm vibration can cause a range of conditions (including vibration white finger) collectively known as hand-arm vibration syndrome, as well as diseases such as carpal tunnel syndrome."
+  },
+  {
+    "id": "5.16",
+    "topic": "Health and Hygiene",
+    "question": "What must your employer do if the daily personal noise exposure is at or exceeds 85 db(A)?",
+    "options": [
+      "Provide hearing protection to those employees who ask for it",
+      "Issue hearing protection to those exposed and ensure that it is worn",
+      "Tell employees to buy their own hearing protection",
+      "Report it to the Health and Safety Executive"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is an interim measure under the Control of Noise at Work Regulations 2005 when the daily personal noise exposure is at or exceeds the upper exposure action value of 85 dB(A). Exposure should subsequently be reduced by implementing organizational or technical measures."
+  },
+  {
+    "id": "5.17",
+    "topic": "Health and Hygiene",
+    "question": "What are the lower and upper action values with regard to daily personal noise exposure, as defined in the Control of Noise at Work Regulations 2005?",
+    "options": ["85 dB(A) and 90 dB(A)", "80 dB(A) and 85 dB(A)", "70 dB(A) and 80 dB(A)", "75 dB(A) and 85dB(A)"],
+    "answerIndex": 1,
+    "explanation": "Daily personal noise exposure is the average noise level experienced by an individual over an 8 hour period."
+  },
+  {
+    "id": "5.18",
+    "topic": "Health and Hygiene",
+    "question": "At or above what level of daily personal noise exposure does an employer have to provide hearing protection if it is requested by an employee?",
+    "options": ["90 dB(A)", "95 dB(A)", "80 dB(A)", "85 dB(A)"],
+    "answerIndex": 2,
+    "explanation": "This is one of the duties of employers under the Control of Noise at Work Regulations 2005 when the lower exposure action value of 80 dB(A) is reached or exceeded."
+  },
+  {
+    "id": "5.19",
+    "topic": "Health and Hygiene",
+    "question": "The effects of damage to your hearing by long-term exposure to high noise levels:",
+    "options": [
+      "Can be corrected by an operation",
+      "Are permanent",
+      "Will be reduced when you change jobs",
+      "Can be reversed to near normal with time"
+    ],
+    "answerIndex": 1,
+    "explanation": "Hearing damage due to long-term noise exposure is irreversible."
+  },
+  {
+    "id": "5.20",
+    "topic": "Health and Hygiene",
+    "question": "Hearing protection should be worn:",
+    "options": ["In designated areas", "In noisy internal areas only", "At any workplace", "Only on building sites"],
+    "answerIndex": 0,
+    "explanation": "Employees must wear hearing protectors when exposed at or above the upper exposure action values and within hearing protection zones."
+  },
+  {
+    "id": "5.21",
+    "topic": "Health and Hygiene",
+    "question": "Wearing suitable hearing protection:",
+    "options": [
+      "Stops you hearing distracting conversations",
+      "Stops you hearing all noise",
+      "Brings noise down to an acceptable level",
+      "Repairs damaged hearing"
+    ],
+    "answerIndex": 2,
+    "explanation": "Hearing protection still allows some noise to reach the ear, but, if it has been correctly chosen, will reduce noise levels to an acceptable level."
+  },
+  {
+    "id": "5.22",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following is one of the recommended means of protecting your hearing?",
+    "options": ["Rolled tissue paper", "Cotton wool pads", "Soft cloth pads", "Ear defenders"],
+    "answerIndex": 3,
+    "explanation": "The others are not considered to be suitable types of hearing protection."
+  },
+  {
+    "id": "5.23",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following would NOT reduce the risks from hand-arm vibration when using a hammer action tool?",
+    "options": [
+      "Selecting the lowest vibration tool that is suitable and which can do the work efficiently",
+      "Wearing gloves to keep the hands warm",
+      "Working as a team to share the work out",
+      "Making sure one person does all the work with the tool"
+    ],
+    "answerIndex": 3,
+    "explanation": "Where tools require constant or frequent use, rotas will avoid individuals having long exposure to vibration. The use of low-vibration tools and keeping the hands warm in cold conditions will also reduce the risks."
+  },
+  {
+    "id": "5.24",
+    "topic": "Health and Hygiene",
+    "question": "Which of the following animals can carry Weil's disease?",
+    "options": ["Snake", "Sheep", "Rat", "Pig"],
+    "answerIndex": 2,
+    "explanation": "Weil's disease is a serious and sometimes fatal infection that can be transmitted to humans by contact with infected rats. Another form of Leptospirosis infection can be transmitted from cattle to humans."
+  },
+  {
+    "id": "5.25",
+    "topic": "Health and Hygiene",
+    "question": "You are most likely to catch Weil's disease (Leptospirosis) if you:",
+    "options": [
+      "Work near wet ground, waterways or sewers",
+      "Work near air conditioning units",
+      "Fix showers or baths",
+      "Drink water from a standpipe"
+    ],
+    "answerIndex": 0,
+    "explanation": "Anyone who is exposed to rat urine is at risk, particularly sewer workers and farmers. Those in contact with canal or river water are also at risk."
+  },
+  {
+    "id": "5.26",
+    "topic": "Health and Hygiene",
+    "question": "What should you do if the toilets on your site are continually dirty?",
+    "options": [
+      "Ignore the problem – its normal on a construction site",
+      "Make sure you tell someone who can sort it out",
+      "Find some cleaning materials and clean it up yourself",
+      "Ask in a nearby cafe or pub if you can use their toilets"
+    ],
+    "answerIndex": 1,
+    "explanation": "How often welfare facilities on site require cleaning will depend on the number of people on site and how quickly they get dirty. The person in control of the site should make sure someone is responsible for keeping the facilities clean and tidy."
+  },
+  {
+    "id": "5.27",
+    "topic": "Health and Hygiene",
+    "question": "Excessive sunlight on bare skin can cause which serious health problem?",
+    "options": ["Dermatitis", "Rickets", "Acne", "Skin cancer"],
+    "answerIndex": 3,
+    "explanation": "Ultraviolet rays in sunlight can cause sunburn and premature ageing of the skin. The most serious effect, however, is an increased chance of developing skin cancer."
+  },
+  {
+    "id": "6.1",
+    "topic": "Fire and Emergency",
+    "question": "An emergency route(s) must be provided on construction sites to ensure:",
+    "options": [
+      "Safe passage to the open air",
+      "Safe passage to the rest area",
+      "Safe passage to a secure place of safety",
+      "Safe passage to the ground from height"
+    ],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "6.2",
+    "topic": "Fire and Emergency",
+    "question": "What action should you take if you discover a fire?",
+    "options": [
+      "Leave it because you will get the blame",
+      "Raise the alarm",
+      "Carry on working if it is safe to do so",
+      "Extinguish the fire without raising the alarm"
+    ],
+    "answerIndex": 1,
+    "explanation": "Raising the alarm will reduce the risk to others, particularly if the fire spreads."
+  },
+  {
+    "id": "6.3",
+    "topic": "Fire and Emergency",
+    "question": "If there had been a small fire, who should you report it to?",
+    "options": [
+      "Your supervisor",
+      "The main contractor's site agent",
+      "The site's fire marshal",
+      "The resident site engineer"
+    ],
+    "answerIndex": 0,
+    "explanation": "The supervisor should be aware, so that further preventative measures can be considered."
+  },
+  {
+    "id": "6.4",
+    "topic": "Fire and Emergency",
+    "question": "If you discover a fire at work, what should you do first:",
+    "options": [
+      "Telephone 999",
+      "Use a fire extinguisher to put it out",
+      "Run around looking for an alarm to sound",
+      "Raise the alarm and warn fellow workers"
+    ],
+    "answerIndex": 3,
+    "explanation": "Raising the alarm will reduce the risk to others, particularly if the fire spreads."
+  },
+  {
+    "id": "6.5",
+    "topic": "Fire and Emergency",
+    "question": "What is a fire assembly point?",
+    "options": [
+      "The place to go when the fire alarm sounds",
+      "A place where the fire brigade goes to",
+      "A place where fire extinguishers are kept",
+      "The place where the fire alarm is"
+    ],
+    "answerIndex": 0,
+    "explanation": "It is essential that people go to a place of safety, where supervisors or fire marshals know where they are, in the event of a fire."
+  },
+  {
+    "id": "6.6",
+    "topic": "Fire and Emergency",
+    "question": "Where would you go in the event of a fire?",
+    "options": [
+      "To the canteen for a cup of tea",
+      "To the fire assembly point",
+      "To the site hut",
+      "To the fire to see what is going on"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is essential that people go to a place of safety, where supervisors or fire marshals know where they are, in the event of a fire."
+  },
+  {
+    "id": "6.7",
+    "topic": "Fire and Emergency",
+    "question": "What should you do if you hear the fire alarm?",
+    "options": [
+      "Ignore it because it might be someone playing around",
+      "Leave work for the day",
+      "Evacuate the premises to a designated place of safety",
+      "Go towards the sound to find out what is going on"
+    ],
+    "answerIndex": 2,
+    "explanation": "It is essential that people go to a place of safety, where supervisors or fire marshals know where they are, in the event of a fire."
+  },
+  {
+    "id": "6.8",
+    "topic": "Fire and Emergency",
+    "question": "All new fire extinguishers are coloured red or of bright self-coloured metal. How do you know the difference between types?",
+    "options": [
+      "A different colour panel or band is on the body of the extinguishers",
+      "During site induction, you will be told where the different types of extinguishers are",
+      "The weight and shape of the extinguisher",
+      "The type of extinguisher is written on a sign next to it"
+    ],
+    "answerIndex": 0,
+    "explanation": "Different coloured bands show extinguisher types e.g. black for CO2 and blue for dry powder."
+  },
+  {
+    "id": "6.9",
+    "topic": "Fire and Emergency",
+    "question": "A black-labelled fire extinguisher contains:",
+    "options": ["Dry powder", "Water", "Foam", "Carbon dioxide"],
+    "answerIndex": 3,
+    "explanation": null
+  },
+  {
+    "id": "6.10",
+    "topic": "Fire and Emergency",
+    "question": "What is a blue-labelled fire extinguisher filled with?",
+    "options": ["Water", "Foam", "Dry powder", "Carbon dioxide"],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "6.11",
+    "topic": "Fire and Emergency",
+    "question": "Which fire extinguisher should not be used on flammable liquid fires?",
+    "options": ["Carbon dioxide", "Powder", "Water", "Foam"],
+    "answerIndex": 2,
+    "explanation": "Flammable liquids spread if attacked by water extinguishers."
+  },
+  {
+    "id": "6.12",
+    "topic": "Fire and Emergency",
+    "question": "What colour is a water filled fire extinguisher, or its label?",
+    "options": ["Black", "Cream", "Red", "Green"],
+    "answerIndex": 2,
+    "explanation": null
+  },
+  {
+    "id": "6.13",
+    "topic": "Fire and Emergency",
+    "question": "When discharging carbon dioxide fire extinguishers, the nozzle:",
+    "options": ["Becomes warm", "Becomes very hot", "Becomes very cold", "Doesn't change temperature"],
+    "answerIndex": 2,
+    "explanation": "The expansion of CO2 gas coming out of the nozzle causes rapid cooling."
+  },
+  {
+    "id": "6.14",
+    "topic": "Fire and Emergency",
+    "question": "For fires involving spilled petrol, which types of fire extinguisher could you use?",
+    "options": [
+      "Water, carbon dioxide or foam",
+      "Water, foam or dry powder",
+      "Foam, carbon dioxide or dry powder",
+      "Water, carbon dioxide or dry powder"
+    ],
+    "answerIndex": 2,
+    "explanation": "Flammable liquids, such as petrol, spread if attacked by water extinguishers."
+  },
+  {
+    "id": "6.15",
+    "topic": "Fire and Emergency",
+    "question": "Which types of fire extinguishers should be used on electrical fires?",
+    "options": ["Foam and water", "Carbon dioxide and dry powder", "Dry powder and foam", "Water and carbon dioxide"],
+    "answerIndex": 1,
+    "explanation": "Liquids should not be used, since they may conduct electricity."
+  },
+  {
+    "id": "6.16",
+    "topic": "Fire and Emergency",
+    "question": "A red-labelled fire extinguisher should NOT be used:",
+    "options": [
+      "On wood fires",
+      "Where there is a risk of electrocution",
+      "On burning clothes",
+      "On burning furniture"
+    ],
+    "answerIndex": 1,
+    "explanation": "Red denotes water. Liquids should not be used on electrical fires, since they can conduct electricity."
+  },
+  {
+    "id": "6.17",
+    "topic": "Fire and Emergency",
+    "question": "A workmate burns their hand on a piece of very hot metal. What should you do first?",
+    "options": [
+      "Rub some cream or Vaseline into the burn",
+      "Cover the burn with something dry",
+      "Warn other people about the piece of hot metal",
+      "Put their hand in cold water if it is available"
+    ],
+    "answerIndex": 3,
+    "explanation": "Burns need immediate and sustained cooling."
+  },
+  {
+    "id": "6.18",
+    "topic": "Fire and Emergency",
+    "question": "Which of the following items should not be in a first aid box?",
+    "options": ["Safety pins", "Pain killers", "Disposable gloves", "Triangular bandages"],
+    "answerIndex": 1,
+    "explanation": "Drugs must not be kept in a first aid box (Health and Safety guidance note INDG 214)."
+  },
+  {
+    "id": "6.19",
+    "topic": "Fire and Emergency",
+    "question": "How often should a first-aider qualified in First Aid at Work (FAW) or Emergency First Aid at Work (EFAW) receive retraining?",
+    "options": ["Every six months", "Every two years", "Every three years", "Every four years"],
+    "answerIndex": 2,
+    "explanation": "First Aid at Work (FAW) and Emergency First Aid at Work (EFAW) certificates are valid for three years and first-aiders are required to undertake retraining at the end of this period. However, the HSE also strongly recommends that first-aiders undertake annual (half-day) refresher training."
+  },
+  {
+    "id": "6.20",
+    "topic": "Fire and Emergency",
+    "question": "If you came across an injury on site, what is the first thing you should do?",
+    "options": [
+      "Tell the casualty to visit their doctor",
+      "Inform the HSE",
+      "Contact a first-aider",
+      "Try and find out what happened"
+    ],
+    "answerIndex": 2,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.21",
+    "topic": "Fire and Emergency",
+    "question": "An employee has a fall and is obviously unconscious. What is the FIRST thing you should do?",
+    "options": [
+      "Send someone for the first-aider",
+      "Find out if there were any witnesses",
+      "Try to protect them from any further injury",
+      "Put them in the recovery position"
+    ],
+    "answerIndex": 0,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.22",
+    "topic": "Fire and Emergency",
+    "question": "A labourer gets an electric shock; looks a bit pale but says they are alright. What should you do?",
+    "options": [
+      "Send someone for the first-aider",
+      "Tell them to report it to their supervisor",
+      "Go and check the electrics so it cannot happen again",
+      "See if they want a drink or a cigarette"
+    ],
+    "answerIndex": 0,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.23",
+    "topic": "Fire and Emergency",
+    "question": "Which of the following must an employer consider when making provisions for first aid?",
+    "options": [
+      "How much working space will be wasted",
+      "How much will it cost",
+      "Whether the local ambulance service can be used",
+      "The likely types of injury"
+    ],
+    "answerIndex": 3,
+    "explanation": "Employers must match first-aid provision to the nature of risks at work."
+  },
+  {
+    "id": "6.24",
+    "topic": "Fire and Emergency",
+    "question": "In an on-site emergency, which of the following must a first-aider NOT do?",
+    "options": [
+      "Treat an unconscious patient",
+      "Control bleeding",
+      "Give resuscitation",
+      "Give medicines to patients without authorisation"
+    ],
+    "answerIndex": 3,
+    "explanation": "First-aid is concerned with preserving life and limb, and first-aiders are not trained to dispense medical treatments."
+  },
+  {
+    "id": "6.25",
+    "topic": "Fire and Emergency",
+    "question": "If someone has fallen over and has stopped breathing, what is the first thing you should do?",
+    "options": [
+      "Send for help",
+      "Attend to any broken bones",
+      "Try to give the casualty a drink",
+      "Try to start the casualty breathing"
+    ],
+    "answerIndex": 0,
+    "explanation": "Do not delay in sending for help; then try to start the casualty breathing."
+  },
+  {
+    "id": "6.26",
+    "topic": "Fire and Emergency",
+    "question": "If someone has fallen off a ladder and they say their leg is broken, what should you do?",
+    "options": [
+      "Send for the first-aider",
+      "Help them to the cabin or mess hut",
+      "Move the ladder so no-one trips over it",
+      "Bandage their legs together"
+    ],
+    "answerIndex": 0,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.27",
+    "topic": "Fire and Emergency",
+    "question": "Your workmate suddenly gets a foreign body in the eye. What should you do?",
+    "options": [
+      "Take your workmate to the supervisor",
+      "Use a clean handkerchief to try and remove it",
+      "Wash your hands before touching your mate's face",
+      "Send someone for the first-aider"
+    ],
+    "answerIndex": 3,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.28",
+    "topic": "Fire and Emergency",
+    "question": "A person nearly collapses complaining of stomach pains. What should you do?",
+    "options": [
+      "Send someone for the first-aider",
+      "Go and find them something to drink",
+      "Help them to find somewhere comfortable to sit",
+      "Ask them if they want something to eat"
+    ],
+    "answerIndex": 0,
+    "explanation": "Competent first-aid treatment is essential, and should be summoned immediately."
+  },
+  {
+    "id": "6.29",
+    "topic": "Fire and Emergency",
+    "question": "A workmate lifting a big box suddenly shouts 'oh, my back' and drops the box. What should you do?",
+    "options": [
+      "Tell them to leave it for someone else to lift",
+      "Send for the first-aider",
+      "Help them to lift the box",
+      "Find them somewhere comfortable to sit and rest"
+    ],
+    "answerIndex": 1,
+    "explanation": "The priority for any back injury is to obtain first-aid advice, in order to prevent further damage."
+  },
+  {
+    "id": "6.30",
+    "topic": "Fire and Emergency",
+    "question": "What should you do immediately if you get a small cut on a finger whilst at work?",
+    "options": ["Carry on working", "Get first-aid", "Ask your employer to report it to the HSE", "Just wash it clean"],
+    "answerIndex": 1,
+    "explanation": "It is important to obtain first-aid to prevent further harm (e.g. through infection). It should also be recorded in the accident book (Bl 510)."
+  },
+  {
+    "id": "6.31",
+    "topic": "Fire and Emergency",
+    "question": "In an emergency situation at work you should do what?",
+    "options": [
+      "Phone the HSE Inspectorate",
+      "Obey the site emergency procedure",
+      "Ensure your work mates are all accounted for",
+      "Leave the site immediately"
+    ],
+    "answerIndex": 1,
+    "explanation": "A site emergency plan should have been drawn up and you should be familiar with the emergency procedure."
+  },
+  {
+    "id": "6.32",
+    "topic": "Fire and Emergency",
+    "question": "What does the sound of a siren on-site normally indicate?",
+    "options": ["A fire", "A toxic escape", "An explosion", "An emergency"],
+    "answerIndex": 3,
+    "explanation": null
+  },
+  {
+    "id": "6.33",
+    "topic": "Fire and Emergency",
+    "question": "The purpose of fire-stopping in a building is to:",
+    "options": [
+      "Prevent a fire starting",
+      "Delay the passage of fire and smoke through openings in walls and floors",
+      "Activate fire sprinklers",
+      "Set off the fire alarm"
+    ],
+    "answerIndex": 1,
+    "explanation": "Fire-stopping is a passive fire protection measure used to seal any openings created in a fire resistance-rated wall or floor assembly, e.g. to allow pipes or wiring systems to pass through. During fire conditions this will impede the spread of fire and smoke."
+  },
+  {
+    "id": "6.34",
+    "topic": "Fire and Emergency",
+    "question": "What are fire-stops designed to do?",
+    "options": [
+      "Extinguish a fire",
+      "Protect services (such as wiring systems) against fire damage",
+      "Close fire doors automatically",
+      "Delay the passage of fire and smoke through openings in walls and floors"
+    ],
+    "answerIndex": 3,
+    "explanation": "Fire-stops are designed to maintain the fireproofing of a wall or floor assembly. Fire-stopping delays the spread of fire and, generally, the spread of smoke as well."
+  },
+  {
+    "id": "6.35",
+    "topic": "Fire and Emergency",
+    "question": "In addition to preserving fire separation between areas of a building, which other important fire safety function can fire-stopping achieve?",
+    "options": [
+      "Preventing premature structural collapse",
+      "Reducing nuisance fire alarms",
+      "Reducing noise transmission",
+      "Saving energy"
+    ],
+    "answerIndex": 0,
+    "explanation": "During a fire it is essential that the load-bearing capacity of elements of the building structure are maintained until occupants have escaped. Timber studs, joists or 'I' beams, for example, may only have a short survival time if exposed to fire and may rely on linings, such as a plasterboard ceiling, for fire-resistance. Services passing through such linings should therefore be fire-stopped."
+  },
+  {
+    "id": "6.36",
+    "topic": "Fire and Emergency",
+    "question": "lntumescent materials used to provide fire-stopping are designed to:",
+    "options": [
+      "Expand when subjected to smoke",
+      "Shrink when subjected to heat",
+      "Expand when subjected to heat",
+      "Prevent noise transmission"
+    ],
+    "answerIndex": 2,
+    "explanation": "A limited number of fire-resistant materials may be used to provide fire-stopping. These include intumescent products, which are designed to expand and provide fire-stopping when subjected to heat. Examples include intumescent 'pillows'."
+  },
+  {
+    "id": "6.37",
+    "topic": "Fire and Emergency",
+    "question": "What should you do if you disturb fire-stopping around a wiring system penetrating a wall or floor whilst carrying out work?",
+    "options": [
+      "Nail a piece of wood over any gaps",
+      "Ensure that the fire-stopping is reinstated to the necessary standard as soon as possible",
+      "Highlight this on any certification",
+      "Fill any holes or gaps with squashed newspaper"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is essential that the integrity of fire compartments is maintained during the construction of buildings and on their completion. Compromising compartmentation, such as failing to adequately fire-stop (seal) openings for services to pass through, can undermine fire precautions catastrophically. Only a limited range of products are suitable and they must be correctly applied to provide the required degree of fire-stopping."
+  },
+  {
+    "id": "6.38",
+    "topic": "Fire and Emergency",
+    "question": "If you discover a hole or gap in a fire rated wall or floor that has not been fire-stopped, what should you do?",
+    "options": [
+      "Report it to your supervisor without delay",
+      "Ignore it unless it is causing a draught",
+      "Cover the hole or gap with insulating tape",
+      "Use decorators' sealant to fill the gap"
+    ],
+    "answerIndex": 0,
+    "explanation": "Supervisors need to be made aware of any observed inadequacies in fire-stopping - which can undermine fire precautions catastrophically during the construction of buildings and on their completion. Only a limited range of products are suitable and they must be correctly applied to provide the required degree of fire-stopping."
+  },
+  {
+    "id": "6.39",
+    "topic": "Fire and Emergency",
+    "question": "Which one of the following is associated with a Higher Risk Building (HRBs) in England?",
+    "options": [
+      "At least 18 metres in height or seven storeys",
+      "At least 15 metres in height or seven storeys",
+      "At least 15 metres in height or six storeys",
+      "At least 18 metres in height or six storeys"
+    ],
+    "answerIndex": 0,
+    "explanation": "At least 18 meters in height or seven storeys is the height at which the Building Safety Regulator regime will apply in England."
+  },
+  {
+    "id": "6.40",
+    "topic": "Fire and Emergency",
+    "question": "For a holistic approach to fire safety - to plan for all aspects of fire safety - the three main areas that need to be considered are design, construction and...",
+    "options": ["Occupation", "Fire stopping", "Maintenance", "Demolition"],
+    "answerIndex": 2,
+    "explanation": "Design, construction and maintenance are the main aspects to be considered as part of a holistic view to fire safety covering all elements to cover all aspects."
+  },
+  {
+    "id": "6.41",
+    "topic": "Fire and Emergency",
+    "question": "Which of the following materials provide the least effective fire resistance?",
+    "options": ["Brick", "Concrete", "Timber", "Steel"],
+    "answerIndex": 2,
+    "explanation": "Timber or wood has a low ignition point and can be highly flammable, generally considered to have poor fire resistance."
+  },
+  {
+    "id": "6.42",
+    "topic": "Fire and Emergency",
+    "question": "When man-made substances, such as rubber, burn, the colour of the smoke is typically:",
+    "options": ["White", "Black", "Grey", "Yellow"],
+    "answerIndex": 1,
+    "explanation": "The black colour of smoke from burning man-made substances, including rubber, is primarily due to incomplete combustion of carbon-based materials, and soot particles suspended in the air making the smoke appear black."
+  },
+  {
+    "id": "6.43",
+    "topic": "Fire and Emergency",
+    "question": "Which one of the following is a benefit of a 'stay put' strategy for fire evacuation in high risk buildings?",
+    "options": [
+      "It slows the fire fighters' response to a fire",
+      "It reduces communication between occupants and emergency services",
+      "You reduce the risk of entering a smoky corridor and being overcome by smoke",
+      "It allows lifts to be used more effectively"
+    ],
+    "answerIndex": 2,
+    "explanation": "A 'stay-put' strategy is designed to prevent injury, reduce panic, and reduce smoke inhalation which could cause injury or fatalities."
+  },
+  {
+    "id": "6.44",
+    "topic": "Fire and Emergency",
+    "question": "Which one of the following is not a requirement of a protected escape route?",
+    "options": ["Leads to a safe place", "Protection from smoke", "Infra-red lights", "Protection from fire"],
+    "answerIndex": 2,
+    "explanation": "Although emergency lighting systems are mandated to provide adequate illumination in escape routes, this does not include infra-red lights specifically."
+  },
+  {
+    "id": "6.45",
+    "topic": "Fire and Emergency",
+    "question": "Which one of the following is not an area of competence?",
+    "options": ["Skills", "Resilience", "Knowledge", "Behaviours"],
+    "answerIndex": 1,
+    "explanation": "Competence is broadly defined as the skills, knowledge, experience, and behaviours of an individual."
+  },
+  {
+    "id": "6.46",
+    "topic": "Fire and Emergency",
+    "question": "What is a key consideration for individuals to ensure safety at work?",
+    "options": [
+      "Pushing personal limits to complete a job at any cost",
+      "Having a go at jobs without proper training",
+      "Recognising the limitations of competence and not exceeding your own limitations",
+      "Ignoring boundaries to complete a job in the quickest manner possible"
+    ],
+    "answerIndex": 2,
+    "explanation": "Competence includes the recognition and awareness of the limitations of your own competence, and not undertaking jobs or tasks for which you haven't received proper training as this will lead to unsafe and potentially dangerous practices."
+  },
+  {
+    "id": "6.47",
+    "topic": "Fire and Emergency",
+    "question": "Which one of the following is a consequence of poor workmanship?",
+    "options": [
+      "Improved fire safety",
+      "A good reputation",
+      "Increase in hazard and servicing",
+      "Increased structural stability"
+    ],
+    "answerIndex": 2,
+    "explanation": "A lack of competence and poor workmanship can lead to increased servicing and maintenance requirements, and increased hazards as a result."
+  },
+  {
+    "id": "6.48",
+    "topic": "Fire and Emergency",
+    "question": "What is CROSS-UK?",
+    "options": [
+      "A branch of the British Red Cross for Construction Workers",
+      "An online forum for workers to complain about their employers",
+      "A confidential reporting system to report on fire and structural safety issues",
+      "A charity that supplies work equipment to apprentices"
+    ],
+    "answerIndex": 2,
+    "explanation": "CROSS-UK is Collaborative Reporting for Safer Structures UK – a confidential reporting system which allows professionals working in the built environment to report on fire or structural safety issues."
+  },
+  {
+    "id": "7.1",
+    "topic": "Work at Height",
+    "question": "Most deaths on site are caused by:",
+    "options": ["Vehicle movements", "Falling from height", "Solvent inhalation", "Chemical burns"],
+    "answerIndex": 1,
+    "explanation": "Although the other dangers can kill or cause injury, falling from height is the bigger cause of fatalities."
+  },
+  {
+    "id": "7.2",
+    "topic": "Work at Height",
+    "question": "The type of accident that kills most construction site workers is:",
+    "options": ["Being hit by falling objects", "Falling from heights", "Trench collapses", "Electrical accident"],
+    "answerIndex": 1,
+    "explanation": "Although the other dangers can kill or cause injury, falling from height is the biggest cause of fatalities."
+  },
+  {
+    "id": "7.3",
+    "topic": "Work at Height",
+    "question": "The main cause of deaths on construction sites is…",
+    "options": ["Fire", "Falls from height", "Being run over by plant", "Excavation collapse"],
+    "answerIndex": 1,
+    "explanation": null
+  },
+  {
+    "id": "7.4",
+    "topic": "Work at Height",
+    "question": "How many people should be working on a ladder at one time?",
+    "options": ["One on each section of an extension ladder", "One", "Two", "Three if it is long enough"],
+    "answerIndex": 1,
+    "explanation": "Only one person should be working on a ladder, although another person may be footing it, for extra stability."
+  },
+  {
+    "id": "7.5",
+    "topic": "Work at Height",
+    "question": "Ladders should be set at a slope of approximately:",
+    "options": ["1 out for every 3 up", "4 out for every 1 up", "1 out for every 1 up", "1 out for every 4 up"],
+    "answerIndex": 3,
+    "explanation": null
+  },
+  {
+    "id": "7.6",
+    "topic": "Work at Height",
+    "question": "Why should aluminium ladders be kept away from wet lime or cement?",
+    "options": [
+      "It will stain your clothes",
+      "The ladder may become statically charged",
+      "It may corrode the ladder",
+      "It will stain the aluminium"
+    ],
+    "answerIndex": 2,
+    "explanation": "Aluminium can corrode in certain situations, notably if in prolonged contact with lime or cement."
+  },
+  {
+    "id": "7.7",
+    "topic": "Work at Height",
+    "question": "Before being used, a ladder should be inspected:",
+    "options": ["By the foreman", "By the user", "By the manufacturer", "By the Safety Officer"],
+    "answerIndex": 1,
+    "explanation": "The user needs to be satisfied that the ladder is in a safe condition before using it."
+  },
+  {
+    "id": "7.8",
+    "topic": "Work at Height",
+    "question": "Ladders should be:",
+    "options": [
+      "In good condition",
+      "Tied or footed",
+      "Tied or footed AND at the right angle AND in good condition",
+      "At the right angle"
+    ],
+    "answerIndex": 2,
+    "explanation": "All the measures listed are required to reduce the risk of falls."
+  },
+  {
+    "id": "7.9",
+    "topic": "Work at Height",
+    "question": "A ladder giving access to a scaffold can generally be safely used, provided that:",
+    "options": [
+      "The foot of the ladder is firmly wedged",
+      "It does not move when you climb up it",
+      "Any broken rungs are clearly marked",
+      "It is tied and extends at least 1 metre above the platform"
+    ],
+    "answerIndex": 3,
+    "explanation": "Access ladders should extend at least 1 metre above the landing point to provide a safe handhold."
+  },
+  {
+    "id": "7.10",
+    "topic": "Work at Height",
+    "question": "What is the ideal angle for a ladder against a wall and floor?",
+    "options": [
+      "One metre up for every metre out from the wall",
+      "One metre up for every two metres out from the wall",
+      "Two metres up for every metre out from the wall",
+      "Four metres up for every metre out from the wall"
+    ],
+    "answerIndex": 3,
+    "explanation": "The correct angle for a ladder is 75 degrees, which can be judged using the angle indicator marked on the stiles of some ladders or using the 1 in 4 rule."
+  },
+  {
+    "id": "7.11",
+    "topic": "Work at Height",
+    "question": "The rung of a wooden ladder has started to split, what should you do?",
+    "options": [
+      "Do not use it, tell your supervisor",
+      "Cut the bad bit out",
+      "Tape it up",
+      "Jump on it to see if it holds your weight"
+    ],
+    "answerIndex": 0,
+    "explanation": "It is essential that supervisors are aware of faulty or damaged equipment."
+  },
+  {
+    "id": "7.12",
+    "topic": "Work at Height",
+    "question": "Ladders should not be painted because:",
+    "options": [
+      "Regular repainting will be necessary",
+      "The paint will make them slippery to use",
+      "The paint may not be suitable on metal parts of the ladder",
+      "The paint may cover a defect or damaged part of the ladder"
+    ],
+    "answerIndex": 3,
+    "explanation": null
+  },
+  {
+    "id": "7.13",
+    "topic": "Work at Height",
+    "question": "When can you work from a ladder?",
+    "options": [
+      "For short periods and then only if it is safe to do so",
+      "When it is long enough",
+      "When it is available",
+      "When not being used for access"
+    ],
+    "answerIndex": 0,
+    "explanation": "Ladders are primarily means of access, not workplaces. They can be worked from, but only if the use of other, more suitable, work equipment is not appropriate and the task is of low risk and of short duration."
+  },
+  {
+    "id": "7.14",
+    "topic": "Work at Height",
+    "question": "When working above public areas, what should be considered?",
+    "options": [
+      "Preventing complaints from the public",
+      "The danger of falling materials",
+      "Keeping the job going",
+      "Keeping the areas open to the public"
+    ],
+    "answerIndex": 1,
+    "explanation": "There is a significant risk to the public from falling materials, if this is not considered before and during work."
+  },
+  {
+    "id": "7.15",
+    "topic": "Work at Height",
+    "question": "A scaffold tower must be erected by:",
+    "options": [
+      "A trained and competent person",
+      "The hire company who supply it",
+      "The site foreman",
+      "Senior site staff"
+    ],
+    "answerIndex": 0,
+    "explanation": "There are a number of organizations that provide training for the safe erection and use of scaffold towers."
+  },
+  {
+    "id": "7.16",
+    "topic": "Work at Height",
+    "question": "What is the minimum height of the top guard-rail of a scaffold above the edge from which someone is liable to fall?",
+    "options": ["470mm", "910mm", "950mm", "2 metres"],
+    "answerIndex": 2,
+    "explanation": "This is a requirement of the Work at Height Regulations 2005."
+  },
+  {
+    "id": "7.17",
+    "topic": "Work at Height",
+    "question": "A working platform used for construction work, and from which a person could fall 2 metres or more, must not be used unless it has been inspected (and a report is subsequently prepared) by a competent person:",
+    "options": ["Only after an accident", "That day", "Within the previous seven days", "Within the previous month"],
+    "answerIndex": 2,
+    "explanation": "Under these specific circumstances a report is required to be prepared by the competent person and given to the person for whom the inspection was done (e.g. the site manager). This is in addition to the more general requirement to inspect equipment for work at height: prior to use in that position (or site if it is mobile); following exceptional circumstances (e.g. high winds); and at suitable intervals."
+  },
+  {
+    "id": "7.18",
+    "topic": "Work at Height",
+    "question": "On a mobile elevating work platform, what should you attach your safety harness to?",
+    "options": [
+      "A secure anchorage point inside the platform",
+      "A strong part of the structure you are working on",
+      "The boom of the machine",
+      "A nearby pipe or scaffold"
+    ],
+    "answerIndex": 0,
+    "explanation": "The priority is to stay within the platform (which is the safest place) and in any event you cannot be sure of the strength of other fixtures."
+  },
+  {
+    "id": "7.19",
+    "topic": "Work at Height",
+    "question": "You have been asked to operate a cherry-picker (mobile elevated work platform) when it is very windy. What should your FIRST consideration be?",
+    "options": [
+      "Wear a safety harness and clip it to the structure that you are working on",
+      "Does the wind-speed make it unsafe to use the machine",
+      "Wear an extra layer of clothing to keep warm",
+      "Tie all light-weight objects to the hand-rails of the basket"
+    ],
+    "answerIndex": 1,
+    "explanation": "The priority in safety is eliminating risk at source – in this case by not working in dangerous conditions – rather than trying to stay safe by using protective equipment."
+  },
+  {
+    "id": "7.20",
+    "topic": "Work at Height",
+    "question": "If you have to work at height and it is not possible to erect a scaffold, or use any other type of working platform or mobile elevating work platform, then you should:",
+    "options": [
+      "Work without fall protection, provided you have a mate with you",
+      "Wear a harness and lanyard at all times",
+      "Work without fall protection, provided the weather is not too windy",
+      "Work without fall protection at all times when no one else is about"
+    ],
+    "answerIndex": 1,
+    "explanation": "The harness will greatly reduce the likelihood of injury if you fall."
+  },
+  {
+    "id": "7.21",
+    "topic": "Work at Height",
+    "question": "When working on a roof that has fragile, clear-plastic panels, what is the best way of preventing falls through the panels?",
+    "options": [
+      "Make sure that everyone is told where the panels are and to avoid treading on them",
+      "Cover the fragile panels with a strong material and secure the covers to stop them being dislodged",
+      "Remove the panels carefully to leave an open space.",
+      "It shouldn' t be necessary to do anything, everyone knows the dangers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Protection from falling through openings and fragile roof lights can be provided by barriers or with covers which can be secured or labelled with a warning."
+  },
+  {
+    "id": "7.22",
+    "topic": "Work at Height",
+    "question": "When working on a roof that has fragile, clear-plastic panels, what is the best way of preventing falls through the panels?",
+    "options": [
+      "It is safe to walk on the purlins",
+      "Walk straight across the roof to where you need to get to",
+      "As long as you avoid any fragile areas it is safe",
+      "Crawling boards should always be used"
+    ],
+    "answerIndex": 3,
+    "explanation": "Fragile roofs must be made safe to work on, before work commences."
+  },
+  {
+    "id": "7.23",
+    "topic": "Work at Height",
+    "question": "Half the deaths on construction sites are caused by which one of the following?",
+    "options": [
+      "Falls from heights",
+      "Electrical misuse",
+      "Working in trenches/confined spaces",
+      "Misuse of plant and machinery"
+    ],
+    "answerIndex": 0,
+    "explanation": "This is shown by HSE statistics."
+  },
+  {
+    "id": "7.24",
+    "topic": "Work at Height",
+    "question": "What should you do if your work activity requires you to wear a full body safety harness and one is not available?",
+    "options": [
+      "Make a harness from items found on site",
+      "Carry on working and hope that everything will be alright",
+      "Borrow a harness from a colleague",
+      "Stop work immediately and tell your supervisor that you do not have the correct PPE"
+    ],
+    "answerIndex": 3,
+    "explanation": "Always advise the supervisor if you do not have the correct PPE."
+  },
+  {
+    "id": "7.25",
+    "topic": "Work at Height",
+    "question": "Under what circumstances do the Work at Height Regulations permit a stepladder to be used on site?",
+    "options": [
+      "Never – stepladders are banned",
+      "At any time",
+      "Provided you can't fall 2 metres or more",
+      "Only when a risk assessment shows that safer alternatives have been ruled out and the task is of low risk and of short duration"
+    ],
+    "answerIndex": 3,
+    "explanation": "The WAH Regulations have not banned the use of ladders or stepladders, but they should be used sensibly."
+  },
+  {
+    "id": "7.26",
+    "topic": "Work at Height",
+    "question": "What is the best method of securing a ladder?",
+    "options": [
+      "Tying it to a suitable point",
+      "Using an effective ladder stability device",
+      "Wedging the ladder (e.g. against a wall)",
+      "Having the ladder footed"
+    ],
+    "answerIndex": 0,
+    "explanation": "Tying the ladder is the safest option, making sure both stiles are tied."
+  },
+  {
+    "id": "7.27",
+    "topic": "Work at Height",
+    "question": "Of the following, which is the POOREST method of securing a ladder?",
+    "options": [
+      "Securing the base of the ladder",
+      "Tying the ladder",
+      "Having someone foot the ladder",
+      "Using a ladder stability device"
+    ],
+    "answerIndex": 2,
+    "explanation": "Footing a ladder is the last resort and should be avoided. Other more suitable access equipment should be used where practicable."
+  },
+  {
+    "id": "7.28",
+    "topic": "Work at Height",
+    "question": "Prior to moving a mobile tower scaffold, the platform height should reduced to a maximum of:",
+    "options": ["2 metres", "3 metres", "4 metres", "5 metres"],
+    "answerIndex": 2,
+    "explanation": "This figure is quoted in guidance published by the HSE and PASMA. Checks should also be made that there are no obstructions overhead, the ground is firm, level and free from potholes, it is not too windy and there are no people or materials on the tower."
+  },
+  {
+    "id": "8.1",
+    "topic": "Work Equipment",
+    "question": "What do the letters SWL stand for?",
+    "options": ["Safe working level", "Satisfactory weight limit", "Satisfactory working limit", "Safe working load"],
+    "answerIndex": 3,
+    "explanation": "Machinery and accessories for lifting loads should be clearly marked to indicate their safe working loads."
+  },
+  {
+    "id": "8.2",
+    "topic": "Work Equipment",
+    "question": "Who should operate plant and equipment on site?",
+    "options": [
+      "Only people over 18 years of age",
+      "Trained and authorised employees only",
+      "An employee holding a full driving licence",
+      "Any experienced employee"
+    ],
+    "answerIndex": 1,
+    "explanation": "Never operate plant or equipment unless you have been trained and are authorised to do so."
+  },
+  {
+    "id": "8.3",
+    "topic": "Work Equipment",
+    "question": "What hazard is created when the head of a cold chisel mushrooms?",
+    "options": ["Reduced striking area", "Softens the impact", "Flying steel splinters", "Damage to the hammer head"],
+    "answerIndex": 2,
+    "explanation": "This question is looking for the hazard, which is the situation that can cause harm to people."
+  },
+  {
+    "id": "8.4",
+    "topic": "Work Equipment",
+    "question": "Any damaged equipment must be:",
+    "options": [
+      "Reported to your supervisor",
+      "Thrown away immediately",
+      "Labelled as damaged before use",
+      "Locked up so no one can use it"
+    ],
+    "answerIndex": 0,
+    "explanation": "It is essential that supervisors are aware of faulty or damaged equipment."
+  },
+  {
+    "id": "8.5",
+    "topic": "Work Equipment",
+    "question": "The electric drill you are about to use has a faulty on/off switch. What action should you take?",
+    "options": [
+      "Try and fix the fault",
+      "Find another machine and carry on working",
+      "Remove it from use and tell your supervisor",
+      "Tape the switch on to keep it running and carry on working"
+    ],
+    "answerIndex": 2,
+    "explanation": "It is essential that supervisors are aware of faulty or damaged equipment."
+  },
+  {
+    "id": "8.6",
+    "topic": "Work Equipment",
+    "question": "The power hand tool you are about to use has burn marks visible on the cable. What should you do?",
+    "options": [
+      "Tape over the affected area and continue",
+      "Tell your supervisor about the defect and do not use the tool",
+      "Obtain another machine and carry on, but don't tell anyone",
+      "Carry on and get the job done"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is essential that supervisors are aware of faulty or damaged equipment."
+  },
+  {
+    "id": "8.7",
+    "topic": "Work Equipment",
+    "question": "Your supervisor asks you to use a powered hand-tool which has a rotating blade. You notice that the guard is missing from the blade. What do you do?",
+    "options": [
+      "Use the tool anyway, you haven't had an accident with it before",
+      "Remove it from use and tell your supervisor",
+      "Try to make an improvised guard yourself",
+      "Contact the manufacturer of the tool"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is essential that supervisors are aware of faulty or damaged equipment."
+  },
+  {
+    "id": "8.8",
+    "topic": "Work Equipment",
+    "question": "Hand and power tools must be:",
+    "options": [
+      "The best that you can buy",
+      "Made available when needed",
+      "In the company's colours",
+      "Suitable for the task and regularly inspected"
+    ],
+    "answerIndex": 3,
+    "explanation": "Tools must not create a risk to the user or others. This means they must be suitable and kept in good condition. This requires inspection before use."
+  },
+  {
+    "id": "8.9",
+    "topic": "Work Equipment",
+    "question": "When should visual checks of portable hand-held equipment be made by the user?",
+    "options": ["When a replacement is needed", "Monthly", "Weekly", "Each time it is used"],
+    "answerIndex": 3,
+    "explanation": "The user needs to be satisfied that the tool has no obvious defect before use."
+  },
+  {
+    "id": "8.10",
+    "topic": "Work Equipment",
+    "question": "What precaution should you take before adjusting an electrical tool?",
+    "options": [
+      "Check the lead is not twisted or knotted",
+      "Wear safety footwear with steel toe caps",
+      "Disconnect from the power source",
+      "Wear the correct personal protective equipment"
+    ],
+    "answerIndex": 2,
+    "explanation": "Do not adjust tools which could still be live or operate."
+  },
+  {
+    "id": "8.11",
+    "topic": "Work Equipment",
+    "question": "An electric drill is to be used. Before use, who should carry out a check on the tool?",
+    "options": ["Storeman", "Electrician", "Foreman", "User"],
+    "answerIndex": 3,
+    "explanation": "The user needs to be satisfied that the tool has no obvious defect before use."
+  },
+  {
+    "id": "8.12",
+    "topic": "Work Equipment",
+    "question": "What action should you take if an electric drill cuts out while you are using it?",
+    "options": [
+      "Shake it about a bit",
+      "Put it back into the tool box",
+      "Switch the power off and on",
+      "Remove it from use and tell your supervisor"
+    ],
+    "answerIndex": 3,
+    "explanation": "The drill may be faulty. If so, tell your supervisor and remove the drill from service."
+  },
+  {
+    "id": "8.13",
+    "topic": "Work Equipment",
+    "question": "If an electric drill gives off blue smoke from the motor, you should:",
+    "options": [
+      "Pour water over it",
+      "2 Use a CO extinguisher",
+      "Switch it off and report it",
+      "Stop work for 30 minutes"
+    ],
+    "answerIndex": 2,
+    "explanation": "Defective electric hand tools must not be used. Stop what you are doing and inform your supervisor."
+  },
+  {
+    "id": "8.14",
+    "topic": "Work Equipment",
+    "question": "How often should user (visual) checks be carried out on portable electrical equipment?",
+    "options": ["Every time you use it", "Every day", "Once a week", "At least once a year"],
+    "answerIndex": 0,
+    "explanation": "All items of portable electrical equipment should be visually checked for safety by the user before being put into use."
+  },
+  {
+    "id": "8.15",
+    "topic": "Work Equipment",
+    "question": "What is the preferred nominal voltage for portable hand lamps for general use on construction sites?",
+    "options": ["110 volts", "150 volts", "230 volts", "400 volts"],
+    "answerIndex": 0,
+    "explanation": "110 volt reduced low voltage systems are strongly preferred for the supply to such equipment."
+  },
+  {
+    "id": "8.16",
+    "topic": "Work Equipment",
+    "question": "What is the preferred nominal voltage for portable hand tools on construction sites?",
+    "options": ["12 volts", "24 volts", "110 volts", "230 volts"],
+    "answerIndex": 2,
+    "explanation": "110 volt reduced low voltage systems are strongly preferred for the supply to such equipment."
+  },
+  {
+    "id": "8.17",
+    "topic": "Work Equipment",
+    "question": "What is the preferred nominal voltage for local lighting up to 2 kW on construction sites?",
+    "options": ["55 volts", "110 volts", "400 volts", "230 volts"],
+    "answerIndex": 1,
+    "explanation": "110 volt reduced low voltage systems are strongly preferred for the supply to such equipment."
+  },
+  {
+    "id": "8.18",
+    "topic": "Work Equipment",
+    "question": "What is the recommended maximum voltage for portable hand lamps when working in confined or damp locations?",
+    "options": ["50 volts", "110 volts", "230 volts", "400 volts"],
+    "answerIndex": 0,
+    "explanation": "Where the environment is damp, or restricting and conductive, the magnitude of any electric shock will be higher than under normal conditions. Hand lamps in such locations should therefore be supplied from a SELV (separated extra-low voltage) system, i.e. having a maximum voltage of 50 volts and which is electrically separated from earth."
+  },
+  {
+    "id": "8.19",
+    "topic": "Work Equipment",
+    "question": "If you only have a mains voltage (230 V) hand drill and you want to use it on a construction site which only has yellow (110 V) socket-outlets, what should you do?",
+    "options": [
+      "Use a transformer to boost the voltage",
+      "Cut the plug off and fit a yellow one instead",
+      "Obtain a 110 V drill or a cordless one for the work",
+      "Make up an extension cable with a yellow plug on one end and a standard socket on the other end"
+    ],
+    "answerIndex": 2,
+    "explanation": "Electrical equipment must not be modified or operated at voltages other than their design voltage."
+  },
+  {
+    "id": "8.20",
+    "topic": "Work Equipment",
+    "question": "What is most commonly used to reduce 230 volts to 110 volts on site?",
+    "options": ["Residual current device", "Transformer", "Circuit breaker", "Step-down generator"],
+    "answerIndex": 1,
+    "explanation": "A transformer, usually coloured yellow, will transform 230 volts (mains voltage) down to a relatively safe 110 volts."
+  },
+  {
+    "id": "8.21",
+    "topic": "Work Equipment",
+    "question": "When using an extension cable reel, which of the following statements is correct?",
+    "options": [
+      "Leave as much as possible coiled up on the reel",
+      "Uncoil it fully every time",
+      "Do not exceed the reeled or unreeled rating as appropriate",
+      "Only uncoil what you need"
+    ],
+    "answerIndex": 2,
+    "explanation": "The rating of a partially unreeled extension cable is much lower than when fully unreeled. Overheating of the cable will occur if the rating is exceeded. Care should also be taken to prevent extension cables becoming a tripping hazard."
+  },
+  {
+    "id": "8.22",
+    "topic": "Work Equipment",
+    "question": "If an extension cable is to be run across a site road, what action should you take?",
+    "options": [
+      "Throw wooden boards over it",
+      "Place a rubber protection ramp over it and put up a sign stating 'Ramp Ahead'",
+      "Don' t do anything to protect the cable",
+      "Lay the cable over wooden boards"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is essential that the cable is protected from damage caused by passing traffic. A sign will warn road traffic of the ramp."
+  },
+  {
+    "id": "8.23",
+    "topic": "Work Equipment",
+    "question": "To operate a powered hand tool you must be:",
+    "options": ["16 years old or over", "18 years old or over", "21 years old or over", "Trained and competent"],
+    "answerIndex": 3,
+    "explanation": "There are no general age restrictions in legislation relating to the use of work equipment. Any person using work equipment. however, must be competent to do so, which will require initial and refresher training."
+  },
+  {
+    "id": "8.24",
+    "topic": "Work Equipment",
+    "question": "If you are about to use a power tool and discover the guard is missing, you should:",
+    "options": [
+      "Make up a temporary guard yourself",
+      "Use the tool but try to work quickly",
+      "Not use the tool until a proper guard has been fitted",
+      "Use the tool but work carefully and slowly"
+    ],
+    "answerIndex": 2,
+    "explanation": "Visual checks should be carried out before using equipment. Any faults should be reported immediately and rectified before use."
+  },
+  {
+    "id": "9.1",
+    "topic": "Special Site Hazards",
+    "question": "Why may a confined space be dangerous to work in?",
+    "options": [
+      "There may not be sufficient working space",
+      "Air in the space may be unbreathable due to poisonous gas",
+      "Temperature and poor ventilation may affect the worker",
+      "All of the hazards mentioned"
+    ],
+    "answerIndex": 3,
+    "explanation": "There can be a range of hazards associated with confined spaces, and these can include all of those mentioned."
+  },
+  {
+    "id": "9.2",
+    "topic": "Special Site Hazards",
+    "question": "What must be considered first when planning to carry out work in a confined space?",
+    "options": [
+      "Has the job been priced properly",
+      "Have the correct tools been arranged",
+      "Has sufficient manpower been allocated",
+      "Can the work be done from the outside"
+    ],
+    "answerIndex": 3,
+    "explanation": "Working outside will remove the risks of working in the confined space."
+  },
+  {
+    "id": "9.3",
+    "topic": "Special Site Hazards",
+    "question": "When working in a confined space, such as a sewer, what danger may occur?",
+    "options": [
+      "Getting wet through",
+      "Boredom",
+      "Not enough time for the job to be done",
+      "Build-up of harmful gases"
+    ],
+    "answerIndex": 3,
+    "explanation": "Sewer gases can be inflammable and suffocating."
+  },
+  {
+    "id": "9.4",
+    "topic": "Special Site Hazards",
+    "question": "To determine the safety of the atmosphere in an excavation, which of the following is essential.",
+    "options": [
+      "Sniffing the atmosphere after entry",
+      "Using a gas detector",
+      "Only entering for a short period to enable a quick escape",
+      "Looking for toxic gases"
+    ],
+    "answerIndex": 1,
+    "explanation": "Use a suitable detector. Many dangerous gases have no smell and cannot be seen. Workers can be overcome in seconds in dangerous atmospheres."
+  },
+  {
+    "id": "9.5",
+    "topic": "Special Site Hazards",
+    "question": "Before entering an excavation to start work, it must first be:",
+    "options": [
+      "Inspected by a competent person",
+      "Covered over and left overnight",
+      "Filled with water then drained",
+      "Inspected by the HSE"
+    ],
+    "answerIndex": 0,
+    "explanation": "Excavation work is hazardous. A competent person, knowledgeable about how to reduce risks, notably from collapse of the walls, must inspect the excavation first."
+  },
+  {
+    "id": "9.6",
+    "topic": "Special Site Hazards",
+    "question": "What is the purpose of using a 'permit to work' system?",
+    "options": [
+      "To ensure the job is carried out by the quickest method",
+      "To help ensure a safe system of work",
+      "To ensure that the client will pay for the work",
+      "To enable tools and equipment to be properly checked before the commencement of work"
+    ],
+    "answerIndex": 1,
+    "explanation": "A permit to work is a written system used to control certain types of hazardous work. They allow work to start only when site procedures have been clarified."
+  },
+  {
+    "id": "9.7",
+    "topic": "Special Site Hazards",
+    "question": "Why may young people be more at risk on site?",
+    "options": [
+      "There is no specific legislation applying to them",
+      "They are usually left to work alone to gain experience",
+      "There is no requirement to provide PPE to young people",
+      "They are inexperienced and may not recognise danger"
+    ],
+    "answerIndex": 3,
+    "explanation": "Health and Safety guidance lists young people as often being 'at particular risk', due to their lack of practical experience."
+  },
+  {
+    "id": "9.8",
+    "topic": "Special Site Hazards",
+    "question": "You have to enter a manhole in which you know there are toxic gases. You have all the PPE but there does not appear to be a rescue plan in place. What should you do?",
+    "options": [
+      "Just get on and do the job, it will probably be alright",
+      "Plan to carry out the job in short bursts",
+      "Do not enter the manhole until a rescue plan and rescue equipment are in place",
+      "Ask your mate to stand-by at the top of the manhole with a length of rope"
+    ],
+    "answerIndex": 2,
+    "explanation": "A rescue plan must be in place before anyone enters a confined space. This is one of the requirements of the Confined Spaces Regulations 1997."
+  },
+  {
+    "id": "9.9",
+    "topic": "Special Site Hazards",
+    "question": "You have to enter a manhole in which you believe there could be toxic gases. You have not been provided with any Respiratory Protective Equipment (RPE). What should you do?",
+    "options": [
+      "Tell your supervisor that you will need RPE, and if necessary, training in confined space working",
+      "Sniff the atmosphere in the manhole to see if you can smell harmful gases",
+      "Look into the manhole to see if you can see any harmful gases",
+      "Just get on with the job, and accept the risks"
+    ],
+    "answerIndex": 0,
+    "explanation": "An employer must provide all necessary personal protective equipment and respiratory protective equipment when an employee is required to enter a confined space. This is one of the requirements of the Confined Spaces Regulations 1997."
+  },
+  {
+    "id": "9.10",
+    "topic": "Special Site Hazards",
+    "question": "While digging a trench, you uncover a length of yellow marker tape at a depth of about 150mm. What does the presence of the marker tape mean?",
+    "options": [
+      "The area has a high water-table and precautions must be taken to prevent an in-rush of water",
+      "There is a buried electrical cable and further excavation must be carried out with care",
+      "There is contaminated soil below the level of the marker tape and all excavation must stop",
+      "The excavation has reached a depth where the sides must now be supported"
+    ],
+    "answerIndex": 1,
+    "explanation": "The coloured tape indicates that there are buried services below the route of the tape."
+  },
+  {
+    "id": "9.11",
+    "topic": "Special Site Hazards",
+    "question": "A Cable Avoidance Tool (C.A.T.) and a 'Genny' (generator) can be used successfully to locate underground cables by whom:",
+    "options": ["Anyone", "A competent person after training", "Any electricity company employee", "The site foreman"],
+    "answerIndex": 1,
+    "explanation": "Equipment used to locate buried services must only be used by people who have been trained to use it."
+  },
+  {
+    "id": "9.12",
+    "topic": "Special Site Hazards",
+    "question": "When exposing underground power cables, which method of excavation should you use?",
+    "options": ["A 360 degree excavator with rubber tyres", "A pickaxe", "Hand digging", "A kango hammer"],
+    "answerIndex": 2,
+    "explanation": "Hand-held power tools and mechanical excavators should not be used too close to underground services and hand digging should be carried out with care."
+  },
+  {
+    "id": "9.13",
+    "topic": "Special Site Hazards",
+    "question": "When do special precautions need to be taken when working near overhead electric power lines?",
+    "options": [
+      "Only if cranes etc. are being used",
+      "Only if someone could touch a line with their bare hands",
+      "Only if plant has to pass under the lines",
+      "Whenever work areas will be near or beneath the lines"
+    ],
+    "answerIndex": 3,
+    "explanation": "Actual contact with a power line is not necessary to result in an electric shock as a close approach may allow 'flashover' to occur. HSE publication GS6 gives advice on procedures to avoid such danger."
+  },
+  {
+    "id": "9.14",
+    "topic": "Special Site Hazards",
+    "question": "When working alone:",
+    "options": [
+      "Make sure someone responsible knows where you are",
+      "You can do away with protective equipment",
+      "Don't bother anyone if you have a problem, always sort it out yourself",
+      "Wear headphones, it will make the day go more quickly"
+    ],
+    "answerIndex": 0,
+    "explanation": "Employees should adhere to safe working arrangements put in place by their employer. When working alone, such arrangements should include informing a responsible person of your location periodically."
+  },
+  {
+    "id": "9.15",
+    "topic": "Special Site Hazards",
+    "question": "You have to walk across a site several times a day, but have to dodge a lot of site traffic. The first thing you should do is:",
+    "options": [
+      "Have word with the drivers",
+      "Walk around the edges of the site to keep out of the way",
+      "Tell your supervisor about the danger",
+      "Jump on the back of a vehicle if you can, it's safer than walking"
+    ],
+    "answerIndex": 2,
+    "explanation": "Pedestrian routes should have been set up to keep people and vehicles apart, so inform your employer if the system is not working. Don't hitch rides on vehicles unless safe seating is provided."
+  },
+  {
+    "id": "9.16",
+    "topic": "Special Site Hazards",
+    "question": "A mobile plant operator can let you ride in the machine:",
+    "options": [
+      "If you have a long way to go",
+      "If it is raining",
+      "If it is designed to carry passengers",
+      "At any time"
+    ],
+    "answerIndex": 2,
+    "explanation": "Don't hitch rides on vehicles unless safe seating is provided."
+  },
+  {
+    "id": "10.1",
+    "topic": "Electrotechnical",
+    "question": "In accordance with the Electricity at Work regulations, when considering whether to work live a responsible person should:",
+    "options": ["Carry out a risk assessment", "Only work dead", "Only work live", "Do as the client demands"],
+    "answerIndex": 0,
+    "explanation": "To identify and assess the risks involved and the methods of controlling them."
+  },
+  {
+    "id": "10.2",
+    "topic": "Electrotechnical",
+    "question": "The normal procedure for working on electrical equipment should be which one of the following?",
+    "options": ["Dead working", "Wearing insulated gloves", "Using insulated tools", "Live working"],
+    "answerIndex": 0,
+    "explanation": "Dead working should be considered as the norm and work on or near live conductors should rarely be permitted."
+  },
+  {
+    "id": "10.3",
+    "topic": "Electrotechnical",
+    "question": "Test instruments used for working on electrical systems should:",
+    "options": [
+      "Be yellow in colour",
+      "Be less than 10 years old",
+      "Have non-insulated test probes",
+      "Have insulated test probes"
+    ],
+    "answerIndex": 3,
+    "explanation": "To protect the user from electric shock whilst using the instrument. i.e. handling the probes."
+  },
+  {
+    "id": "10.4",
+    "topic": "Electrotechnical",
+    "question": "Under the Electricity at Work Regulations, live working is considered:",
+    "options": [
+      "As entirely acceptable",
+      "To be normally permitted",
+      "Only to be allowed in exceptional circumstances",
+      "Never to be allowed"
+    ],
+    "answerIndex": 2,
+    "explanation": "Extra controls must be employed, including training, supervision and use of suitable tools and protective equipment."
+  },
+  {
+    "id": "10.5",
+    "topic": "Electrotechnical",
+    "question": "Which of the following would you use to replace the fuse in a plug if fuses were NOT available?",
+    "options": ["A nail", "A piece of silver paper", "A bit of wire", "None of the options listed"],
+    "answerIndex": 3,
+    "explanation": "A fuse is often the main safety device in an electrical circuit. A blown fuse must only be replaced by a fuse of the correct type and rating."
+  },
+  {
+    "id": "10.6",
+    "topic": "Electrotechnical",
+    "question": "To prove a circuit or equipment is dead after isolation what is the FIRST activity in the sequence of events?",
+    "options": [
+      "Make sure equipment is not working",
+      "Check between line and earth",
+      "Check that the voltage detector is working on a proving device, known live source or in built test feature",
+      "Check between line and neutral"
+    ],
+    "answerIndex": 2,
+    "explanation": "This will prove that that the voltage detector (such as a two-pole voltage detector or proprietary test lamp) is working, i.e. indicating voltage."
+  },
+  {
+    "id": "10.7",
+    "topic": "Electrotechnical",
+    "question": "The nominal single phase voltage in the UK is?",
+    "options": ["230 volts", "240 volts", "415 volts", "400 volts"],
+    "answerIndex": 0,
+    "explanation": "This is the nominal voltage for public electricity supply systems within Europe."
+  },
+  {
+    "id": "10.8",
+    "topic": "Electrotechnical",
+    "question": "When is live working permissible?",
+    "options": [
+      "When the person carrying out the work is a competent person",
+      "When it is unreasonable in all circumstances for the equipment to be made dead and suitable precautions are taken",
+      "When the means of isolation cannot be identified",
+      "When the person working on the equipment is wearing rubber gloves"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is a requirement under r.14 of the EAW Regulations. However, it does not mean that live working is then 'safe'."
+  },
+  {
+    "id": "10.9",
+    "topic": "Electrotechnical",
+    "question": "Which of the following is NOT a requirement of low voltage safe isolation practice?",
+    "options": [
+      "Ensuring that the correct point of isolation is identified",
+      "The person carrying out the work is issued with insulating gloves",
+      "A caution notice should be applied at the point of isolation",
+      "The conductors are proved to be dead at the point of work"
+    ],
+    "answerIndex": 1,
+    "explanation": "Safe isolation practice refers to dead working. The use of insulating gloves will generally only be applicable to live working."
+  },
+  {
+    "id": "10.10",
+    "topic": "Electrotechnical",
+    "question": "The specific effects on the human body of a major electric shock are one of the following:",
+    "options": ["Dermatitis", "Burns and cardiac arrest", "Broken bones", "Chest pains"],
+    "answerIndex": 1,
+    "explanation": null
+  },
+  {
+    "id": "10.11",
+    "topic": "Electrotechnical",
+    "question": "The lowest level of electrical current which can harm the human body is normally measured in:",
+    "options": ["Microamps", "Kiloamps", "Amps", "Milliamps"],
+    "answerIndex": 3,
+    "explanation": "Research has shown that a person is in serious danger of a fatal electric shock at. or above, approximately 30 milliamps."
+  },
+  {
+    "id": "10.12",
+    "topic": "Electrotechnical",
+    "question": "With regard to the effect of electrical current on the human body, one of the following is correct:",
+    "options": [
+      "A 6 amp circuit breaker should prevent a person receiving a fatal electric shock",
+      "A 3 amp fuse should prevent a person receiving a fatal electric shock",
+      "A 30 mA Residual Current Device (RCD) should prevent a person receiving a fatal electric shock",
+      "A 5 amp rewireable fuse should prevent a person receiving a fatal electric shock"
+    ],
+    "answerIndex": 2,
+    "explanation": "An RCD is a mechanical switching device intended to cause the opening of the contacts when the residual current attains a given value under specified conditions."
+  },
+  {
+    "id": "10.13",
+    "topic": "Electrotechnical",
+    "question": "Where mains voltage is used to supply portable equipment on a construction site, what additional protection is required?",
+    "options": [
+      "Step-down transformer",
+      "Step-down generator",
+      "Cable avoidance tool",
+      "Residual current device (RCD)"
+    ],
+    "answerIndex": 3,
+    "explanation": "Reduced low voltage systems (e.g. 110 volt centre point earthed) are strongly preferred in such circumstances. Where only mains voltage (230 V) equipment is available, however, a 30 mA RCD will give additional protection against fatal electric shock."
+  },
+  {
+    "id": "10.14",
+    "topic": "Electrotechnical",
+    "question": "What colour cable USUALLY signifies 110 volt power supply on site?",
+    "options": ["Black", "Red", "Blue", "Yellow"],
+    "answerIndex": 3,
+    "explanation": "Yellow is the usual colour of cables, socket outlets, plugs and transformers etc which are used with a 110 volt supply."
+  },
+  {
+    "id": "10.15",
+    "topic": "Electrotechnical",
+    "question": "A portable electric generator on site has two power outlets, 110 volts and 230 volts. What colour would the 110 volt outlet be?",
+    "options": ["Black", "Yellow", "Red", "Blue"],
+    "answerIndex": 1,
+    "explanation": "Yellow is the usual colour of cables, socket outlets, plugs and transformers etc which are used with a 110 volt supply."
+  },
+  {
+    "id": "10.16",
+    "topic": "Electrotechnical",
+    "question": "Where there is no local means of isolation for equipment or circuits to be worked on, which of the following is the preferred method of isolation?",
+    "options": [
+      "Use a suitable device such as a circuit breaker",
+      "Isolation of the individual circuit breaker or fuse",
+      "Pulling out the distributor's cut-out fuse",
+      "Disconnecting the individual circuit from the DB"
+    ],
+    "answerIndex": 0,
+    "explanation": "Isolating the whole installation or distribution board is the safest method."
+  },
+  {
+    "id": "10.17",
+    "topic": "Electrotechnical",
+    "question": "What action should you take if a workmate gets an electric shock?",
+    "options": [
+      "Phone the electricity board immediately",
+      "Dial 999 and ask for the fire brigade",
+      "Cut off the power and call for help",
+      "Try to pull them to safety"
+    ],
+    "answerIndex": 2,
+    "explanation": "If you can switch the power off, the electric hazard will be removed. First aid assistance will then probably be required. Do not touch someone who is still in contact with live electrical cables as you could also receive an electric shock."
+  },
+  {
+    "id": "10.18",
+    "topic": "Electrotechnical",
+    "question": "A residual current device is designed to operate in the event of one of the following:",
+    "options": ["Overload", "Earth fault", "Lightning strike on the supply", "Short-circuit"],
+    "answerIndex": 1,
+    "explanation": "An RCD provides additional protection against the risk of electric shock."
+  },
+  {
+    "id": "10.19",
+    "topic": "Electrotechnical",
+    "question": "Electrical installations on construction sites should be periodically inspected and tested:",
+    "options": ["Every 3 months", "Every year", "Every 6 months", "Every month"],
+    "answerIndex": 0,
+    "explanation": "Three monthly inspections of construction site installations are recommended in IET Guidance Note 3."
+  },
+  {
+    "id": "10.20",
+    "topic": "Electrotechnical",
+    "question": "The maximum AC voltage which the human body can withstand without long term physiological effects in dry conditions is:",
+    "options": ["110 volts", "230 volts", "50 volts", "400 volts"],
+    "answerIndex": 2,
+    "explanation": "Regarded as a non-fatal voltage level."
+  },
+  {
+    "id": "10.21",
+    "topic": "Electrotechnical",
+    "question": "Which of the following statements is true with regard to the dangers of electricity?",
+    "options": [
+      "Electricity is perfectly safe so long as you wear cotton gloves",
+      "Electricity is only dangerous if you are not wearing wellington boots",
+      "Electricity is only dangerous in wet weather",
+      "Electricity is dangerous at any time because you cannot tell by looking at a cable whether or not it is live"
+    ],
+    "answerIndex": 3,
+    "explanation": "The features which make electricity so dangerous are that you cannot see, hear or smell it. It can give you a very unpleasant surprise. Always assume that cables are live."
+  },
+  {
+    "id": "10.22",
+    "topic": "Electrotechnical",
+    "question": "What is the most serious effect that electric shock can have if you come into contact with a live part?",
+    "options": [
+      "The electric current can cause a slight tingling in the fingers",
+      "The electric current can cause burn marks on the fingers",
+      "The electric current can cause the heart to stop, resulting in death",
+      "The electric current can cause the finger muscles to twitch"
+    ],
+    "answerIndex": 2,
+    "explanation": "Contact with live electrical parts can be fatal. If you do not know otherwise, always assume that electrical parts are live."
+  },
+  {
+    "id": "10.23",
+    "topic": "Electrotechnical",
+    "question": "Your job involves you working near to hanging electrical cables which have bare ends. What should you do?",
+    "options": [
+      "Touch the cables to see if they are live",
+      "Carry on working, as there shouldn't be a problem",
+      "Inform your supervisor and keep well away",
+      "Attempt to push the cables back into the ceiling void so that you can start work"
+    ],
+    "answerIndex": 2,
+    "explanation": "You must always assume that exposed cables are live until you know they are not. Contact with live electrical cables can kill."
+  },
+  {
+    "id": "10.24",
+    "topic": "Electrotechnical",
+    "question": "For all live working activities it is necessary to:",
+    "options": [
+      "Carry out a risk assessment as required by the EAW Regulations.",
+      "Wear rubber gloves only",
+      "Be accompanied",
+      "Keep your fingers crossed"
+    ],
+    "answerIndex": 0,
+    "explanation": null
+  },
+  {
+    "id": "10.25",
+    "topic": "Electrotechnical",
+    "question": "An electrical Permit to Work is primarily a statement that:",
+    "options": [
+      "Someone else has taken responsibility for the work",
+      "The circuit or equipment is live",
+      "Certain instructions need to be followed",
+      "The circuit or equipment has been isolated and is safe to work on"
+    ],
+    "answerIndex": 3,
+    "explanation": "Permits to work describe the procedures that prevent a major hazard, such as electricity or moving machinery, from causing harm, usually by isolation to effectively ensure (in the case of electricity) 'dead' working with no chance of it going 'live'."
+  },
+  {
+    "id": "10.26",
+    "topic": "Electrotechnical",
+    "question": "The probes of voltage detectors and test instruments used on electrical systems should be:",
+    "options": [
+      "Manufactured in the UK",
+      "Accompanied by a calibration certificate",
+      "Shaped or have barriers to prevent finger contact with the tips",
+      "Coloured red"
+    ],
+    "answerIndex": 2,
+    "explanation": "In addition, to protect against damage by overcurrent whilst in use, the probes or instrument should incorporate suitable high breaking capacity (hbc) fuses with a low current rating (usually not exceeding 500 mA). or current-limiting resistors."
+  },
+  {
+    "id": "10.27",
+    "topic": "Electrotechnical",
+    "question": "Which of the following does the Electricity at Work (EAW) regulations apply to?",
+    "options": [
+      "All persons engaged for work purposes",
+      "Self employed persons only",
+      "Employees only",
+      "Employers only"
+    ],
+    "answerIndex": 0,
+    "explanation": "The EAW Regulations impose duties on employers, employees and the self employed."
+  },
+  {
+    "id": "10.28",
+    "topic": "Electrotechnical",
+    "question": "The Electricity at Work Regulations require that:",
+    "options": [
+      "Persons working with electricity must have the appropriate level of knowledge and experience",
+      "A training course is necessary before anyone can work with electricity",
+      "Only electricians can work with electricity",
+      "Anyone supervised can work with electricity"
+    ],
+    "answerIndex": 0,
+    "explanation": "Competency is a requirement of r.16 of the EAW Regulations."
+  },
+  {
+    "id": "10.29",
+    "topic": "Electrotechnical",
+    "question": "The Electricity at Work Regulations apply to:",
+    "options": [
+      "Only low voltage systems",
+      "Only extra-low voltage systems",
+      "All voltage systems",
+      "Only high voltage systems"
+    ],
+    "answerIndex": 2,
+    "explanation": "The EAW Regulations cover the safe use of electricity in work activities, irrespective of voltage."
+  },
+  {
+    "id": "10.30",
+    "topic": "Electrotechnical",
+    "question": "Which of the following should be used to prove a circuit or equipment is dead after isolation?",
+    "options": [
+      "A lamp holder with a length of flex attached",
+      "A proprietary test lamp or two-pole voltage detector",
+      "A voltage stick",
+      "A multimeter"
+    ],
+    "answerIndex": 1,
+    "explanation": "Accident history has shown that using incorrectly set multimeters or makeshift devices for voltage detection has often caused accidents. The use of non-contact voltage indicators (voltage sticks) is also not advised as the sole means of proving dead."
+  },
+  {
+    "id": "10.31",
+    "topic": "Electrotechnical",
+    "question": "Which of the following is NOT a suitable means of isolating a circuit?",
+    "options": [
+      "Removing a fuse and locking the distribution board",
+      "Putting insulating tape over the circuit breaker",
+      "Padlocking the isolating switch",
+      "Fitting a padlocked circuit breaker lockout"
+    ],
+    "answerIndex": 1,
+    "explanation": "The isolating device should be switched off or the fuse removed. The switch, circuit breaker or enclosure should then be locked and the key removed. A notice or label should also be posted to warn that someone is working on the circuit or apparatus."
+  },
+  {
+    "id": "10.32",
+    "topic": "Electrotechnical",
+    "question": "Which of the following work procedures on electrical systems will always require a permit-to-work to be issued?",
+    "options": [
+      "Dead working on low-voltage systems",
+      "Live working on low-voltage systems",
+      "Dead working on high-voltage systems",
+      "Live working on high-voltage systems"
+    ],
+    "answerIndex": 2,
+    "explanation": "An electrical permit-to-work should state what circuit or equipment has been made safe, how that has been achieved and what work is to be done. A permit should not, therefore, be used for live working. Such a permit is always required for work on high-voltage systems, but can also be used for low-voltage systems."
+  },
+  {
+    "id": "10.33",
+    "topic": "Electrotechnical",
+    "question": "Optical fibre cable remnants should not be left lying around on site because:",
+    "options": [
+      "They can be hot and burn upon contact",
+      "Laser beams still exist in the cut pieces",
+      "They can pierce the skin or eyes",
+      "They are toxic"
+    ],
+    "answerIndex": 2,
+    "explanation": "Fibre fragments can enter the bloodstream and cause infections in the skin or eyes. All fibre waste, particularly small pieces, should be placed in suitable receptacles."
+  },
+  {
+    "id": "10.34",
+    "topic": "Electrotechnical",
+    "question": "Why should the end of an optical fibre cable never be pointed towards your own or anyone else's eyes?",
+    "options": [
+      "The beam can transfer a strong electric current",
+      "The colour of the beam is very hypnotic",
+      "The beam can bore a hole through the skin",
+      "The beam can damage the eyes"
+    ],
+    "answerIndex": 3,
+    "explanation": "Exposure to light sources such as lasers or highly concentrated visible or infrared light beams, associated with the testing or use of optical fibres, can cause damage to the eyes, or even blindness."
+  },
+  {
+    "id": "10.35",
+    "topic": "Electrotechnical",
+    "question": "The use of a multi-lock hasp with the appropriate number of padlocks is a recommended method of safe isolation where:",
+    "options": [
+      "Individual circuit breaker locking off devices are not available",
+      "Individual circuit breakers are not identified at the distribution board",
+      "More than one person will be working on circuits supplied from the same distribution board",
+      "You know the health and safety inspector is in the area"
+    ],
+    "answerIndex": 2,
+    "explanation": "A multi-lock hasp can be used to prevent operation of the isolator until such time that all persons working on the electrical installation have completed their work and removed their padlocks from the hasp."
+  },
+  {
+    "id": "10.36",
+    "topic": "Electrotechnical",
+    "question": "Which of the following procedures should be used when more than one person will be working on circuits supplied from a distribution board which has been switched off?",
+    "options": [
+      "The use of a multi-lock hasp on the isolator with a padlock for each operative",
+      "Blowing a horn before the power is switched on again",
+      "Giving each operative a volt stick",
+      "Telling everyone what time the power will be switched on again"
+    ],
+    "answerIndex": 0,
+    "explanation": "A multi-lock hasp can be used to prevent operation of the isolator until such time that all persons working on the electrical installation have completed their work and removed their padlocks from the hasp."
+  },
+  {
+    "id": "11.1",
+    "topic": "Environmental",
+    "question": "You are on site and you need to dispose of some waste liquid which has oil in it and you are not sure what to do with it. What should you do?",
+    "options": [
+      "Dispose of it in a sealed container into the site skip",
+      "Pour it onto the ground, it will soak away",
+      "Take it outside and set light to it",
+      "Ask your supervisor about the correct way to deal with this waste."
+    ],
+    "answerIndex": 3,
+    "explanation": "Dealing with hazardous/special waste will include proper storage and segregation before it is taken away by an authorised waste carrier as required by environmental legislation. An oil spillage could also get into the ground or drains, which may also be an offence under environmental law. Burning waste on site is also an offence, under air pollution legislation, and can lead to local complaints."
+  },
+  {
+    "id": "11.2",
+    "topic": "Environmental",
+    "question": "How should you get rid of hazardous/special waste?",
+    "options": [
+      "Put it at the bottom of any site skip",
+      "In accordance with the correct site waste rules",
+      "Take it home, they wont want it on site",
+      "Take it to the nearest local authority waste tip"
+    ],
+    "answerIndex": 1,
+    "explanation": "The Hazardous Waste Regulations (Special Waste Regulations in Scotland) require hazardous/special waste to be properly segregated or otherwise treated, and then recovered or disposed of in an officially approved way."
+  },
+  {
+    "id": "11.3",
+    "topic": "Environmental",
+    "question": "Which of the following is classed as hazardous/special waste?",
+    "options": ["Non-asbestos Insulation", "Polythene and shrink wrap", "Empty cement bags", "Fluorescent light tubes"],
+    "answerIndex": 3,
+    "explanation": "Hazardous wastes (special wastes in Scotland) are specified in waste legislation. Fluorescent tubes are included because of their mercury content."
+  },
+  {
+    "id": "11.4",
+    "topic": "Environmental",
+    "question": "Which of the following should be disposed of as hazardous/special waste?",
+    "options": [
+      "Timber, plywood and MDF off-cuts",
+      "Glass fibre insulation",
+      "Aerosol sealant canisters",
+      "Used nuisance dust masks"
+    ],
+    "answerIndex": 2,
+    "explanation": "Hazardous wastes (special wastes in Scotland) are specified in waste legislation. Aerosol sealants are included because they can explode if not recovered or disposed of properly, and they may still contain hazardous solvents."
+  },
+  {
+    "id": "11.5",
+    "topic": "Environmental",
+    "question": "You need to clean up some oil that has leaked from machinery onto the ground. What is the right way to do this?",
+    "options": [
+      "Put the oily contaminated soil into the general waste skip",
+      "Put the oily contaminated soil into a suitable container that takes hazardous waste",
+      "Put it under some off-cuts so that the oil cannot be seen",
+      "Wash the oil away with water and detergent"
+    ],
+    "answerIndex": 1,
+    "explanation": "Oil-contaminated wastes are classified as hazardous/ special waste in waste legislation. The Hazardous Waste Regulations (Special Waste Regulations in Scotland) require such waste to be properly segregated or otherwise treated, and then recovered or disposed of in an approved way. Following the other options would be an offence under waste legislation."
+  },
+  {
+    "id": "11.6",
+    "topic": "Environmental",
+    "question": "Other site workers are complaining that you are generating too much dust. What should you do?",
+    "options": [
+      "Tell them you have nearly finished",
+      "Stop work and inform your supervisor",
+      "Ignore them – it's none of their business",
+      "Issue the other site workers with dust masks"
+    ],
+    "answerIndex": 1,
+    "explanation": "Excessive dust may be a health hazard to you and those around you, but even if it is not a health hazard, excessive dust can be a 'statutory nuisance (under the Environmental Protection Act). Even when it is not a statutory nuisance, it can lead to complaints from neighbours and possible damage to neighbouring property."
+  },
+  {
+    "id": "11.7",
+    "topic": "Environmental",
+    "question": "Who needs to understand relevant environmental risks on a construction site?",
+    "options": [
+      "Only the principal contractor",
+      "Only the subcontractors",
+      "Everyone working on the site",
+      "Only the environmental clerk of works"
+    ],
+    "answerIndex": 2,
+    "explanation": "The actions of everyone on site determine how well the risks to the environment (such as water pollution, or creating a local nuisance) are controlled."
+  },
+  {
+    "id": "11.8",
+    "topic": "Environmental",
+    "question": "Under environmental law, which statement is true?",
+    "options": [
+      "Companies and individuals can be prosecuted if they do not follow the law",
+      "Companies can be prosecuted, but not individuals",
+      "It is legal to transport business waste without proper paperwork",
+      "It is legal to disturb protected species' habitats"
+    ],
+    "answerIndex": 0,
+    "explanation": "Most environmental law is enforced against companies, but the regulator in the relevant part of the UK (the Environment Agency, SEPA or NIEA) can also prosecute company officers and even have powers to prosecute employees if they wilfully contribute to environmental harm."
+  },
+  {
+    "id": "11.9",
+    "topic": "Environmental",
+    "question": "Do individuals have any responsibility for sustainability when on site?",
+    "options": [
+      "No, it is dealt with by the site manager",
+      "No, it is a matter for the Environment Agency/NIEA/SEPA",
+      "Only on sites where there is asbestos",
+      "Yes, on every site"
+    ],
+    "answerIndex": 3,
+    "explanation": "Your responsibility is to follow the site and company rules aimed at environmental protection and sustainability, and to help your company to comply with relevant legal requirements, such as the need to segregate waste properly (e.g. so that it can be recovered)."
+  },
+  {
+    "id": "11.10",
+    "topic": "Environmental",
+    "question": "Which of the following is NOT best practice from a sustainability point of view?",
+    "options": [
+      "Saving materials, fuel, water and energy",
+      "Looking after the people working on or near the site",
+      "Protecting the environment",
+      "Sending unused and waste copper cables to landfill"
+    ],
+    "answerIndex": 3,
+    "explanation": "Option D would be wasting a valuable natural resource (copper) that could be effectively recovered for later use or recycling. Reusing or recycling copper has less environmental impact than mining and extracting new copper reserves."
+  },
+  {
+    "id": "11.11",
+    "topic": "Environmental",
+    "question": "Which of the following does NOT help sustainability during construction projects?",
+    "options": [
+      "Leaving engines and motors running when they are not needed",
+      "Segregating waste",
+      "Vehicle sharing or using public transport to get to work",
+      "Avoiding overheating site huts"
+    ],
+    "answerIndex": 0,
+    "explanation": "Option A generates local air pollution and carbon dioxide emissions (which contribute to global warming), and also increases the noise nuisance."
+  },
+  {
+    "id": "11.12",
+    "topic": "Environmental",
+    "question": "Which of the following should you do on site in the interest of sustainability?",
+    "options": [
+      "Run plant and equipment when they are not needed",
+      "Bury waste material",
+      "Comply with site instructions on handling waste materials",
+      "Pour waste liquids down a drain off-site"
+    ],
+    "answerIndex": 2,
+    "explanation": "Your actions will help your company, and others working on site, to achieve more sustainable work practices, such as waste recovery."
+  },
+  {
+    "id": "11.13",
+    "topic": "Environmental",
+    "question": "Which of the following is NOT part of 'environmentally-friendly' construction?",
+    "options": [
+      "Creating a dust nuisance to residents in neighbouring properties",
+      "Preventing water and soil pollution",
+      "Saving energy",
+      "Minimising the amount of waste you create during a job"
+    ],
+    "answerIndex": 0,
+    "explanation": "Neighbours outside the site are an important part of the wider environment. They may be affected by nuisance (such as noise, dust or even light at night), and they may complain to the client, main contractor or the local enforcing authority. Creating certain types of nuisance is an offence under the Environmental Protection Act."
+  },
+  {
+    "id": "11.14",
+    "topic": "Environmental",
+    "question": "From an environmental point of view, why should materials be reused, where possible?",
+    "options": [
+      "To save the client money",
+      "A lot of energy and raw materials go into making most construction products",
+      "It makes less mess on site",
+      "Its' a European Union Law"
+    ],
+    "answerIndex": 1,
+    "explanation": "Although reducing the amount of waste is the first priority, the re-use of materials can also contribute to effective waste management."
+  },
+  {
+    "id": "11.15",
+    "topic": "Environmental",
+    "question": "Which action will help to minimise waste?",
+    "options": [
+      "Only take or open what you need and return or reseal anything left over",
+      "Use new materials/packs at the beginning of each day",
+      "Leave materials unprotected in the rain",
+      "Always order much more than usually required – just in case you need it"
+    ],
+    "answerIndex": 0,
+    "explanation": "The hierarchy for managing waste is to reduce/reuse/ recover. Reducing the amount of waste is therefore the first priority."
+  },
+  {
+    "id": "11.16",
+    "topic": "Environmental",
+    "question": "Which of the following is good environmental practice?",
+    "options": [
+      "Over-ordering materials",
+      "Segregating waste into different types",
+      "Leaving skips uncovered in wet weather",
+      "Leaving motors running when they are not needed"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is good practice, since it will help with waste recovery. If the waste is classified as hazardous waste (special waste in Scotland) proper segregation is also a legal requirement."
+  },
+  {
+    "id": "11.17",
+    "topic": "Environmental",
+    "question": "Do individuals have any responsibility for minimising the amount of waste created on site?",
+    "options": [
+      "Only if asbestos removal is being carried out",
+      "Yes, everyone on site has this responsibility",
+      "No, it's the responsibility of the client",
+      "Only during site clean-up, at the end of the project"
+    ],
+    "answerIndex": 1,
+    "explanation": "Your actions will help your company, and others on site, to procure sensibly and to organise the job so that materials and substances are not wasted. Waste reduction is the best option when trying to manage site waste."
+  },
+  {
+    "id": "11.18",
+    "topic": "Environmental",
+    "question": "If you have unused material left, what should you do before you consider putting non-hazardous waste items into a skip?",
+    "options": [
+      "Make sure there is a label on it",
+      "Put it in a plastic bag and put it in a skip",
+      "Check whether someone else on your team can make use of it",
+      "Weigh it"
+    ],
+    "answerIndex": 2,
+    "explanation": "Although reducing the amount of waste is the first priority, the reuse of waste materials is much better than disposal, which is the most expensive option and which should be the last resort. Reuse is a better waste management option than recovery."
+  },
+  {
+    "id": "11.19",
+    "topic": "Environmental",
+    "question": "Why should different types of waste be separated on site?",
+    "options": [
+      "It will take up less room in the skip",
+      "So the local council can charge Landfill Tax",
+      "So the main contractor can check what's being thrown away",
+      "So waste can be recovered more easily"
+    ],
+    "answerIndex": 3,
+    "explanation": "This is good practice, since waste recovery can save both energy and materials, compared to creating brand new materials or items. It will also cut the amount of waste that goes to landfill. If the waste is classed as hazardous (special waste in Scotland) then the effective separation of different wastes is a legal requirement."
+  },
+  {
+    "id": "11.20",
+    "topic": "Environmental",
+    "question": "When storing liquids (such as oils, fuels or chemicals) on-site, what must you do?",
+    "options": [
+      "Always use the nearest container",
+      "Use a transparent container so you can check how much liquid is in it",
+      "Ensure the liquid material is stored safely and securely, and out of the way of site traffic",
+      "Keep the tops off, to prevent pressure from building up"
+    ],
+    "answerIndex": 2,
+    "explanation": "Any spillage could get into the ground or drains, which is likely to be an offence under environmental legislation."
+  },
+  {
+    "id": "11.21",
+    "topic": "Environmental",
+    "question": "What can help to prevent harm to the environment from oil spillages?",
+    "options": [
+      "A supply of water to flush the spill away",
+      "Cover the spillage with soil",
+      "Turning liquid containers upside down so the top can't come off",
+      "Store oils in an area that can catch any spills, such as a bund or a drip tray."
+    ],
+    "answerIndex": 3,
+    "explanation": "The use of a bund (fully walled storage area) or a drip tray will help any spillage to be contained in a small area for clear up. Any spillage could get into the ground or drains, which is likely to be an offence under environmental legislation."
+  }
+]

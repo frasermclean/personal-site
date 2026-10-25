@@ -29,6 +29,31 @@ export function hasLikedPost(slug: string): boolean {
 }
 
 /**
+ * Get the IDs of ECS quiz questions that were most recently answered incorrectly.
+ * @returns The missed question IDs, or an empty array if none are stored or storage is unavailable.
+ */
+export function getMissedEcsQuestions(): string[] {
+  try {
+    const ids = JSON.parse(localStorage.getItem('ecsMissedQuestions') || '[]');
+    return Array.isArray(ids) ? ids.filter((id) => typeof id === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Store the IDs of ECS quiz questions that were most recently answered incorrectly.
+ * @param ids The missed question IDs.
+ */
+export function setMissedEcsQuestions(ids: string[]): void {
+  try {
+    localStorage.setItem('ecsMissedQuestions', JSON.stringify(ids));
+  } catch {
+    // Storage may be unavailable (e.g. private browsing); missed questions just won't persist
+  }
+}
+
+/**
  * Get the current theme from local storage.
  * @returns The current theme ('light', 'dark', or null if not set).
  */
