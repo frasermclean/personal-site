@@ -1,6 +1,7 @@
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
+import { ECS_TOPICS, type EcsTopic } from './lib/ecs-quiz';
 
 const posts = defineCollection({
   loader: glob({ base: 'src/content/posts', pattern: '**/*.{md,mdx}' }),
@@ -57,4 +58,15 @@ const bookmarks = defineCollection({
   })
 });
 
-export const collections = { posts, projects, bookmarks };
+const ecsQuestions = defineCollection({
+  loader: file('src/data/ecs-questions.json'),
+  schema: z.object({
+    topic: z.enum(ECS_TOPICS.map((topic) => topic.name) as [EcsTopic, ...EcsTopic[]]),
+    question: z.string().min(1),
+    options: z.array(z.string().min(1)).length(4),
+    answerIndex: z.number().int().min(0).max(3),
+    explanation: z.string().nullable()
+  })
+});
+
+export const collections = { posts, projects, bookmarks, ecsQuestions };

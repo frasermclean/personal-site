@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import EcsQuiz from './EcsQuiz';
+
+const entries = await getCollection('ecsQuestions');
+const questions = entries.map(({ id, data }) => ({ id, ...data }));
+---
+
+<div class="not-prose my-8">
+  <EcsQuiz client:visible questions={questions} />
+</div>
